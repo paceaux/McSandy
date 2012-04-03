@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<!--[if gt IE 6]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 crappy" lang="en"><head><title>WTF!</title></head><body><h1>put down the crack pipe and use chrome!</h1></body></html> <![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>HTML5 Playground</title>
+<style type="text/css">
+header, footer, aside,section, article, nav, div, iframe {
+	display:block;
+	margin:0;
+	padding: 0;
+}
+html{
+	background: #ededed;
+	font-family: arial;
+	color: #393939;
+	font-size: 1em;
+	line-height: 1;
+}
+body{
+	height: 100%;
+	width: 100%;
+}
+header{
+	height: 4em;
+	width: 100%;
+	border-bottom: .0625em;
+	text-shadow: 3px 3px 5px #999, -3px 3px 5px #999;
+}
+section{
+	width: 28%;
+	border-right: 1px solid #393939;
+	float:left;
+	height: 40em;
+	overflow:hidden;
+	outline: 1px solid black;
+	box-shadow: 3px 3px 5px #999;
+}
+	section nav{
+		height: 1em;
+		width:  100%;
+		border-bottom: .0625em solid #f8d93f;
+		clear:both;
+		padding: 1em 0;
+		background: #fef9eb;
+	}
+		section nav ul{
+			margin: 0;
+			padding: 0;
+			width: 55%;
+			float:left;
+			height: 100%;
+
+		}
+			section nav li{
+				list-style-type: none;
+				float:left;
+				margin: 0 .75em;
+			}
+			section nav a{
+				display:block;
+				color: #999;
+				text-decoration: none;
+			}
+	div[contenteditable]{
+		font-family: courier, monospace;
+		height: 33em;
+		width: 100%;
+		color: #3f67f8;
+		background: #fff;
+		float:left;
+		outline: 1px solid blue;
+	}
+	div[contenteditable]:not(:target){ /* this is cheaper than crazy fixed positioning and floating*/
+		display:none;
+	}
+	div[contenteditable]:target{
+		display:block;
+	}
+section footer{
+	clear:both;
+	border-top: .0625em;
+	background: #fef9eb;
+	width: inherit;
+	height: 3em;
+	border-top: .0625em solid #f8d93f;
+	position:fixed;
+	bottom: 0;
+}
+iframe{
+	width: 70%;
+	float:right;
+	height: 35em;
+	box-shadow: -3px 3px 5px #999
+}
+input, button, select, option{
+	padding: .35em;
+	outline:none;
+	border: 1px solid #3f67f8;
+	border-radius: .25em;
+	font-size: .8em;
+}
+button, select{
+	background: #3f67f8;
+	color: #fff;
+}
+input{
+	background: #fff;
+	color:#3f67f8 ;
+}
+:target {
+	color: #444;
+	background: #999;
+}
+</style>
+<script type="text/javascript" src="jquery-1.7.min.js"></script>
+</head>
+<body>
+<header>
+<h1>HTML5 playground</h1>
+</header>
+<section id="editrange">
+	<nav>
+		<ul>
+			<li><a href="#content">HTML</a></li>
+			<li><a href="#css">CSS</a></li>
+			<li><a href="#js">JS</a></li>
+		</ul>
+				<select id="saveditems">
+		</select>
+	</nav>
+	<div id="content" contenteditable="true">
+		<h1>HTML</H1>	
+	</div>
+	<div id="css" contenteditable="true">
+		<H1>css</H1>
+	</div>
+	<div id="js" contenteditable="true">
+		<h1>js</h1>
+	</div>
+	<footer>
+		<input type="text" name="filename" id="name" placeholder="name">
+		<button id="save" onclick="save()">Save</button>
+		<button id="clearthis" onclick="clearThis()">Delete</button>
+		<button id="clear" onclick="clearStorage()">Clear All</button>
+<script type="text/javascript">
+	function clearStorage(){
+		var answer = confirm ("Are you sure you want to delete all your work")
+		if (answer){
+			localStorage.clear();
+			$('#saveditems').empty();
+			alert ("Local storage has been cleared");
+			$('#name').val().empty();
+		} else{
+			alert("local storage untouched");
+			};
+	};
+	function clearThis(){
+		var key = $('#name').val();
+		var keyID = "#"+key;
+			localStorage.removeItem(key);
+			$(keyID).remove();
+			$('#name').val("");
+			//TODO: clear the content in the center
+	};
+	function save(){
+		var content = $('#content').html();
+		var key = $('#name').val();
+			if (!localStorage.getItem(key)){
+				$('#saveditems').append('<option id=">'+ key + '">' + key +'</option>');
+			}
+			localStorage.setItem(key, JSON.stringify(content));
+			$('#save').css('background','#3f67f8');	
+			$("#save").html('Saved!');
+		var bb = new window.WebKitBlobBuilder();
+		var iframe = $('#result');
+			bb.append(content);
+			$(iframe).prop("src", window.webkitURL.createObjectURL(bb.getBlob('text/html')) ) ;
+	};
+	function load(){
+		var savedItems = $('#saveditems').val();
+		var savedContent = JSON.parse(localStorage.getItem(savedItems));
+		var bb = new window.WebKitBlobBuilder();
+		var iframe = $('#result');
+			$('#content').html(savedContent);
+			$('#name').val(savedItems);
+			bb.append(savedContent);
+			$(iframe).prop("src", window.webkitURL.createObjectURL(bb.getBlob('text/html')) ) ;
+};
+$('#saveditems').change(function(event){
+	load();
+});
+	var numberItems = localStorage.length;
+		for (i = 0; i <= numberItems - 1 ; i++)
+			{
+			$('#saveditems').append('<option id="'+localStorage.key(i) + '"> ' + localStorage.key(i) + '</option>');
+			};
+		$('#content').keyup(function(event){
+		$('#save').css('background', '#f83f42', 'border-color',"#f83f42").html('Save');
+});
+	</script>
+	<script type="text/javascript">
+		var playground = {};
+		playground.indexedDB = {};
+		playground.indexedDB.open = function() {
+				var request = indexedDB.open("todos","This is a description of the database.");
+		  		request.onsuccess = function(e) {
+		    		var v = "1.0";
+		    		playground.indexedDB.db = e.target.result;
+		    		var db = playground.indexedDB.db;
+		    			// We can only create Object stores in a setVersion transaction;
+		    	if(v!= db.version) {
+		      		var setVrequest = db.setVersion(v);
+		      		// onsuccess is the only place we can create Object Stores
+		      		setVrequest.onfailure = playground.indexedDB.onerror;
+		      		setVrequest.onsuccess = function(e) {
+		        		var store = db.createObjectStore("todo",
+		          		{keyPath: "timeStamp"});
+		        		playground.indexedDB.getAllTodoItems();
+		      			};
+		    		};
+		    		playground.indexedDB.getAllTodoItems();
+		  		};
+		  request.onfailure = playground.indexedDB.onerror;
+		};
+	</script>
+	</footer>
+</section>
+<iframe id="result"></iframe>
+</body>
+</html>
