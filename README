@@ -1,0 +1,10 @@
+McSandy: The HTML5 offline Sandbox
+Author: Frank M. Taylor
+Dependencies: jQuery 1.7.1.min.js
+Requirements: Google Chrome V17+
+APIs: File System, LocalStorage, Blobs
+Usage: Make sure that jQuery is in the same directory as the file. 
+You should (eventually) be able to edit CSS, JS, or HTML and get realtime results in the iframe
+License: Copyright 2012 and All Rights Reserved by Frank Marshall Taylor
+Why: Until I finish this concept and feel comfortable distributing it,
+	 don't want other people to do the same and take credit
