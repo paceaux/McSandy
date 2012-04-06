@@ -51,7 +51,6 @@ section#editrange{
 			width: 55%;
 			float:left;
 			height: 100%;
-
 		}
 			section#editrange nav li{
 				list-style-type: none;
@@ -130,13 +129,13 @@ input{
 		<select id="saveditems"></select>
 	</nav>
 	<div id="content" contenteditable="true">
-		<h1>HTML</H1>	
+		HTML
 	</div>
 	<div id="css" contenteditable="true">
-		<H1>css</H1>
+		css
 	</div>
 	<div id="js" contenteditable="true">
-		<h1>js</h1>
+		js
 	</div>
 	<footer>
 		<input type="text" name="filename" id="name" placeholder="name">
@@ -168,12 +167,11 @@ input{
 		var markup = $('#content').text();
 		var jscript = '<script type=\"text\/javascript\">' + $('#js').text() + "<\/script>";
 		var styles = '<style type="text/css">' + $('#css').text() + "</style>";
-		var content = styles + markup + jscript; 
+		var content = styles + markup + jscript; //but it'd be cooler to turn CSS and JS into blobs, too
 			if (!localStorage.getItem(key)){
 				$('#saveditems').append('<option id=">'+ key + '">' + key +'</option>');
 			}
-
-			localStorage.setItem(key, JSON.stringify(markup));
+			localStorage.setItem(key, JSON.stringify(markup)); //todo, put this in an indexedDB
 			localStorage.setItem(key+"-CSS", JSON.stringify(styles));
 			localStorage.setItem(key+"-JS", JSON.stringify(jscript));
 			$('#save').css('background','#3f67f8');	
@@ -202,7 +200,7 @@ $('#saveditems').change(function(event){
 });
 	var numberItems = localStorage.length;
 		for (i = 0; i <= numberItems - 1 ; i++)
-			{
+			{//TODO: figure out how to NOT load the CSS and JS from localstorage here
 			$('#saveditems').append('<option id="'+localStorage.key(i) + '"> ' + localStorage.key(i) + '</option>');
 			};
 		$('#content').keyup(function(event){

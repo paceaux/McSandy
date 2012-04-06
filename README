@@ -1,13 +1,16 @@
 McSandy: The HTML5 offline Sandbox
 Author: Frank M. Taylor
 Dependencies: jQuery 1.7.1.min.js
-Requirements: Google Chrome V17+
+Requirements: Google Chrome V17+ , jQuery in same directory as the playground.html file
 APIs: File System, LocalStorage, Blobs
 Usage: Make sure that jQuery is in the same directory as the file. 
-You should (eventually) be able to edit CSS, JS, or HTML and get realtime results in the iframe
 Version:
 	.01 :: initial upload
 	.02 :: added some interactive CSS for hovers of buttons, a touch o' shadows
+	.03 :: Storing CSS and JS
+	       Converting CSS and JS to strings so the actual result works
+	       Removed the incompleted indexedDB script
+	       
 License: Copyright 2012 and All Rights Reserved by Frank Marshall Taylor
 Why: Until I finish this concept and feel comfortable distributing it,
 	 don't want other people to do the same and take credit
