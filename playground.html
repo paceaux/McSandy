@@ -22,13 +22,13 @@ body{
 	height: 100%;
 	width: 100%;
 }
-header{
+header#playground{
 	height: 4em;
 	width: 100%;
 	border-bottom: .0625em;
 	text-shadow: 3px 3px 5px #999, -3px 3px 5px #999;
 }
-section{
+section#editrange{
 	width: 28%;
 	border-right: 1px solid #393939;
 	float:left;
@@ -37,7 +37,7 @@ section{
 	outline: 1px solid black;
 	box-shadow: 3px 3px 5px #999;
 }
-	section nav{
+	section#editrange nav{
 		height: 1em;
 		width:  100%;
 		border-bottom: .0625em solid #f8d93f;
@@ -45,7 +45,7 @@ section{
 		padding: 1em 0;
 		background: #fef9eb;
 	}
-		section nav ul{
+		section#editrange nav ul{
 			margin: 0;
 			padding: 0;
 			width: 55%;
@@ -53,12 +53,12 @@ section{
 			height: 100%;
 
 		}
-			section nav li{
+			section#editrange nav li{
 				list-style-type: none;
 				float:left;
 				margin: 0 .75em;
 			}
-			section nav a{
+			section#editrange nav a{
 				display:block;
 				color: #999;
 				text-decoration: none;
@@ -78,7 +78,7 @@ section{
 	div[contenteditable]:target{
 		display:block;
 	}
-section footer{
+section#editrange footer{
 	clear:both;
 	border-top: .0625em;
 	background: #fef9eb;
@@ -117,7 +117,7 @@ input{
 <script type="text/javascript" src="jquery-1.7.min.js"></script>
 </head>
 <body>
-<header>
+<header id="playground">
 <h1>HTML5 playground</h1>
 </header>
 <section id="editrange">
@@ -127,8 +127,7 @@ input{
 			<li><a href="#css">CSS</a></li>
 			<li><a href="#js">JS</a></li>
 		</ul>
-				<select id="saveditems">
-		</select>
+		<select id="saveditems"></select>
 	</nav>
 	<div id="content" contenteditable="true">
 		<h1>HTML</H1>	
@@ -165,12 +164,18 @@ input{
 			//TODO: clear the content in the center
 	};
 	function save(){
-		var content = $('#content').html();
 		var key = $('#name').val();
+		var markup = $('#content').text();
+		var jscript = '<script type=\"text\/javascript\">' + $('#js').text() + "<\/script>";
+		var styles = '<style type="text/css">' + $('#css').text() + "</style>";
+		var content = styles + markup + jscript; 
 			if (!localStorage.getItem(key)){
 				$('#saveditems').append('<option id=">'+ key + '">' + key +'</option>');
 			}
-			localStorage.setItem(key, JSON.stringify(content));
+
+			localStorage.setItem(key, JSON.stringify(markup));
+			localStorage.setItem(key+"-CSS", JSON.stringify(styles));
+			localStorage.setItem(key+"-JS", JSON.stringify(jscript));
 			$('#save').css('background','#3f67f8');	
 			$("#save").html('Saved!');
 		var bb = new window.WebKitBlobBuilder();
@@ -181,9 +186,13 @@ input{
 	function load(){
 		var savedItems = $('#saveditems').val();
 		var savedContent = JSON.parse(localStorage.getItem(savedItems));
+		var savedCSS = JSON.parse(localStorage.getItem(savedItems+'-CSS'));
+		var savedJS = JSON.parse(localStorage.getItem(savedItems+'-JS'));
 		var bb = new window.WebKitBlobBuilder();
 		var iframe = $('#result');
-			$('#content').html(savedContent);
+			$('#content').text(savedContent);
+			$('#css').text(savedCSS);
+			$('#js').text(savedJS);
 			$('#name').val(savedItems);
 			bb.append(savedContent);
 			$(iframe).prop("src", window.webkitURL.createObjectURL(bb.getBlob('text/html')) ) ;
@@ -199,31 +208,6 @@ $('#saveditems').change(function(event){
 		$('#content').keyup(function(event){
 		$('#save').css('background', '#f83f42', 'border-color',"#f83f42").html('Save');
 });
-	</script>
-	<script type="text/javascript">
-		var playground = {};
-		playground.indexedDB = {};
-		playground.indexedDB.open = function() {
-				var request = indexedDB.open("todos","This is a description of the database.");
-		  		request.onsuccess = function(e) {
-		    		var v = "1.0";
-		    		playground.indexedDB.db = e.target.result;
-		    		var db = playground.indexedDB.db;
-		    			// We can only create Object stores in a setVersion transaction;
-		    	if(v!= db.version) {
-		      		var setVrequest = db.setVersion(v);
-		      		// onsuccess is the only place we can create Object Stores
-		      		setVrequest.onfailure = playground.indexedDB.onerror;
-		      		setVrequest.onsuccess = function(e) {
-		        		var store = db.createObjectStore("todo",
-		          		{keyPath: "timeStamp"});
-		        		playground.indexedDB.getAllTodoItems();
-		      			};
-		    		};
-		    		playground.indexedDB.getAllTodoItems();
-		  		};
-		  request.onfailure = playground.indexedDB.onerror;
-		};
 	</script>
 	</footer>
 </section>
