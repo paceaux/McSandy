@@ -10,6 +10,10 @@ Version:
 	.03 :: Storing CSS and JS
 	       Converting CSS and JS to strings so the actual result works
 	       Removed the incompleted indexedDB script
+	.04 :: changed the content variable to an array. 
+	       Using JSON.stringify and JSON.parse to and from storage
+	       minified the CSS
+
 	       
 License: Copyright 2012 and All Rights Reserved by Frank Marshall Taylor
 Why: Until I finish this concept and feel comfortable distributing it,
