@@ -27,16 +27,19 @@ Version:
 		   Added an online/offline indicator to tell user if there's an internect connection
 
 Upcoming:
+	auto-insert the meyer reset into the CSS
+	auto-insert a jquery reference into the <head> of the HTML
+	a "run" button for the javascript so user can type JS without it automatically running 
 	add some custom shortcuts
 	automatically take user back to HTML when changing saved item
-	after hitting "save", the 'saved' button only shows 'saved' for a few seconds
-	Export to file features (probably a 2.0 version)
+	Export HTML / CSS / JS into files (probably a 2.0 version)
 
-Known Defects:
-	required doubleclick to switch frm one type of code to the next
+Known Defects / issues:
+	required doubleclick to switch from one type of code to the next
+	Code loses user's formatting when it's reloaded
+	Save button doesn't auto refresh the iframe
+
 
 
 	       
 License: Copyright 2012 and All Rights Reserved by Frank Marshall Taylor
-Why: Until I finish this concept and feel comfortable distributing it,
-	 don't want other people to do the same and take credit
