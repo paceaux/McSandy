@@ -6,31 +6,33 @@ APIs: File System, LocalStorage, Blobs, Network Information
 Usage: Make sure that jQuery is in the same directory as the file. 
 Version:
    1
-	.01 :: initial upload
-	.02 :: added some interactive CSS for hovers of buttons, a touch o' shadows
-	.03 :: Storing CSS and JS
-	       Converting CSS and JS to strings so the actual result works
-	       Removed the incompleted indexedDB script
-	.04 :: changed the content variable to an array. 
-	       Using JSON.stringify and JSON.parse to and from storage
-	       minified the CSS
-	.05 :: FireFox Support finally. Using an if-then to detect the browser specific extensions
-		   detecting whether user has internet connection, showing that in upper right
-		   Added a title to the editing section and the iframe section
-		   HTML section displays upon page load
-		   first item stored in local storage loads upon page load
-		   Brightened the color of the nav 
-		   color for :hover and :focus of buttons
-		   changed widths and displays of the sections so that switching from HTML->js doesn't cause page skipping
-		   added TABINDEX to the HTML->JS switchers and tabs
-	.06 :: Iframe refreshes as you type (bound an event to #content and #css)
-		   Added an online/offline indicator to tell user if there's an internect connection
+	.01 :: 	initial upload
+	.02 :: 	added some interactive CSS for hovers of buttons, a touch o' shadows
+	.03 :: 	Storing CSS and JS
+	       	Converting CSS and JS to strings so the actual result works
+	       	Removed the incompleted indexedDB script
+	.04 :: 	changed the content variable to an array. 
+	       	Using JSON.stringify and JSON.parse to and from storage
+	       	minified the CSS
+	.05 :: 	FireFox Support finally. Using an if-then to detect the browser specific extensions
+		   	detecting whether user has internet connection, showing that in upper right
+		   	Added a title to the editing section and the iframe section
+		   	HTML section displays upon page load
+		   	first item stored in local storage loads upon page load
+		   	Brightened the color of the nav 
+		   	color for :hover and :focus of buttons
+		   	changed widths and displays of the sections so that switching from HTML->js doesn't cause page skipping
+		   	added TABINDEX to the HTML->JS switchers and tabs
+	.06 :: 	Iframe refreshes as you type (bound an event to #content and #css)
+		   	Added an online/offline indicator to tell user if there's an internect connection
+	.07	:: 	Meyer reset is auto inserted into the CSS for the iframe
+			Putting the playground's jquery reference in the iframe (so jquery is now supported)
+			keyboard controls: ctrl + ~ hides the codebox
+			Error message will display if blob URLs aren't supported. 
+
 
 Upcoming:
-	auto-insert the meyer reset into the CSS
-	auto-insert a jquery reference into the <head> of the HTML
 	a "run" button for the javascript so user can type JS without it automatically running 
-	add some custom shortcuts
 	automatically take user back to HTML when changing saved item
 	Export HTML / CSS / JS into files (probably a 2.0 version)
 
