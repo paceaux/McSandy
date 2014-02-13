@@ -2,6 +2,25 @@ html, body, h1, h2, h3, h4, h5, h6, div, fieldset, form, input{
     padding:0;
     margin: 0;
 }
+body, html{
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+}
+h1, .h1{
+    font-size: 1.2em;
+}
+h1, .h2{
+    font-size: 1.1em;
+}
 a, 
 input, 
 textarea, 
@@ -14,22 +33,35 @@ form{
 a:hover, a:focus, a:active,
 input:hover, input:focus,
 textarea:hover, textarea:focus{
+    outline: none;
     -webkit-transition: all .3s ease-out;
     -moz-transition: all .3s ease-out;
     -o-transition: all .3s ease-out;
     transition: all .3s ease-out;    
 }
-body{
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
+button,
+input,
+select,
+textarea{
+    border:1px solid hsla(128, 38.2%, 61.8%, 1);
+    outline: none;
 }
-h1, .h1{
-    font-size: 1.2em;
+button:hover, button:focus,
+input:hover,input:focus,
+select:hover, select:focus,
+textarea:hover,textarea:focus{
+    border:1px solid hsla(128,38.2%, 38.2%, 1);
 }
-h1, .h2{
-    font-size: 1.1em;
+button, input, select{
+    padding: .618em;
+    margin: .618em;
+}
+button{
+    background:hsla(128, 38.2%, 61.8%, 1) ;
+}
+button:hover, button:focus{
+    background:1px solid hsla(128,38.2%, 38.2%, 1);
+
 }
     .mpGlobal__header{
         align-items: flex-start;
@@ -40,6 +72,7 @@ h1, .h2{
     }
     .mpGlobal__header, .mpGlobal__footer{
         display:flex;
+        flex-shrink: 1;
         flex-direction: column;
         justify-content: flex-start;
         align-items: stretch;
@@ -69,13 +102,19 @@ h1, .h2{
         transition: all .3s ease-in-out;  
     }
     .wrapper__label{
+        display:inline-block;
+        align-self: flex-start;
+        border: 1px solid gray;
         position:relative;
         top:-1em;
         margin:0;
-        padding: 0;
+        padding: .25em;
     }
     .wrapper__toggle:checked ~ .mpGlobal__header__controls,
-    .wrapper__toggle:checked ~ .mpGlobal__header__controls > .controls__labelWrapper{
+    .wrapper__toggle:checked ~ .mpGlobal__header__controls > .controls__labelWrapper, 
+    .wrapper__toggle:checked ~ .mpGlobal__footer__controls,
+    .wrapper__toggle:checked ~ .mpGlobal__footer__controls > .controls__fieldset
+    {
         height: 0;
         overflow:hidden;
     }
@@ -141,11 +180,14 @@ h1, .h2{
         font-weight: bold;
         border-color: #777;
     } 
+    .controls__input{}
+    .controls__input--name:empty ~ .controls__button--del{
+        display:none;
+    }
 .mcsandy__result{
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    flex-basis: 75vh;
+    flex-grow: 2;
     width: 100%;
 
 }
@@ -155,7 +197,6 @@ h1, .h2{
         border: none;
     }
 .mpGlobal__footer{
-    height: 10vh;
 }
 .online{
     color: green;

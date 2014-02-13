@@ -7,13 +7,21 @@ A SFA (Single File Application ) that acts as your HTML, CSS, and JavaScript edi
 
 ## Version History ##
 This is a complete overhaul of McSandy 1.0. This version has **no external dependencies** It uses vanilla JavaScript. 
-2.
- +  
+
+  
 
 
+## Recently done
+ + got the flex layout working properly, header, main area, and footer distributely evenly
+ + can now load projects from local storage
+ + loading projects from LS puts the content in the editors
+ + can delete projects
 ##Upcoming To-dos
- + Need project retrieval
- + proper project storage would be a nice touch
+ + fix the delete button CSS. right now it's always *not* showing. we only want it to show when a project has been loaded
+ + correct the font in the editor boxes
+ + get some animation when you expand/collapse sections. 
+
+
 
  
 
