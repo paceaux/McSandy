@@ -1,66 +1,3 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="js"> <!--<![endif]-->
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>McSandy: The HTML5 Playground<</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<style type="text/css">
-body,div,fieldset,form,h1,h2,h3,h4,h5,h6,html,input{padding:0;margin:0}a,form,input,textarea{-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}a:active,a:focus,a:hover,input:focus,input:hover,textarea:focus,textarea:hover{-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out}body{display:flex;flex-direction:column;justify-content:space-around;align-items:flex-start}.h1,h1{font-size:1.2em}.h2,h1{font-size:1.1em}.mpGlobal__header{-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}.mpGlobal__footer,.mpGlobal__header{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;padding:.618em;width:100%;background:#f0f8ff}.mpGlobal__header__hgroup{display:flex;flex-direction:row;align-self:flex-start;align-items:baseline;justify-content:space-between;font-size:1em;width:100%}.mpGlobal__header__onlineStatus{align-self:flex-end;padding:.618em}.mpGlobal__header__controls__wrapper{display:flex;flex-direction:column;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}.wrapper__label{position:relative;top:-1em;margin:0;padding:0}.wrapper__toggle:checked~.mpGlobal__header__controls,.wrapper__toggle:checked~.mpGlobal__header__controls>.controls__labelWrapper{height:0;overflow:hidden}.controls{display:flex;flex-direction:row;justify-content:space-between;flex-wrap:wrap;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}.controls__labelWrapper{display:inline-flex;flex-direction:column;justify-content:space-between}.controls__fieldset{display:flex;flex-direction:column;flex-grow:1}.controls__control{display:none}.controls__label{display:block;font-size:.8em;padding:.618em;border:1px solid #ccc}.controls__editor{height:0;visibility:hidden;align-self:flex-end;flex-basis:0}.control--html:checked~.control--html{visibility:visible;height:20vh;flex-grow:1}.control--html:checked~.controls__labelWrapper>.controls__label--html{font-weight:700;border-color:#777}.control--css:checked~.control--css{visibility:visible;height:20vh;flex-grow:1}.control--css:checked~.controls__labelWrapper>.controls__label--css{font-weight:700;border-color:#777}.control--js:checked~.control--js{visibility:visible;height:20vh;flex-grow:1}.control--js:checked~.controls__labelWrapper>.controls__label--js{font-weight:700;border-color:#777}.mcsandy__result{display:flex;flex-direction:column;flex-grow:1;flex-basis:75vh;width:100%}.mcsandy__result__iframe{width:100%;outline:0;border:0}.mpGlobal__footer{height:10vh}.online{color:green}.offline{color:red}
-</style>
-</head>
-    <body>
-        <header class="mpGlobal__header">
-            <div class="mpGlobal__header__hgroup">
-                <h1 class="mpGlobal__header__h1 h1">McSandy</h1>
-                <h2 class="mpGlobal__header__h2 h2">The offline HTML sandbox</h2>
-                <span id="js-onlineStatus" class="mpGlobal__header__onlineStatus online">&#9673;</span>
-            </div>
-            <div class="mpGlobal__header__controls__wrapper wrapper">
-                <label for="js-controls-toggle" class="wrapper__label">Toggle Panel</label>
-                <input type="checkbox" id="js-controls-toggle" class="wrapper__toggle controls__control" />
-            <form class="mpGlobal__header__controls controls">
-                <input type="checkbox" id="js-htmlSwitch" class="controls__control controls__control--html control control--html" checked />
-                <input type="checkbox" id="js-cssSwitch" class="controls__control controls__control--css control control--css" checked/>
-                <input type="checkbox" id="js-jsSwitch" class="controls__control controls__control--js control control--js" checked/>
-                <div class="controls__labelWrapper">
-                    <label class="controls__label controls__label--html" for="js-htmlSwitch">HTML</label>
-                    <label class="controls__label controls__label--css" for="js-cssSwitch">CSS</label>
-                    <label class="controls__label controls__label--js" for="js-jsSwitch">JS</label>
-                </div>
-                <textarea  id="js-html" class="controls__editor controls__editor--html control control--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
-                <textarea id="js-css" class="controls__editor controls__editor--css control control--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
-                <textarea id="js-js" class="controls__editor controls__editor--js control control--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
-            </form>
-        </div>
-        </header>
-<main class="mcsandy__result">
-    <iframe id="js-result" class="mcsandy__result__iframe"></iframe>
-</main>
-<footer class="mpGlobal__footer">
-    <form class="mpGlobal__footer__controls controls">
-        <fieldset class="controls__fieldset">
-            <input id="js-projectName" class="controls__input controls__input--name" type="text" placeholder="Name of Project">
-            <button id="js-projectSave" class="controls__button controls__button--save">Save</button>
-        </fieldset>
-        <fieldset class="controls__fieldset">
-            <label for="js-selectProjects">Other Projects</label>
-            <select id="js-selectProjects" >
-                <option></option>
-            </select>
-        </fieldset>
-    </form>
-</footer>
-<script type="text/javascript">
-
-</script>
-<script type="text/javascript">
-</script>
-<script type="text/javascript">
 var mcsandyUI;
 mcsandyUI = {
     init: function () {
@@ -243,7 +180,3 @@ store = {
         }
     }
     mcsandy.init();
-
-</script>
-    </body>
-</html>

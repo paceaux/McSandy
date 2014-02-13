@@ -1,0 +1,165 @@
+html, body, h1, h2, h3, h4, h5, h6, div, fieldset, form, input{
+    padding:0;
+    margin: 0;
+}
+a, 
+input, 
+textarea, 
+form{
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;    
+}
+a:hover, a:focus, a:active,
+input:hover, input:focus,
+textarea:hover, textarea:focus{
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;    
+}
+body{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+h1, .h1{
+    font-size: 1.2em;
+}
+h1, .h2{
+    font-size: 1.1em;
+}
+    .mpGlobal__header{
+        align-items: flex-start;
+        -webkit-transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;  
+    }
+    .mpGlobal__header, .mpGlobal__footer{
+        display:flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: .618em;
+        width: 100%;
+        background: aliceblue;
+    }
+    .mpGlobal__header__hgroup{
+        display:flex;
+        flex-direction: row;
+        align-self:flex-start;
+        align-items: baseline;
+        justify-content: space-between;
+        font-size: 1em;
+        width: 100%;
+    }
+    .mpGlobal__header__onlineStatus{
+        align-self: flex-end;
+        padding: .618em;
+    }
+    .mpGlobal__header__controls__wrapper{
+        display:flex;
+        flex-direction: column;
+        -webkit-transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;  
+    }
+    .wrapper__label{
+        position:relative;
+        top:-1em;
+        margin:0;
+        padding: 0;
+    }
+    .wrapper__toggle:checked ~ .mpGlobal__header__controls,
+    .wrapper__toggle:checked ~ .mpGlobal__header__controls > .controls__labelWrapper{
+        height: 0;
+        overflow:hidden;
+    }
+.controls{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;  
+}
+    .controls__labelWrapper{
+        display:inline-flex;
+        flex-direction:column;
+        justify-content: space-between;
+    }
+    .controls__fieldset{
+        display:flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+.controls__control{
+    display:none;
+}
+.controls__label{
+    display: block;
+    font-size: .8em;
+    padding: .618em;
+    border: 1px solid #ccc;
+}
+.controls__editor{
+    height: 0;
+    visibility: hidden;
+    align-self: flex-end;
+    flex-basis: 0%;
+}
+    .control--html:checked ~ .control--html{
+        visibility: visible;
+        height: 20vh;
+        flex-grow: 1;
+    }
+    .control--html:checked ~ .controls__labelWrapper > .controls__label--html{
+        font-weight: bold;
+        border-color: #777;
+    }            
+    .control--css:checked ~ .control--css{
+        visibility: visible;                
+        height: 20vh;
+        flex-grow: 1;
+    }
+    .control--css:checked ~ .controls__labelWrapper > .controls__label--css{
+        font-weight: bold;
+        border-color: #777;
+    }             
+    .control--js:checked ~ .control--js{
+        visibility: visible;
+        height: 20vh;
+        flex-grow: 1;
+    }
+    .control--js:checked ~ .controls__labelWrapper > .controls__label--js{
+        font-weight: bold;
+        border-color: #777;
+    } 
+.mcsandy__result{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 75vh;
+    width: 100%;
+
+}
+    .mcsandy__result__iframe{
+        width: 100%;
+        outline: none;
+        border: none;
+    }
+.mpGlobal__footer{
+    height: 10vh;
+}
+.online{
+    color: green;
+}
+.offline{
+    color: red;
+}
