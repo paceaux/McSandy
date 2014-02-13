@@ -104,7 +104,7 @@ button:hover, button:focus{
     .wrapper__label{
         display:inline-block;
         align-self: flex-start;
-        border: 1px solid gray;
+        border: 1px solid #e1e1e1;
         position:relative;
         top:-1em;
         margin:0;
@@ -120,7 +120,7 @@ button:hover, button:focus{
     }
 .controls{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     flex-wrap: wrap;
     -webkit-transition: all .3s ease-in-out;
@@ -128,9 +128,12 @@ button:hover, button:focus{
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;  
 }
+.mpGlobal__footer__controls{
+    flex-direction: row;
+}
     .controls__labelWrapper{
         display:inline-flex;
-        flex-direction:column;
+        flex-direction:row;
         justify-content: space-between;
     }
     .controls__fieldset{
@@ -142,6 +145,7 @@ button:hover, button:focus{
     display:none;
 }
 .controls__label{
+    color: #ccc;
     display: block;
     font-size: .8em;
     padding: .618em;
@@ -153,37 +157,40 @@ button:hover, button:focus{
     align-self: flex-end;
     flex-basis: 0%;
 }
-    .control--html:checked ~ .control--html{
+    .controls__editWrapper{
+        display:flex;
+    }
+    .control--html:checked ~ .controls__editWrapper .control--html{
         visibility: visible;
         height: 20vh;
         flex-grow: 1;
     }
-    .control--html:checked ~ .controls__labelWrapper > .controls__label--html{
+    .control--html:checked ~ .controls__labelWrapper  .controls__label--html{
+        color: #333;
         font-weight: bold;
         border-color: #777;
     }            
-    .control--css:checked ~ .control--css{
+    .control--css:checked ~ .controls__editWrapper .control--css{
         visibility: visible;                
         height: 20vh;
         flex-grow: 1;
     }
-    .control--css:checked ~ .controls__labelWrapper > .controls__label--css{
+    .control--css:checked ~ .controls__labelWrapper  .controls__label--css{
+        color: #333;
         font-weight: bold;
         border-color: #777;
     }             
-    .control--js:checked ~ .control--js{
+    .control--js:checked ~ .controls__editWrapper .control--js{
         visibility: visible;
         height: 20vh;
         flex-grow: 1;
     }
-    .control--js:checked ~ .controls__labelWrapper > .controls__label--js{
+    .control--js:checked ~ .controls__labelWrapper  .controls__label--js{
+        color: #333;
         font-weight: bold;
         border-color: #777;
     } 
     .controls__input{}
-    .controls__input--name:empty ~ .controls__button--del{
-        display:none;
-    }
 .mcsandy__result{
     display: flex;
     flex-direction: column;
