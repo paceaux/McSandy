@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<!--[if gt IE 6]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 crappy" lang="en"><head><title>WTF!</title></head><body><h1>put down the crack pipe and use chrome!</h1></body></html> <![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>McSandy: The HTML5 Playground</title>
+<style type="text/css">
+body,html,header,footer,aside,section,article,nav,div,iframe{display:block;margin:0;padding:0}html{font-family:arial;color:#393939;font-size:1em;line-height:1;background:#ededed}body{height:100%;width:100%}h1,h2,h3,h4{margin:0;padding:0}header#playground{height:2.5em;width:100%;border-bottom:.0625em;text-shadow:3px 3px 5px #999, -3px 3px 5px #999}header#playground h1,header#playground h2{display:inline;margin:0;padding:0}header#playground h2{float:right;margin-right:2em}h2.online{color:#59e362}h2.offline{color:#e35959}section#editrange{width:30%;border-right:1px solid #393939;float:left;height:40em;overflow:hidden;outline:1px solid #000;box-shadow:3px 3px 5px #999}section#editrange nav{height:1em;width:100%;border-bottom:.0625em solid #f8d93f;clear:both;background:#fef9eb;padding:1em 0}section#editrange h1,section#result h1{background:#fef9eb;padding:0 .25em}section#editrange nav ul{width:55%;float:left;height:100%;margin:0;padding:0}section#editrange nav li{list-style-type:none;float:left;margin:0 .75em}section#editrange nav a,section#editrange h1,section#result h1{display:block;color:#3fbaf8;text-decoration:none}section#editrange #saveditems{width:40%;margin:0;padding:0}div[contenteditable]{overflow:scroll;font-family:courier, monospace;height:33em;width:100%;color:#3f67f8;float:left;outline:1px solid blue;background:#fff}div[contenteditable]:not(:target){display:none}div[contenteditable]:target,div[id=content][contenteditable]{display:block}#editFields{overflow:hidden;width:100%;height:31em}section#editrange footer{clear:both;width:100%;height:3em;border-top:.0625em solid #f8d93f;background:#fef9eb}section#result{width:69%;float:right;height:40em;box-shadow:-3px 3px 5px #999}iframe{height:37em;width:100%}input,button,select,option{outline:none;border:1px solid #3f67f8;border-radius:.25em;font-size:.8em;padding:.35em}button,select{color:#fff;background:#3f67f8}input{color:#3f67f8;background:#fff}input:hover,input:focus,button:hover,button:focus,select:hover,select:focus{background:#7285cb;border-color:#7285cb}option:target{color:#444;background:#999} section#result.fullscreen, section#editrange.fullscreen{width:100%;}#settings{display:none;}#tweaks fieldset{width: 25em;float:left;}
+</style>
+<script id="jquery" type="text/javascript" src="jquery-1.7.min.js"></script>
+<script type="text/javascript">
+window.addEventListener("load",function(e){if(navigator.onLine)processOnline();else processOffline()},false);window.addEventListener("offline",function(e){processOffline(e.type)},false);window.addEventListener("online",function(e){processOnline(e.type)},false);function processOnline(eventType){$("#playground h2").addClass("online").text("Online").removeClass("offline")}function processOffline(){$("#playground h2").addClass("offline").text("Offline").removeClass("online")};
+</script>
+</head>
+<body>
+<header id="playground">
+<h1>McSandy: The HTML5 PlayBox</h1>
+	<h2></h2>
+</header>
+<div id="main">
+<section id="editrange">
+	<h1>Code Up!</h1>
+	<nav>
+		<ul>
+			<li tabindex="10"><a href="#content">HTML</a></li>
+			<li tabindex="11"><a href="#css">CSS</a></li>
+			<li tabindex="12"><a href="#js">JS</a></li>
+		</ul>
+		<select tabindex="20"id="saveditems"></select>
+	</nav>
+	<div id="editFields">
+		<div id="content" contenteditable="true" placeholder="HTML"></div>
+		<div id="css" contenteditable="true"> css </div>
+		<div id="js" contenteditable="true"> js </div>
+	</div>
+	<footer>
+		<input type="text" name="filename" id="name" placeholder="name" tabindex="30">
+		<button id="save" onclick="save()" tabindex="20">Save</button>
+		<button id="clearthis" onclick="clearThis()" tabindex="50">Delete</button>
+		<button id="clear" onclick="clearStorage()">Clear All</button>
+	</footer>
+</section>
+<section id="result">
+	<h1>Show up!</h1>
+<iframe></iframe>
+</section>
+</div>
+<div id="settings">
+<section id="assets">
+<h1>Tweak McSandy</h1>
+<div id="tweaks">
+	<fieldset>
+	<legend for="css">CSS Reset </legend>
+	<input type="radio" name="css" value="None" />No Reset
+	<input type="radio" name="css" value="Meyer" />Meyer Reset
+	<input type="radio" name="css" value="Normalize" />Normalize
+</fieldset>
+	</div>
+</section>
+</div>
+<script type="text/javascript">
+function createAssets(){var meyerReset="html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}";
+var jqueryRef=$("#jquery").prop("src");if(localStorage.getItem("reset")==null)localStorage.setItem("reset",meyerReset);if(localStorage.getItem("jquery")==null)localStorage.setItem("jquery",jqueryRef)}function clearStorage(){var answer=confirm("Are you sure you want to delete all your work");if(answer){localStorage.clear();$("#saveditems").empty();alert("Local storage has been cleared");$("#name").val().empty()}else alert("local storage untouched")}
+function clearThis(){var key=$("#name").val();var keyID="#"+key;localStorage.removeItem(key);$(keyID).remove();$("#name").val("")}
+function save(){var key=$("#name").val();var markup=$("#content").text();var styles=$("#css").text();var jscript=$("#js").text();var content=new Array(markup,styles,jscript);var result='<head><style type="text/css">'+localStorage.getItem("reset")+content[1]+'</style><script type="text/javascript" src="'+localStorage.getItem("jquery")+'"><\/script></head><body>'+content[0]+'<script type="text/css">'+content[2]+"<\/script>";content=JSON.stringify(content);if(!localStorage.getItem(key))$("#saveditems").append('<option id=">'+
+key+'">'+key+"</option>");localStorage.setItem(key,content);createFrame(result);$("#save").css("background","#3f67f8");$("#save").html("Saved!")}
+function loadItems(){var savedItems=$("#saveditems").val();var savedContent=JSON.parse(localStorage.getItem(savedItems));var result='<head><style type="text/css"> '+localStorage.getItem("reset")+savedContent[1]+'</style><script type="text/javascript" src="'+localStorage.getItem("jquery")+'"><\/script></head><body>'+savedContent[0]+'<script type="text/javascript"> '+savedContent[2]+"<\/script></body></html>";$("#content").text(savedContent[0]);$("#css").text(savedContent[1]);$("#js").text(savedContent[2]);
+$("#name").val(savedItems);createFrame(result)}
+function refreshFrame(){var key=$("#name").val();var markup=$("#content").text();var styles=$("#css").text();var jscript=$("#js").text();var content=new Array(markup,styles,jscript);var result='<head><style type="text/css"> '+localStorage.getItem("reset")+content[1]+'</style><script type="text/javascript" src="'+localStorage.getItem("jquery")+'"><\/script></head><body>'+content[0]+'<script type="text/css">'+content[2]+"<\/script>";createFrame(result)}$("#content, #js, #css").bind("keyup",function(e){refreshFrame()});
+$(window).keyup(function(e){if(e.which==17)isCtrl=false}).keydown(function(e){if(e.which==17)isCtrl=true;if(e.which==192&&isCtrl==true){$("section#editrange").slideToggle("fast");$("section#result").toggleClass("fullscreen");return false}if(e.which==190&&isCtrl==true){$("section#result").slideToggle("fast");$("section#editrange").toggleClass("fullscreen");return false}if(e.which==186&&isCtrl==true){$("#main").slideToggle("fast");$("#settings").slideToggle("fast");return false}});$("#saveditems").blur(function(event){loadItems()});
+$(window).load(function(event){createAssets();loadItems()});
+function createFrame(result){if(window.URL){var bb=new window.MozBlobBuilder||new window.BlobBuilder;bb.append(result);var iframeSrc=window.URL.createObjectURL(bb.getBlob("text/html"))}else if(window.webkitURL){var bb=new window.WebKitBlobBuilder;bb.append(result);var iframeSrc=window.webkitURL.createObjectURL(bb.getBlob("text/html"))}else if(!window.URL&&!window.webkitURL){console.log("Sad Day. No Blob for you!");$("#result h1").text("Doesn't look like your browser is supported")}$("#result iframe").prop("src",iframeSrc)}
+var numberItems=localStorage.length;for(i=0;i<=numberItems-1;i++)if(localStorage.key(i)!="reset")if(localStorage.key(i)!="jquery")$("#saveditems").append('<option id="'+localStorage.key(i)+'"> '+localStorage.key(i)+"</option>");$("#content").keyup(function(event){$("#save").css("background","#f83f42","border-color","#f83f42").html("Save")});
+	</script>
+</body>
+</html>
+
