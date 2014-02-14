@@ -63,6 +63,9 @@ button:hover, button:focus{
     background:1px solid hsla(128,38.2%, 38.2%, 1);
 
 }
+textarea{
+    font-family: Courier, monospace;
+}
     .mpGlobal__header{
         align-items: flex-start;
         -webkit-transition: all .3s ease-in-out;
@@ -77,7 +80,7 @@ button:hover, button:focus{
         justify-content: flex-start;
         align-items: stretch;
         padding: .618em;
-        width: 100%;
+        width: 98.5%;
         background: aliceblue;
     }
     .mpGlobal__header__hgroup{
