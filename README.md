@@ -12,10 +12,15 @@ A SFA (Single File Application ) that acts as your HTML, CSS, and JavaScript edi
 An SFA is a Single File Application. This means the entire application functions in a single file - no installation, extra files, or internet, is required to use it. Once you've downloaded McSandy (index.html), that's all you need. At 350 lines, that's not too bad, right?
 
 ### What can I do with McSandy? ###
-McSandy lets you edit HTML, CSS and JavaScript with a live preview. Every time you leave the HTML, CSS, or JavaScript fields (with the tab button), live preview will be updated. You'll have a live-reload with the CSS. 
+McSandy lets you edit HTML, CSS and JavaScript with a live preview. Every time you keyup in the HTML, or CSS fields, live preview will be updated. When you `tab` away from the JavaScript field, that'll 
 
 ### Can I save my work? ###
-Of course you can! McSandy uses `localstorage` to save your projects. You can save and delete any of your projects
+Of course you can! McSandy uses `localstorage` to save your projects. You can save and delete any of your projects by clicking on the save button at the bottom, or with `ctrl` + `s`.
+
+### How can I get my work back? ###
+At the bottom of McSandy, there's a select box where you can retrieve your old projects. 
+
+You can also retrieve your projects as a url. 
 
 ###Can I export my work? ###
 Not yet, but that is an upcoming feature. You will be able to export 
@@ -37,6 +42,8 @@ If you'd like to contribute, just clone the repo. All of the 'editable' assets a
 ## Upcoming Features ##
  + add external JS/CSS (will require offline validation to make sure that it'll work if no internet)
  + Export to File (download a project to a single file, or download a particular asset)
+ + editor validation
+ + last project-restore
 
 
 ## Recently done ##
@@ -51,6 +58,10 @@ If you'd like to contribute, just clone the repo. All of the 'editable' assets a
  + Can now load a project by simply adding the name of the project as a hash to the url: `index.html#test`
  + fixed animation for expand collapse sections
  + improved the UI a bit, set the theme around one central color, threw some stylus variables around it
+ + load button, instead of loading when user chooses select button
+ + shortcut for running JS
+
+
 
 
  

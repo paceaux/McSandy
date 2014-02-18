@@ -37,12 +37,17 @@ mcsandyUI = {
         onlineState: 'online',
         onlineCtrl: document.getElementById('js-onlineStatus'),
         els: {
-            projecSelect: document.getElementById('js-selectProjects')
+            projectSelect: document.getElementById('js-selectProjects'),
+            projectLoad: document.getElementById('js-projectLoad')
         },
         keyMaps:{
             save: {
                 83:false,
                 17:false
+            },
+            run: {
+                83:false,
+                16:false
             }
         }
     },
@@ -50,12 +55,19 @@ mcsandyUI = {
         keyDown: function(e) {
             var _this = mcsandyUI,
                 keyMaps = _this.data.keyMaps, 
-                saveMap = keyMaps.save;
+                saveMap = keyMaps.save,
+                runMap = keyMaps.run
 
             /*SAVE*/
             if (e.keyCode in saveMap){
                 saveMap[e.keyCode] = true;
                 if(saveMap[17] && saveMap[83]) {
+                    mcsandy.functions.saveContent(e);
+                }
+            }
+            if (e.keyCode in runMap){
+                runMap[e.keyCode] = true;
+                if(runMap[16] && runMap[83]) {
                     mcsandy.functions.saveContent(e);
                 }
             }
@@ -65,6 +77,9 @@ mcsandyUI = {
                 keyMaps = _this.data.keyMaps,
                 saveMap = keyMaps.save;
             if (e.keyCode in keyMaps.save) {
+                keyMaps.save[e.keyCode] = false;
+            }
+            if (e.keyCode in keyMaps.run){
                 keyMaps.save[e.keyCode] = false;
             }
         },
@@ -93,13 +108,13 @@ mcsandyUI = {
 
         /*WINDOW HASH CHANGE */
         window.addEventListener("hashchange", _this.functions.handleHash)
+        
         /*SELECT A PROJECT*/
-        els.projecSelect.addEventListener('change', _this.functions.handleProjectSelect);
+        els.projectLoad.addEventListener('click', _this.functions.handleProjectSelect);
 
         /*KEYBOARD SHORTCUTS*/
         document.addEventListener('keydown', helpers.keyDown)
         document.addEventListener('keyup', helpers.keyUp)
-
     },
     functions: {
         handleConnection: function (e) {
@@ -108,8 +123,10 @@ mcsandyUI = {
             _this.data.onlineState = navigator.onLine ? "online" : "offline";
             if (_this.data.onlineState == "online"){
                 ctrl.className = ctrl.className.replace( /(?:^|\s)offline(?!\S)/g, " online");
+                document.title = "McSandy | Online";
             } else {
                 ctrl.className = ctrl.className.replace( /(?:^|\s)online(?!\S)/g," offline");
+                document.title = "McSandy | Offline"
             }
         },
         handleHash: function (e) {
@@ -123,8 +140,9 @@ mcsandyUI = {
             window.location.hash = _this.helpers.convertHash(hash);
         },
         handleProjectSelect: function (e) {
+            e.preventDefault();
             var _this = mcsandyUI,
-                project = e.target.value;
+                project = _this.data.els.projectSelect.value;
             _this.functions.setHash(project);
             _this.functions.loadProject(project);
 
@@ -163,6 +181,7 @@ mcsandy = {
     },
     data: {
         ctrls: {
+            projectLoad: document.getElementById('js-projectLoad'),
             projectSave: document.getElementById('js-projectSave'),
             projectDel: document.getElementById('js-projectDel'),
             project: document.getElementById('js-projectName'),
@@ -255,13 +274,22 @@ mcsandy = {
     bindUiEvents: function () {
         var _this = mcsandy,
             functions = _this.functions,
-            ctrls = _this.data.ctrls;
+            ctrls = _this.data.ctrls,
+            keyUpCounter = 0;
         //BIND EVENTS TO TEXTAREAS
         ctrls.css.addEventListener('keyup',function (e) {
-            functions.updateContent();
-        });
+            keyUpCounter++;
+            if (keyUpCounter == 5){
+                functions.updateContent();
+                keyUpCounter = 0;
+            }        });
         ctrls.html.addEventListener('keyup',function (e) {
-            functions.updateContent();
+            keyUpCounter++;
+            if (keyUpCounter == 4){
+                functions.updateContent();
+                keyUpCounter = 0;
+            }
+            
         });
         ctrls.js.addEventListener('change',function (e) {
             functions.updateContent();
@@ -292,7 +320,7 @@ mcsandy = {
              var _this = mcsandy,
                 iframe = _this.data.targets.iframe,
                 parts =  loadedParts !== undefined ? loadedParts.blobArray : _this.helpers.wrapProjectParts();
-               var result = _this.helpers.prepareResult(parts);
+            var result = _this.helpers.prepareResult(parts);
             iframe.src = window.URL.createObjectURL(result);
         },
         delContent: function (e) {

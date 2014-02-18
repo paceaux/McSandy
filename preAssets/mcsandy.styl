@@ -3,7 +3,7 @@ headingColor= keyColor
 inactiveHeadingColor = desaturate(keyColor, 38.2%)
 activeHeadingColor = headingColor
 borderColor = darken(keyColor, 61.8%)
-bodyColor = #0a1a26
+bodyColor = darken(keyColor, 80%)
 bgColor = lighten(keyColor, 90%)
 standardPeach = keyColor - 174deg
 inactivePeach = lighten(standardPeach, 61.8%)  
@@ -24,6 +24,13 @@ smooth-out()
     -moz-transition: all .3s ease-out;
     -o-transition: all .3s ease-out;
     transition: all .3s ease-out; 
+@keyframes slideUp
+    0%
+        max-height:0
+    50% 
+        max-height: 7.5vh
+    100%
+        max-height: 0
 
 html, body, h1, h2, h3, h4, h5, h6, div, fieldset, form, input, header, footer, section, article, figure, iframe
     padding:0;
@@ -105,16 +112,22 @@ textarea
     &__hgroup
         flex-shrink: 0;
         flex-grow: 1
+        align-self:flex-start;
         display:flex;
         flex-direction: row;
-        align-self:flex-start;
         align-items: baseline;
         justify-content: space-between;
         font-size: 1em;
         width: 100%;
-        max-height: 7.5vh
+        max-height: 0
         background: bgColor
         border-bottom: .125em solid borderColor;
+        overflow:hidden
+        animation-delay: .5s
+        animation-duration: 3.5s
+        animation-name: slideUp
+        animation-iteration-count: 1
+        animation-direction: normal
     .editor
         border-bottom: .125em solid borderColor
         &__label
@@ -187,7 +200,7 @@ textarea
         visibility: hidden;
         align-self: flex-end;
         flex-basis: 0%;
-    &--thisProject
+    &--thisProject, &--otherProjects
         display:block
     &--html
         order: 1
@@ -283,7 +296,7 @@ textarea
         flex-direction:row
         flex-shrink: 1
         align-self: flex-start
-        flex-basis: 3em
+        flex-basis: 4.5em
         width: 100%
         border-top: .125em solid borderColor
         background: bgColor
