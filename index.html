@@ -10,226 +10,64 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
-html, body, h1, h2, h3, h4, h5, h6, div, fieldset, form, input{
-    padding:0;
-    margin: 0;
-}
-body, html{
-    height: 100%;
-    width: 100%;
-}
 
-body{
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-    height: 100%;
-    width: 100%;
-}
-h1, .h1{
-    font-size: 1.2em;
-}
-h1, .h2{
-    font-size: 1.1em;
-}
-a, 
-input, 
-textarea, 
-form{
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;    
-}
-a:hover, a:focus, a:active,
-input:hover, input:focus,
-textarea:hover, textarea:focus{
-    outline: none;
-    -webkit-transition: all .3s ease-out;
-    -moz-transition: all .3s ease-out;
-    -o-transition: all .3s ease-out;
-    transition: all .3s ease-out;    
-}
-button,
-input,
-select,
-textarea{
-    border:1px solid hsla(128, 38.2%, 61.8%, 1);
-    outline: none;
-}
-button:hover, button:focus,
-input:hover,input:focus,
-select:hover, select:focus,
-textarea:hover,textarea:focus{
-    border:1px solid hsla(128,38.2%, 38.2%, 1);
-}
-button, input, select{
-    padding: .618em;
-    margin: .618em;
-}
-button{
-    background:hsla(128, 38.2%, 61.8%, 1) ;
-}
-button:hover, button:focus{
-    background:1px solid hsla(128,38.2%, 38.2%, 1);
+html,body,h1,h2,h3,h4,h5,h6,div,fieldset,form,input,header,footer,section,article,figure,iframe{padding:0;margin:0}
+fieldset{border:none}
+body,html{height:100%;width:100%}
+body{display:flex;flex-direction:column;justify-content:space-around;align-items:flex-start;height:100%;width:100%;color:#091927;}
+h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{color:#589bd7;}
+h1,.h1{font-size:1.2em}
+h1,.h2{font-size:1.1em}
+a,input,textarea,form,fieldset{-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
+a:hover,input:hover,textarea:hover,form:hover,fieldset:hover,a:focus,input:focus,textarea:focus,form:focus,fieldset:focus{outline:none;-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out}
+button,input,select,textarea{border:1px solid #78c382;outline:none;}
+button:hover,input:hover,select:hover,textarea:hover{border:1px solid #3c8746}
+button,input,select{padding:.618em;margin:.618em}
+button{background:#78c382;}
+button:hover,button:focus{background:1px solid #3c8746}
+textarea{font-family:Courier,monospace}
+.mpGlobal__header,.mpGlobal__footer{flex-shrink:1;display:flex;flex-direction:column;justify-content:flex-start;padding:.618em;width:98.5%}
+.mpGlobal__header{align-items:stretch;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
+.mpGlobal__header__onlineStatus{align-self:flex-end;padding:.618em;min-height:0;max-height:9em}
+.mpGlobal__header__editor__wrapper{display:flex;flex-direction:column;flex-grow:1;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
+.mpGlobal__header__hgroup{display:flex;flex-shrink:0;flex-direction:row;align-self:flex-start;align-items:baseline;justify-content:space-between;font-size:1em;width:100%;background:#ecf4fa;border-bottom:.125em solid #091927;}
+.mpGlobal__header__hgroup .editor__label{border-top-left-radius:0;border-top-right-radius:0;border-bottom-left-radius:.5em;border-bottom-right-radius:.5em}
+.editor{display:flex;flex-basis:10em;flex-direction:column;justify-content:space-between;flex-grow:1;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
+.editor__toggle{visibility:hidden;position:fixed;left:-9999em;}
+.editor__toggle:checked ~ .mpGlobal__header__editor,.editor__toggle:checked ~ .mpGlobal__footer__editor,.editor__toggle:checked ~ .mpGlobal__footer__editor > .editor__fieldset{flex-basis:0;height:0;overflow:hidden}
+.editor__label{flex-shrink:0;align-self:flex-start;display:inline-block;padding:.25em;border:1px solid #e1e1e1;border-top-left-radius:.25em;border-top-right-radius:.25em;margin:0}
+.editor__fieldset{flex-shrink:1}
+.editor__control{display:none}
+.editor .editor__fieldsetWrap{display:flex;}
+.editor .editor__fieldsetWrap .fieldset{flex-grow:0;flex-shrink:1;flex-basis:0%;height:2em;overflow:hidden;}
+.editor .editor__fieldsetWrap .fieldset__field{width:0%}
+.fieldset{display:flex;flex-direction:column;}
+.fieldset__label{color:#ccc;display:block;font-size:.8em;padding:.618em;border:1px solid #ccc}
+.fieldset__field{height:0;visibility:hidden;align-self:flex-end;flex-basis:0%}
+.fieldset--thisProject{display:block}
+.control{visibility:hidden;width:0%;height:0}
+.control--html:checked ~ .editor__fieldsetWrap .fieldset--html{flex-grow:1;flex-basis:33%;min-height:7em;max-height:20vh;}
+.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .field{visibility:visible;width:100%;height:75%}
+.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .fieldset__label{color:#333;font-weight:bold;border-color:#777}
+.control--css:checked ~ .editor__fieldsetWrap .fieldset--css{flex-grow:1;flex-basis:33%;visibility:visible;min-height:7em;max-height:20vh;flex-grow:1;}
+.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .field{visibility:visible;width:100%;height:75%}
+.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .fieldset__label{color:#333;font-weight:bold;border-color:#777}
+.control--js:checked ~ .editor__fieldsetWrap .fieldset--js{flex-grow:1;flex-basis:33%;visibility:visible;min-height:7em;max-height:20vh;flex-grow:1;}
+.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .field{visibility:visible;width:100%;height:75%}
+.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .fieldset__label{color:#333;font-weight:bold;border-color:#777}
+.control--html:not(:checked) + .control--css:not(:checked) + .control--js:not(:checked) ~ .editor__fieldsetWrap .fieldset{flex-grow:1}
+.mcsandy__result{display:flex;flex-direction:column;flex-grow:2;width:100%;}
+.mcsandy__result__iframe{width:100%;outline:none;border:none}
+.mpGlobal__footer__editor{flex-direction:row;flex-shrink:1;align-self:flex-start;flex-basis:3em;width:100%;}
+.mpGlobal__footer__editor .fieldset{flex-grow:1}
+.online{color:#008000}
+.offline{color:#f00}
 
-}
-textarea{
-    font-family: Courier, monospace;
-}
-    .mpGlobal__header{
-        align-items: flex-start;
-        -webkit-transition: all .3s ease-in-out;
-        -moz-transition: all .3s ease-in-out;
-        -o-transition: all .3s ease-in-out;
-        transition: all .3s ease-in-out;  
-    }
-    .mpGlobal__header, .mpGlobal__footer{
-        display:flex;
-        flex-shrink: 1;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: stretch;
-        padding: .618em;
-        width: 98.5%;
-        background: aliceblue;
-    }
-    .mpGlobal__header__hgroup{
-        display:flex;
-        flex-direction: row;
-        align-self:flex-start;
-        align-items: baseline;
-        justify-content: space-between;
-        font-size: 1em;
-        width: 100%;
-    }
-    .mpGlobal__header__onlineStatus{
-        align-self: flex-end;
-        padding: .618em;
-    }
-    .mpGlobal__header__controls__wrapper{
-        display:flex;
-        flex-direction: column;
-        -webkit-transition: all .3s ease-in-out;
-        -moz-transition: all .3s ease-in-out;
-        -o-transition: all .3s ease-in-out;
-        transition: all .3s ease-in-out;  
-    }
-    .wrapper__label{
-        display:inline-block;
-        align-self: flex-start;
-        border: 1px solid #e1e1e1;
-        position:relative;
-        top:-1em;
-        margin:0;
-        padding: .25em;
-    }
-    .wrapper__toggle:checked ~ .mpGlobal__header__controls,
-    .wrapper__toggle:checked ~ .mpGlobal__header__controls > .controls__labelWrapper, 
-    .wrapper__toggle:checked ~ .mpGlobal__footer__controls,
-    .wrapper__toggle:checked ~ .mpGlobal__footer__controls > .controls__fieldset
-    {
-        height: 0;
-        overflow:hidden;
-    }
-.controls{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;  
-}
-.mpGlobal__footer__controls{
-    flex-direction: row;
-}
-    .controls__labelWrapper{
-        display:flex;
-        flex-direction:row;
-        justify-content: space-between;
-        height: 2em;
-        margin: 0 0 1em 0;
-    }
-    .controls__fieldset{
-        display:flex;
-        flex-direction: column;
-        flex-grow: 1;
-    }
-.controls__control{
-    display:none;
-}
-.controls__label{
-    color: #ccc;
-    display: block;
-    font-size: .8em;
-    padding: .618em;
-    border: 1px solid #ccc;
-}
-.controls__editor{
-    height: 0;
-    visibility: hidden;
-    align-self: flex-end;
-    flex-basis: 0%;
-}
-    .controls__editWrapper{
-        display:flex;
-    }
-    .control--html:checked ~ .controls__editWrapper .control--html{
-        visibility: visible;
-        min-height: 7em;
-        max-height: 20vh;
-        flex-grow: 1;
-    }
-    .control--html:checked ~ .controls__labelWrapper  .controls__label--html{
-        color: #333;
-        font-weight: bold;
-        border-color: #777;
-    }            
-    .control--css:checked ~ .controls__editWrapper .control--css{
-        visibility: visible;                
-        min-height: 7em;
-        max-height: 20vh;
-        flex-grow: 1;
-    }
-    .control--css:checked ~ .controls__labelWrapper  .controls__label--css{
-        color: #333;
-        font-weight: bold;
-        border-color: #777;
-    }             
-    .control--js:checked ~ .controls__editWrapper .control--js{
-        visibility: visible;
-        min-height: 7em;
-        max-height: 20vh;
-        flex-grow: 1;
-    }
-    .control--js:checked ~ .controls__labelWrapper  .controls__label--js{
-        color: #333;
-        font-weight: bold;
-        border-color: #777;
-    } 
-    .controls__input{}
-.mcsandy__result{
-    display: flex;
-    flex-direction: column;
-    flex-grow: 2;
-    width: 100%;
 
-}
-    .mcsandy__result__iframe{
-        width: 100%;
-        outline: none;
-        border: none;
-    }
-.mpGlobal__footer{
-}
-.online{
-    color: green;
-}
-.offline{
-    color: red;
-}
+
+
+
+
 </style>
 </head>
     <body>
@@ -239,22 +77,27 @@ textarea{
                 <h2 class="mpGlobal__header__h2 h2">The offline HTML sandbox</h2>
                 <span id="js-onlineStatus" class="mpGlobal__header__onlineStatus online">&#9673;</span>
             </div>
-            <div class="mpGlobal__header__controls__wrapper wrapper">
-                <label for="js-controls-toggle" class="wrapper__label">Toggle Panel</label>
-                <input type="checkbox" id="js-controls-toggle" class="wrapper__toggle controls__control" />
-            <form class="mpGlobal__header__controls controls">
-                <input type="checkbox" id="js-htmlSwitch" class="controls__control controls__control--html control control--html" checked />
-                <input type="checkbox" id="js-cssSwitch" class="controls__control controls__control--css control control--css" checked/>
-                <input type="checkbox" id="js-jsSwitch" class="controls__control controls__control--js control control--js" checked/>
-                <div class="controls__labelWrapper">
-                    <label class="controls__label controls__label--html" for="js-htmlSwitch">HTML</label>
-                    <label class="controls__label controls__label--css" for="js-cssSwitch">CSS</label>
-                    <label class="controls__label controls__label--js" for="js-jsSwitch">JS</label>
-                </div>
-                <div class="controls__editWrapper">
-                    <textarea  id="js-html" class="controls__editor controls__editor--html control control--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
-                    <textarea id="js-css" class="controls__editor controls__editor--css control control--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
-                    <textarea id="js-js" class="controls__editor controls__editor--js control control--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
+            <div class="mpGlobal__header__editor__wrapper wrapper">
+                <label for="js-editor-toggle" class="editor__label">Toggle Editor</label>
+                <input type="checkbox" id="js-editor-toggle" class="editor__toggle" />
+            <form class="mpGlobal__header__editor editor">
+                <input type="checkbox" id="js-htmlSwitch" class="editor__control editor__control--html control control--html" checked />
+                <input type="checkbox" id="js-cssSwitch" class="editor__control editor__control--css control control--css" checked/>
+                <input type="checkbox" id="js-jsSwitch" class="editor__control editor__control--js control control--js" checked/>
+
+                <div class="editor__fieldsetWrap">
+                    <fieldset class="editor__fieldset fieldset fieldset--html">
+                        <label class="fieldset__label fieldset__label--html" for="js-htmlSwitch">HTML</label>
+                        <textarea  id="js-html" class="fieldset__field fieldset__field--html field field--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
+                    </fieldset>
+                    <fieldset class="editor__fieldset fieldset fieldset--css">
+                        <label class="fieldset__label fieldset__label--css" for="js-cssSwitch">CSS</label>
+                        <textarea id="js-css" class="fieldset__field fieldset__field--css field field--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
+                    </fieldset>
+                    <fieldset class="editor__fieldset fieldset fieldset--js">
+                        <label class="fieldset__label fieldset__label--js" for="js-jsSwitch">JS</label>
+                        <textarea id="js-js" class="fieldset__field fieldset__field--js field field--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
+                    </fieldset>
             </div>
             </form>
         </div>
@@ -263,16 +106,22 @@ textarea{
     <iframe id="js-result" class="mcsandy__result__iframe"></iframe>
 </main>
 <footer class="mpGlobal__footer">
-    <label for="js-footer-controls-toggle" class="wrapper__label">Toggle Panel</label>
-    <input type="checkbox" id="js-footer-controls-toggle" class="wrapper__toggle controls__control" />
-    <form class="mpGlobal__footer__controls controls">
-        <fieldset class="controls__fieldset">
-            <input id="js-projectName" class="controls__input controls__input--name" type="text" placeholder="Name of Project">
-            <button id="js-projectSave" class="controls__button controls__button--save">Save</button>
-            <button id="js-projectDel" class="controls__button controls__button--del">Delete</button>
+    <label for="js-footer-editor-toggle" class="editor__label">Toggle Projects</label>
+    <input type="checkbox" id="js-footer-editor-toggle" class="editor__toggle" />
+    <form class="mpGlobal__footer__editor editor">
+        <fieldset class="editor__fieldset fieldset fieldset--thisProject">
+            <legend class="fieldset__legend">
+                This Sandbox
+            </legend>
+            <input id="js-projectName" class="editor__input editor__input--name" type="text" placeholder="Name of Project">
+            <button id="js-projectSave" class="editor__button editor__button--save">Save</button>
+            <button id="js-projectDel" class="editor__button editor__button--del">Delete</button>
         </fieldset>
-        <fieldset class="controls__fieldset">
-            <label for="js-selectProjects">Other Projects</label>
+        <fieldset class="editor__fieldset fieldset fieldset--otherProjects">
+            <legend class="fieldset__legend">
+                Other Sandboxes
+            </legend>
+            <label for="js-selectProjects">Load Projects</label>
             <select id="js-selectProjects" >
                 <option></option>
             </select>
@@ -310,7 +159,7 @@ store = {
         store.types[type].clear();
     }
 };
-/*McSandy UI is the editor and its controls. It's the content that goes in*/
+/*McSandy UI is the editor and its editor. It's the content that goes in*/
 mcsandyUI = {
     init: function () {
         var _this = mcsandyUI;
@@ -368,7 +217,9 @@ mcsandyUI = {
         /*CHECK FOR INTERNET CONNECTION*/
         window.addEventListener('load', function (e) {
             _this.functions.handleConnection();
-            _this.functions.handleHash();
+            if(window.location.hash) {
+                _this.functions.handleHash();
+            }
         });
         window.addEventListener("offline", _this.functions.handleConnection );
         window.addEventListener("online", _this.functions.handleConnection );
@@ -458,7 +309,7 @@ mcsandy = {
     },
     blobData: {
         reset: 'html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}',
-        jquery: '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"><\/script>'
+        jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'
     },
     helpers: {
         updateContent: function (val, target) {
@@ -469,7 +320,12 @@ mcsandy = {
             return '<style type="text/css">' + css + '</style>';
         },
         prepareHTML: function (html) {
-            return html
+            return html;
+        },
+        prepareExternalJS: function(js) {
+            js = js.replace('https://', '//');
+            js = js.replace('http://', '//');
+            return '<script type="text\/javascript" src="' + js + '"><\/script>';
         },
         prepareJS: function (js) {
             return '<script type="text\/javascript">' + js + '<\/script>';
@@ -489,11 +345,11 @@ mcsandy = {
                 ctrls = _this.data.ctrls,
                 html = helpers.prepareHTML(ctrls.html.value),
                 reset = helpers.prepareCSS(blobData.reset),
-                jquery = blobData.jquery,
+                jquery = helpers.prepareExternalJS(_this.blobData.jquery),
                 css =  helpers.prepareCSS(ctrls.css.value),
-                head = '<head>'+css+'</head>',
+                head = '<head>'+css+ jquery +'</head>',
                 js = helpers.prepareJS(ctrls.js.value),
-                blobKit = [head,html,jquery,js];
+                blobKit = [head,html,js];
             return blobKit;
         },
         createProject: function (projectName, rawParts, blobArray) {
@@ -533,14 +389,11 @@ mcsandy = {
         var _this = mcsandy,
             functions = _this.functions,
             ctrls = _this.data.ctrls;
-        ctrls.css.addEventListener('change',function (e) {
-            functions.updateContent();
-        });
         ctrls.css.addEventListener('keyup',function (e) {
             functions.updateContent();
         });
 
-        ctrls.html.addEventListener('change',function (e) {
+        ctrls.html.addEventListener('keyup',function (e) {
             functions.updateContent();
         });
         ctrls.js.addEventListener('change',function (e) {
@@ -553,11 +406,19 @@ mcsandy = {
         getProjects: function () {
             var _this = mcsandy,
                 projects = _this.helpers.getStoredProjects(),
-                select = document.getElementById('js-selectProjects');
+                select = document.getElementById('js-selectProjects'),
+                pageHash = window.location.hash;
+            select.innerHTML = '';//clear pre-exiting options
             projects.forEach(function(el) {
                 var option = _this.helpers.createSelectOption(el);
+                if (mcsandyUI.helpers.unconvertHash(el) === mcsandyUI.helpers.unconvertHash(pageHash)){
+                    select.selected = true;
+                }
                 select.appendChild(option);
             })
+            if(window.location.hash){
+                select.value = mcsandyUI.helpers.unconvertHash(window.location.hash);
+            }
         },
         updateContent: function (loadedParts) {
              var _this = mcsandy,
@@ -571,6 +432,7 @@ mcsandy = {
             var _this = mcsandy,
                 projectName = _this.data.ctrls.project.value;
             store.del(0,projectName);
+            window.location.hash = '';
             _this.functions.getProjects();
         },
         saveContent: function (e) {
@@ -582,6 +444,7 @@ mcsandy = {
                 projectName = _this.data.ctrls.project.value,
                 project = _this.helpers.createProject(projectName, rawParts, blobArray)
             store.set(0, projectName, project);
+            mcsandyUI.functions.setHash(projectName)
             _this.functions.getProjects();
         }
     }

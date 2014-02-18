@@ -39,10 +39,10 @@ McSandy also uses the Flexbox module for its layout. Flexbox is supported in IE1
  + live updating when editing the CSS
  + corrected font in editor boxes
  + Can now load a project by simply adding the name of the project as a hash to the url: `index.html#test`
+ + fixed animation for expand collapse sections
 
 ## Upcoming To-dos ##
  + fix the delete button CSS. right now it's always *not* showing. we only want it to show when a project has been loaded
- + get some animation when you expand/collapse sections. 
 
 
 
