@@ -34,6 +34,11 @@ It's super simple. Download Mcsandy.html and get started!
 ### How can I make it better ?
 If you'd like to contribute, just clone the repo. All of the 'editable' assets are in the `preAssets` folder. The HTML files are in their own folder.  Grunt.js will build the files in `postAssets`, and generate a file called `post-mcsandy.html` for you. 
 
+## Upcoming Features ##
+ + add external JS/CSS (will require offline validation to make sure that it'll work if no internet)
+ + Export to File (download a project to a single file, or download a particular asset)
+
+
 ## Recently done ##
  + got the flex layout working properly, header, main area, and footer distributely evenly
  + can now load projects from local storage
@@ -45,11 +50,10 @@ If you'd like to contribute, just clone the repo. All of the 'editable' assets a
  + corrected font in editor boxes
  + Can now load a project by simply adding the name of the project as a hash to the url: `index.html#test`
  + fixed animation for expand collapse sections
- + 
+ + improved the UI a bit, set the theme around one central color, threw some stylus variables around it
 
-## Upcoming To-dos ##
- + fix the delete button CSS. right now it's always *not* showing. we only want it to show when a project has been loaded
- + 
+
+ 
 
 
 

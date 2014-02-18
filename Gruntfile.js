@@ -66,10 +66,6 @@ module.exports = function(grunt) {
         files: ['preAssets/html/*.html', 'preAssets/*.html'],
         tasks: ['stylus:standard', 'htmlbuild', 'copy']
       },
-      postBuild:{
-        files: ['postAssets/*.html'],
-        tasks: ['copy']
-      },
       js: {
         files: ['preAssets/mcsandy.js'],
         tasks: ['uglify', 'htmlbuild', 'copy']
@@ -85,6 +81,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-stylus');
   // Default task(s).
   grunt.registerTask('copy', ['copy']);
-  grunt.registerTask('default', ['watch', 'htmlbuild', 'copy']);
+  grunt.registerTask('default', ['watch', 'htmlbuild']);
 
 };

@@ -1,4 +1,19 @@
-mainColor = #ecf4fa
+keyColor = hsl(212, 72%, 61.8%)
+headingColor= keyColor
+inactiveHeadingColor = desaturate(keyColor, 38.2%)
+activeHeadingColor = headingColor
+borderColor = darken(keyColor, 61.8%)
+bodyColor = #0a1a26
+bgColor = lighten(keyColor, 90%)
+standardPeach = keyColor - 174deg
+inactivePeach = lighten(standardPeach, 61.8%)  
+activePeach = lighten(standardPeach, 38.2%)
+standardGreen = keyColor - 90deg
+inactiveGreen = lighten(standardGreen, 61.8%)
+activeGreen = lighten(standardGreen, 32.8%)
+/* 
+
+*/
 smooth()
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
@@ -29,7 +44,7 @@ body{
     align-items: flex-start;
     height: 100%;
     width: 100%;
-    color: #091927;  /*hsl(208, 61.4%, 09.4%)*/
+    color: bodyColor; 
 }
 h1, .h1,
 h2, .h2,
@@ -37,34 +52,35 @@ h3, .h3,
 h4, .h4, 
 h5, .h5, 
 h6, .h6{
-    color: #589bd7; /* rgb(88, 155, 215);*/
+    color: headingColor; /* rgb(88, 155, 215);*/
 }
 h1, .h1{
     font-size: 1.2em;
+    padding: 0 .618em
 }
-h1, .h2{
+h2, .h2{
     font-size: 1.1em;
 }
-a, input, textarea, form,fieldset
+a, input, textarea, form,fieldset, button, label
     smooth()    
     &:hover, &:focus
         outline: none;
         smooth-out()    
 
 button,input,select,textarea
-    border:1px solid hsla(128, 38.2%, 61.8%, 1)
+    border:1px solid inactivePeach
     outline: none;
     &:hover
-        border:1px solid hsla(128,38.2%, 38.2%, 1)
+        border:1px solid activePeach
 
 button, input, select
     padding: .618em;
     margin: .618em;
 
-button
-    background: hsla(128, 38.2%, 61.8%, 1);
+button, .editor__label
+    background: inactivePeach;
     &:hover, &:focus
-        background:1px solid hsla(128,38.2%, 38.2%, 1);
+        background: activePeach
 
 textarea
     font-family: Courier, monospace;
@@ -80,26 +96,29 @@ textarea
     smooth()  
     &__onlineStatus
         align-self: flex-end;
-        padding: .618em;
-        min-height: 0em;
-        max-height: 9em;
+        padding: 0 .618em;
     &__editor__wrapper
         display:flex;
         flex-direction: column;
         flex-grow:1;
         smooth() 
     &__hgroup
-        display:flex;
         flex-shrink: 0;
+        flex-grow: 1
+        display:flex;
         flex-direction: row;
         align-self:flex-start;
         align-items: baseline;
         justify-content: space-between;
         font-size: 1em;
         width: 100%;
-        background: mainColor
-        border-bottom: .125em solid #091927;
-        .editor__label
+        max-height: 7.5vh
+        background: bgColor
+        border-bottom: .125em solid borderColor;
+    .editor
+        border-bottom: .125em solid borderColor
+        &__label
+            order:2;
             border-top-left-radius: 0
             border-top-right-radius: 0
             border-bottom-left-radius: .5em
@@ -110,10 +129,7 @@ textarea
     flex-direction: column;
     justify-content: space-between;
     flex-grow: 1;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
+    smooth-out()
     &__toggle
         visibility:hidden
         position: fixed
@@ -131,9 +147,10 @@ textarea
         display:inline-block;
         padding: .25em;
         border: 1px solid #e1e1e1;
-        border-top-left-radius: .25em;
-        border-top-right-radius: .25em;
+        border-top-right-radius: .25em
+        border-top-left-radius: .25em
         margin:0;
+        smooth()
     &__fieldset
         flex-shrink: 1;     
     &__control
@@ -153,11 +170,18 @@ textarea
     display:flex;
     flex-direction: column;
     &__label
-        color: #ccc;
+        text-align: center
+        color: inactivePeach;
         display: block;
         font-size: .8em;
         padding: .618em;
-        border: 1px solid #ccc;  
+        border-bottom: 1px solid bodyColor;
+        background: inactiveHeadingColor
+        smooth() 
+        &:hover
+            color: activePeach 
+            background: activeHeadingColor
+            smooth()
     &__field
         height: 0;
         visibility: hidden;
@@ -165,27 +189,37 @@ textarea
         flex-basis: 0%;
     &--thisProject
         display:block
+    &--html
+        order: 1
+    &--css
+        order: 2
+    &--js
+        order: 3
 
 .control
     visibility: hidden;
     width: 0%;
     height: 0;
 
+        
 .control--html:checked 
     ~ .editor__fieldsetWrap 
         .fieldset--html
             flex-grow: 1;
             flex-basis: 33%;
-            min-height: 7em;
+            min-height: 7.25em;
             max-height: 20vh;
             .field
                 visibility: visible;
                 width: 100%;
                 height: 75%;
             .fieldset__label
-                color: #333;
+                color: activePeach;
                 font-weight: bold;
-                border-color: #777;
+                border-bottom:1px solid activePeach
+                background:activeHeadingColor
+                &:hover
+                    background: inactiveHeadingColor
       
 .control--css:checked
     ~ .editor__fieldsetWrap
@@ -193,7 +227,7 @@ textarea
             flex-grow: 1;
             flex-basis: 33%;
             visibility: visible;                
-            min-height: 7em;
+            min-height: 7.25em;
             max-height: 20vh;
             flex-grow: 1;
             .field
@@ -201,9 +235,12 @@ textarea
                 width: 100%;
                 height: 75%;  
             .fieldset__label
-                color: #333;
+                color: activePeach;
                 font-weight: bold;
-                border-color: #777;
+                border-bottom:1px solid activePeach
+                background:activeHeadingColor
+                &:hover
+                    background:inactiveHeadingColor
                       
 .control--js:checked
     ~ .editor__fieldsetWrap
@@ -211,7 +248,7 @@ textarea
             flex-grow: 1;
             flex-basis: 33%;
             visibility: visible;
-            min-height: 7em;
+            min-height: 7.25em;
             max-height: 20vh;
             flex-grow: 1;
             .field
@@ -219,9 +256,12 @@ textarea
                 width: 100%;
                 height: 75%;  
             .fieldset__label
-                color: #333;
+                color: activePeach;
                 font-weight: bold;
-                border-color: #777;
+                border-bottom:1px solid activePeach
+                background:activeHeadingColor
+                &:hover
+                    background:inactiveHeadingColor
             
 .control--html:not(:checked) + .control--css:not(:checked) + .control--js:not(:checked)
     ~ .editor__fieldsetWrap
@@ -245,11 +285,13 @@ textarea
         align-self: flex-start
         flex-basis: 3em
         width: 100%
+        border-top: .125em solid borderColor
+        background: bgColor
         .fieldset
             flex-grow:1
 
 .online
-    color: green;
+    color: standardGreen;
 
 .offline
     color: red;
