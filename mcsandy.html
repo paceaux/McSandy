@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="js"> <!--<![endif]-->
 <head>
-    <title>McSandy | The Offline HTML5 Sandbox</title>
+    <title>McSandy | Online</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
@@ -13,7 +13,7 @@
 html,body,h1,h2,h3,h4,h5,h6,div,fieldset,form,input,header,footer,section,article,figure,iframe{padding:0;margin:0}
 fieldset{border:none}
 body,html{height:100%;width:100%}
-body{display:flex;flex-direction:column;justify-content:space-around;align-items:flex-start;height:100%;width:100%;color:#0a1a26}
+body{display:flex;flex-direction:column;justify-content:space-around;align-items:flex-start;height:100%;width:100%;color:#091e36}
 h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{color:#5799e4;}
 h1,.h1{font-size:1.2em;padding:0 .618em}
 h2,.h2{font-size:1.1em}
@@ -29,7 +29,7 @@ textarea{font-family:Courier,monospace}
 .mpGlobal__header{align-items:stretch;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
 .mpGlobal__header__onlineStatus{align-self:flex-end;padding:0 .618em}
 .mpGlobal__header__editor__wrapper{display:flex;flex-direction:column;flex-grow:1;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
-.mpGlobal__header__hgroup{flex-shrink:0;flex-grow:1;display:flex;flex-direction:row;align-self:flex-start;align-items:baseline;justify-content:space-between;font-size:1em;width:100%;max-height:7.5vh;background:#eef5fc;border-bottom:.125em solid #113968}
+.mpGlobal__header__hgroup{flex-shrink:0;flex-grow:1;align-self:flex-start;display:flex;flex-direction:row;align-items:baseline;justify-content:space-between;font-size:1em;width:100%;max-height:0;background:#eef5fc;border-bottom:.125em solid #113968;overflow:hidden;animation-delay:.5s;animation-duration:3.5s;animation-name:slideUp;animation-iteration-count:1;animation-direction:normal}
 .mpGlobal__header .editor{border-bottom:.125em solid #113968;}
 .mpGlobal__header .editor__label{order:2;border-top-left-radius:0;border-top-right-radius:0;border-bottom-left-radius:.5em;border-bottom-right-radius:.5em}
 .editor{display:flex;flex-basis:10em;flex-direction:column;justify-content:space-between;flex-grow:1;-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out;}
@@ -42,10 +42,10 @@ textarea{font-family:Courier,monospace}
 .editor .editor__fieldsetWrap .fieldset{flex-grow:0;flex-shrink:1;flex-basis:0%;height:2em;overflow:hidden;}
 .editor .editor__fieldsetWrap .fieldset__field{width:0%}
 .fieldset{display:flex;flex-direction:column;}
-.fieldset__label{text-align:center;color:#f5e1bf;display:block;font-size:.8em;padding:.618em;border-bottom:1px solid #0a1a26;background:#729bc9;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
+.fieldset__label{text-align:center;color:#f5e1bf;display:block;font-size:.8em;padding:.618em;border-bottom:1px solid #091e36;background:#729bc9;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
 .fieldset__label:hover{color:#eece97;background:#5799e4;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
 .fieldset__field{height:0;visibility:hidden;align-self:flex-end;flex-basis:0%}
-.fieldset--thisProject{display:block}
+.fieldset--thisProject,.fieldset--otherProjects{display:block}
 .fieldset--html{order:1}
 .fieldset--css{order:2}
 .fieldset--js{order:3}
@@ -65,11 +65,26 @@ textarea{font-family:Courier,monospace}
 .control--html:not(:checked) + .control--css:not(:checked) + .control--js:not(:checked) ~ .editor__fieldsetWrap .fieldset{flex-grow:1}
 .mcsandy__result{display:flex;flex-direction:column;flex-grow:2;width:100%;}
 .mcsandy__result__iframe{width:100%;outline:none;border:none}
-.mpGlobal__footer__editor{flex-direction:row;flex-shrink:1;align-self:flex-start;flex-basis:3em;width:100%;border-top:.125em solid #113968;background:#eef5fc;}
+.mpGlobal__footer__editor{flex-direction:row;flex-shrink:1;align-self:flex-start;flex-basis:4.5em;width:100%;border-top:.125em solid #113968;background:#eef5fc;}
 .mpGlobal__footer__editor .fieldset{flex-grow:1}
 .online{color:#57e45c}
 .offline{color:#f00}
-
+@-moz-keyframes slideUp{0%{max-height:0}
+50%{max-height:7.5vh}
+100%{max-height:0}
+}@-webkit-keyframes slideUp{0%{max-height:0}
+50%{max-height:7.5vh}
+100%{max-height:0}
+}@-o-keyframes slideUp{0%{max-height:0}
+50%{max-height:7.5vh}
+100%{max-height:0}
+}@-ms-keyframes slideUp{0%{max-height:0}
+50%{max-height:7.5vh}
+100%{max-height:0}
+}@keyframes slideUp{0%{max-height:0}
+50%{max-height:7.5vh}
+100%{max-height:0}
+}
 </style>
 </head>
 <body>
@@ -97,7 +112,7 @@ textarea{font-family:Courier,monospace}
                         <textarea id="js-css" class="fieldset__field fieldset__field--css field field--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
                     </fieldset>
                     <fieldset class="editor__fieldset fieldset fieldset--js">
-                        <label class="fieldset__label fieldset__label--js" for="js-jsSwitch">JS</label>
+                        <label class="fieldset__label fieldset__label--js" for="js-jsSwitch" title="ctrl + r">JS</label>
                         <textarea id="js-js" class="fieldset__field fieldset__field--js field field--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
                     </fieldset>
             </div>
@@ -120,13 +135,12 @@ textarea{font-family:Courier,monospace}
                 <button id="js-projectDel" class="editor__button editor__button--del">Delete</button>
             </fieldset>
             <fieldset class="editor__fieldset fieldset fieldset--otherProjects">
-                <legend class="fieldset__legend">
-                    Other Sandboxes
-                </legend>
-                <label for="js-selectProjects">Load Projects</label>
                 <select id="js-selectProjects">
                     <option></option>
                 </select>
+                <button id="js-projectLoad" class="editor__button editor__button--load">
+                    Load Projects
+                </button>
             </fieldset>
         </form>
     </footer>
@@ -171,12 +185,17 @@ mcsandyUI = {
         onlineState: 'online',
         onlineCtrl: document.getElementById('js-onlineStatus'),
         els: {
-            projecSelect: document.getElementById('js-selectProjects')
+            projectSelect: document.getElementById('js-selectProjects'),
+            projectLoad: document.getElementById('js-projectLoad')
         },
         keyMaps:{
             save: {
                 83:false,
                 17:false
+            },
+            run: {
+                83:false,
+                16:false
             }
         }
     },
@@ -184,12 +203,19 @@ mcsandyUI = {
         keyDown: function(e) {
             var _this = mcsandyUI,
                 keyMaps = _this.data.keyMaps, 
-                saveMap = keyMaps.save;
+                saveMap = keyMaps.save,
+                runMap = keyMaps.run
 
             /*SAVE*/
             if (e.keyCode in saveMap){
                 saveMap[e.keyCode] = true;
                 if(saveMap[17] && saveMap[83]) {
+                    mcsandy.functions.saveContent(e);
+                }
+            }
+            if (e.keyCode in runMap){
+                runMap[e.keyCode] = true;
+                if(runMap[16] && runMap[83]) {
                     mcsandy.functions.saveContent(e);
                 }
             }
@@ -199,6 +225,9 @@ mcsandyUI = {
                 keyMaps = _this.data.keyMaps,
                 saveMap = keyMaps.save;
             if (e.keyCode in keyMaps.save) {
+                keyMaps.save[e.keyCode] = false;
+            }
+            if (e.keyCode in keyMaps.run){
                 keyMaps.save[e.keyCode] = false;
             }
         },
@@ -227,13 +256,13 @@ mcsandyUI = {
 
         /*WINDOW HASH CHANGE */
         window.addEventListener("hashchange", _this.functions.handleHash)
+        
         /*SELECT A PROJECT*/
-        els.projecSelect.addEventListener('change', _this.functions.handleProjectSelect);
+        els.projectLoad.addEventListener('click', _this.functions.handleProjectSelect);
 
         /*KEYBOARD SHORTCUTS*/
         document.addEventListener('keydown', helpers.keyDown)
         document.addEventListener('keyup', helpers.keyUp)
-
     },
     functions: {
         handleConnection: function (e) {
@@ -242,8 +271,10 @@ mcsandyUI = {
             _this.data.onlineState = navigator.onLine ? "online" : "offline";
             if (_this.data.onlineState == "online"){
                 ctrl.className = ctrl.className.replace( /(?:^|\s)offline(?!\S)/g, " online");
+                document.title = "McSandy | Online";
             } else {
                 ctrl.className = ctrl.className.replace( /(?:^|\s)online(?!\S)/g," offline");
+                document.title = "McSandy | Offline"
             }
         },
         handleHash: function (e) {
@@ -257,8 +288,9 @@ mcsandyUI = {
             window.location.hash = _this.helpers.convertHash(hash);
         },
         handleProjectSelect: function (e) {
+            e.preventDefault();
             var _this = mcsandyUI,
-                project = e.target.value;
+                project = _this.data.els.projectSelect.value;
             _this.functions.setHash(project);
             _this.functions.loadProject(project);
 
@@ -297,6 +329,7 @@ mcsandy = {
     },
     data: {
         ctrls: {
+            projectLoad: document.getElementById('js-projectLoad'),
             projectSave: document.getElementById('js-projectSave'),
             projectDel: document.getElementById('js-projectDel'),
             project: document.getElementById('js-projectName'),
@@ -389,13 +422,22 @@ mcsandy = {
     bindUiEvents: function () {
         var _this = mcsandy,
             functions = _this.functions,
-            ctrls = _this.data.ctrls;
+            ctrls = _this.data.ctrls,
+            keyUpCounter = 0;
         //BIND EVENTS TO TEXTAREAS
         ctrls.css.addEventListener('keyup',function (e) {
-            functions.updateContent();
-        });
+            keyUpCounter++;
+            if (keyUpCounter == 5){
+                functions.updateContent();
+                keyUpCounter = 0;
+            }        });
         ctrls.html.addEventListener('keyup',function (e) {
-            functions.updateContent();
+            keyUpCounter++;
+            if (keyUpCounter == 4){
+                functions.updateContent();
+                keyUpCounter = 0;
+            }
+            
         });
         ctrls.js.addEventListener('change',function (e) {
             functions.updateContent();
@@ -426,7 +468,7 @@ mcsandy = {
              var _this = mcsandy,
                 iframe = _this.data.targets.iframe,
                 parts =  loadedParts !== undefined ? loadedParts.blobArray : _this.helpers.wrapProjectParts();
-               var result = _this.helpers.prepareResult(parts);
+            var result = _this.helpers.prepareResult(parts);
             iframe.src = window.URL.createObjectURL(result);
         },
         delContent: function (e) {
