@@ -1,0 +1,23 @@
+    <footer class="mpGlobal__footer">
+        <label for="js-footer-editor-toggle" class="editor__label">Toggle Projects</label>
+        <input type="checkbox" id="js-footer-editor-toggle" class="editor__toggle" />
+        <form class="mpGlobal__footer__editor editor">
+            <fieldset class="editor__fieldset fieldset fieldset--thisProject">
+                <legend class="fieldset__legend">
+                    This Sandbox
+                </legend>
+                <input id="js-projectName" class="editor__input editor__input--name" type="text" placeholder="Name of Project">
+                <button id="js-projectSave" class="editor__button editor__button--save">Save</button>
+                <button id="js-projectDel" class="editor__button editor__button--del">Delete</button>
+            </fieldset>
+            <fieldset class="editor__fieldset fieldset fieldset--otherProjects">
+                <legend class="fieldset__legend">
+                    Other Sandboxes
+                </legend>
+                <label for="js-selectProjects">Load Projects</label>
+                <select id="js-selectProjects">
+                    <option></option>
+                </select>
+            </fieldset>
+        </form>
+    </footer>

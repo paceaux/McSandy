@@ -1,0 +1,40 @@
+{
+  "name": "McSandy",
+  "version": "0.2.0",
+  "author": "Paceaux <me@frankmtaylor.com>",
+  "description": "McSandy: the Offline HTML5 sandbox",
+  "Mcsandy": {
+    "pre": {
+      "assets": "preAssets/mcsandy.styl",
+      "html": "preAssets/html/"
+    },
+    "post": {
+      "html": "postAssets/post-mcsandy.html"
+    }
+  },
+  "devDependencies": {
+    "nib": "~1.0.1",
+    "stylus": "~0.37.0",
+    "grunt": "~0.4.2",
+    "grunt-contrib-stylus": "~0.12.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-contrib-compress": "~0.6.1",
+    "grunt-contrib": "~0.9.0",
+    "grunt-build-html": "~0.1.0"
+  },
+  "main": "Gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox.git"
+  },
+  "keywords": [
+    "cli",
+    "node",
+    "projects"
+  ],
+  "license": "BSD"
+}

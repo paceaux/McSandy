@@ -13,7 +13,7 @@ button,input,select{padding:.618em;margin:.618em}
 button{background:#78c382;}
 button:hover,button:focus{background:1px solid #3c8746}
 textarea{font-family:Courier,monospace}
-.mpGlobal__header,.mpGlobal__footer{flex-shrink:1;display:flex;flex-direction:column;justify-content:flex-start;padding:.618em;width:98.5%}
+.mpGlobal__header,.mpGlobal__footer{flex-shrink:1;display:flex;flex-direction:column;justify-content:flex-start;width:100%}
 .mpGlobal__header{align-items:stretch;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
 .mpGlobal__header__onlineStatus{align-self:flex-end;padding:.618em;min-height:0;max-height:9em}
 .mpGlobal__header__editor__wrapper{display:flex;flex-direction:column;flex-grow:1;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}

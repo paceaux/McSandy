@@ -4,7 +4,7 @@ A SFA (Single File Application ) that acts as your HTML, CSS, and JavaScript edi
 
  * Version: 0.2.0
  * License: Copyright 2014 Frank M. Taylor. All Rights Reserved
- * Prerequisites: IE10+, other modern browsers
+ * Prerequisites: IE10+, other modern browsers that support CSS flexbox and blob urls
 
 ## FAQs ##
 ###What's an SFA? ###
@@ -28,6 +28,11 @@ McSandy is an HTML5 application. It's using Vanilla JavaScript, but it makes use
 
 McSandy also uses the Flexbox module for its layout. Flexbox is supported in IE10+ 
 
+### Awesome, so what do I need to use it? ###
+It's super simple. Download Mcsandy.html and get started! 
+
+### How can I make it better ?
+If you'd like to contribute, just clone the repo. All of the 'editable' assets are in the `preAssets` folder. The HTML files are in their own folder.  Grunt.js will build the files in `postAssets`, and generate a file called `post-mcsandy.html` for you. 
 
 ## Recently done ##
  + got the flex layout working properly, header, main area, and footer distributely evenly
@@ -40,9 +45,11 @@ McSandy also uses the Flexbox module for its layout. Flexbox is supported in IE1
  + corrected font in editor boxes
  + Can now load a project by simply adding the name of the project as a hash to the url: `index.html#test`
  + fixed animation for expand collapse sections
+ + 
 
 ## Upcoming To-dos ##
  + fix the delete button CSS. right now it's always *not* showing. we only want it to show when a project has been loaded
+ + 
 
 
 

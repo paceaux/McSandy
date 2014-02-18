@@ -4,18 +4,68 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="js"> <!--<![endif]-->
 <head>
+    <title>McSandy | The Offline HTML5 Sandbox</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>McSandy: The HTML5 Playground<</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
-article,body,div,fieldset,figure,footer,form,h1,h2,h3,h4,h5,h6,header,html,iframe,input,section{padding:0;margin:0}fieldset{border:0}body,html{height:100%;width:100%}body{display:flex;flex-direction:column;justify-content:space-around;align-items:flex-start;height:100%;width:100%;color:#091927}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{color:#589bd7}.h1,h1{font-size:1.2em}.h2,h1{font-size:1.1em}a,fieldset,form,input,textarea{-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}a:focus,a:hover,fieldset:focus,fieldset:hover,form:focus,form:hover,input:focus,input:hover,textarea:focus,textarea:hover{outline:0;-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out}button,input,select,textarea{border:1px solid #78c382;outline:0}button:hover,input:hover,select:hover,textarea:hover{border:1px solid #3c8746}button,input,select{padding:.618em;margin:.618em}button{background:#78c382}button:focus,button:hover{background:1px solid #3c8746}textarea{font-family:Courier,monospace}.mpGlobal__footer,.mpGlobal__header{flex-shrink:1;display:flex;flex-direction:column;justify-content:flex-start;padding:.618em;width:98.5%}.mpGlobal__header{align-items:stretch;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}.mpGlobal__header__onlineStatus{align-self:flex-end;padding:.618em;min-height:0;max-height:9em}.mpGlobal__header__editor__wrapper{display:flex;flex-direction:column;flex-grow:1;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}.mpGlobal__header__hgroup{display:flex;flex-shrink:0;flex-direction:row;align-self:flex-start;align-items:baseline;justify-content:space-between;font-size:1em;width:100%;background:#ecf4fa;border-bottom:.125em solid #091927}.mpGlobal__header__hgroup .editor__label{border-top-left-radius:0;border-top-right-radius:0;border-bottom-left-radius:.5em;border-bottom-right-radius:.5em}.editor{display:flex;flex-basis:10em;flex-direction:column;justify-content:space-between;flex-grow:1;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}.editor__toggle{visibility:hidden;position:fixed;left:-9999em}.editor__toggle:checked~.mpGlobal__footer__editor,.editor__toggle:checked~.mpGlobal__footer__editor>.editor__fieldset,.editor__toggle:checked~.mpGlobal__header__editor{flex-basis:0;height:0;overflow:hidden}.editor__label{flex-shrink:0;align-self:flex-start;display:inline-block;padding:.25em;border:1px solid #e1e1e1;border-top-left-radius:.25em;border-top-right-radius:.25em;margin:0}.editor__fieldset{flex-shrink:1}.editor__control{display:none}.editor .editor__fieldsetWrap{display:flex}.editor .editor__fieldsetWrap .fieldset{flex-grow:0;flex-shrink:1;flex-basis:0;height:2em;overflow:hidden}.editor .editor__fieldsetWrap .fieldset__field{width:0}.fieldset{display:flex;flex-direction:column}.fieldset__label{color:#ccc;display:block;font-size:.8em;padding:.618em;border:1px solid #ccc}.fieldset__field{height:0;visibility:hidden;align-self:flex-end;flex-basis:0}.fieldset--thisProject{display:block}.control{visibility:hidden;width:0;height:0}.control--html:checked~.editor__fieldsetWrap .fieldset--html{flex-grow:1;flex-basis:33%;min-height:7em;max-height:20vh}.control--html:checked~.editor__fieldsetWrap .fieldset--html .field{visibility:visible;width:100%;height:75%}.control--html:checked~.editor__fieldsetWrap .fieldset--html .fieldset__label{color:#333;font-weight:700;border-color:#777}.control--css:checked~.editor__fieldsetWrap .fieldset--css{flex-basis:33%;visibility:visible;min-height:7em;max-height:20vh;flex-grow:1}.control--css:checked~.editor__fieldsetWrap .fieldset--css .field{visibility:visible;width:100%;height:75%}.control--css:checked~.editor__fieldsetWrap .fieldset--css .fieldset__label{color:#333;font-weight:700;border-color:#777}.control--js:checked~.editor__fieldsetWrap .fieldset--js{flex-basis:33%;visibility:visible;min-height:7em;max-height:20vh;flex-grow:1}.control--js:checked~.editor__fieldsetWrap .fieldset--js .field{visibility:visible;width:100%;height:75%}.control--js:checked~.editor__fieldsetWrap .fieldset--js .fieldset__label{color:#333;font-weight:700;border-color:#777}.control--html:not(:checked)+.control--css:not(:checked)+.control--js:not(:checked)~.editor__fieldsetWrap .fieldset{flex-grow:1}.mcsandy__result{display:flex;flex-direction:column;flex-grow:2;width:100%}.mcsandy__result__iframe{width:100%;outline:0;border:0}.mpGlobal__footer__editor{flex-direction:row;flex-shrink:1;align-self:flex-start;flex-basis:3em;width:100%}.mpGlobal__footer__editor .fieldset{flex-grow:1}.online{color:green}.offline{color:red}
+html,body,h1,h2,h3,h4,h5,h6,div,fieldset,form,input,header,footer,section,article,figure,iframe{padding:0;margin:0}
+fieldset{border:none}
+body,html{height:100%;width:100%}
+body{display:flex;flex-direction:column;justify-content:space-around;align-items:flex-start;height:100%;width:100%;color:#091927;}
+h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{color:#589bd7;}
+h1,.h1{font-size:1.2em}
+h1,.h2{font-size:1.1em}
+a,input,textarea,form,fieldset{-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
+a:hover,input:hover,textarea:hover,form:hover,fieldset:hover,a:focus,input:focus,textarea:focus,form:focus,fieldset:focus{outline:none;-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out}
+button,input,select,textarea{border:1px solid #78c382;outline:none;}
+button:hover,input:hover,select:hover,textarea:hover{border:1px solid #3c8746}
+button,input,select{padding:.618em;margin:.618em}
+button{background:#78c382;}
+button:hover,button:focus{background:1px solid #3c8746}
+textarea{font-family:Courier,monospace}
+.mpGlobal__header,.mpGlobal__footer{flex-shrink:1;display:flex;flex-direction:column;justify-content:flex-start;width:100%}
+.mpGlobal__header{align-items:stretch;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
+.mpGlobal__header__onlineStatus{align-self:flex-end;padding:.618em;min-height:0;max-height:9em}
+.mpGlobal__header__editor__wrapper{display:flex;flex-direction:column;flex-grow:1;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
+.mpGlobal__header__hgroup{display:flex;flex-shrink:0;flex-direction:row;align-self:flex-start;align-items:baseline;justify-content:space-between;font-size:1em;width:100%;background:#ecf4fa;border-bottom:.125em solid #091927;}
+.mpGlobal__header__hgroup .editor__label{border-top-left-radius:0;border-top-right-radius:0;border-bottom-left-radius:.5em;border-bottom-right-radius:.5em}
+.editor{display:flex;flex-basis:10em;flex-direction:column;justify-content:space-between;flex-grow:1;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
+.editor__toggle{visibility:hidden;position:fixed;left:-9999em;}
+.editor__toggle:checked ~ .mpGlobal__header__editor,.editor__toggle:checked ~ .mpGlobal__footer__editor,.editor__toggle:checked ~ .mpGlobal__footer__editor > .editor__fieldset{flex-basis:0;height:0;overflow:hidden}
+.editor__label{flex-shrink:0;align-self:flex-start;display:inline-block;padding:.25em;border:1px solid #e1e1e1;border-top-left-radius:.25em;border-top-right-radius:.25em;margin:0}
+.editor__fieldset{flex-shrink:1}
+.editor__control{display:none}
+.editor .editor__fieldsetWrap{display:flex;}
+.editor .editor__fieldsetWrap .fieldset{flex-grow:0;flex-shrink:1;flex-basis:0%;height:2em;overflow:hidden;}
+.editor .editor__fieldsetWrap .fieldset__field{width:0%}
+.fieldset{display:flex;flex-direction:column;}
+.fieldset__label{color:#ccc;display:block;font-size:.8em;padding:.618em;border:1px solid #ccc}
+.fieldset__field{height:0;visibility:hidden;align-self:flex-end;flex-basis:0%}
+.fieldset--thisProject{display:block}
+.control{visibility:hidden;width:0%;height:0}
+.control--html:checked ~ .editor__fieldsetWrap .fieldset--html{flex-grow:1;flex-basis:33%;min-height:7em;max-height:20vh;}
+.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .field{visibility:visible;width:100%;height:75%}
+.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .fieldset__label{color:#333;font-weight:bold;border-color:#777}
+.control--css:checked ~ .editor__fieldsetWrap .fieldset--css{flex-grow:1;flex-basis:33%;visibility:visible;min-height:7em;max-height:20vh;flex-grow:1;}
+.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .field{visibility:visible;width:100%;height:75%}
+.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .fieldset__label{color:#333;font-weight:bold;border-color:#777}
+.control--js:checked ~ .editor__fieldsetWrap .fieldset--js{flex-grow:1;flex-basis:33%;visibility:visible;min-height:7em;max-height:20vh;flex-grow:1;}
+.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .field{visibility:visible;width:100%;height:75%}
+.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .fieldset__label{color:#333;font-weight:bold;border-color:#777}
+.control--html:not(:checked) + .control--css:not(:checked) + .control--js:not(:checked) ~ .editor__fieldsetWrap .fieldset{flex-grow:1}
+.mcsandy__result{display:flex;flex-direction:column;flex-grow:2;width:100%;}
+.mcsandy__result__iframe{width:100%;outline:none;border:none}
+.mpGlobal__footer__editor{flex-direction:row;flex-shrink:1;align-self:flex-start;flex-basis:3em;width:100%;}
+.mpGlobal__footer__editor .fieldset{flex-grow:1}
+.online{color:#008000}
+.offline{color:#f00}
 
 </style>
 </head>
-    <body>
-        <header class="mpGlobal__header">
+<body>
+<header class="mpGlobal__header">
             <div class="mpGlobal__header__hgroup">
                 <h1 class="mpGlobal__header__h1 h1">McSandy</h1>
                 <h2 class="mpGlobal__header__h2 h2">The offline HTML sandbox</h2>
@@ -46,36 +96,35 @@ article,body,div,fieldset,figure,footer,form,h1,h2,h3,h4,h5,h6,header,html,ifram
             </form>
         </div>
         </header>
-<main class="mcsandy__result">
-    <iframe id="js-result" class="mcsandy__result__iframe"></iframe>
-</main>
-<footer class="mpGlobal__footer">
-    <label for="js-footer-editor-toggle" class="editor__label">Toggle Projects</label>
-    <input type="checkbox" id="js-footer-editor-toggle" class="editor__toggle" />
-    <form class="mpGlobal__footer__editor editor">
-        <fieldset class="editor__fieldset fieldset fieldset--thisProject">
-            <legend class="fieldset__legend">
-                This Sandbox
-            </legend>
-            <input id="js-projectName" class="editor__input editor__input--name" type="text" placeholder="Name of Project">
-            <button id="js-projectSave" class="editor__button editor__button--save">Save</button>
-            <button id="js-projectDel" class="editor__button editor__button--del">Delete</button>
-        </fieldset>
-        <fieldset class="editor__fieldset fieldset fieldset--otherProjects">
-            <legend class="fieldset__legend">
-                Other Sandboxes
-            </legend>
-            <label for="js-selectProjects">Load Projects</label>
-            <select id="js-selectProjects" >
-                <option></option>
-            </select>
-        </fieldset>
-    </form>
-</footer>
+    <main class="mcsandy__result">
+        <iframe id="js-result" class="mcsandy__result__iframe"></iframe>
+    </main>
+    <footer class="mpGlobal__footer">
+        <label for="js-footer-editor-toggle" class="editor__label">Toggle Projects</label>
+        <input type="checkbox" id="js-footer-editor-toggle" class="editor__toggle" />
+        <form class="mpGlobal__footer__editor editor">
+            <fieldset class="editor__fieldset fieldset fieldset--thisProject">
+                <legend class="fieldset__legend">
+                    This Sandbox
+                </legend>
+                <input id="js-projectName" class="editor__input editor__input--name" type="text" placeholder="Name of Project">
+                <button id="js-projectSave" class="editor__button editor__button--save">Save</button>
+                <button id="js-projectDel" class="editor__button editor__button--del">Delete</button>
+            </fieldset>
+            <fieldset class="editor__fieldset fieldset fieldset--otherProjects">
+                <legend class="fieldset__legend">
+                    Other Sandboxes
+                </legend>
+                <label for="js-selectProjects">Load Projects</label>
+                <select id="js-selectProjects">
+                    <option></option>
+                </select>
+            </fieldset>
+        </form>
+    </footer>
+</body>
 <script type="text/javascript">
-
-
-/*store is the local/session storage helper. */
+/*STORE: Local and Session Storage tool wrapper*/
 var store, mcsandyUI,mcsandy;
 store = {
     types: [localStorage,sessionStorage],
@@ -103,9 +152,10 @@ store = {
         store.types[type].clear();
     }
 };
-/*McSandy UI is the editor and its editor. It's the content that goes in*/
+/*MCSANDYUI: the main user interactions with the app*/
 mcsandyUI = {
     init: function () {
+        console.info("McSandyUI is Running")
         var _this = mcsandyUI;
         _this.bindUiEvents();
     },
@@ -157,7 +207,6 @@ mcsandyUI = {
         var _this = mcsandyUI,
             helpers = _this.helpers,
             els = _this.data.els;
-
         /*CHECK FOR INTERNET CONNECTION*/
         window.addEventListener('load', function (e) {
             _this.functions.handleConnection();
@@ -229,11 +278,11 @@ mcsandyUI = {
         }
     }
 };
-mcsandyUI.init();
 
-/*mcsandy stores the data and retrieves the data. it also prepares the iframe*/
+/*MCSANDY: The preview, storage, and retrieval*/
 mcsandy = {
     init: function () {
+        console.info("McSandy is Running")
         var _this = mcsandy;
         _this.bindUiEvents();
         _this.functions.getProjects();
@@ -333,16 +382,17 @@ mcsandy = {
         var _this = mcsandy,
             functions = _this.functions,
             ctrls = _this.data.ctrls;
+        //BIND EVENTS TO TEXTAREAS
         ctrls.css.addEventListener('keyup',function (e) {
             functions.updateContent();
         });
-
         ctrls.html.addEventListener('keyup',function (e) {
             functions.updateContent();
         });
         ctrls.js.addEventListener('change',function (e) {
             functions.updateContent();
         });
+        //BIND EVENTS TO BUTTONS
         ctrls.projectSave.addEventListener('click', functions.saveContent);
         ctrls.projectDel.addEventListener('click', functions.delContent);
     },
@@ -378,6 +428,7 @@ mcsandy = {
             store.del(0,projectName);
             window.location.hash = '';
             _this.functions.getProjects();
+            _this.data.ctrls.project.value = '';
         },
         saveContent: function (e) {
             e.preventDefault();
@@ -393,8 +444,8 @@ mcsandy = {
         }
     }
 };
-mcsandy.init();
 
+mcsandyUI.init();
+mcsandy.init();
 </script>
-    </body>
 </html>
