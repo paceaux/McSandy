@@ -23,7 +23,7 @@ At the bottom of McSandy, there's a select box where you can retrieve your old p
 You can also retrieve your projects as a url. 
 
 ###Can I export my work? ###
-Not yet, but that is an upcoming feature. You will be able to export 
+Not yet, but that is an upcoming feature. You will be able to export the entire project, and individual files from it. 
   
 ### What are the technologies that McSandy uses? ###
 McSandy is an HTML5 application. It's using Vanilla JavaScript, but it makes use of three API's in particular
@@ -59,7 +59,9 @@ If you'd like to contribute, just clone the repo. All of the 'editable' assets a
  + fixed animation for expand collapse sections
  + improved the UI a bit, set the theme around one central color, threw some stylus variables around it
  + load button, instead of loading when user chooses select button
- + shortcut for running JS
+ + header hides after initial page load. 
+ + the Title element is also updated with online/offline state
+ + shortcut for running JS: `ctrl` + `r`
 
 
 
