@@ -44,7 +44,6 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
 
 ## Upcoming Features ##
  + add external JS/CSS (will require offline validation to make sure that it'll work if no internet)
- + Export to File (download a project to a single file, or download a particular asset)
  + editor validation
  + last project-restore
 
@@ -65,6 +64,7 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
  + header hides after initial page load. 
  + the Title element is also updated with online/offline state
  + shortcut for running JS: `ctrl` + `r`
+ + Export to File for the project
 
 ## Known issues ##
  + McSandy adds jQuery to the live preview, but jQuery doesn't work unless McSandy is running on a local server. 

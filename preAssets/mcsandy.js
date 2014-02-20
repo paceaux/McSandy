@@ -1,4 +1,220 @@
+/*! FileSaver.js
+ *  A saveAs() FileSaver implementation.
+ *  2014-01-24
+ *
+ *  By Eli Grey, http://eligrey.com
+ *  License: X11/MIT
+ *    See LICENSE.md
+ */
+/*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */
+var saveAs = saveAs
+  || (navigator.msSaveOrOpenBlob && navigator.msSaveOrOpenBlob.bind(navigator))
+  || (function(view) {
+    "use strict";
+    if (/MSIE [1-9]\./.test(navigator.userAgent)) {
+        return;
+    }
+    var
+          doc = view.document
+        , get_URL = function() {
+            return view.URL || view.webkitURL || view;
+        }
+        , URL = view.URL || view.webkitURL || view
+        , save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a")
+        , can_use_save_link = !view.externalHost && "download" in save_link
+        , click = function(node) {
+            var event = doc.createEvent("MouseEvents");
+            event.initMouseEvent(
+                "click", true, false, view, 0, 0, 0, 0, 0
+                , false, false, false, false, 0, null
+            );
+            node.dispatchEvent(event);
+        }
+        , webkit_req_fs = view.webkitRequestFileSystem
+        , req_fs = view.requestFileSystem || webkit_req_fs || view.mozRequestFileSystem
+        , throw_outside = function(ex) {
+            (view.setImmediate || view.setTimeout)(function() {
+                throw ex;
+            }, 0);
+        }
+        , force_saveable_type = "application/octet-stream"
+        , fs_min_size = 0
+        , deletion_queue = []
+        , process_deletion_queue = function() {
+            var i = deletion_queue.length;
+            while (i--) {
+                var file = deletion_queue[i];
+                if (typeof file === "string") { // file is an object URL
+                    URL.revokeObjectURL(file);
+                } else { // file is a File
+                    file.remove();
+                }
+            }
+            deletion_queue.length = 0; // clear queue
+        }
+        , dispatch = function(filesaver, event_types, event) {
+            event_types = [].concat(event_types);
+            var i = event_types.length;
+            while (i--) {
+                var listener = filesaver["on" + event_types[i]];
+                if (typeof listener === "function") {
+                    try {
+                        listener.call(filesaver, event || filesaver);
+                    } catch (ex) {
+                        throw_outside(ex);
+                    }
+                }
+            }
+        }
+        , FileSaver = function(blob, name) {
+            var
+                  filesaver = this
+                , type = blob.type
+                , blob_changed = false
+                , object_url
+                , target_view
+                , get_object_url = function() {
+                    var object_url = get_URL().createObjectURL(blob);
+                    deletion_queue.push(object_url);
+                    return object_url;
+                }
+                , dispatch_all = function() {
+                    dispatch(filesaver, "writestart progress write writeend".split(" "));
+                }
+                , fs_error = function() {
+                    if (blob_changed || !object_url) {
+                        object_url = get_object_url(blob);
+                    }
+                    if (target_view) {
+                        target_view.location.href = object_url;
+                    } else {
+                        window.open(object_url, "_blank");
+                    }
+                    filesaver.readyState = filesaver.DONE;
+                    dispatch_all();
+                }
+                , abortable = function(func) {
+                    return function() {
+                        if (filesaver.readyState !== filesaver.DONE) {
+                            return func.apply(this, arguments);
+                        }
+                    };
+                }
+                , create_if_not_found = {create: true, exclusive: false}
+                , slice
+            ;
+            filesaver.readyState = filesaver.INIT;
+            if (!name) {
+                name = "download";
+            }
+            if (can_use_save_link) {
+                object_url = get_object_url(blob);
+                doc = view.document;
+                save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a");
+                save_link.href = object_url;
+                save_link.download = name;
+                var event = doc.createEvent("MouseEvents");
+                event.initMouseEvent(
+                    "click", true, false, view, 0, 0, 0, 0, 0
+                    , false, false, false, false, 0, null
+                );
+                save_link.dispatchEvent(event);
+                filesaver.readyState = filesaver.DONE;
+                dispatch_all();
+                return;
+            }
+            if (view.chrome && type && type !== force_saveable_type) {
+                slice = blob.slice || blob.webkitSlice;
+                blob = slice.call(blob, 0, blob.size, force_saveable_type);
+                blob_changed = true;
+            }
+
+            if (webkit_req_fs && name !== "download") {
+                name += ".download";
+            }
+            if (type === force_saveable_type || webkit_req_fs) {
+                target_view = view;
+            }
+            if (!req_fs) {
+                fs_error();
+                return;
+            }
+            fs_min_size += blob.size;
+            req_fs(view.TEMPORARY, fs_min_size, abortable(function(fs) {
+                fs.root.getDirectory("saved", create_if_not_found, abortable(function(dir) {
+                    var save = function() {
+                        dir.getFile(name, create_if_not_found, abortable(function(file) {
+                            file.createWriter(abortable(function(writer) {
+                                writer.onwriteend = function(event) {
+                                    target_view.location.href = file.toURL();
+                                    deletion_queue.push(file);
+                                    filesaver.readyState = filesaver.DONE;
+                                    dispatch(filesaver, "writeend", event);
+                                };
+                                writer.onerror = function() {
+                                    var error = writer.error;
+                                    if (error.code !== error.ABORT_ERR) {
+                                        fs_error();
+                                    }
+                                };
+                                "writestart progress write abort".split(" ").forEach(function(event) {
+                                    writer["on" + event] = filesaver["on" + event];
+                                });
+                                writer.write(blob);
+                                filesaver.abort = function() {
+                                    writer.abort();
+                                    filesaver.readyState = filesaver.DONE;
+                                };
+                                filesaver.readyState = filesaver.WRITING;
+                            }), fs_error);
+                        }), fs_error);
+                    };
+                    dir.getFile(name, {create: false}, abortable(function(file) {
+                        file.remove();
+                        save();
+                    }), abortable(function(ex) {
+                        if (ex.code === ex.NOT_FOUND_ERR) {
+                            save();
+                        } else {
+                            fs_error();
+                        }
+                    }));
+                }), fs_error);
+            }), fs_error);
+        }
+        , FS_proto = FileSaver.prototype
+        , saveAs = function(blob, name) {
+            return new FileSaver(blob, name);
+        }
+    ;
+    FS_proto.abort = function() {
+        var filesaver = this;
+        filesaver.readyState = filesaver.DONE;
+        dispatch(filesaver, "abort");
+    };
+    FS_proto.readyState = FS_proto.INIT = 0;
+    FS_proto.WRITING = 1;
+    FS_proto.DONE = 2;
+    FS_proto.error =
+    FS_proto.onwritestart =
+    FS_proto.onprogress =
+    FS_proto.onwrite =
+    FS_proto.onabort =
+    FS_proto.onerror =
+    FS_proto.onwriteend =
+        null;
+
+    view.addEventListener("unload", process_deletion_queue, false);
+    return saveAs;
+}(
+       typeof self !== "undefined" && self
+    || typeof window !== "undefined" && window
+    || this.content
+));
+if (typeof module !== "undefined") module.exports = saveAs;
+
 /*STORE: Local and Session Storage tool wrapper*/
+
 var store, mcsandyUI,mcsandy;
 store = {
     types: [localStorage,sessionStorage],
@@ -36,7 +252,8 @@ mcsandyUI = {
     data: {
         onlineState: 'online',
         onlineCtrl: document.getElementById('js-onlineStatus'),
-        els: {
+        ctrls: {
+            projectDownload: document.getElementById('js-projectDownload'),
             projectSelect: document.getElementById('js-selectProjects'),
             projectLoad: document.getElementById('js-projectLoad')
         },
@@ -95,7 +312,8 @@ mcsandyUI = {
     bindUiEvents: function () {
         var _this = mcsandyUI,
             helpers = _this.helpers,
-            els = _this.data.els;
+            ctrls = _this.data.ctrls;
+
         /*CHECK FOR INTERNET CONNECTION*/
         window.addEventListener('load', function (e) {
             _this.functions.handleConnection();
@@ -110,7 +328,10 @@ mcsandyUI = {
         window.addEventListener("hashchange", _this.functions.handleHash)
         
         /*SELECT A PROJECT*/
-        els.projectLoad.addEventListener('click', _this.functions.handleProjectSelect);
+        ctrls.projectLoad.addEventListener('click', _this.functions.handleProjectLoad);
+
+        /* DOWNLOAD A PROJECT */
+        ctrls.projectDownload.addEventListener('click', _this.functions.handleDownloadProject);
 
         /*KEYBOARD SHORTCUTS*/
         document.addEventListener('keydown', helpers.keyDown)
@@ -139,10 +360,10 @@ mcsandyUI = {
             var _this = mcsandyUI;
             window.location.hash = _this.helpers.convertHash(hash);
         },
-        handleProjectSelect: function (e) {
+        handleProjectLoad: function (e) {
             e.preventDefault();
             var _this = mcsandyUI,
-                project = _this.data.els.projectSelect.value;
+                project = _this.data.ctrls.projectSelect.value;
             _this.functions.setHash(project);
             _this.functions.loadProject(project);
 
@@ -152,8 +373,14 @@ mcsandyUI = {
                 projData = store.get(0,project);
             mcsandy.functions.updateContent(projData); // this is in the McSandy interface
             _this.functions.updateEditors(projData.rawParts.html, projData.rawParts.css, projData.rawParts.js);
-            _this.functions.updateProjectName(projData.project);
+            _this.functions.updateCtrls(projData.project);
 
+        },
+        handleDownloadProject: function (e) {
+            e.preventDefault();
+            var _this = mcsandyUI,
+                project = store.get(0,_this.data.ctrls.projectSelect.value);
+            mcsandy.functions.downloadContent(project);
         },
         updateEditors: function (html, css, js) {
             var _this = mcsandyUI, 
@@ -162,11 +389,14 @@ mcsandyUI = {
             ctrls.css.value = css;
             ctrls.js.value = js;
         },
-        updateProjectName: function (projectName) {
+        updateCtrls: function (projectName) {
             var _this = mcsandyUI,
-                projectField = mcsandy.data.ctrls.project;
+                projectField = mcsandy.data.ctrls.project,
+                ctrls = _this.data.ctrls;
             projectField.value = projectName;
             projectField.placeholder = projectName;
+            ctrls.projectDownload.value = projectName;
+
         }
     }
 };
@@ -184,6 +414,7 @@ mcsandy = {
             projectLoad: document.getElementById('js-projectLoad'),
             projectSave: document.getElementById('js-projectSave'),
             projectDel: document.getElementById('js-projectDel'),
+            projectDel: document.getElementById('js-projectDownload'),
             project: document.getElementById('js-projectName'),
             html: document.getElementById('js-html'),
             css: document.getElementById('js-css'),
@@ -198,10 +429,6 @@ mcsandy = {
         jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'
     },
     helpers: {
-        updateContent: function (val, target) {
-            target.innerHTML = val;
-            return;
-        },
         prepareCSS: function (css) {
             return '<style type="text/css">' + css + '</style>';
         },
@@ -224,7 +451,7 @@ mcsandy = {
             }
             return rawParts;
         },
-        wrapProjectParts: function (html, css, js) {
+        wrapBlobParts: function (html, css, js) {
             var _this = mcsandy,
                 helpers = _this.helpers,
                 blobData = _this.blobData,
@@ -245,13 +472,12 @@ mcsandy = {
                 rawParts: rawParts
             }; 
         },
-        prepareResult: function (parts) {
+        buildBlob: function (parts, type) {
             var _this = mcsandy,
                 helpers = _this.helpers;
-            if (window.URL) {
-                var blob = new Blob(parts, {type : 'text/html'});
+                blobType = type !== undefined ? 'text/' + type + ';charset=utf-8' : 'text/html;charset=utf-8';
+                var blob = new Blob(parts, {type : blobType});
                 return blob;                   
-            }
         },
         getStoredProjects: function () {
             var _this = mcsandy,
@@ -319,8 +545,8 @@ mcsandy = {
         updateContent: function (loadedParts) {
              var _this = mcsandy,
                 iframe = _this.data.targets.iframe,
-                parts =  loadedParts !== undefined ? loadedParts.blobArray : _this.helpers.wrapProjectParts();
-            var result = _this.helpers.prepareResult(parts);
+                parts =  loadedParts !== undefined ? loadedParts.blobArray : _this.helpers.wrapBlobParts();
+            var result = _this.helpers.buildBlob(parts);
             iframe.src = window.URL.createObjectURL(result);
         },
         delContent: function (e) {
@@ -337,12 +563,26 @@ mcsandy = {
             var _this = mcsandy,
                 ctrls = _this.data.ctrls,
                 rawParts = _this.helpers.createRawParts(ctrls.html.value, ctrls.css.value, ctrls.js.value),
-                blobArray = _this.helpers.wrapProjectParts(),
+                blobArray = _this.helpers.wrapBlobParts(),
                 projectName = _this.data.ctrls.project.value,
                 project = _this.helpers.createProject(projectName, rawParts, blobArray)
             store.set(0, projectName, project);
             mcsandyUI.functions.setHash(projectName)
             _this.functions.getProjects();
+        },
+        downloadContent: function (downloadObj, type) {
+            //downloadObj should be an object. 
+            //It should have in it an array called blobArray. 
+            //there must be a minimum of one item in the array, which contains the stuff we want to download
+            //type is presumed to be either html, css, or js
+            var _this = mcsandy,
+                downloadType = type !== undefined ? type : 'html', // if there's no type, then it must be a dl for the entire project
+                parts =  downloadObj !== undefined ? downloadObj.blobArray : _this.helpers.wrapBlobParts(),
+                blob = _this.helpers.buildBlob(parts,downloadType),
+                fileName = downloadObj.project + '.' + downloadType;
+                console.log(downloadObj);
+            saveAs(blob, fileName);
+
         }
     }
 };
