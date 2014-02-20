@@ -38,7 +38,7 @@ textarea{font-family:Courier,monospace}
 .editor__label{flex-shrink:0;align-self:flex-start;display:inline-block;padding:.25em;border:1px solid #e1e1e1;border-top-right-radius:.25em;border-top-left-radius:.25em;margin:0;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
 .editor__fieldset{flex-shrink:1}
 .editor__control{display:none}
-.editor .editor__fieldsetWrap{display:flex;}
+.editor .editor__fieldsetWrap{display:flex;height:30vh;}
 .editor .editor__fieldsetWrap .fieldset{flex-grow:0;flex-shrink:1;flex-basis:0%;height:2em;overflow:hidden;}
 .editor .editor__fieldsetWrap .fieldset__field{width:0%}
 .fieldset{display:flex;flex-direction:column;}
@@ -50,15 +50,15 @@ textarea{font-family:Courier,monospace}
 .fieldset--css{order:2}
 .fieldset--js{order:3}
 .control{visibility:hidden;width:0%;height:0}
-.control--html:checked ~ .editor__fieldsetWrap .fieldset--html{flex-grow:1;flex-basis:33%;min-height:9.25em;max-height:20vh;}
+.control--html:checked ~ .editor__fieldsetWrap .fieldset--html{flex-grow:1;flex-basis:33%;height:100%;}
 .control--html:checked ~ .editor__fieldsetWrap .fieldset--html .field{visibility:visible;width:100%;height:75%}
 .control--html:checked ~ .editor__fieldsetWrap .fieldset--html .fieldset__label{color:#eece97;font-weight:bold;border-bottom:1px solid #eece97;background:#5799e4;}
 .control--html:checked ~ .editor__fieldsetWrap .fieldset--html .fieldset__label:hover{background:#729bc9}
-.control--css:checked ~ .editor__fieldsetWrap .fieldset--css{flex-grow:1;flex-basis:33%;visibility:visible;min-height:9.25em;max-height:20vh;flex-grow:1;}
+.control--css:checked ~ .editor__fieldsetWrap .fieldset--css{flex-grow:1;flex-basis:33%;visibility:visible;height:100%;flex-grow:1;}
 .control--css:checked ~ .editor__fieldsetWrap .fieldset--css .field{visibility:visible;width:100%;height:75%}
 .control--css:checked ~ .editor__fieldsetWrap .fieldset--css .fieldset__label{color:#eece97;font-weight:bold;border-bottom:1px solid #eece97;background:#5799e4;}
 .control--css:checked ~ .editor__fieldsetWrap .fieldset--css .fieldset__label:hover{background:#729bc9}
-.control--js:checked ~ .editor__fieldsetWrap .fieldset--js{flex-grow:1;flex-basis:33%;visibility:visible;min-height:9.25em;max-height:20vh;flex-grow:1;}
+.control--js:checked ~ .editor__fieldsetWrap .fieldset--js{flex-grow:1;flex-basis:33%;visibility:visible;height:100%;flex-grow:1;}
 .control--js:checked ~ .editor__fieldsetWrap .fieldset--js .field{visibility:visible;width:100%;height:75%}
 .control--js:checked ~ .editor__fieldsetWrap .fieldset--js .fieldset__label{color:#eece97;font-weight:bold;border-bottom:1px solid #eece97;background:#5799e4;}
 .control--js:checked ~ .editor__fieldsetWrap .fieldset--js .fieldset__label:hover{background:#729bc9}
@@ -533,7 +533,7 @@ mcsandyUI = {
         handleDownloadProject: function (e) {
             e.preventDefault();
             var _this = mcsandyUI,
-                project = store.get(0,_this.data.ctrls.projectSelect.value);
+                project = store.get(0,e.target.value);
             mcsandy.functions.downloadContent(project);
         },
         updateEditors: function (html, css, js) {
@@ -545,7 +545,7 @@ mcsandyUI = {
         },
         updateCtrls: function (projectName) {
             var _this = mcsandyUI,
-                projectField = mcsandy.data.ctrls.project,
+                projectField = mcsandy.data.ctrls.projectName,
                 ctrls = _this.data.ctrls;
             projectField.value = projectName;
             projectField.placeholder = projectName;
@@ -568,8 +568,7 @@ mcsandy = {
             projectLoad: document.getElementById('js-projectLoad'),
             projectSave: document.getElementById('js-projectSave'),
             projectDel: document.getElementById('js-projectDel'),
-            projectDel: document.getElementById('js-projectDownload'),
-            project: document.getElementById('js-projectName'),
+            projectName: document.getElementById('js-projectName'),
             html: document.getElementById('js-html'),
             css: document.getElementById('js-css'),
             js: document.getElementById('js-js')
@@ -706,7 +705,7 @@ mcsandy = {
         delContent: function (e) {
             e.preventDefault();
             var _this = mcsandy,
-                projectName = _this.data.ctrls.project.value;
+                projectName = _this.data.ctrls.projectName.value;
             store.del(0,projectName);
             window.location.hash = '';
             _this.functions.getProjects();
@@ -718,7 +717,7 @@ mcsandy = {
                 ctrls = _this.data.ctrls,
                 rawParts = _this.helpers.createRawParts(ctrls.html.value, ctrls.css.value, ctrls.js.value),
                 blobArray = _this.helpers.wrapBlobParts(),
-                projectName = _this.data.ctrls.project.value,
+                projectName = _this.data.ctrls.projectName.value,
                 project = _this.helpers.createProject(projectName, rawParts, blobArray)
             store.set(0, projectName, project);
             mcsandyUI.functions.setHash(projectName)
@@ -734,7 +733,6 @@ mcsandy = {
                 parts =  downloadObj !== undefined ? downloadObj.blobArray : _this.helpers.wrapBlobParts(),
                 blob = _this.helpers.buildBlob(parts,downloadType),
                 fileName = downloadObj.project + '.' + downloadType;
-                console.log(downloadObj);
             saveAs(blob, fileName);
 
         }

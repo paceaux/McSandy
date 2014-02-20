@@ -379,7 +379,7 @@ mcsandyUI = {
         handleDownloadProject: function (e) {
             e.preventDefault();
             var _this = mcsandyUI,
-                project = store.get(0,_this.data.ctrls.projectSelect.value);
+                project = store.get(0,e.target.value);
             mcsandy.functions.downloadContent(project);
         },
         updateEditors: function (html, css, js) {
@@ -391,7 +391,7 @@ mcsandyUI = {
         },
         updateCtrls: function (projectName) {
             var _this = mcsandyUI,
-                projectField = mcsandy.data.ctrls.project,
+                projectField = mcsandy.data.ctrls.projectName,
                 ctrls = _this.data.ctrls;
             projectField.value = projectName;
             projectField.placeholder = projectName;
@@ -414,8 +414,7 @@ mcsandy = {
             projectLoad: document.getElementById('js-projectLoad'),
             projectSave: document.getElementById('js-projectSave'),
             projectDel: document.getElementById('js-projectDel'),
-            projectDel: document.getElementById('js-projectDownload'),
-            project: document.getElementById('js-projectName'),
+            projectName: document.getElementById('js-projectName'),
             html: document.getElementById('js-html'),
             css: document.getElementById('js-css'),
             js: document.getElementById('js-js')
@@ -552,7 +551,7 @@ mcsandy = {
         delContent: function (e) {
             e.preventDefault();
             var _this = mcsandy,
-                projectName = _this.data.ctrls.project.value;
+                projectName = _this.data.ctrls.projectName.value;
             store.del(0,projectName);
             window.location.hash = '';
             _this.functions.getProjects();
@@ -564,7 +563,7 @@ mcsandy = {
                 ctrls = _this.data.ctrls,
                 rawParts = _this.helpers.createRawParts(ctrls.html.value, ctrls.css.value, ctrls.js.value),
                 blobArray = _this.helpers.wrapBlobParts(),
-                projectName = _this.data.ctrls.project.value,
+                projectName = _this.data.ctrls.projectName.value,
                 project = _this.helpers.createProject(projectName, rawParts, blobArray)
             store.set(0, projectName, project);
             mcsandyUI.functions.setHash(projectName)
@@ -580,7 +579,6 @@ mcsandy = {
                 parts =  downloadObj !== undefined ? downloadObj.blobArray : _this.helpers.wrapBlobParts(),
                 blob = _this.helpers.buildBlob(parts,downloadType),
                 fileName = downloadObj.project + '.' + downloadType;
-                console.log(downloadObj);
             saveAs(blob, fileName);
 
         }
