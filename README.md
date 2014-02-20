@@ -9,10 +9,10 @@ A SFA (Single File Application ) that acts as your HTML, CSS, and JavaScript edi
 ## FAQs ##
 ###What's an SFA? ###
 
-An SFA is a Single File Application. This means the entire application functions in a single file - no installation, extra files, or internet, is required to use it. Once you've downloaded McSandy (index.html), that's all you need. At 350 lines, that's not too bad, right?
+An SFA is a Single File Application. This means the entire application functions in a single file - no installation, extra files, or internet, is required to use it. Once you've downloaded McSandy (index.html), that's all you need. At about 500 lines, that's not too bad, right?
 
 ### What can I do with McSandy? ###
-McSandy lets you edit HTML, CSS and JavaScript with a live preview. Every time you keyup in the HTML, or CSS fields, live preview will be updated. When you `tab` away from the JavaScript field, that'll 
+McSandy lets you edit HTML, CSS and JavaScript with a live preview. Every time you keyup in the HTML or CSS fields, live preview will be updated. When you `tab` away from the JavaScript field, that will also run it. At any time, you can use `ctrl` + `r` to preview your project. 
 
 ### Can I save my work? ###
 Of course you can! McSandy uses `localstorage` to save your projects. You can save and delete any of your projects by clicking on the save button at the bottom, or with `ctrl` + `s`.
@@ -20,11 +20,16 @@ Of course you can! McSandy uses `localstorage` to save your projects. You can sa
 ### How can I get my work back? ###
 At the bottom of McSandy, there's a select box where you can retrieve your old projects. 
 
-You can also retrieve your projects as a url. 
+You can also retrieve your projects as a hash in the URL: `mcsandy.html#my_project`. 
+
+This means that you can bookmark your projects!
 
 ###Can I export my work? ###
 Not yet, but that is an upcoming feature. You will be able to export the entire project, and individual files from it. 
-  
+
+### Awesome, so what do I need to use it? ###
+It's super simple. Download Mcsandy.html and get started! 
+
 ### What are the technologies that McSandy uses? ###
 McSandy is an HTML5 application. It's using Vanilla JavaScript, but it makes use of three API's in particular
  + localStorage (for storing data)
@@ -33,11 +38,9 @@ McSandy is an HTML5 application. It's using Vanilla JavaScript, but it makes use
 
 McSandy also uses the Flexbox module for its layout. Flexbox is supported in IE10+ 
 
-### Awesome, so what do I need to use it? ###
-It's super simple. Download Mcsandy.html and get started! 
 
 ### How can I make it better ?
-If you'd like to contribute, just clone the repo. All of the 'editable' assets are in the `preAssets` folder. The HTML files are in their own folder.  Grunt.js will build the files in `postAssets`, and generate a file called `post-mcsandy.html` for you. 
+If you'd like to contribute, just pull the repo. All of the 'editable' assets are in the `preAssets` folder. The HTML files are in their own folder.  Grunt.js will build the files in `postAssets`, and generate a file called `post-mcsandy.html` for you. 
 
 ## Upcoming Features ##
  + add external JS/CSS (will require offline validation to make sure that it'll work if no internet)
@@ -63,6 +66,8 @@ If you'd like to contribute, just clone the repo. All of the 'editable' assets a
  + the Title element is also updated with online/offline state
  + shortcut for running JS: `ctrl` + `r`
 
+## Known issues ##
+ + McSandy adds jQuery to the live preview, but jQuery doesn't work unless McSandy is running on a local server. 
 
 
 

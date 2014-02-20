@@ -32,7 +32,7 @@ textarea{font-family:Courier,monospace}
 .mpGlobal__header__hgroup{flex-shrink:0;flex-grow:1;align-self:flex-start;display:flex;flex-direction:row;align-items:baseline;justify-content:space-between;font-size:1em;width:100%;max-height:0;background:#eef5fc;border-bottom:.125em solid #113968;overflow:hidden;animation-delay:.5s;animation-duration:3.5s;animation-name:slideUp;animation-iteration-count:1;animation-direction:normal}
 .mpGlobal__header .editor{border-bottom:.125em solid #113968;}
 .mpGlobal__header .editor__label{order:2;border-top-left-radius:0;border-top-right-radius:0;border-bottom-left-radius:.5em;border-bottom-right-radius:.5em}
-.editor{display:flex;flex-basis:10em;flex-direction:column;justify-content:space-between;flex-grow:1;-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out;}
+.editor{display:flex;flex-basis:30vh;flex-direction:column;justify-content:space-between;flex-grow:1;-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out;}
 .editor__toggle{visibility:hidden;position:fixed;left:-9999em;}
 .editor__toggle:checked ~ .mpGlobal__header__editor,.editor__toggle:checked ~ .mpGlobal__footer__editor,.editor__toggle:checked ~ .mpGlobal__footer__editor > .editor__fieldset{flex-basis:0;height:0;overflow:hidden}
 .editor__label{flex-shrink:0;align-self:flex-start;display:inline-block;padding:.25em;border:1px solid #e1e1e1;border-top-right-radius:.25em;border-top-left-radius:.25em;margin:0;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
@@ -50,21 +50,21 @@ textarea{font-family:Courier,monospace}
 .fieldset--css{order:2}
 .fieldset--js{order:3}
 .control{visibility:hidden;width:0%;height:0}
-.control--html:checked ~ .editor__fieldsetWrap .fieldset--html{flex-grow:1;flex-basis:33%;min-height:7.25em;max-height:20vh;}
+.control--html:checked ~ .editor__fieldsetWrap .fieldset--html{flex-grow:1;flex-basis:33%;min-height:9.25em;max-height:20vh;}
 .control--html:checked ~ .editor__fieldsetWrap .fieldset--html .field{visibility:visible;width:100%;height:75%}
 .control--html:checked ~ .editor__fieldsetWrap .fieldset--html .fieldset__label{color:#eece97;font-weight:bold;border-bottom:1px solid #eece97;background:#5799e4;}
 .control--html:checked ~ .editor__fieldsetWrap .fieldset--html .fieldset__label:hover{background:#729bc9}
-.control--css:checked ~ .editor__fieldsetWrap .fieldset--css{flex-grow:1;flex-basis:33%;visibility:visible;min-height:7.25em;max-height:20vh;flex-grow:1;}
+.control--css:checked ~ .editor__fieldsetWrap .fieldset--css{flex-grow:1;flex-basis:33%;visibility:visible;min-height:9.25em;max-height:20vh;flex-grow:1;}
 .control--css:checked ~ .editor__fieldsetWrap .fieldset--css .field{visibility:visible;width:100%;height:75%}
 .control--css:checked ~ .editor__fieldsetWrap .fieldset--css .fieldset__label{color:#eece97;font-weight:bold;border-bottom:1px solid #eece97;background:#5799e4;}
 .control--css:checked ~ .editor__fieldsetWrap .fieldset--css .fieldset__label:hover{background:#729bc9}
-.control--js:checked ~ .editor__fieldsetWrap .fieldset--js{flex-grow:1;flex-basis:33%;visibility:visible;min-height:7.25em;max-height:20vh;flex-grow:1;}
+.control--js:checked ~ .editor__fieldsetWrap .fieldset--js{flex-grow:1;flex-basis:33%;visibility:visible;min-height:9.25em;max-height:20vh;flex-grow:1;}
 .control--js:checked ~ .editor__fieldsetWrap .fieldset--js .field{visibility:visible;width:100%;height:75%}
 .control--js:checked ~ .editor__fieldsetWrap .fieldset--js .fieldset__label{color:#eece97;font-weight:bold;border-bottom:1px solid #eece97;background:#5799e4;}
 .control--js:checked ~ .editor__fieldsetWrap .fieldset--js .fieldset__label:hover{background:#729bc9}
 .control--html:not(:checked) + .control--css:not(:checked) + .control--js:not(:checked) ~ .editor__fieldsetWrap .fieldset{flex-grow:1}
 .mcsandy__result{display:flex;flex-direction:column;flex-grow:2;width:100%;}
-.mcsandy__result__iframe{width:100%;outline:none;border:none}
+.mcsandy__result__iframe{flex-grow:1;width:100%;outline:none;border:none}
 .mpGlobal__footer__editor{flex-direction:row;flex-shrink:1;align-self:flex-start;flex-basis:4.5em;width:100%;border-top:.125em solid #113968;background:#eef5fc;}
 .mpGlobal__footer__editor .fieldset{flex-grow:1}
 .online{color:#57e45c}
@@ -209,13 +209,13 @@ mcsandyUI = {
             /*SAVE*/
             if (e.keyCode in saveMap){
                 saveMap[e.keyCode] = true;
-                if(saveMap[17] && saveMap[83]) {
+                if(saveMap[83] && saveMap[17]) {
                     mcsandy.functions.saveContent(e);
                 }
             }
             if (e.keyCode in runMap){
                 runMap[e.keyCode] = true;
-                if(runMap[16] && runMap[83]) {
+                if(runMap[83] && runMap[16]) {
                     mcsandy.functions.saveContent(e);
                 }
             }
@@ -228,7 +228,7 @@ mcsandyUI = {
                 keyMaps.save[e.keyCode] = false;
             }
             if (e.keyCode in keyMaps.run){
-                keyMaps.save[e.keyCode] = false;
+                keyMaps.run[e.keyCode] = false;
             }
         },
         convertHash: function (hash) {

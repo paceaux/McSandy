@@ -61,13 +61,13 @@ mcsandyUI = {
             /*SAVE*/
             if (e.keyCode in saveMap){
                 saveMap[e.keyCode] = true;
-                if(saveMap[17] && saveMap[83]) {
+                if(saveMap[83] && saveMap[17]) {
                     mcsandy.functions.saveContent(e);
                 }
             }
             if (e.keyCode in runMap){
                 runMap[e.keyCode] = true;
-                if(runMap[16] && runMap[83]) {
+                if(runMap[83] && runMap[16]) {
                     mcsandy.functions.saveContent(e);
                 }
             }
@@ -80,7 +80,7 @@ mcsandyUI = {
                 keyMaps.save[e.keyCode] = false;
             }
             if (e.keyCode in keyMaps.run){
-                keyMaps.save[e.keyCode] = false;
+                keyMaps.run[e.keyCode] = false;
             }
         },
         convertHash: function (hash) {
