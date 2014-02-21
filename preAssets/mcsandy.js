@@ -379,7 +379,7 @@ mcsandyUI = {
         handleDownloadProject: function (e) {
             e.preventDefault();
             var _this = mcsandyUI,
-                project = store.get(0,e.target.value);
+                project = store.get(0,_this.data.ctrls.projectSelect.value); // don't get the value of the button, but the one from the select box. 
             mcsandy.functions.downloadContent(project);
         },
         updateEditors: function (html, css, js) {
