@@ -245,8 +245,8 @@ store = {
 /*MCSANDYUI: the main user interactions with the app*/
 mcsandyUI = {
     init: function () {
-        console.info("McSandyUI is Running")
         var _this = mcsandyUI;
+        console.info("McSandyUI is Running");
         _this.bindUiEvents();
     },
     data: {
@@ -269,22 +269,21 @@ mcsandyUI = {
         }
     },
     helpers: {
-        keyDown: function(e) {
+        keyDown: function (e) {
             var _this = mcsandyUI,
                 keyMaps = _this.data.keyMaps, 
                 saveMap = keyMaps.save,
-                runMap = keyMaps.run
-
+                runMap = keyMaps.run;
             /*SAVE*/
-            if (e.keyCode in saveMap){
+            if (e.keyCode in saveMap) {
                 saveMap[e.keyCode] = true;
-                if(saveMap[83] && saveMap[17]) {
+                if (saveMap[83] && saveMap[17]) {
                     mcsandy.functions.saveContent(e);
                 }
             }
-            if (e.keyCode in runMap){
+            if (e.keyCode in runMap) {
                 runMap[e.keyCode] = true;
-                if(runMap[83] && runMap[16]) {
+                if (runMap[83] && runMap[16]) {
                     mcsandy.functions.saveContent(e);
                 }
             }
@@ -307,17 +306,43 @@ mcsandyUI = {
             hash = hash.replace('#','');
             hash = hash.replace('_',' ');
             return hash;
+        },
+        createInput: function (t, id, c, v, d) {
+            var input = document.createElement('input');
+            input.type = t;
+            input.id = id;
+            input.className = c;
+            input.value = v;
+            input.setAttribute('data-mcsandy', d);
+            return input;
+        },
+        createLabel: function (id, c, t) {
+            var label = document.createElement('label');
+            label.className = c;
+            label.setAttribute('for', id);
+            label.innerText = t;
+            return label;
+        },
+        toggleLabelClick: function (e) {
+            var label = e.target,
+                input = document.getElementById(e.target.getAttribute('for'));
+            if (!label.className.match('js-checked') ) {
+                label.className = label.className + ' ' + 'js-checked';
+                input.className = input.className + ' ' + 'js-checked';
+            } else {
+                label.className = label.className.replace( /(?:^|\s)js-checked(?!\S)/g, "")
+                input.className = input.className.replace( /(?:^|\s)js-checked(?!\S)/g, "")
+            }
         }
     },
     bindUiEvents: function () {
         var _this = mcsandyUI,
             helpers = _this.helpers,
             ctrls = _this.data.ctrls;
-
         /*CHECK FOR INTERNET CONNECTION*/
         window.addEventListener('load', function (e) {
             _this.functions.handleConnection();
-            if(window.location.hash) {
+            if (window.location.hash) {
                 _this.functions.handleHash();
             }
         });
@@ -336,25 +361,36 @@ mcsandyUI = {
         /*KEYBOARD SHORTCUTS*/
         document.addEventListener('keydown', helpers.keyDown)
         document.addEventListener('keyup', helpers.keyUp)
+
+        /*LABEL/INPUT SHENANIGANS*/
+        _this.functions.bindJsCheck();
+
     },
     functions: {
         handleConnection: function (e) {
             var _this = mcsandyUI,
                 ctrl = document.getElementById('js-onlineStatus');
             _this.data.onlineState = navigator.onLine ? "online" : "offline";
-            if (_this.data.onlineState == "online"){
+
+            if (_this.data.onlineState == "online") {
                 ctrl.className = ctrl.className.replace( /(?:^|\s)offline(?!\S)/g, " online");
                 document.title = "McSandy | Online";
+                document.querySelector('body').className = document.querySelector('body').className.replace( /(?:^|\s)mcsandy--offline(?!\S)/g, " mcsandy--online");
+                mcsandy.functions.createLibSelect();
+                _this.functions.handleHash();
             } else {
                 ctrl.className = ctrl.className.replace( /(?:^|\s)online(?!\S)/g," offline");
                 document.title = "McSandy | Offline"
+                document.querySelector('body').className = document.querySelector('body').className.replace( /(?:^|\s)mcsandy--online(?!\S)/g, " mcsandy--offline");
             }
+
         },
         handleHash: function (e) {
-            var _this = mcsandyUI,
-                hash = _this.helpers.unconvertHash(window.location.hash);
-            _this.functions.loadProject(hash);
-
+            var _this = mcsandyUI;
+            if (window.location.hash.length > 0){
+                var hash = _this.helpers.unconvertHash(window.location.hash);
+                _this.functions.loadProject(hash);
+            }
         },
         setHash: function (hash) {
             var _this = mcsandyUI;
@@ -366,15 +402,13 @@ mcsandyUI = {
                 project = _this.data.ctrls.projectSelect.value;
             _this.functions.setHash(project);
             _this.functions.loadProject(project);
-
         },
         loadProject: function (project) {
             var _this = mcsandyUI,
                 projData = store.get(0,project);
             mcsandy.functions.updateContent(projData); // this is in the McSandy interface
             _this.functions.updateEditors(projData.rawParts.html, projData.rawParts.css, projData.rawParts.js);
-            _this.functions.updateCtrls(projData.project);
-
+            _this.functions.updateCtrls(projData);
         },
         handleDownloadProject: function (e) {
             e.preventDefault();
@@ -389,14 +423,27 @@ mcsandyUI = {
             ctrls.css.value = css;
             ctrls.js.value = js;
         },
-        updateCtrls: function (projectName) {
+        updateCtrls: function (projData) {
             var _this = mcsandyUI,
                 projectField = mcsandy.data.ctrls.projectName,
                 ctrls = _this.data.ctrls;
-            projectField.value = projectName;
-            projectField.placeholder = projectName;
-            ctrls.projectDownload.value = projectName;
-
+            projectField.value = projData.project;
+            projectField.placeholder = projData.project;
+            ctrls.projectDownload.value = projData.project;
+            if(projData.rawParts.external){
+                projData.rawParts.external.js.forEach(function (el) {
+                    var exJsInput = document.querySelector('[data-mcsandy="' + el + '"]');
+                        exJsInput.checked = true;
+                });
+            }
+        },
+        bindJsCheck: function () {
+            var _this = mcsandyUI,
+                labels = document.querySelectorAll('label');
+            for (i=0; i<labels.length; i++) {
+                var l = labels[i];
+                l.addEventListener('click', _this.helpers.toggleLabelClick);
+            }
         }
     }
 };
@@ -404,16 +451,20 @@ mcsandyUI = {
 /*MCSANDY: The preview, storage, and retrieval*/
 mcsandy = {
     init: function () {
-        console.info("McSandy is Running")
         var _this = mcsandy;
+        console.info("McSandy is Running");
         _this.bindUiEvents();
-        _this.functions.getProjects();
+        _this.functions.createProjectSelect();
+        if (navigator.onLine) {
+            _this.functions.createLibSelect();
+        }
     },
     data: {
         ctrls: {
             projectLoad: document.getElementById('js-projectLoad'),
             projectSave: document.getElementById('js-projectSave'),
             projectDel: document.getElementById('js-projectDel'),
+            projectNew: document.getElementById('js-projectNew'),
             projectName: document.getElementById('js-projectName'),
             html: document.getElementById('js-html'),
             css: document.getElementById('js-css'),
@@ -421,11 +472,22 @@ mcsandy = {
         },
         targets: {
             iframe: document.getElementById('js-result')
+        },
+        externalJS: {
+            AngularJS: '//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js',
+            Dojo: '//ajax.googleapis.com/ajax/libs/dojo/1.9.2/dojo/dojo.js',
+            jQuery: 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+            jQueryMobile: '//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.0/jquery.mobile.min.js',
+            jQueryUi: '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js',
+            mooTools: '//ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js',
+            prototype: '//ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js',
+            scriptaculous: '//ajax.googleapis.com/ajax/libs/scriptaculous/1.9.0/scriptaculous.js'
         }
     },
     blobData: {
         reset: 'html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}',
-        jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'
+        jquery: 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+        externalJS: []
     },
     helpers: {
         prepareCSS: function (css) {
@@ -434,37 +496,59 @@ mcsandy = {
         prepareHTML: function (html) {
             return html;
         },
-        prepareExternalJS: function(js) {
-            js = js.replace('https://', '//');
-            js = js.replace('http://', '//');
+        prepareExternalJS: function (js) {
+            //make sure that the JS has a protocol that'll work
+            var mcProtocol = window.location.protocol,
+                js = (js.slice(js.indexOf('//')+2));
+            //if McSandy isn't running as http(s), then it's probably file:// - which shouldn't use a relative protocol
+            if (!window.location.protocol.match('http')){
+                js = 'http://' + js;
+            } else {
+                js = window.location.protocol + '//' + js;                
+            }
             return '<script type="text\/javascript" src="' + js + '"><\/script>';
         },
-        prepareJS: function (js) {
+        createExternalLibs: function () {
+            var _this = mcsandy,
+                externalLibs = _this.blobData.externalJS,
+                externalJSSet = '';
+            if (navigator.onLine) {
+                /*only add external libraries if we're online*/
+                externalLibs.forEach(function (el) {
+                    externalJSSet+=_this.helpers.prepareExternalJS(el);
+                });
+            }
+            return externalJSSet;
+        },
+        prepareInternalJS: function (js) {
             return '<script type="text\/javascript">' + js + '<\/script>';
         },
-        createRawParts:function (html, css, js) {
+        createRawParts:function (html, css, js, externalJS) {
             var rawParts = {
                 html: html,
                 css: css,
-                js: js
+                js: js,
+                external: {
+                    js: externalJS
+                }
             }
             return rawParts;
         },
-        wrapBlobParts: function (html, css, js) {
+        wrapBlobParts: function () {
             var _this = mcsandy,
                 helpers = _this.helpers,
                 blobData = _this.blobData,
                 ctrls = _this.data.ctrls,
                 html = helpers.prepareHTML(ctrls.html.value),
                 reset = helpers.prepareCSS(blobData.reset),
-                jquery = helpers.prepareExternalJS(_this.blobData.jquery),
+                externalLibraries = helpers.createExternalLibs(),
                 css =  helpers.prepareCSS(ctrls.css.value),
-                head = '<head>'+css+ jquery +'</head>',
-                js = helpers.prepareJS(ctrls.js.value),
+                head = '<head>'+css+ externalLibraries +'</head>',
+                js = helpers.prepareInternalJS(ctrls.js.value),
                 blobKit = [head,html,js];
             return blobKit;
         },
-        createProject: function (projectName, rawParts, blobArray) {
+        createProjectObj: function (projectName, rawParts, blobArray) {
             return {
                 'project': projectName,
                 blobArray: blobArray,
@@ -501,30 +585,34 @@ mcsandy = {
             functions = _this.functions,
             ctrls = _this.data.ctrls,
             keyUpCounter = 0;
+
+
         //BIND EVENTS TO TEXTAREAS
         ctrls.css.addEventListener('keyup',function (e) {
             keyUpCounter++;
             if (keyUpCounter == 5){
                 functions.updateContent();
                 keyUpCounter = 0;
-            }        });
+            }
+        });
         ctrls.html.addEventListener('keyup',function (e) {
             keyUpCounter++;
             if (keyUpCounter == 4){
                 functions.updateContent();
                 keyUpCounter = 0;
             }
-            
         });
         ctrls.js.addEventListener('change',function (e) {
             functions.updateContent();
         });
+
         //BIND EVENTS TO BUTTONS
         ctrls.projectSave.addEventListener('click', functions.saveContent);
         ctrls.projectDel.addEventListener('click', functions.delContent);
+        ctrls.projectNew.addEventListener('click', functions.clearContent);
     },
     functions: {
-        getProjects: function () {
+        createProjectSelect: function () {
             var _this = mcsandy,
                 projects = _this.helpers.getStoredProjects(),
                 select = document.getElementById('js-selectProjects'),
@@ -541,7 +629,35 @@ mcsandy = {
                 select.value = mcsandyUI.helpers.unconvertHash(window.location.hash);
             }
         },
+        createLibSelect: function () {
+            var _this = mcsandy,
+                libs = _this.data.externalJS,
+                libFieldset = document.querySelector('.fieldset--externalLibs'),
+                libWrap = libFieldset.querySelector('.fieldset__wrapper');
+            for (lib in libs) {
+                var exJs = libs[lib],
+                    input = mcsandyUI.helpers.createInput('checkbox', lib, 'fieldset__field fieldset__field--jsLib', lib, exJs);
+                    label = mcsandyUI.helpers.createLabel(lib,'fieldset__label fieldset__label--jsLib', lib);
+                input.addEventListener('change', _this.functions.handleLibToggle);
+                libWrap.appendChild(input);
+                libWrap.appendChild(label);
+            }
+            
+            mcsandyUI.functions.bindJsCheck();
+        },
+        handleLibToggle: function (e) {
+            var _this = mcsandy,
+                value = e.target.value,
+                exJs = e.target.getAttribute('data-mcsandy');
+            if (!e.target.checked) {
+                _this.blobData.externalJS.splice(_this.blobData.externalJS.indexOf(exJs, 1));
+            } else {
+                _this.blobData.externalJS.push(exJs);
+            }
+        },
         updateContent: function (loadedParts) {
+            /*load content and bindUIevents call this function*/
+            /* only mcsandyUI.functions.loadContent sends loadedParts*/
              var _this = mcsandy,
                 iframe = _this.data.targets.iframe,
                 parts =  loadedParts !== undefined ? loadedParts.blobArray : _this.helpers.wrapBlobParts();
@@ -554,20 +670,25 @@ mcsandy = {
                 projectName = _this.data.ctrls.projectName.value;
             store.del(0,projectName);
             window.location.hash = '';
-            _this.functions.getProjects();
+            _this.functions.createProjectSelect();
             _this.data.ctrls.project.value = '';
+        },
+        clearContent: function (e) {
+            e.preventDefault();
+            var _this = mcsandy;
+            window.location.href = window.location.origin + window.location.pathname;
         },
         saveContent: function (e) {
             e.preventDefault();
             var _this = mcsandy,
                 ctrls = _this.data.ctrls,
-                rawParts = _this.helpers.createRawParts(ctrls.html.value, ctrls.css.value, ctrls.js.value),
+                rawParts = _this.helpers.createRawParts(ctrls.html.value, ctrls.css.value, ctrls.js.value, _this.blobData.externalJS),
                 blobArray = _this.helpers.wrapBlobParts(),
                 projectName = _this.data.ctrls.projectName.value,
-                project = _this.helpers.createProject(projectName, rawParts, blobArray)
+                project = _this.helpers.createProjectObj(projectName, rawParts, blobArray)
             store.set(0, projectName, project);
             mcsandyUI.functions.setHash(projectName)
-            _this.functions.getProjects();
+            _this.functions.createProjectSelect();
         },
         downloadContent: function (downloadObj, type) {
             //downloadObj should be an object. 
@@ -580,10 +701,8 @@ mcsandy = {
                 blob = _this.helpers.buildBlob(parts,downloadType),
                 fileName = downloadObj.project + '.' + downloadType;
             saveAs(blob, fileName);
-
         }
     }
 };
-
 mcsandyUI.init();
 mcsandy.init();

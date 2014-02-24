@@ -17,6 +17,9 @@ McSandy lets you edit HTML, CSS and JavaScript with a live preview. Every time y
 ### Can I save my work? ###
 Of course you can! McSandy uses `localstorage` to save your projects. You can save and delete any of your projects by clicking on the save button at the bottom, or with `ctrl` + `s`.
 
+### Can I add external files? ###
+McSandy gives you the option to load JavaScript libraries from Google's CDN. In the future, you'll be able to add your own JS Libraries, too. 
+
 ### How can I get my work back? ###
 At the bottom of McSandy, there's a select box where you can retrieve your old projects. Select the project and just click the `load` button. 
 
@@ -46,7 +49,7 @@ McSandy also uses the Flexbox module for its layout. Flexbox is supported in IE1
 If you'd like to contribute, just pull the repo. All of the 'editable' assets are in the `preAssets` folder. The HTML files are in their own folder.  Grunt.js will build the files in `postAssets`, and generate a file called `post-mcsandy.html` for you. 
 
 ## Upcoming Features ##
- + add external JS/CSS (will require offline validation to make sure that it'll work if no internet)
+ + manually enter external js libraries
  + editor validation
  + last project-restore
 
@@ -68,10 +71,11 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
  + the Title element is also updated with online/offline state
  + shortcut for running JS: `ctrl` + `r`
  + Export to File for the project
+ + add external JS/CSS (can get JS libraries from Google's CDN)
+ + fixed relative protocol issue with jQuery
 
 ## Known issues ##
- + McSandy adds jQuery to the live preview, but jQuery doesn't work unless McSandy is running on a local server. 
-
+ + `ctrl + r` doesn't always run
 
 
  

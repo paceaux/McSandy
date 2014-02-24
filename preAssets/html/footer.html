@@ -2,27 +2,36 @@
         <label for="js-footer-editor-toggle" class="editor__label">Projects</label>
         <input type="checkbox" id="js-footer-editor-toggle" class="editor__toggle" />
         <form class="mpGlobal__footer__editor editor">
-            <fieldset class="editor__fieldset fieldset fieldset--thisProject">
-                <legend class="fieldset__legend">
+            <div class="editor__fieldset fieldset fieldset--thisProject">
+                <h3 class="fieldset__legend">
                     This Sandbox
-                </legend>
-                <input id="js-projectName" class="editor__input editor__input--name" type="text" placeholder="Name of Project">
+                </h3>
+                <div class="fieldset__wrapper">
+                    <input id="js-projectName" class="editor__input editor__input--name" type="text" placeholder="Name of Project">
+                    <button id="js-projectSave" class="editor__button editor__button--save">Save</button>
+                    <button id="js-projectDel" class="editor__button editor__button--del">Delete</button>
+                    <button id="js-projectNew" class="editor__button editor__button--new" title="Clear Everything and Start Over">New</button>
+                </div>
+            </div>
+            <div class="editor__fieldset fieldset fieldset--externalLibs">
+                <h3 class="fieldset__legend">
+                    External Libraries
+                </h3>
+                <div class="fieldset__wrapper">
 
-                <button id="js-projectSave" class="editor__button editor__button--save">Save</button>
-                <button id="js-projectDel" class="editor__button editor__button--del">Delete</button>
-            </fieldset>
-            <fieldset class="editor__fieldset fieldset fieldset--otherProjects">
-                <legend class-"fieldset__legend">
+                </div>
+            </div>
+            <div class="editor__fieldset fieldset fieldset--otherProjects">
+                <h3 class-"fieldset__legend">
                     McSandy Projects
-                </legend>
-                <select id="js-selectProjects">
-                    <option></option>
-                </select>
-                <button id="js-projectLoad" class="editor__button editor__button--load">
-                    Load 
-                </button>
-                <button id="js-projectDownload" class="editor__button editor__button--download">Download</button>
-
-            </fieldset>
+                </h3>
+                <div class="fieldset__wrapper">
+                    <select class="editor__input editor__input--name" id="js-selectProjects">
+                        <option></option>
+                    </select>
+                    <button id="js-projectLoad" class="editor__button editor__button--load">Load </button>
+                    <button id="js-projectDownload" class="editor__button editor__button--download">Download</button>
+                </div>
+            </div>
         </form>
     </footer>

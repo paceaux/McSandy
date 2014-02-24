@@ -168,6 +168,10 @@ textarea
         flex-shrink: 1;     
     &__control
         display:none;
+    &__input
+        &--name
+            flex-grow: 1
+            smooth()
     .editor__fieldsetWrap
         display:flex
         height: 30vh
@@ -183,6 +187,7 @@ textarea
 .fieldset
     display:flex;
     flex-direction: column;
+    smooth()
     &__label
         text-align: center
         color: inactivePeach;
@@ -196,13 +201,46 @@ textarea
             color: activePeach 
             background: activeHeadingColor
             smooth()
+    &__wrapper
+            flex-grow: 1;
+            display:flex
+            width: 100%;
+            flex-direction: row
+            justify-content: flex-start
+            align-items:stretch
+            smooth()
     &__field
         height: 0;
         visibility: hidden;
         align-self: flex-end;
         flex-basis: 0%;
-    &--thisProject, &--otherProjects
-        display:block
+    &--externalLibs
+        width: 10em;
+        .fieldset__wrapper
+            flex-shrink: 1;
+            height: 3em;
+            overflow: scroll;
+            flex-direction: row;
+            justify-content:center;
+            align-items: stretch;
+            align-content: flex-start;
+            flex-wrap: wrap;
+        .fieldset
+            &__field
+                height: 2.3em;
+                visibility:visible
+                flex-basis: 1.3em;
+            &__label
+                flex-basis: 70%;
+                margin: .5em;
+        .fieldset__field:checked + .fieldset__label
+            color: activePeach;
+            font-weight: bold;
+            background:activeHeadingColor
+    &--otherProjects
+        align-items: flex-end
+        .fieldset__wrapper
+            justify-content: flex-end
     &--html
         order: 1
     &--css
@@ -307,4 +345,11 @@ textarea
 
 .offline
     color: red;
-
+.mcsandy--offline
+    .fieldset--externalLibs
+        flex-grow: 0
+        flex-basis: 0%
+        width:0
+        height: 0
+        .fieldset__legend,.fieldset__wrapper
+            display:none
