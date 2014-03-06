@@ -279,12 +279,13 @@ mcsandyUI = {
                 saveMap[e.keyCode] = true;
                 if (saveMap[83] && saveMap[17]) {
                     mcsandy.functions.saveContent(e);
+                    mcsandyUI.functions.flashClass(document.getElementById('js-projectSave'));
                 }
             }
             if (e.keyCode in runMap) {
                 runMap[e.keyCode] = true;
                 if (runMap[83] && runMap[16]) {
-                    mcsandy.functions.saveContent(e);
+                    mcsandy.functions.updateContent();
                 }
             }
         },
@@ -371,7 +372,6 @@ mcsandyUI = {
             var _this = mcsandyUI,
                 ctrl = document.getElementById('js-onlineStatus');
             _this.data.onlineState = navigator.onLine ? "online" : "offline";
-
             if (_this.data.onlineState == "online") {
                 ctrl.className = ctrl.className.replace( /(?:^|\s)offline(?!\S)/g, " online");
                 document.title = "McSandy | Online";
@@ -383,7 +383,6 @@ mcsandyUI = {
                 document.title = "McSandy | Offline"
                 document.querySelector('body').className = document.querySelector('body').className.replace( /(?:^|\s)mcsandy--online(?!\S)/g, " mcsandy--offline");
             }
-
         },
         handleHash: function (e) {
             var _this = mcsandyUI;
@@ -402,6 +401,13 @@ mcsandyUI = {
                 project = _this.data.ctrls.projectSelect.value;
             _this.functions.setHash(project);
             _this.functions.loadProject(project);
+            _this.functions.flashClass(e.currentTarget);
+        },
+        flashClass: function (el) {
+            el.className = el.className + ' js-flash';
+            setTimeout(function () {
+                el.className = el.className.replace('js-flash','');
+            }, 3000)
         },
         loadProject: function (project) {
             var _this = mcsandyUI,
@@ -680,6 +686,7 @@ mcsandy = {
         },
         saveContent: function (e) {
             e.preventDefault();
+            mcsandyUI.functions.flashClass(e.currentTarget);
             var _this = mcsandy,
                 ctrls = _this.data.ctrls,
                 rawParts = _this.helpers.createRawParts(ctrls.html.value, ctrls.css.value, ctrls.js.value, _this.blobData.externalJS),

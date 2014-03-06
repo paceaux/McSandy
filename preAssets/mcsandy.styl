@@ -23,7 +23,13 @@ smooth-out()
     -webkit-transition: all .3s ease-out;
     -moz-transition: all .3s ease-out;
     -o-transition: all .3s ease-out;
-    transition: all .3s ease-out; 
+    transition: all .3s ease-out;
+mcanimate(name)
+        animation-delay: .5s
+        animation-duration: 3.5s
+        animation-name: name
+        animation-iteration-count: 1
+        animation-direction: normal 
 @keyframes slideUp
     0%
         max-height:0
@@ -31,6 +37,11 @@ smooth-out()
         max-height: 7.5vh
     100%
         max-height: 0
+@keyframes saved
+    0%
+        background: standardGreen
+    50%
+        background: activeGreen
 
 html, body, h1, h2, h3, h4, h5, h6, div, fieldset, form, input, header, footer, section, article, figure, iframe
     padding:0;
@@ -123,11 +134,7 @@ textarea
         background: bgColor
         border-bottom: .125em solid borderColor;
         overflow:hidden
-        animation-delay: .5s
-        animation-duration: 3.5s
-        animation-name: slideUp
-        animation-iteration-count: 1
-        animation-direction: normal
+        mcanimate(slideUp)
     .editor
         border-bottom: .125em solid borderColor
         &__label
@@ -353,3 +360,5 @@ textarea
         height: 0
         .fieldset__legend,.fieldset__wrapper
             display:none
+.js-flash
+    mcanimate(saved)

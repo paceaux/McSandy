@@ -24,8 +24,9 @@ module.exports = function(grunt) {
     },
     copy: {
       main: {
-        src:'postAssets/mcsandy.html',
-        dest: '/mcsandy.html'
+        src:'postAssets/post-mcsandy.html',
+        dest: 'mcsandy.html',
+        filter: 'isFile'
       }
     },
     stylus: {
@@ -60,15 +61,15 @@ module.exports = function(grunt) {
     watch: {
       stylus:{
         files: ['preAssets/*.styl'],
-        tasks: ['stylus:standard', 'htmlbuild', 'copy']
+        tasks: ['stylus:standard', 'htmlbuild']
       },
       html: {
         files: ['preAssets/html/*.html', 'preAssets/*.html'],
-        tasks: ['stylus:standard', 'htmlbuild', 'copy']
+        tasks: ['stylus:standard', 'htmlbuild']
       },
       js: {
         files: ['preAssets/mcsandy.js'],
-        tasks: ['uglify', 'htmlbuild', 'copy']
+        tasks: ['uglify', 'htmlbuild', 'copy:main']
       }
     }
   });
@@ -80,7 +81,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-stylus');
   // Default task(s).
-  grunt.registerTask('copy', ['copy']);
   grunt.registerTask('default', ['watch', 'htmlbuild']);
 
 };

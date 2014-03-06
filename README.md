@@ -73,10 +73,13 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
  + Export to File for the project
  + add external JS/CSS (can get JS libraries from Google's CDN)
  + fixed relative protocol issue with jQuery
+ + Gruntfile wasn't copying the post-assets mcsandy into the root folder. Fixed
+ + added a small green flash to the load and save buttons so you know you've clicked the button or fired the keystroke
+ + fixed `ctrl + r` slightly .... it loads now. 
 
 ## Known issues ##
  + `ctrl + r` doesn't always run
-
+ + Keystrokes in general are sketchy. not always firing when they should. 
 
  
 
