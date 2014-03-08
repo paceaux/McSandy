@@ -31,11 +31,11 @@ textarea{font-family:Courier,monospace}
 .mpGlobal__header__editor__wrapper{display:flex;flex-direction:column;flex-grow:1;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
 .mpGlobal__header__hgroup{flex-shrink:0;flex-grow:1;align-self:flex-start;display:flex;flex-direction:row;align-items:baseline;justify-content:space-between;font-size:1em;width:100%;max-height:0;background:#eef5fc;border-bottom:.125em solid #113968;overflow:hidden;animation-delay:.5s;animation-duration:3.5s;animation-name:slideUp;animation-iteration-count:1;animation-direction:normal}
 .mpGlobal__header .editor{border-bottom:.125em solid #113968;}
-.mpGlobal__header .editor__label{order:2;border-top-left-radius:0;border-top-right-radius:0;border-bottom-left-radius:.5em;border-bottom-right-radius:.5em}
+.mpGlobal__header .editor__label{order:2;border-top-left-radius:0;border-top-right-radius:0;border-bottom-left-radius:.5em;border-bottom-right-radius:.5em;cursor:pointer}
 .editor{display:flex;flex-basis:30vh;flex-direction:column;justify-content:space-between;flex-grow:1;-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out;}
 .editor__toggle{visibility:hidden;position:fixed;left:-9999em;}
 .editor__toggle:checked ~ .mpGlobal__header__editor,.editor__toggle:checked ~ .mpGlobal__footer__editor,.editor__toggle:checked ~ .mpGlobal__footer__editor > .editor__fieldset{flex-basis:0;height:0;overflow:hidden}
-.editor__label{flex-shrink:0;align-self:flex-start;display:inline-block;padding:.25em;border:1px solid #e1e1e1;border-top-right-radius:.25em;border-top-left-radius:.25em;margin:0;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
+.editor__label{flex-shrink:0;align-self:flex-start;display:inline-block;padding:.25em;border:1px solid #e1e1e1;border-top-right-radius:.25em;border-top-left-radius:.25em;margin:0;cursor:pointer;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
 .editor__fieldset{flex-shrink:1}
 .editor__control{display:none}
 .editor__input--name{flex-grow:1;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
@@ -59,15 +59,18 @@ textarea{font-family:Courier,monospace}
 .fieldset--js{order:3}
 .control{visibility:hidden;width:0%;height:0}
 .control--html:checked ~ .editor__fieldsetWrap .fieldset--html{flex-grow:1;flex-basis:33%;height:100%;}
-.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .field{visibility:visible;width:100%;height:75%}
+.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .field{visibility:visible;width:100%;height:75%;}
+.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .field.js-shrink{height:0%}
 .control--html:checked ~ .editor__fieldsetWrap .fieldset--html .fieldset__label{color:#eece97;font-weight:bold;border-bottom:1px solid #eece97;background:#5799e4;}
 .control--html:checked ~ .editor__fieldsetWrap .fieldset--html .fieldset__label:hover{background:#729bc9}
 .control--css:checked ~ .editor__fieldsetWrap .fieldset--css{flex-grow:1;flex-basis:33%;visibility:visible;height:100%;flex-grow:1;}
-.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .field{visibility:visible;width:100%;height:75%}
+.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .field{visibility:visible;width:100%;height:75%;}
+.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .field.js-shrink{height:0%}
 .control--css:checked ~ .editor__fieldsetWrap .fieldset--css .fieldset__label{color:#eece97;font-weight:bold;border-bottom:1px solid #eece97;background:#5799e4;}
 .control--css:checked ~ .editor__fieldsetWrap .fieldset--css .fieldset__label:hover{background:#729bc9}
 .control--js:checked ~ .editor__fieldsetWrap .fieldset--js{flex-grow:1;flex-basis:33%;visibility:visible;height:100%;flex-grow:1;}
-.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .field{visibility:visible;width:100%;height:75%}
+.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .field{visibility:visible;width:100%;height:75%;}
+.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .field.js-shrink{height:0%}
 .control--js:checked ~ .editor__fieldsetWrap .fieldset--js .fieldset__label{color:#eece97;font-weight:bold;border-bottom:1px solid #eece97;background:#5799e4;}
 .control--js:checked ~ .editor__fieldsetWrap .fieldset--js .fieldset__label:hover{background:#729bc9}
 .control--html:not(:checked) + .control--css:not(:checked) + .control--js:not(:checked) ~ .editor__fieldsetWrap .fieldset{flex-grow:1}
@@ -79,7 +82,9 @@ textarea{font-family:Courier,monospace}
 .offline{color:#f00}
 .mcsandy--offline .fieldset--externalLibs{flex-grow:0;flex-basis:0%;width:0;height:0;}
 .mcsandy--offline .fieldset--externalLibs .fieldset__legend,.mcsandy--offline .fieldset--externalLibs .fieldset__wrapper{display:none}
-.js-flash{animation-delay:.5s;animation-duration:3.5s;animation-name:saved;animation-iteration-count:1;animation-direction:normal}
+.anim-flash{animation-delay:.5s;animation-duration:3.5s;animation-name:saved;animation-iteration-count:1;animation-direction:normal}
+.anim-slideUp{animation-delay:.5s;animation-duration:3.5s;animation-name:slideUp;animation-iteration-count:1;animation-direction:normal}
+.anim-slideDown{animation-delay:.5s;animation-duration:3.5s;animation-name:slideDown;animation-iteration-count:1;animation-direction:normal}
 @-moz-keyframes slideUp{0%{max-height:0}
 50%{max-height:7.5vh}
 100%{max-height:0}
@@ -95,6 +100,21 @@ textarea{font-family:Courier,monospace}
 }@keyframes slideUp{0%{max-height:0}
 50%{max-height:7.5vh}
 100%{max-height:0}
+}@-moz-keyframes slideDown{0%{max-height:7.5vh}
+50%{max-height:0}
+100%{max-height:7.5vh}
+}@-webkit-keyframes slideDown{0%{max-height:7.5vh}
+50%{max-height:0}
+100%{max-height:7.5vh}
+}@-o-keyframes slideDown{0%{max-height:7.5vh}
+50%{max-height:0}
+100%{max-height:7.5vh}
+}@-ms-keyframes slideDown{0%{max-height:7.5vh}
+50%{max-height:0}
+100%{max-height:7.5vh}
+}@keyframes slideDown{0%{max-height:7.5vh}
+50%{max-height:0}
+100%{max-height:7.5vh}
 }@-moz-keyframes saved{0%{background:#57e45c}
 50%{background:#8eed91}
 }@-webkit-keyframes saved{0%{background:#57e45c}
@@ -124,17 +144,19 @@ textarea{font-family:Courier,monospace}
                 <input type="checkbox" id="js-jsSwitch" class="editor__control editor__control--js control control--js" checked/>
 
                 <div class="editor__fieldsetWrap">
-                    <fieldset class="editor__fieldset fieldset fieldset--html">
+                    <fieldset class="editor__fieldset fieldset fieldset--html" draggable="true">
                         <label class="fieldset__label fieldset__label--html" for="js-htmlSwitch">HTML</label>
                         <textarea  id="js-html" class="fieldset__field fieldset__field--html field field--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
                     </fieldset>
-                    <fieldset class="editor__fieldset fieldset fieldset--css">
+                    <fieldset class="editor__fieldset fieldset fieldset--css" draggable="true">
                         <label class="fieldset__label fieldset__label--css" for="js-cssSwitch">CSS</label>
                         <textarea id="js-css" class="fieldset__field fieldset__field--css field field--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
+                        <input type="file" class="fielset__field fieldset__field--upload" />
                     </fieldset>
-                    <fieldset class="editor__fieldset fieldset fieldset--js">
+                    <fieldset class="editor__fieldset fieldset fieldset--js" draggable="true">
                         <label class="fieldset__label fieldset__label--js" for="js-jsSwitch" title="ctrl + r">JS</label>
                         <textarea id="js-js" class="fieldset__field fieldset__field--js field field--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
+                        <input type="file" class="fielset__field fieldset__field--upload" />
                     </fieldset>
             </div>
             </form>
@@ -447,8 +469,15 @@ mcsandyUI = {
                 17:false
             },
             run: {
-                83:false,
-                16:false
+                82:false,
+                17:false
+            },
+            shrink: {
+                83: false,
+                192: false
+            },
+            ctrl:{
+                17:false
             }
         }
     },
@@ -457,7 +486,8 @@ mcsandyUI = {
             var _this = mcsandyUI,
                 keyMaps = _this.data.keyMaps, 
                 saveMap = keyMaps.save,
-                runMap = keyMaps.run;
+                runMap = keyMaps.run,
+                shrink =keyMaps.shrink;
             /*SAVE*/
             if (e.keyCode in saveMap) {
                 saveMap[e.keyCode] = true;
@@ -468,7 +498,7 @@ mcsandyUI = {
             }
             if (e.keyCode in runMap) {
                 runMap[e.keyCode] = true;
-                if (runMap[83] && runMap[16]) {
+                if (runMap[83] && runMap[17]) {
                     mcsandy.functions.updateContent();
                 }
             }
@@ -483,6 +513,7 @@ mcsandyUI = {
             if (e.keyCode in keyMaps.run){
                 keyMaps.run[e.keyCode] = false;
             }
+
         },
         convertHash: function (hash) {
             return hash.replace(' ', '_');
@@ -518,6 +549,13 @@ mcsandyUI = {
                 label.className = label.className.replace( /(?:^|\s)js-checked(?!\S)/g, "")
                 input.className = input.className.replace( /(?:^|\s)js-checked(?!\S)/g, "")
             }
+        }, 
+        toggleClass: function (el, className) {
+            if (el.className.match(className)) {
+                el.className = el.className.replace(className,'');
+            } else {
+                el.className = el.className + ' '+className;
+            }            
         }
     },
     bindUiEvents: function () {
@@ -546,6 +584,26 @@ mcsandyUI = {
         /*KEYBOARD SHORTCUTS*/
         document.addEventListener('keydown', helpers.keyDown)
         document.addEventListener('keyup', helpers.keyUp)
+
+        var editors = document.querySelectorAll('.fieldset__field');
+        [].forEach.call(editors, function(editor){
+            var _this = mcsandyUI,
+                keyMaps = _this.data.keyMaps, 
+                shrink =keyMaps.shrink;
+            editor.addEventListener('keydown', function (e) {
+                if (e.keyCode == 17){
+                    keyMaps.ctrl[17] = true;
+                }
+            })
+            editor.addEventListener('keyup', function (e) {
+                if (keyMaps.ctrl[17] == true) {
+                    if (e.keyCode === 192) {
+                        keyMaps.ctrl[17] = false;
+                        _this.helpers.toggleClass(e.target, 'js-shrink');
+                    }
+                }
+            })
+        });
 
         /*LABEL/INPUT SHENANIGANS*/
         _this.functions.bindJsCheck();
@@ -588,9 +646,9 @@ mcsandyUI = {
             _this.functions.flashClass(e.currentTarget);
         },
         flashClass: function (el) {
-            el.className = el.className + ' js-flash';
+            el.className = el.className + ' anim-flash';
             setTimeout(function () {
-                el.className = el.className.replace('js-flash','');
+                el.className = el.className.replace('anim-flash','');
             }, 3000)
         },
         loadProject: function (project) {

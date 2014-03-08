@@ -263,8 +263,15 @@ mcsandyUI = {
                 17:false
             },
             run: {
-                83:false,
-                16:false
+                82:false,
+                17:false
+            },
+            shrink: {
+                83: false,
+                192: false
+            },
+            ctrl:{
+                17:false
             }
         }
     },
@@ -273,7 +280,8 @@ mcsandyUI = {
             var _this = mcsandyUI,
                 keyMaps = _this.data.keyMaps, 
                 saveMap = keyMaps.save,
-                runMap = keyMaps.run;
+                runMap = keyMaps.run,
+                shrink =keyMaps.shrink;
             /*SAVE*/
             if (e.keyCode in saveMap) {
                 saveMap[e.keyCode] = true;
@@ -284,7 +292,7 @@ mcsandyUI = {
             }
             if (e.keyCode in runMap) {
                 runMap[e.keyCode] = true;
-                if (runMap[83] && runMap[16]) {
+                if (runMap[83] && runMap[17]) {
                     mcsandy.functions.updateContent();
                 }
             }
@@ -299,6 +307,7 @@ mcsandyUI = {
             if (e.keyCode in keyMaps.run){
                 keyMaps.run[e.keyCode] = false;
             }
+
         },
         convertHash: function (hash) {
             return hash.replace(' ', '_');
@@ -334,6 +343,13 @@ mcsandyUI = {
                 label.className = label.className.replace( /(?:^|\s)js-checked(?!\S)/g, "")
                 input.className = input.className.replace( /(?:^|\s)js-checked(?!\S)/g, "")
             }
+        }, 
+        toggleClass: function (el, className) {
+            if (el.className.match(className)) {
+                el.className = el.className.replace(className,'');
+            } else {
+                el.className = el.className + ' '+className;
+            }            
         }
     },
     bindUiEvents: function () {
@@ -362,6 +378,26 @@ mcsandyUI = {
         /*KEYBOARD SHORTCUTS*/
         document.addEventListener('keydown', helpers.keyDown)
         document.addEventListener('keyup', helpers.keyUp)
+
+        var editors = document.querySelectorAll('.fieldset__field');
+        [].forEach.call(editors, function(editor){
+            var _this = mcsandyUI,
+                keyMaps = _this.data.keyMaps, 
+                shrink =keyMaps.shrink;
+            editor.addEventListener('keydown', function (e) {
+                if (e.keyCode == 17){
+                    keyMaps.ctrl[17] = true;
+                }
+            })
+            editor.addEventListener('keyup', function (e) {
+                if (keyMaps.ctrl[17] == true) {
+                    if (e.keyCode === 192) {
+                        keyMaps.ctrl[17] = false;
+                        _this.helpers.toggleClass(e.target, 'js-shrink');
+                    }
+                }
+            })
+        });
 
         /*LABEL/INPUT SHENANIGANS*/
         _this.functions.bindJsCheck();
@@ -404,9 +440,9 @@ mcsandyUI = {
             _this.functions.flashClass(e.currentTarget);
         },
         flashClass: function (el) {
-            el.className = el.className + ' js-flash';
+            el.className = el.className + ' anim-flash';
             setTimeout(function () {
-                el.className = el.className.replace('js-flash','');
+                el.className = el.className.replace('anim-flash','');
             }, 3000)
         },
         loadProject: function (project) {

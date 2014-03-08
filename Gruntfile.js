@@ -61,11 +61,11 @@ module.exports = function(grunt) {
     watch: {
       stylus:{
         files: ['preAssets/*.styl'],
-        tasks: ['stylus:standard', 'htmlbuild']
+        tasks: ['stylus:standard', 'htmlbuild', 'copy:main']
       },
       html: {
         files: ['preAssets/html/*.html', 'preAssets/*.html'],
-        tasks: ['stylus:standard', 'htmlbuild']
+        tasks: ['stylus:standard', 'htmlbuild', 'copy:main']
       },
       js: {
         files: ['preAssets/mcsandy.js'],

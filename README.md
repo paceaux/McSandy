@@ -76,10 +76,11 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
  + Gruntfile wasn't copying the post-assets mcsandy into the root folder. Fixed
  + added a small green flash to the load and save buttons so you know you've clicked the button or fired the keystroke
  + fixed `ctrl + r` slightly .... it loads now. 
+ + `ctrl + `` shrinks the edit box 
 
 ## Known issues ##
  + `ctrl + r` doesn't always run
- + Keystrokes in general are sketchy. not always firing when they should. 
+ + Keystrokes in general are still sketchy
 
  
 
