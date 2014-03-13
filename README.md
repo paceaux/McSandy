@@ -89,8 +89,7 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
  + created fields for adding external URLs (not working yet)
 
 ## Known issues ##
- + `ctrl + r` doesn't always run
- + Keystrokes in general are still sketchy
+ + add/remove external files button acts a little...odd
 
  
 

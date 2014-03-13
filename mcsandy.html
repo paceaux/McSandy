@@ -151,11 +151,11 @@ textarea{font-family:Courier,monospace}
                 <div class="editor__fieldsetWrap">
                     <fieldset class="editor__fieldset fieldset fieldset--html" >
                         <label class="fieldset__label fieldset__label--html" for="js-htmlSwitch">HTML</label>
-                        <textarea  id="js-html" class="fieldset__field fieldset__field--html field field--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
+                        <textarea  id="js-html" tabindex="1" class="fieldset__field fieldset__field--html field field--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
                     </fieldset>
                     <fieldset class="editor__fieldset fieldset fieldset--css" >
                         <label class="fieldset__label fieldset__label--css" for="js-cssSwitch">CSS</label>
-                        <textarea id="js-css" class="fieldset__field fieldset__field--css field field--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
+                        <textarea id="js-css" tabindex="2" class="fieldset__field fieldset__field--css field field--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
                         <div class="fieldset__inputWrapper">
                             <input type="url" class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.css"/>
                             <button class="fieldset__button fieldset__button--add">+</button>
@@ -163,7 +163,7 @@ textarea{font-family:Courier,monospace}
                     </fieldset>
                     <fieldset class="editor__fieldset fieldset fieldset--js" >
                         <label class="fieldset__label fieldset__label--js" for="js-jsSwitch" title="ctrl + r">JS</label>
-                        <textarea id="js-js" class="fieldset__field fieldset__field--js field field--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
+                        <textarea id="js-js" tabindex="3" class="fieldset__field fieldset__field--js field field--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
                         <div class="fieldset__inputWrapper">
                             <input type="url"  class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.js"/>
                             <button class="fieldset__button fieldset__button--add">+</button>
@@ -872,7 +872,6 @@ mcsandy = {
             ctrls = _this.data.ctrls,
             keyUpCounter = 0;
 
-
         //BIND EVENTS TO TEXTAREAS
         ctrls.css.addEventListener('keyup',function (e) {
             keyUpCounter++;
@@ -972,7 +971,7 @@ mcsandy = {
                 rawParts = _this.helpers.createRawParts(ctrls.html.value, ctrls.css.value, ctrls.js.value, _this.blobData.externalJS),
                 blobArray = _this.helpers.wrapBlobParts(),
                 projectName = _this.data.ctrls.projectName.value,
-                project = _this.helpers.createProjectObj(projectName, rawParts, blobArray)
+                project = _this.helpers.createProjectObj(projectName, rawParts, blobArray);
             store.set(0, projectName, project);
             mcsandyUI.functions.setHash(projectName)
             _this.functions.createProjectSelect();
