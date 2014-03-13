@@ -6,19 +6,33 @@ A SFA (Single File Application ) that acts as your HTML, CSS, and JavaScript edi
  * License: Copyright 2014 Frank M. Taylor. All Rights Reserved
  * Prerequisites: IE10+, other modern browsers that support CSS flexbox and blob urls
 
+## Features ##
+ + McSandy lets you edit HTML, CSS, and JavaScript and get a live preview
+ + McSandy let you save your work into local storage
+ + Your project gets a hashable url, so you can bookmark it: `mcsandy.html#myawesomeproject`
+ + You can export your work into an HTML file
+ + You can drag HTML, CSS, or JavaScript files into the edit fields
+ + McSandy knows when you have an internet connection and uses any external libraries appropriately 
+
+### What are the technologies that McSandy uses? ###
+McSandy is an HTML5 application. It's using Vanilla JavaScript, but it makes use of three API's in particular
+ + localStorage (for storing data)
+ + `online` (for showing whether you have internet)
+ + Blob URLs (for doing the live-preview in an iframe)
+ + fileReader for reading and generating files
+ + drag and drop (for dropping files into your edit areas)
+ + [Eli Grey](http://eligrey.com/blog/post/saving-generated-files-on-the-client-side)'s [filesaver.js](https://github.com/eligrey/FileSaver.js) is used for the export, until a McSandy-specific solution is developed. 
+
+McSandy also uses the Flexbox module for its layout. Flexbox is supported in IE10+ 
+
 ## FAQs ##
 ###What's an SFA? ###
 
 An SFA is a Single File Application. This means the entire application functions in a single file - no installation, extra files, or internet, is required to use it. Once you've downloaded McSandy (mcsandy.html), that's all you need.
 
-### What can I do with McSandy? ###
-McSandy lets you edit HTML, CSS and JavaScript with a live preview. Every time you keyup in the HTML or CSS fields, live preview will be updated. When you `tab` away from the JavaScript field, that will also run it. At any time, you can use `ctrl` + `r` to preview your project. 
 
-### Can I save my work? ###
-Of course you can! McSandy uses `localstorage` to save your projects. You can save and delete any of your projects by clicking on the save button at the bottom, or with `ctrl` + `s`.
-
-### Can I add external files? ###
-McSandy gives you the option to load JavaScript libraries from Google's CDN. In the future, you'll be able to add your own JS Libraries, too. 
+### How can I save my work? ###
+McSandy uses `localstorage` to save your projects. You can save and delete any of your projects by clicking on the save button at the bottom, or by using the keyboard command `ctrl + s`
 
 ### How can I get my work back? ###
 At the bottom of McSandy, there's a select box where you can retrieve your old projects. Select the project and just click the `load` button. 
@@ -27,22 +41,14 @@ You can also retrieve your projects as a hash in the URL: `mcsandy.html#my_proje
 
 This means that you can bookmark your projects!
 
-###Can I export my work? ###
-Yes. At the bottom of McSandy is a `download` button. This will export your current project to a static HTML file. 
+### How can I add external files? ###
+McSandy gives you the option to load JavaScript libraries from Google's CDN. In the future, you'll be able to add your own JS Libraries, too. 
+
+### How can I export my work? ###
+At the bottom of McSandy is a `download` button. This will export your current project to a static HTML file. 
 
 In future versions, you will have the option to export each section of code. 
 
-### Awesome, so what do I need to use it? ###
-It's super simple. Download Mcsandy.html and get started! 
-
-### What are the technologies that McSandy uses? ###
-McSandy is an HTML5 application. It's using Vanilla JavaScript, but it makes use of three API's in particular
- + localStorage (for storing data)
- + `online` (for showing whether you have internet)
- + Blob URLs (for doing the live-preview in an iframe)
- + [Eli Grey](http://eligrey.com/blog/post/saving-generated-files-on-the-client-side)'s [filesaver.js](https://github.com/eligrey/FileSaver.js) is used for the export, until a McSandy-specific solution is developed. 
-
-McSandy also uses the Flexbox module for its layout. Flexbox is supported in IE10+ 
 
 
 ### How can I make it better ?
@@ -75,8 +81,12 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
  + fixed relative protocol issue with jQuery
  + Gruntfile wasn't copying the post-assets mcsandy into the root folder. Fixed
  + added a small green flash to the load and save buttons so you know you've clicked the button or fired the keystroke
- + fixed `ctrl + r` slightly .... it loads now. 
- + `ctrl + `` shrinks the edit box 
+ + fixed keystrokes
+ + Broke the JavaScript into smaller JS files so grunt can concatenate them
+ + `ctrl + `` to see external file input fields (the functionality for adding the files isn't there yet)
+ + `ctrl + d` for downloading
+ + can now drag files into the editors
+ + created fields for adding external URLs (not working yet)
 
 ## Known issues ##
  + `ctrl + r` doesn't always run

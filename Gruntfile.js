@@ -29,6 +29,20 @@ module.exports = function(grunt) {
         filter: 'isFile'
       }
     },
+    concat: {
+      js:{
+        options: {
+          banner: '/* MCSANDY: THE OFFLINE HTML5 SANDBOX */\n' + 'var store, mcsandy, mcsandyUI;\n',
+          footer: 'mcsandyUI.init();\n'+ 'mcsandy.init();\n',
+          process: function (src, filepath) {
+            return '// Source: ' + filepath + '\n' + src
+          }
+        },
+        files: {
+          'preAssets/mcsandy.js' : ['preAssets/js/store.js', 'preAssets/js/filesaver.js', 'preAssets/js/mcsandy.js']
+        }
+      }
+    },
     stylus: {
       standard:{
         options: {
@@ -68,8 +82,8 @@ module.exports = function(grunt) {
         tasks: ['stylus:standard', 'htmlbuild', 'copy:main']
       },
       js: {
-        files: ['preAssets/mcsandy.js'],
-        tasks: ['uglify', 'htmlbuild', 'copy:main']
+        files: ['preAssets/js/*.js'],
+        tasks: ['concat:js','uglify', 'htmlbuild', 'copy:main']
       }
     }
   });
@@ -77,6 +91,7 @@ module.exports = function(grunt) {
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-html-build');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-stylus');

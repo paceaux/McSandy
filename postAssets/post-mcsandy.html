@@ -40,14 +40,19 @@ textarea{font-family:Courier,monospace}
 .editor__control{display:none}
 .editor__input--name{flex-grow:1;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
 .editor .editor__fieldsetWrap{display:flex;height:30vh;}
-.editor .editor__fieldsetWrap .fieldset{flex-grow:0;flex-shrink:1;flex-basis:0%;height:2em;overflow:hidden;}
-.editor .editor__fieldsetWrap .fieldset__field{width:0%}
+.editor .editor__fieldsetWrap .fieldset{flex-grow:0;flex-shrink:1;flex-basis:0%;height:2em;overflow:hidden}
 .fieldset{display:flex;flex-direction:column;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
 .fieldset__label{text-align:center;color:#f5e1bf;display:block;font-size:.8em;padding:.618em;border-bottom:1px solid #091e36;background:#729bc9;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
 .fieldset__label:hover{color:#eece97;background:#5799e4;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
 .fieldset__wrapper{flex-grow:1;display:flex;width:100%;flex-direction:row;justify-content:flex-start;align-items:stretch;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
-.fieldset__field{height:0;visibility:hidden;align-self:flex-end;flex-basis:0%}
-.fieldset--externalLibs{width:10em;}
+.fieldset__button{flex-basis:2.5em}
+.fieldset__inputWrapper{align-self:flex-start;display:flex;justify-content:flex-start;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
+.fieldset__inputWrapper .fieldset__field{flex-grow:1;margin-left:0;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
+.fieldset__inputWrapper .fieldset__button{align-self:flex-end}
+.fieldset__field{height:0;visibility:hidden;align-self:flex-end;flex-basis:0%;width:95%;}
+.fieldset__field--upload{flex-basis:100%;width:95%}
+.fieldset__field.js-shrink ~ .fieldset__inputWrapper .fieldset__field{visibility:visible;height:auto;width:75%}
+.fieldset--externalLibs{width:4em;}
 .fieldset--externalLibs .fieldset__wrapper{flex-shrink:1;height:3em;overflow:scroll;flex-direction:row;justify-content:center;align-items:stretch;align-content:flex-start;flex-wrap:wrap}
 .fieldset--externalLibs .fieldset__field{height:2.3em;visibility:visible;flex-basis:1.3em}
 .fieldset--externalLibs .fieldset__label{flex-basis:70%;margin:.5em}
@@ -59,18 +64,18 @@ textarea{font-family:Courier,monospace}
 .fieldset--js{order:3}
 .control{visibility:hidden;width:0%;height:0}
 .control--html:checked ~ .editor__fieldsetWrap .fieldset--html{flex-grow:1;flex-basis:33%;height:100%;}
-.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .field{visibility:visible;width:100%;height:75%;}
-.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .field.js-shrink{height:0%}
+.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .field{visibility:visible;width:100%;height:80%;}
+.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .field.js-shrink{height:10%}
 .control--html:checked ~ .editor__fieldsetWrap .fieldset--html .fieldset__label{color:#eece97;font-weight:bold;border-bottom:1px solid #eece97;background:#5799e4;}
 .control--html:checked ~ .editor__fieldsetWrap .fieldset--html .fieldset__label:hover{background:#729bc9}
 .control--css:checked ~ .editor__fieldsetWrap .fieldset--css{flex-grow:1;flex-basis:33%;visibility:visible;height:100%;flex-grow:1;}
-.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .field{visibility:visible;width:100%;height:75%;}
-.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .field.js-shrink{height:0%}
+.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .field{visibility:visible;width:100%;height:80%;}
+.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .field.js-shrink{height:10%}
 .control--css:checked ~ .editor__fieldsetWrap .fieldset--css .fieldset__label{color:#eece97;font-weight:bold;border-bottom:1px solid #eece97;background:#5799e4;}
 .control--css:checked ~ .editor__fieldsetWrap .fieldset--css .fieldset__label:hover{background:#729bc9}
 .control--js:checked ~ .editor__fieldsetWrap .fieldset--js{flex-grow:1;flex-basis:33%;visibility:visible;height:100%;flex-grow:1;}
-.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .field{visibility:visible;width:100%;height:75%;}
-.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .field.js-shrink{height:0%}
+.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .field{visibility:visible;width:100%;height:80%;}
+.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .field.js-shrink{height:10%}
 .control--js:checked ~ .editor__fieldsetWrap .fieldset--js .fieldset__label{color:#eece97;font-weight:bold;border-bottom:1px solid #eece97;background:#5799e4;}
 .control--js:checked ~ .editor__fieldsetWrap .fieldset--js .fieldset__label:hover{background:#729bc9}
 .control--html:not(:checked) + .control--css:not(:checked) + .control--js:not(:checked) ~ .editor__fieldsetWrap .fieldset{flex-grow:1}
@@ -144,19 +149,25 @@ textarea{font-family:Courier,monospace}
                 <input type="checkbox" id="js-jsSwitch" class="editor__control editor__control--js control control--js" checked/>
 
                 <div class="editor__fieldsetWrap">
-                    <fieldset class="editor__fieldset fieldset fieldset--html" draggable="true">
+                    <fieldset class="editor__fieldset fieldset fieldset--html" >
                         <label class="fieldset__label fieldset__label--html" for="js-htmlSwitch">HTML</label>
                         <textarea  id="js-html" class="fieldset__field fieldset__field--html field field--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
                     </fieldset>
-                    <fieldset class="editor__fieldset fieldset fieldset--css" draggable="true">
+                    <fieldset class="editor__fieldset fieldset fieldset--css" >
                         <label class="fieldset__label fieldset__label--css" for="js-cssSwitch">CSS</label>
                         <textarea id="js-css" class="fieldset__field fieldset__field--css field field--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
-                        <input type="file" class="fielset__field fieldset__field--upload" />
+                        <div class="fieldset__inputWrapper">
+                            <input type="url" class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.css"/>
+                            <button class="fieldset__button fieldset__button--add">+</button>
+                        </div>
                     </fieldset>
-                    <fieldset class="editor__fieldset fieldset fieldset--js" draggable="true">
+                    <fieldset class="editor__fieldset fieldset fieldset--js" >
                         <label class="fieldset__label fieldset__label--js" for="js-jsSwitch" title="ctrl + r">JS</label>
                         <textarea id="js-js" class="fieldset__field fieldset__field--js field field--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
-                        <input type="file" class="fielset__field fieldset__field--upload" />
+                        <div class="fieldset__inputWrapper">
+                            <input type="url"  class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.js"/>
+                            <button class="fieldset__button fieldset__button--add">+</button>
+                        </div>
                     </fieldset>
             </div>
             </form>
@@ -204,6 +215,36 @@ textarea{font-family:Courier,monospace}
     </footer>
 </body>
 <script type="text/javascript">
+/* MCSANDY: THE OFFLINE HTML5 SANDBOX */
+var store, mcsandy, mcsandyUI;
+// Source: preAssets/js/store.js
+store = {
+    types: [localStorage,sessionStorage],
+    convertValue: function (v) {
+        return typeof v !== "object" ? v : JSON.stringify(v);
+    },
+    unconvertValue: function (v) {
+        if ( v.indexOf("{") === 0 || v.indexOf("[") === 0 ){
+            var v = JSON.parse(v);
+        }
+        return v;
+    },
+    set: function (type, k, v) {
+        var v = this.convertValue(v);
+        store.types[type].setItem(k,v); 
+    },
+    get: function (type, k) {
+        var v = typeof k !== "number" ? store.types[type].getItem(k) : store.types[type].key(k);
+        return  this.unconvertValue(v);
+    },
+    del: function (type, k){
+        store.types[type].removeItem(k);       
+    },
+    clr: function (type){
+        store.types[type].clear();
+    }
+};
+// Source: preAssets/js/filesaver.js
 /*! FileSaver.js
  *  A saveAs() FileSaver implementation.
  *  2014-01-24
@@ -418,36 +459,7 @@ var saveAs = saveAs
     || this.content
 ));
 if (typeof module !== "undefined") module.exports = saveAs;
-
-/*STORE: Local and Session Storage tool wrapper*/
-
-var store, mcsandyUI,mcsandy;
-store = {
-    types: [localStorage,sessionStorage],
-    convertValue: function (v) {
-        return typeof v !== "object" ? v : JSON.stringify(v);
-    },
-    unconvertValue: function (v) {
-        if ( v.indexOf("{") === 0 || v.indexOf("[") === 0 ){
-            var v = JSON.parse(v);
-        }
-        return v;
-    },
-    set: function (type, k, v) {
-        var v = this.convertValue(v);
-        store.types[type].setItem(k,v); 
-    },
-    get: function (type, k) {
-        var v = typeof k !== "number" ? store.types[type].getItem(k) : store.types[type].key(k);
-        return  this.unconvertValue(v);
-    },
-    del: function (type, k){
-        store.types[type].removeItem(k);       
-    },
-    clr: function (type){
-        store.types[type].clear();
-    }
-};
+// Source: preAssets/js/mcsandy.js
 /*MCSANDYUI: the main user interactions with the app*/
 mcsandyUI = {
     init: function () {
@@ -462,65 +474,38 @@ mcsandyUI = {
             projectDownload: document.getElementById('js-projectDownload'),
             projectSelect: document.getElementById('js-selectProjects'),
             projectLoad: document.getElementById('js-projectLoad')
-        },
-        keyMaps:{
-            save: {
-                83:false,
-                17:false
-            },
-            run: {
-                82:false,
-                17:false
-            },
-            shrink: {
-                83: false,
-                192: false
-            },
-            ctrl:{
-                17:false
-            }
         }
     },
     helpers: {
         keyDown: function (e) {
-            var _this = mcsandyUI,
-                keyMaps = _this.data.keyMaps, 
-                saveMap = keyMaps.save,
-                runMap = keyMaps.run,
-                shrink =keyMaps.shrink;
+            var _this = mcsandyUI;
             /*SAVE*/
-            if (e.keyCode in saveMap) {
-                saveMap[e.keyCode] = true;
-                if (saveMap[83] && saveMap[17]) {
+            if (e.ctrlKey) {
+                switch (e.keyCode) {
+                case 83:
                     mcsandy.functions.saveContent(e);
-                    mcsandyUI.functions.flashClass(document.getElementById('js-projectSave'));
-                }
-            }
-            if (e.keyCode in runMap) {
-                runMap[e.keyCode] = true;
-                if (runMap[83] && runMap[17]) {
+                    _this.functions.flashClass(document.getElementById('js-projectSave'));
+                    break;
+                case 82:
                     mcsandy.functions.updateContent();
+                    break;
+                case 68:
+                    _this.functions.handleDownloadProject(e);
+                    break;
+                default:
+                    break;
                 }
             }
         },
         keyUp: function (e) {
-            var _this = mcsandyUI,
-                keyMaps = _this.data.keyMaps,
-                saveMap = keyMaps.save;
-            if (e.keyCode in keyMaps.save) {
-                keyMaps.save[e.keyCode] = false;
-            }
-            if (e.keyCode in keyMaps.run){
-                keyMaps.run[e.keyCode] = false;
-            }
-
+            var _this = mcsandyUI;
         },
         convertHash: function (hash) {
             return hash.replace(' ', '_');
         },
         unconvertHash: function (hash) {
-            hash = hash.replace('#','');
-            hash = hash.replace('_',' ');
+            hash = hash.replace('#', '');
+            hash = hash.replace('_', ' ');
             return hash;
         },
         createInput: function (t, id, c, v, d) {
@@ -539,96 +524,117 @@ mcsandyUI = {
             label.innerText = t;
             return label;
         },
+        createExternalInput: function (type, classes, placeholder) {
+            var input = document.createElement('input');
+            input.type = type;
+            input.class = classes;
+            input.placeholder = placeholder;
+            return input;
+        },
+        removeParent: function (el) {
+            var parent = el.parentNode;
+            parent.remove();
+        },
+        cloneParent: function (el) {
+            var clone = el.parentNode.cloneNode(true),
+                grandparent = el.parentNode.parentNode;
+            grandparent.appendChild(clone);
+        },
         toggleLabelClick: function (e) {
             var label = e.target,
                 input = document.getElementById(e.target.getAttribute('for'));
-            if (!label.className.match('js-checked') ) {
+            if (!label.className.match('js-checked')) {
                 label.className = label.className + ' ' + 'js-checked';
                 input.className = input.className + ' ' + 'js-checked';
             } else {
-                label.className = label.className.replace( /(?:^|\s)js-checked(?!\S)/g, "")
-                input.className = input.className.replace( /(?:^|\s)js-checked(?!\S)/g, "")
+                label.className = label.className.replace(/(?:^|\s)js-checked(?!\S)/g, "");
+                input.className = input.className.replace(/(?:^|\s)js-checked(?!\S)/g, "");
             }
-        }, 
+        },
         toggleClass: function (el, className) {
             if (el.className.match(className)) {
-                el.className = el.className.replace(className,'');
+                el.className = el.className.replace(className, '');
             } else {
-                el.className = el.className + ' '+className;
-            }            
+                el.className = el.className + ' ' + className;
+            }
+        },
+        addEvents: function (els, evt, func) {
+            [].forEach.call(els, function (el) {
+                el.addEventListener(evt, func);
+            });
         }
     },
     bindUiEvents: function () {
         var _this = mcsandyUI,
             helpers = _this.helpers,
-            ctrls = _this.data.ctrls;
+            ctrls = _this.data.ctrls,
+            editors = document.querySelectorAll('.fieldset__field'),
+            fileUploads = document.querySelectorAll('.fieldset__field--upload'),
+            addExternalFile = document.querySelectorAll('.fieldset__button--add'),
+            removeExternalFile = document.querySelectorAll('.fieldset__button--rem');
+
         /*CHECK FOR INTERNET CONNECTION*/
-        window.addEventListener('load', function (e) {
+        window.addEventListener('load', function () {
             _this.functions.handleConnection();
             if (window.location.hash) {
                 _this.functions.handleHash();
             }
         });
-        window.addEventListener("offline", _this.functions.handleConnection );
-        window.addEventListener("online", _this.functions.handleConnection );
+        window.addEventListener("offline", _this.functions.handleConnection);
+        window.addEventListener("online", _this.functions.handleConnection);
 
         /*WINDOW HASH CHANGE */
-        window.addEventListener("hashchange", _this.functions.handleHash)
-        
+        window.addEventListener("hashchange", _this.functions.handleHash);
         /*SELECT A PROJECT*/
         ctrls.projectLoad.addEventListener('click', _this.functions.handleProjectLoad);
 
         /* DOWNLOAD A PROJECT */
         ctrls.projectDownload.addEventListener('click', _this.functions.handleDownloadProject);
 
-        /*KEYBOARD SHORTCUTS*/
-        document.addEventListener('keydown', helpers.keyDown)
-        document.addEventListener('keyup', helpers.keyUp)
+        /*THE EDITOR FIELDS */
+        document.addEventListener('keydown', helpers.keyDown);
+        document.addEventListener('keyup', helpers.keyUp);
 
-        var editors = document.querySelectorAll('.fieldset__field');
-        [].forEach.call(editors, function(editor){
-            var _this = mcsandyUI,
-                keyMaps = _this.data.keyMaps, 
-                shrink =keyMaps.shrink;
+        [].forEach.call(editors, function (editor) {
             editor.addEventListener('keydown', function (e) {
-                if (e.keyCode == 17){
-                    keyMaps.ctrl[17] = true;
+                if (e.ctrlKey && e.keyCode === 192) {
+                    _this.helpers.toggleClass(e.target, 'js-shrink');
                 }
-            })
-            editor.addEventListener('keyup', function (e) {
-                if (keyMaps.ctrl[17] == true) {
-                    if (e.keyCode === 192) {
-                        keyMaps.ctrl[17] = false;
-                        _this.helpers.toggleClass(e.target, 'js-shrink');
-                    }
-                }
-            })
+            });
+            editor.addEventListener('dragover', _this.functions.handleDragOver);
+            editor.addEventListener('drop', _this.functions.handleFileUpload);
         });
 
+        /*DRAG AND DROP FILES INTO EDITORS */
+        helpers.addEvents(fileUploads, 'change', _this.helpers.handleFileUpload);
+
+        /*ADD EXTERNAL LINK*/
+        helpers.addEvents(addExternalFile, 'click', _this.functions.handleAddExternalFile);
+        helpers.addEvents(removeExternalFile, 'click', _this.functions.handleRemoveExternalFile);
         /*LABEL/INPUT SHENANIGANS*/
         _this.functions.bindJsCheck();
 
     },
     functions: {
-        handleConnection: function (e) {
+        handleConnection: function () {
             var _this = mcsandyUI,
                 ctrl = document.getElementById('js-onlineStatus');
             _this.data.onlineState = navigator.onLine ? "online" : "offline";
-            if (_this.data.onlineState == "online") {
-                ctrl.className = ctrl.className.replace( /(?:^|\s)offline(?!\S)/g, " online");
+            if (_this.data.onlineState === "online") {
+                ctrl.className = ctrl.className.replace(/(?:^|\s)offline(?!\S)/g, " online");
                 document.title = "McSandy | Online";
-                document.querySelector('body').className = document.querySelector('body').className.replace( /(?:^|\s)mcsandy--offline(?!\S)/g, " mcsandy--online");
+                document.querySelector('body').className = document.querySelector('body').className.replace(/(?:^|\s)mcsandy--offline(?!\S)/g, " mcsandy--online");
                 mcsandy.functions.createLibSelect();
                 _this.functions.handleHash();
             } else {
-                ctrl.className = ctrl.className.replace( /(?:^|\s)online(?!\S)/g," offline");
-                document.title = "McSandy | Offline"
-                document.querySelector('body').className = document.querySelector('body').className.replace( /(?:^|\s)mcsandy--online(?!\S)/g, " mcsandy--offline");
+                ctrl.className = ctrl.className.replace(/(?:^|\s)online(?!\S)/g, " offline");
+                document.title = "McSandy | Offline";
+                document.querySelector('body').className = document.querySelector('body').className.replace(/(?:^|\s)mcsandy--online(?!\S)/g, " mcsandy--offline");
             }
         },
-        handleHash: function (e) {
+        handleHash: function () {
             var _this = mcsandyUI;
-            if (window.location.hash.length > 0){
+            if (window.location.hash.length > 0) {
                 var hash = _this.helpers.unconvertHash(window.location.hash);
                 _this.functions.loadProject(hash);
             }
@@ -648,21 +654,54 @@ mcsandyUI = {
         flashClass: function (el) {
             el.className = el.className + ' anim-flash';
             setTimeout(function () {
-                el.className = el.className.replace('anim-flash','');
-            }, 3000)
+                el.className = el.className.replace('anim-flash', '');
+            }, 3000);
         },
         loadProject: function (project) {
             var _this = mcsandyUI,
-                projData = store.get(0,project);
+                projData = store.get(0, project);
             mcsandy.functions.updateContent(projData); // this is in the McSandy interface
             _this.functions.updateEditors(projData.rawParts.html, projData.rawParts.css, projData.rawParts.js);
             _this.functions.updateCtrls(projData);
         },
+        handleRemoveExternalFile: function (e) {
+            e.preventDefault();
+            var _this = mcsandyUI,
+                helpers = _this.helpers;
+            helpers.removeParent(e.target);
+        },
+        handleAddExternalFile: function (e) {
+            e.preventDefault();
+            var _this = mcsandyUI,
+                helpers = _this.helpers,
+                el = e.target;
+            helpers.cloneParent(el);
+            el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
+            el.innerHTML = "&mdash;";
+            _this.bindUiEvents();
+        },
         handleDownloadProject: function (e) {
             e.preventDefault();
             var _this = mcsandyUI,
-                project = store.get(0,_this.data.ctrls.projectSelect.value); // don't get the value of the button, but the one from the select box. 
+                project = store.get(0, _this.data.ctrls.projectSelect.value); // don't get the value of the button, but the one from the select box. 
+            _this.functions.flashClass(document.getElementById('js-projectDownload'));
             mcsandy.functions.downloadContent(project);
+        },
+        handleFileUpload: function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            var files = e.dataTransfer.files,
+                file = files[0],
+                reader = new FileReader();
+            reader.onload = function (evt) {
+                e.toElement.value = evt.target.result;
+            }
+            reader.readAsText(file);
+        }, 
+        handleDragOver: function (e){
+            e.stopPropagation();
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'copy';
         },
         updateEditors: function (html, css, js) {
             var _this = mcsandyUI, 
@@ -744,15 +783,14 @@ mcsandy = {
         prepareHTML: function (html) {
             return html;
         },
-        prepareExternalJS: function (js) {
+        prepareExternalJS: function (javascript) {
             //make sure that the JS has a protocol that'll work
-            var mcProtocol = window.location.protocol,
-                js = (js.slice(js.indexOf('//')+2));
+            var js = (javascript.slice(javascript.indexOf('//') + 2));
             //if McSandy isn't running as http(s), then it's probably file:// - which shouldn't use a relative protocol
-            if (!window.location.protocol.match('http')){
+            if (!window.location.protocol.match('http')) {
                 js = 'http://' + js;
             } else {
-                js = window.location.protocol + '//' + js;                
+                js = window.location.protocol + '//' + js;          
             }
             return '<script type="text\/javascript" src="' + js + '"><\/script>';
         },
@@ -763,7 +801,7 @@ mcsandy = {
             if (navigator.onLine) {
                 /*only add external libraries if we're online*/
                 externalLibs.forEach(function (el) {
-                    externalJSSet+=_this.helpers.prepareExternalJS(el);
+                    externalJSSet+= _this.helpers.prepareExternalJS(el);
                 });
             }
             return externalJSSet;
@@ -771,7 +809,7 @@ mcsandy = {
         prepareInternalJS: function (js) {
             return '<script type="text\/javascript">' + js + '<\/script>';
         },
-        createRawParts:function (html, css, js, externalJS) {
+        createRawParts: function (html, css, js, externalJS) {
             var rawParts = {
                 html: html,
                 css: css,
@@ -779,7 +817,7 @@ mcsandy = {
                 external: {
                     js: externalJS
                 }
-            }
+            };
             return rawParts;
         },
         wrapBlobParts: function () {
@@ -791,7 +829,7 @@ mcsandy = {
                 reset = helpers.prepareCSS(blobData.reset),
                 externalLibraries = helpers.createExternalLibs(),
                 css =  helpers.prepareCSS(ctrls.css.value),
-                head = '<head>'+css+ externalLibraries +'</head>',
+                head = '<head>' + css + externalLibraries +'</head>',
                 js = helpers.prepareInternalJS(ctrls.js.value),
                 blobKit = [head,html,js];
             return blobKit;
@@ -806,7 +844,7 @@ mcsandy = {
         buildBlob: function (parts, type) {
             var _this = mcsandy,
                 helpers = _this.helpers;
-                blobType = type !== undefined ? 'text/' + type + ';charset=utf-8' : 'text/html;charset=utf-8';
+                blobType = type !== undefined ? type + ';charset=utf-8' : 'text/html;charset=utf-8';
                 var blob = new Blob(parts, {type : blobType});
                 return blob;                   
         },
@@ -947,13 +985,14 @@ mcsandy = {
             var _this = mcsandy,
                 downloadType = type !== undefined ? type : 'html', // if there's no type, then it must be a dl for the entire project
                 parts =  downloadObj !== undefined ? downloadObj.blobArray : _this.helpers.wrapBlobParts(),
-                blob = _this.helpers.buildBlob(parts,downloadType),
+                mimeType = type !== 'javascript' ? 'text/'+ type : 'application/javascript',
+                blob = _this.helpers.buildBlob(parts,mimeType),
                 fileName = downloadObj.project + '.' + downloadType;
             saveAs(blob, fileName);
         }
     }
-};
-mcsandyUI.init();
+};mcsandyUI.init();
 mcsandy.init();
+
 </script>
 </html>

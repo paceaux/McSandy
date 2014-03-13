@@ -197,8 +197,7 @@ textarea
             flex-basis: 0%;
             height: 2em;
             overflow:hidden;
-            &__field
-                width: 0%;
+
 
 .fieldset
     display:flex;
@@ -225,13 +224,36 @@ textarea
             justify-content: flex-start
             align-items:stretch
             smooth()
+    &__button
+        flex-basis: 2.5em;
+    &__inputWrapper
+            align-self:flex-start
+            display:flex
+            justify-content:flex-start
+            smooth()
+            .fieldset__field
+                flex-grow: 1
+                margin-left: 0
+                smooth()
+            .fieldset__button
+                align-self: flex-end
     &__field
         height: 0;
         visibility: hidden;
         align-self: flex-end;
         flex-basis: 0%;
+        width: 95%;
+        &--upload
+            flex-basis: 100%
+            width: 95%;
+        &.js-shrink
+            ~ .fieldset__inputWrapper
+                 .fieldset__field
+                    visibility: visible
+                    height: auto
+                    width: 75%
     &--externalLibs
-        width: 10em;
+        width: 4em;
         .fieldset__wrapper
             flex-shrink: 1;
             height: 3em;
@@ -279,9 +301,9 @@ textarea
             .field
                 visibility: visible;
                 width: 100%;
-                height: 75%;
+                height: 80%;
                 &.js-shrink
-                    height: 0%;  
+                    height: 10%;  
             .fieldset__label
                 color: activePeach;
                 font-weight: bold;
@@ -301,9 +323,9 @@ textarea
             .field
                 visibility: visible;
                 width: 100%;
-                height: 75%;
+                height: 80%;
                 &.js-shrink
-                    height: 0%;  
+                    height: 10%;  
             .fieldset__label
                 color: activePeach;
                 font-weight: bold;
@@ -323,9 +345,9 @@ textarea
             .field
                 visibility: visible;
                 width: 100%;
-                height: 75%;  
+                height: 80%;  
                 &.js-shrink
-                    height: 0%;  
+                    height: 10%;  
             .fieldset__label
                 color: activePeach;
                 font-weight: bold;

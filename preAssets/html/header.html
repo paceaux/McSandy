@@ -13,19 +13,25 @@
                 <input type="checkbox" id="js-jsSwitch" class="editor__control editor__control--js control control--js" checked/>
 
                 <div class="editor__fieldsetWrap">
-                    <fieldset class="editor__fieldset fieldset fieldset--html" draggable="true">
+                    <fieldset class="editor__fieldset fieldset fieldset--html" >
                         <label class="fieldset__label fieldset__label--html" for="js-htmlSwitch">HTML</label>
                         <textarea  id="js-html" class="fieldset__field fieldset__field--html field field--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
                     </fieldset>
-                    <fieldset class="editor__fieldset fieldset fieldset--css" draggable="true">
+                    <fieldset class="editor__fieldset fieldset fieldset--css" >
                         <label class="fieldset__label fieldset__label--css" for="js-cssSwitch">CSS</label>
                         <textarea id="js-css" class="fieldset__field fieldset__field--css field field--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
-                        <input type="file" class="fielset__field fieldset__field--upload" />
+                        <div class="fieldset__inputWrapper">
+                            <input type="url" class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.css"/>
+                            <button class="fieldset__button fieldset__button--add">+</button>
+                        </div>
                     </fieldset>
-                    <fieldset class="editor__fieldset fieldset fieldset--js" draggable="true">
+                    <fieldset class="editor__fieldset fieldset fieldset--js" >
                         <label class="fieldset__label fieldset__label--js" for="js-jsSwitch" title="ctrl + r">JS</label>
                         <textarea id="js-js" class="fieldset__field fieldset__field--js field field--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
-                        <input type="file" class="fielset__field fieldset__field--upload" />
+                        <div class="fieldset__inputWrapper">
+                            <input type="url"  class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.js"/>
+                            <button class="fieldset__button fieldset__button--add">+</button>
+                        </div>
                     </fieldset>
             </div>
             </form>
