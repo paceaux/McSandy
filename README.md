@@ -1,32 +1,23 @@
 # McSandy: The HTML5 offline Sandbox #
 
-A SFA (Single File Application ) that acts as your HTML, CSS, and JavaScript editor;
+A SFWA (Single File Web Application ) that acts as your HTML, CSS, and JavaScript editor.
 
  * Version: 0.2.1
  * License: Copyright 2014 Frank M. Taylor. All Rights Reserved
  * Prerequisites: IE10+, other modern browsers that support CSS flexbox and blob urls
 
-## Features ##
+## McSandy's Features ##
 McSandy isn't the only web-based, live preview editor out there. Here's what makes McSandy unique:
  
  + McSandy let you save your work into local storage
  + Your project gets a hashable url, so you can bookmark it: `mcsandy.html#myawesomeproject`
- + You can export your work into an HTML file (it's that download button)
+ + You can export your work into an HTML file (it's that <kbd>download</kbd> button)
  + You can drag HTML, CSS, or JavaScript files into the edit fields to edit them.
- + You Can your HTML, CSS, or JavaScript fields to your desktop
+ + You can drag your HTML, CSS, or JavaScript fields to your desktop to save them
  + McSandy knows when you have an internet connection and uses any external libraries appropriately
- + McSandy works offline!
+ + McSandy is a single file: mcsandy.html
+ + McSandy doesn't need an internet connection
 
-### What are the technologies that McSandy uses? ###
-McSandy is an HTML5 application. It's using Vanilla JavaScript, but it makes use of three API's in particular
- + localStorage (for storing data)
- + `online` (for showing whether you have internet)
- + Blob URLs (for doing the live-preview in an iframe)
- + fileReader for reading and generating files
- + drag and drop (for dropping files into your edit areas)
- + [Eli Grey](http://eligrey.com/blog/post/saving-generated-files-on-the-client-side)'s [filesaver.js](https://github.com/eligrey/FileSaver.js) is used for the export, until a McSandy-specific solution is developed. 
-
-McSandy also uses the Flexbox module for its layout. Flexbox is supported in IE10+ 
 
 ## Keyboard Shortcuts ##
 
@@ -39,17 +30,33 @@ McSandy also uses the Flexbox module for its layout. Flexbox is supported in IE1
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>del</kbd>:   delete project
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>+</kbd>:  New Project
 
-## FAQs ##
-###What's an SFA? ###
+### The Technologies Behind McSandy ###
+McSandy is an HTML5 application. It's using Vanilla JavaScript, but it makes use of three API's in particular
+ + localStorage (for storing data)
+ + `online` (for showing whether you have internet)
+ + Blob URLs (for doing the live-preview in an iframe)
+ + fileReader for reading and generating files
+ + drag and drop (for dropping files into your edit areas)
+ + [Eli Grey](http://eligrey.com/blog/post/saving-generated-files-on-the-client-side)'s [filesaver.js](https://github.com/eligrey/FileSaver.js) is used for the export, until a McSandy-specific solution is developed. 
+ + CSS3's Flexbox module for layout. Flexbox is supported in IE10+ 
 
-An SFA is a Single File Application. This means the entire application functions in a single file - no installation, extra files, or internet, is required to use it. Once you've downloaded McSandy (mcsandy.html), that's all you need.
+## Upcoming Features ##
+ + manually enter external libraries
+ + drag in/out additional files (that you don't want to edit)
+ + "tips" window for seeing available keyboard shortcuts
+ + warning/alert window for various errors
+
+## FAQs ##
+###What's an SFWA? ###
+
+An SFWA is a Single File Web Application. This means the entire application functions in a single html file. There are no dependencies on any external libraries. Once you've downloaded McSandy (mcsandy.html), you're ready to start coding. 
 
 
 ### How can I save my work? ###
 McSandy uses `localstorage` to save your projects. You can save and delete any of your projects by clicking on the save button at the bottom, or by using the keyboard command <kbd>ctrl</kbd> + <kbd>s</kbd>
 
 ### How can I get my work back? ###
-At the bottom of McSandy, there's a select box where you can retrieve your old projects. Select the project and just click the `load` button. 
+At the bottom of McSandy, there's a select box where you can retrieve your old projects. Select the project and just click the <kbd>load</kbd> button. 
 
 You can also retrieve your projects as a hash in the URL: `mcsandy.html#my_project`. 
 
@@ -61,17 +68,11 @@ McSandy gives you the option to load JavaScript libraries from Google's CDN. In 
 ### How can I export my work? ###
 At the bottom of McSandy is a <kbd>download</kbd> button. This will export your current project to a static HTML file. 
 
-In future versions, you will have the option to export each section of code. 
-
-
 
 ### How can I make it better ?
 If you'd like to contribute, just pull the repo. All of the 'editable' assets are in the `preAssets` folder. The HTML files are in their own folder.  Grunt.js will build the files in `postAssets`, and generate a file called `post-mcsandy.html` for you. 
 
-## Upcoming Features ##
- + manually enter external js libraries
- + editor validation
- + last project-restore
+
 
 
 ## Recently done ##
@@ -106,8 +107,8 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>p</kbd> to toggle the project panel
 
 ## Known issues ##
- + add/remove external files button acts a little...odd
- + the peakabo animation that shows the McSandy header only seems to work in Chrome for Mac. this maybe be an issue w/ CSS minification.
+ + the peakabo animation that shows the McSandy header only seems to work in Chrome for Mac. this maybe be an issue w/ CSS minification. 
+ + animation doesn't work on buttons when user saves. 
 
  
 
