@@ -7,12 +7,15 @@ A SFA (Single File Application ) that acts as your HTML, CSS, and JavaScript edi
  * Prerequisites: IE10+, other modern browsers that support CSS flexbox and blob urls
 
 ## Features ##
- + McSandy lets you edit HTML, CSS, and JavaScript and get a live preview
+McSandy isn't the only web-based, live preview editor out there. Here's what makes McSandy unique:
+ 
  + McSandy let you save your work into local storage
  + Your project gets a hashable url, so you can bookmark it: `mcsandy.html#myawesomeproject`
- + You can export your work into an HTML file
- + You can drag HTML, CSS, or JavaScript files into the edit fields
- + McSandy knows when you have an internet connection and uses any external libraries appropriately 
+ + You can export your work into an HTML file (it's that download button)
+ + You can drag HTML, CSS, or JavaScript files into the edit fields to edit them.
+ + You Can your HTML, CSS, or JavaScript fields to your desktop
+ + McSandy knows when you have an internet connection and uses any external libraries appropriately
+ + McSandy works offline!
 
 ### What are the technologies that McSandy uses? ###
 McSandy is an HTML5 application. It's using Vanilla JavaScript, but it makes use of three API's in particular
@@ -24,6 +27,14 @@ McSandy is an HTML5 application. It's using Vanilla JavaScript, but it makes use
  + [Eli Grey](http://eligrey.com/blog/post/saving-generated-files-on-the-client-side)'s [filesaver.js](https://github.com/eligrey/FileSaver.js) is used for the export, until a McSandy-specific solution is developed. 
 
 McSandy also uses the Flexbox module for its layout. Flexbox is supported in IE10+ 
+
+## Keyboard Shortcuts ##
+
+ + <kbd>ctrl</kbd> + <kbd>s</kbd>: save
+ + <kbd>ctrl</kbd> + <kbd>r</kbd>: run
+ + <kbd>ctrl</kbd> + <kbd>d</kbd>: download
+ + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>e</kbd>: toggle editor
+ + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>: toggle editor: toggle projects
 
 ## FAQs ##
 ###What's an SFA? ###
@@ -87,9 +98,13 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
  + `ctrl + d` for downloading
  + can now drag files into the editors
  + created fields for adding external URLs (not working yet)
+ + can now drag your editor fields out, drop them on a desktop, to create a separate file, just for that asset
+ + `ctrl + shift + e` to toggle the editors
+ + `ctrl + shift + p` to toggle the project panel
 
 ## Known issues ##
  + add/remove external files button acts a little...odd
+ + the peakabo animation that shows the McSandy header only seems to work in Chrome for Mac. this maybe be an issue w/ CSS minification.
 
  
 
