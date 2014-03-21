@@ -28,13 +28,18 @@ mcsandyUI = {
                 switch (e.keyCode) {
                 case 83:
                     mcsandy.functions.saveContent(e);
-                    _this.functions.flashClass(document.getElementById('js-projectSave'));
+                    _this.functions.flashClass(mcsandy.data.ctrls.projectSave);
                     break;
                 case 82:
-                    mcsandy.functions.updateContent();
+                    mcsandy.functions.updateContent(e);
                     break;
-                case 68:
+                case 76:
+                    _this.functions.handleProjectLoad(e);
+                    _this.functions.flashClass(mcsandy.data.ctrls.projectLoad);
+                    break;
+                case 70:
                     _this.functions.handleDownloadProject(e);
+                    _this.functions.flashClass(mcsandy.data.ctrls.projectDownload);
                     break;
                 default:
                     break;
@@ -46,6 +51,15 @@ mcsandyUI = {
                             break;
                         case 80:
                             document.getElementById('js-footer-editor-toggle').checked = document.getElementById('js-footer-editor-toggle').checked === true ? false : true;
+                            break;
+                        case 187: 
+                            mcsandy.functions.clearContent(e);
+                            break;
+                        case 107: 
+                            mcsandy.functions.clearContent(e);
+                            break;
+                        case 8:
+                            mcsandy.functions.delContent(e);
                             break;
                         default: 
                             break;
@@ -162,6 +176,9 @@ mcsandyUI = {
             editor.addEventListener('drop', _this.functions.handleFileUpload);
         });
 
+        /*GLOBAL BUTTON STUFF*/
+        helpers.addEvents(document.querySelectorAll('button'), 'click', _this.functions.flashClass)
+
         /*DRAG AND DROP FILES INTO EDITORS */
         helpers.addEvents(fileUploads, 'change', _this.helpers.handleFileUpload);
 
@@ -233,6 +250,7 @@ mcsandyUI = {
             var _this = mcsandyUI,
                 helpers = _this.helpers,
                 el = e.target;
+            e.target.removeEventListener('click',_this.functions.handleAddExternalFile);
             helpers.cloneParent(el);
             el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
             el.innerHTML = "&mdash;";
@@ -268,7 +286,6 @@ mcsandyUI = {
         handleFileDragout: function (e) {
             e.stopPropagation();
             e.preventDefault();
-            console.log(e);
             var _this = mcsandyUI,
                 source = e.target.querySelector('textarea').value,
                 classes = e.target.classList,
@@ -549,7 +566,7 @@ mcsandy = {
             store.del(0,projectName);
             window.location.hash = '';
             _this.functions.createProjectSelect();
-            _this.data.ctrls.project.value = '';
+            _this.data.ctrls.project.value =  '';
         },
         clearContent: function (e) {
             e.preventDefault();
