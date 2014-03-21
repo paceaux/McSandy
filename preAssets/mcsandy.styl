@@ -383,7 +383,28 @@ textarea
         background: bgColor
         .fieldset
             flex-grow:1
-
+.mpModal
+    display:none
+    position:fixed
+    z-index: 1100
+    top: 19.1%
+    left: 19.1%
+    padding: .618em
+    max-width: 61.8%
+    background: #dedede
+    border-radius: .25em
+    &.visible
+        display:block
+    &__overlay
+        display:none
+        position: fixed
+        z-index: 1000
+        height: 100%
+        width: 100%
+        background: rgba(0, 0, 0, .7)
+        &.visible
+            display:block
+            order:-1
 .online
     color: standardGreen;
 
