@@ -34,7 +34,7 @@ McSandy also uses the Flexbox module for its layout. Flexbox is supported in IE1
  + <kbd>ctrl</kbd> + <kbd>r</kbd>: run
  + <kbd>ctrl</kbd> + <kbd>d</kbd>: download
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>e</kbd>: toggle editor
- + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>: toggle editor: toggle projects
+ + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>:  toggle projects
 
 ## FAQs ##
 ###What's an SFA? ###
@@ -43,7 +43,7 @@ An SFA is a Single File Application. This means the entire application functions
 
 
 ### How can I save my work? ###
-McSandy uses `localstorage` to save your projects. You can save and delete any of your projects by clicking on the save button at the bottom, or by using the keyboard command `ctrl + s`
+McSandy uses `localstorage` to save your projects. You can save and delete any of your projects by clicking on the save button at the bottom, or by using the keyboard command <kbd>ctrl</kbd> + <kbd>s</kbd>
 
 ### How can I get my work back? ###
 At the bottom of McSandy, there's a select box where you can retrieve your old projects. Select the project and just click the `load` button. 
@@ -56,7 +56,7 @@ This means that you can bookmark your projects!
 McSandy gives you the option to load JavaScript libraries from Google's CDN. In the future, you'll be able to add your own JS Libraries, too. 
 
 ### How can I export my work? ###
-At the bottom of McSandy is a `download` button. This will export your current project to a static HTML file. 
+At the bottom of McSandy is a <kbd>download</kbd> button. This will export your current project to a static HTML file. 
 
 In future versions, you will have the option to export each section of code. 
 
@@ -77,7 +77,7 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
  + loading projects from LS puts the content in the editors
  + can delete projects
  + changed orientation of the editor buttons
- + can now save with `ctrl + s`
+ + can now save with <kbd>ctrl</kbd> + <kbd>s</kbd>
  + live updating when editing the CSS
  + corrected font in editor boxes
  + Can now load a project by simply adding the name of the project as a hash to the url: `index.html#test`
@@ -86,7 +86,7 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
  + load button, instead of loading when user chooses select button
  + header hides after initial page load. 
  + the Title element is also updated with online/offline state
- + shortcut for running JS: `ctrl` + `r`
+ + shortcut for running JS: <kbd>ctrl</kbd> + <kbd>r</kbd>
  + Export to File for the project
  + add external JS/CSS (can get JS libraries from Google's CDN)
  + fixed relative protocol issue with jQuery
@@ -94,13 +94,13 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
  + added a small green flash to the load and save buttons so you know you've clicked the button or fired the keystroke
  + fixed keystrokes
  + Broke the JavaScript into smaller JS files so grunt can concatenate them
- + `ctrl + `` to see external file input fields (the functionality for adding the files isn't there yet)
- + `ctrl + d` for downloading
+ + <kbd>ctrl</kbd> + <kbd>`</kbd>to see external file input fields (the functionality for adding the files isn't there yet)
+ + <kbd>ctrl</kbd> + <kbd>d </kbd> for downloading
  + can now drag files into the editors
  + created fields for adding external URLs (not working yet)
  + can now drag your editor fields out, drop them on a desktop, to create a separate file, just for that asset
- + `ctrl + shift + e` to toggle the editors
- + `ctrl + shift + p` to toggle the project panel
+ + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>e</kbd> to toggle the editors
+ + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>p</kbd> to toggle the project panel
 
 ## Known issues ##
  + add/remove external files button acts a little...odd
