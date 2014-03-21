@@ -75,6 +75,20 @@ h2,
 .h2 {
   font-size: 1.1em;
 }
+dt,
+dd {
+  display: inline-block;
+  float: left;
+  margin: 0.618em 0.618em 0.618em 0;
+}
+dt {
+  clear: left;
+}
+dd::after {
+  content: ' ';
+  display: table;
+  clear: both;
+}
 a,
 input,
 textarea,
@@ -107,6 +121,19 @@ label:focus {
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
+kbd {
+  font-size: 1rem;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 10px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  border: 1px solid #ddd;
+  border-bottom-color: #ccc;
+  border-right-color: #ccc;
+  background-color: #ddd;
+  background-image: linear-gradient(#f1f1f1, #ddd);
+  background-repeat: repeat-x;
+}
 button,
 input,
 select,
@@ -136,7 +163,15 @@ button:focus,
 .editor__label:focus {
   background: #eece97;
 }
-textarea {
+button:active {
+  animation-delay: 0.5s;
+  animation-duration: 3.5s;
+  animation-name: saved;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+}
+textarea,
+code {
   font-family: Courier, monospace;
 }
 .mpGlobal__header,
@@ -489,10 +524,11 @@ textarea {
   position: fixed;
   z-index: 1100;
   top: 19.1%;
-  left: 19.1%;
+  left: 30.9%;
   padding: 0.618em;
-  max-width: 61.8%;
-  background: #dedede;
+  max-height: 61.8%;
+  width: 38.2%;
+  background: #fefefe;
   border-radius: 0.25em;
 }
 .mpModal.visible {
@@ -509,6 +545,11 @@ textarea {
 .mpModal__overlay.visible {
   display: block;
   order: -1;
+}
+.mpModal__content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .online {
   color: #57e45c;
@@ -778,8 +819,8 @@ textarea {
                 </h3>
                 <div class="fieldset__wrapper">
                     <input id="js-projectName" class="editor__input editor__input--name" type="text" placeholder="Name of Project">
-                    <button id="js-projectSave" class="editor__button editor__button--save">Save</button>
-                    <button id="js-projectDel" class="editor__button editor__button--del">Delete</button>
+                    <button id="js-projectSave" class="editor__button editor__button--save" title="save this project">Save</button>
+                    <button id="js-projectDel" class="editor__button editor__button--del" title="Delete this project">Delete</button>
                     <button id="js-projectNew" class="editor__button editor__button--new" title="Clear Everything and Start Over">New</button>
                 </div>
             </div>
@@ -799,22 +840,27 @@ textarea {
                     <select class="editor__input editor__input--name" id="js-selectProjects">
                         <option></option>
                     </select>
-                    <button id="js-projectLoad" class="editor__button editor__button--load">Load </button>
-                    <button id="js-projectDownload" class="editor__button editor__button--download">Download</button>
+                    <button id="js-projectLoad" class="editor__button editor__button--load" title="Load the project">Load </button>
+                    <button id="js-projectDownload" class="editor__button editor__button--download" title="Export this project to a single file">Download</button>
                 </div>
             </div>
         </form>
     </footer>
         <section id="js-modal" class="mpModal">
-            <h2 id="js-modal__title">Modal Title</h2>
-            <div class="js-modal__content">
-                <ul>
-                    <li>blah
-                    <li>blah
-                    <li>blah
-                    <li>blah
-                    <li>blah
-                </ul>
+            <h2 id="js-modal__title" class="mpModal__title">Keyboard Shortcuts</h2>
+            <div id="js-modal__content" class="mpModal__content">
+                <dl>
+                    <dt><kbd>ctrl</kbd>+<kbd>s</kbd></dt><dd>save</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>r</kbd></dt><dd>run</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>f</kbd></dt><dd>download</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>l</kbd></dt><dd>load</dd>
+                </dl>
+                <dl>
+                    <dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>e</kbd></dt><dd>Toggle Editor Panel</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd></dt><dd>Toggle Project Panel</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>del</kbd></dt><dd>Delete Project</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>+</kbd></dt><dd>New Project</dd>
+                </dl>
             </div>
         </section>
     <div id="js-modal__overlay" class="mpModal__overlay">
@@ -1096,13 +1142,18 @@ mcsandyUI = {
                 switch (e.keyCode) {
                 case 83:
                     mcsandy.functions.saveContent(e);
-                    _this.functions.flashClass(document.getElementById('js-projectSave'));
+                    _this.functions.flashClass(mcsandy.data.ctrls.projectSave);
                     break;
                 case 82:
-                    mcsandy.functions.updateContent();
+                    mcsandy.functions.updateContent(e);
                     break;
-                case 68:
+                case 76:
+                    _this.functions.handleProjectLoad(e);
+                    _this.functions.flashClass(mcsandy.data.ctrls.projectLoad);
+                    break;
+                case 70:
                     _this.functions.handleDownloadProject(e);
+                    _this.functions.flashClass(mcsandy.data.ctrls.projectDownload);
                     break;
                 default:
                     break;
@@ -1114,6 +1165,15 @@ mcsandyUI = {
                             break;
                         case 80:
                             document.getElementById('js-footer-editor-toggle').checked = document.getElementById('js-footer-editor-toggle').checked === true ? false : true;
+                            break;
+                        case 187: 
+                            mcsandy.functions.clearContent(e);
+                            break;
+                        case 107: 
+                            mcsandy.functions.clearContent(e);
+                            break;
+                        case 8:
+                            mcsandy.functions.delContent(e);
                             break;
                         default: 
                             break;
@@ -1230,6 +1290,9 @@ mcsandyUI = {
             editor.addEventListener('drop', _this.functions.handleFileUpload);
         });
 
+        /*GLOBAL BUTTON STUFF*/
+        helpers.addEvents(document.querySelectorAll('button'), 'click', _this.functions.flashClass)
+
         /*DRAG AND DROP FILES INTO EDITORS */
         helpers.addEvents(fileUploads, 'change', _this.helpers.handleFileUpload);
 
@@ -1301,6 +1364,7 @@ mcsandyUI = {
             var _this = mcsandyUI,
                 helpers = _this.helpers,
                 el = e.target;
+            e.target.removeEventListener('click',_this.functions.handleAddExternalFile);
             helpers.cloneParent(el);
             el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
             el.innerHTML = "&mdash;";
@@ -1336,7 +1400,6 @@ mcsandyUI = {
         handleFileDragout: function (e) {
             e.stopPropagation();
             e.preventDefault();
-            console.log(e);
             var _this = mcsandyUI,
                 source = e.target.querySelector('textarea').value,
                 classes = e.target.classList,
@@ -1617,7 +1680,7 @@ mcsandy = {
             store.del(0,projectName);
             window.location.hash = '';
             _this.functions.createProjectSelect();
-            _this.data.ctrls.project.value = '';
+            _this.data.ctrls.project.value =  '';
         },
         clearContent: function (e) {
             e.preventDefault();

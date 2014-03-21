@@ -33,8 +33,11 @@ McSandy also uses the Flexbox module for its layout. Flexbox is supported in IE1
  + <kbd>ctrl</kbd> + <kbd>s</kbd>: save
  + <kbd>ctrl</kbd> + <kbd>r</kbd>: run
  + <kbd>ctrl</kbd> + <kbd>d</kbd>: download
+ + <kbd>ctrl</kbd> + <kbd>l</kbd>: load
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>e</kbd>: toggle editor
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>:  toggle projects
+ + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>del</kbd>:   delete project
+ + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>+</kbd>:  New Project
 
 ## FAQs ##
 ###What's an SFA? ###
