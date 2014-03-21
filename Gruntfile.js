@@ -33,13 +33,13 @@ module.exports = function(grunt) {
       js:{
         options: {
           banner: '/* MCSANDY: THE OFFLINE HTML5 SANDBOX */\n' + 'var store, mcsandy, mcsandyUI;\n',
-          footer: 'mcsandyUI.init();\n'+ 'mcsandy.init();\n',
+          footer: '\n' + 'mcsandyUI.init();\n' + 'mcsandy.init();\n',
           process: function (src, filepath) {
             return '// Source: ' + filepath + '\n' + src
           }
         },
         files: {
-          'preAssets/mcsandy.js' : ['preAssets/js/store.js', 'preAssets/js/filesaver.js', 'preAssets/js/mcsandy.js']
+          'preAssets/mcsandy.js' : ['preAssets/js/store.js', 'preAssets/js/filesaver.js','preAssets/js/mcsandy.js']
         }
       }
     },
@@ -47,7 +47,7 @@ module.exports = function(grunt) {
       standard:{
         options: {
           linenos: false,
-          compress: true
+          compress: false
         },
         files : {
           'postAssets/mcsandy.min.css' : ['preAssets/mcsandy.styl'],
