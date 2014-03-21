@@ -257,6 +257,12 @@ mcsandyUI = {
             projectDownload: document.getElementById('js-projectDownload'),
             projectSelect: document.getElementById('js-selectProjects'),
             projectLoad: document.getElementById('js-projectLoad')
+        },
+        modal:{
+            container: document.getElementById('js-modal'),
+            overlay: document.getElementById('js-modal__overlay'),
+            content: document.getElementById('js-modal__content'),
+            title: document.getElementById('js-modal__title')
         }
     },
     helpers: {
@@ -277,6 +283,18 @@ mcsandyUI = {
                     break;
                 default:
                     break;
+                }
+                if (e.shiftKey) {
+                    switch (e.keyCode) {
+                        case 69:
+                            document.getElementById('js-editor-toggle').checked = document.getElementById('js-editor-toggle').checked === true ? false : true;
+                            break;
+                        case 80:
+                            document.getElementById('js-footer-editor-toggle').checked = document.getElementById('js-footer-editor-toggle').checked === true ? false : true;
+                            break;
+                        default: 
+                            break;
+                    }
                 }
             }
         },
@@ -352,6 +370,7 @@ mcsandyUI = {
             helpers = _this.helpers,
             ctrls = _this.data.ctrls,
             editors = document.querySelectorAll('.fieldset__field'),
+            editorFieldsets = document.querySelectorAll('.editor__fieldset'),
             fileUploads = document.querySelectorAll('.fieldset__field--upload'),
             addExternalFile = document.querySelectorAll('.fieldset__button--add'),
             removeExternalFile = document.querySelectorAll('.fieldset__button--rem');
@@ -391,12 +410,13 @@ mcsandyUI = {
         /*DRAG AND DROP FILES INTO EDITORS */
         helpers.addEvents(fileUploads, 'change', _this.helpers.handleFileUpload);
 
+        helpers.addEvents(editorFieldsets, 'dragend', _this.functions.handleFileDragout)
         /*ADD EXTERNAL LINK*/
         helpers.addEvents(addExternalFile, 'click', _this.functions.handleAddExternalFile);
         helpers.addEvents(removeExternalFile, 'click', _this.functions.handleRemoveExternalFile);
         /*LABEL/INPUT SHENANIGANS*/
         _this.functions.bindJsCheck();
-
+        _this.data.modal.overlay.addEventListener('click', _this.functions.toggleModal);
     },
     functions: {
         handleConnection: function () {
@@ -486,6 +506,27 @@ mcsandyUI = {
             e.preventDefault();
             e.dataTransfer.dropEffect = 'copy';
         },
+        handleDragStart: function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        },
+        handleFileDragout: function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            console.log(e);
+            var _this = mcsandyUI,
+                source = e.target.querySelector('textarea').value,
+                classes = e.target.classList,
+                projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy',
+                downloadObj = {
+                    project: projectName,
+                    blobArray: [source]
+                };
+                typeString= classes[2].replace('fieldset--','');
+                type = typeString !== 'js' ? typeString : 'javascript';        
+
+            mcsandy.functions.downloadContent(downloadObj, type);
+        },
         updateEditors: function (html, css, js) {
             var _this = mcsandyUI, 
                 ctrls = mcsandy.data.ctrls;
@@ -514,6 +555,18 @@ mcsandyUI = {
                 var l = labels[i];
                 l.addEventListener('click', _this.helpers.toggleLabelClick);
             }
+        },
+        addModalContent: function (title, content){
+            var _this = mcsandyUI,
+                modal = _this.data.modal;
+            modal.title.innerText = title;
+            modal.content.innerHTML = content;
+        },
+        toggleModal: function () {
+            var _this = mcsandyUI,
+                modal = _this.data.modal;
+            _this.helpers.toggleClass(modal.container, 'visible');
+            _this.helpers.toggleClass(modal.overlay, 'visible');
         }
     }
 };
@@ -529,6 +582,7 @@ mcsandy = {
             _this.functions.createLibSelect();
         }
     },
+    appVersion: '2.1',
     data: {
         ctrls: {
             projectLoad: document.getElementById('js-projectLoad'),
@@ -774,5 +828,6 @@ mcsandy = {
             saveAs(blob, fileName);
         }
     }
-};mcsandyUI.init();
+};
+mcsandyUI.init();
 mcsandy.init();

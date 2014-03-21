@@ -284,6 +284,7 @@ mcsandy = {
             _this.functions.createLibSelect();
         }
     },
+    appVersion: '2.1',
     data: {
         ctrls: {
             projectLoad: document.getElementById('js-projectLoad'),
