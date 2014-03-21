@@ -8,8 +8,8 @@
                 </h3>
                 <div class="fieldset__wrapper">
                     <input id="js-projectName" class="editor__input editor__input--name" type="text" placeholder="Name of Project">
-                    <button id="js-projectSave" class="editor__button editor__button--save">Save</button>
-                    <button id="js-projectDel" class="editor__button editor__button--del">Delete</button>
+                    <button id="js-projectSave" class="editor__button editor__button--save" title="save this project">Save</button>
+                    <button id="js-projectDel" class="editor__button editor__button--del" title="Delete this project">Delete</button>
                     <button id="js-projectNew" class="editor__button editor__button--new" title="Clear Everything and Start Over">New</button>
                 </div>
             </div>
@@ -29,22 +29,27 @@
                     <select class="editor__input editor__input--name" id="js-selectProjects">
                         <option></option>
                     </select>
-                    <button id="js-projectLoad" class="editor__button editor__button--load">Load </button>
-                    <button id="js-projectDownload" class="editor__button editor__button--download">Download</button>
+                    <button id="js-projectLoad" class="editor__button editor__button--load" title="Load the project">Load </button>
+                    <button id="js-projectDownload" class="editor__button editor__button--download" title="Export this project to a single file">Download</button>
                 </div>
             </div>
         </form>
     </footer>
         <section id="js-modal" class="mpModal">
-            <h2 id="js-modal__title">Modal Title</h2>
-            <div class="js-modal__content">
-                <ul>
-                    <li>blah
-                    <li>blah
-                    <li>blah
-                    <li>blah
-                    <li>blah
-                </ul>
+            <h2 id="js-modal__title" class="mpModal__title">Keyboard Shortcuts</h2>
+            <div id="js-modal__content" class="mpModal__content">
+                <dl>
+                    <dt><kbd>ctrl</kbd>+<kbd>s</kbd></dt><dd>save</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>r</kbd></dt><dd>run</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>f</kbd></dt><dd>download</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>l</kbd></dt><dd>load</dd>
+                </dl>
+                <dl>
+                    <dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>e</kbd></dt><dd>Toggle Editor Panel</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd></dt><dd>Toggle Project Panel</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>del</kbd></dt><dd>Delete Project</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>+</kbd></dt><dd>New Project</dd>
+                </dl>
             </div>
         </section>
     <div id="js-modal__overlay" class="mpModal__overlay">

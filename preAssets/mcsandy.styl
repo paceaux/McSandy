@@ -86,12 +86,34 @@ h1, .h1{
 h2, .h2{
     font-size: 1.1em;
 }
+dt, dd
+    display: inline-block
+    float: left
+    margin: .618em .618em .618em 0
+dt
+    clear:left
+dd::after
+    content: ' '
+    display:table
+    clear: both
+
 a, input, textarea, form,fieldset, button, label
     smooth()    
     &:hover, &:focus
         outline: none;
         smooth-out()    
-
+kbd
+    font-size: 1rem
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+    border-radius: 2px;
+    border: 1px solid #ddd;
+    border-bottom-color: #ccc;
+    border-right-color: #ccc;
+    background-color: #ddd
+    background-image: linear-gradient(#f1f1f1, #ddd);
+    background-repeat: repeat-x;
 button,input,select,textarea
     border:1px solid inactivePeach
     outline: none;
@@ -106,9 +128,12 @@ button, .editor__label
     background: inactivePeach;
     &:hover, &:focus
         background: activePeach
+button:active
+    mcanimate(saved)        
 
-textarea
+textarea, code
     font-family: Courier, monospace;
+
 
 .mpGlobal__header,.mpGlobal__footer
     flex-shrink: 1
@@ -388,10 +413,11 @@ textarea
     position:fixed
     z-index: 1100
     top: 19.1%
-    left: 19.1%
+    left: 30.9%
     padding: .618em
-    max-width: 61.8%
-    background: #dedede
+    max-height: 61.8%
+    width: 38.2%
+    background: #fefefe
     border-radius: .25em
     &.visible
         display:block
@@ -405,6 +431,11 @@ textarea
         &.visible
             display:block
             order:-1
+    &__content
+        display:flex
+        flex-direction: row
+        justify-content:space-between
+
 .online
     color: standardGreen;
 
