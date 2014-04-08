@@ -1,0 +1,198 @@
+html, body
+	height: 100%
+	width: 100%
+body
+	display:flex
+	flex-direction: column
+	justify-content: space-around
+	align-items: flex-start
+
+.mpGlobal
+	&__header, &__footer
+		flex-shrink: 1
+		display: flex
+		width: 100%
+		flex-direction: column
+		justify-content: flex-start
+	&__header
+		align-items: stretch;
+		&__onlineStatus
+			align-self: flex-end
+		&__editor__wrapper
+			flex-grow: 1;
+			display: flex
+			flex-direction: column
+		&__hgroup
+			font-size: 1rem
+			flex-shrink: 0
+			flex-grow: 1
+			align-self: flex-start
+			display: flex
+			width: 100%
+			max-height: 0
+			overflow: hidden
+			flex-direction: row
+			align-items: baseline
+			justify-content: space-between
+		.editor
+			&__label
+				order: 2
+.editor
+	flex-grow: 1
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+	&__toggle
+		&:checked
+			~ .mpGlobal__header__editor, 
+			~ .mpGlobal__footer__editor, 
+			~ .mpGlobal__footer__editor > .editor__fieldset
+				flex-basis: 0
+				height: 0
+				overflow:hidden
+	&__label
+		align-self: flex-start
+		flex-shrink: 0
+		display: inline-block
+	&__fieldset
+		flex-shrink: 1
+	&__input
+		&--name
+			flex-grow: 1
+	&__fieldset
+		flex-grow:1
+.fieldsetGroup
+	display: flex
+	height: 30vh
+	&__fieldset
+		flex-grow: 1
+		flex-basis: 10%
+.fieldset
+	display: flex
+	flex-direction: column
+	overflow-y: hidden
+	overflow-x: hidden
+	flex-grow: 1
+	flex-shrink: 1
+	&__label
+		display: block
+	&__wrapper
+		flex-grow: 1
+		width: 100%
+		display: flex
+		flex-direction: row
+		justify-content: flex-start
+		align-items: stretch
+	&__button
+		flex-basis: 2.5em
+	&__inputWrapper
+		align-self: flex-start
+		display: flex
+		justify-content: flex-start
+		.fieldset__field
+			flex-grow: 1
+			margin-left: 0
+		.fieldset__button
+			align-self: flex-end
+	&__field
+		align-self: flex-end
+		flex-basis: 0%
+		width: 99%
+	&--html
+		order: 1
+	&--css
+		order: 2
+	&--js
+		order: 3
+	&--externalLibs
+		width: 4em
+		.fieldset__wrapper
+			flex-shrink: 1
+			height: 3em
+			overflow: scroll
+			flex-direction: row
+			flex-wrap: wrap
+			justify-content: center
+			align-items: stretch;
+			align-content: flex-start
+	&.js-shrunk
+		flex-basis: 0%
+		flex-grow: 0
+		flex-shrink: 2
+		.field, .fieldset__inputWrapper
+			display:none
+
+
+.field
+	flex-grow: 1
+	&--upload
+		flex-basis: 100%
+		width: 95%
+	&--textarea
+		height: 20vh
+	&--html
+		height: 26.5vh
+	&.js-shrink
+		height: 0
+		~ .fieldset__inputWrapper
+			.fieldset__field
+				visibility: visible
+				height: auto
+				width: 75%
+
+.mpGlobal__result
+	display:flex
+	width: 100%
+	flex-direction: column
+	flex-grow: 2
+	&__iframe
+		flex-grow: 1
+		width: 100%
+		outline: none
+		border: none
+.mpGlobal__footer
+	&__editor
+		flex-shrink: 1
+		flex-direction: row
+		align-self: flex-start
+		flex-basis: 4.5em
+		width: 100%
+		.fieldset
+			flex-grow: 1
+
+.mcsandy
+	&--horizontal
+		flex-direction: row
+		.mpGlobal
+			&__header
+				width: 40vw
+				.editor
+					flex-basis: 95vh
+					height: @flex-basis
+					flex-direction: column
+					.fieldset
+						flex-basis: 5%
+			&__result
+				height: 100%
+			&__footer
+				flex-basis: 30vw
+				height: 95vh
+				flex-direction: row
+				align-self:flex-end
+				&__editor
+					flex-direction: column
+					flex-basis: none
+					height: 100%
+					align-self: flex-end
+					.fieldset
+						font-size: .9em
+						width: 100%
+						&__wrapper
+							flex-direction: column
+		.editor__toggle:checked ~ .mpGlobal__footer__editor
+			flex-grow:0
+		> .editor__fieldset
+			height: initial
+			width: 0
+
+	
