@@ -11,9 +11,7 @@ activePeach = lighten(standardPeach, 38.2%)
 standardGreen = keyColor - 90deg
 inactiveGreen = lighten(standardGreen, 61.8%)
 activeGreen = lighten(standardGreen, 32.8%)
-/* 
 
-*/
 smooth()
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
@@ -54,23 +52,14 @@ html, body, h1, h2, h3, h4, h5, h6, div, fieldset, form, input, header, footer, 
     padding:0;
     margin: 0;
 
-fieldset{
+fieldset
     border: none;
-}
-body, html{
-    height: 100%;
-    width: 100%;
-}
 
-body{
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-    height: 100%;
-    width: 100%;
+
+
+body
     color: bodyColor; 
-}
+
 h1, .h1,
 h2, .h2,
 h3, .h3,
@@ -121,11 +110,13 @@ button,input,select,textarea
         border:1px solid activePeach
 
 button, input, select
-    padding: .618em;
-    margin: .618em;
+    font-size: 1vw
+    padding: .618vw;
+    margin: .618vw;
 
 button, .editor__label
     background: inactivePeach;
+    flex-shrink: 0
     &:hover, &:focus
         background: activePeach
 button:active
@@ -135,103 +126,50 @@ textarea, code
     font-family: Courier, monospace;
 
 
-.mpGlobal__header,.mpGlobal__footer
-    flex-shrink: 1
-    display:flex
-    flex-direction:column
-    justify-content:flex-start
-    width: 100%;
 .mpGlobal__header
-    align-items: stretch;
     smooth()  
     &__onlineStatus
-        align-self: flex-end;
         padding: 0 .618em;
     &__editor__wrapper
-        display:flex;
-        flex-direction: column;
-        flex-grow:1;
         smooth() 
     &__hgroup
-        flex-shrink: 0;
-        flex-grow: 1
-        align-self:flex-start;
-        display:flex;
-        flex-direction: row;
-        align-items: baseline;
-        justify-content: space-between;
         font-size: 1em;
-        width: 100%;
-        max-height: 0
         background: bgColor
         border-bottom: .125em solid borderColor;
-        overflow:hidden
         mcanimate(slideUp)
     .editor
         border-bottom: .125em solid borderColor
         &__label
-            order:2;
             border-top-left-radius: 0
             border-top-right-radius: 0
             border-bottom-left-radius: .5em
             border-bottom-right-radius: .5em
             cursor: pointer;
 .editor
-    display: flex;
-    flex-basis: 30vh;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1;
     smooth-out()
     &__toggle
         visibility:hidden
         position: fixed
         left: -9999em
-        &:checked
-            ~ .mpGlobal__header__editor,
-            ~ .mpGlobal__footer__editor,
-            ~ .mpGlobal__footer__editor > .editor__fieldset
-                flex-basis: 0;
-                height: 0;
-                overflow:hidden;  
     &__label
-        flex-shrink: 0;
-        align-self: flex-start;
-        display:inline-block;
         padding: .25em;
         border: 1px solid #e1e1e1;
         border-top-right-radius: .25em
         border-top-left-radius: .25em
         margin:0;
         cursor: pointer;
-        smooth()
-    &__fieldset
-        flex-shrink: 1;     
+        smooth()    
     &__control
         display:none;
     &__input
         &--name
-            flex-grow: 1
             smooth()
-    .editor__fieldsetWrap
-        display:flex
-        height: 30vh
-        .fieldset
-            flex-grow: 0;
-            flex-shrink: 1;
-            flex-basis: 0%;
-            height: 2em;
-            overflow:hidden;
-
 
 .fieldset
-    display:flex;
-    flex-direction: column;
     smooth()
     &__label
         text-align: center
         color: inactivePeach;
-        display: block;
         font-size: .8em;
         padding: .618em;
         border-bottom: 1px solid bodyColor;
@@ -241,53 +179,20 @@ textarea, code
             color: activePeach 
             background: activeHeadingColor
             smooth()
+        &.js-shrunk
+            color: activePeach
+            background: activeHeadingColor
+            &:hover, &:focus, &:active
+                color: inactivePeach
+                background: inactiveHeadingColor
     &__wrapper
-            flex-grow: 1;
-            display:flex
-            width: 100%;
-            flex-direction: row
-            justify-content: flex-start
-            align-items:stretch
-            smooth()
-    &__button
-        flex-basis: 2.5em;
+        smooth()
     &__inputWrapper
-            align-self:flex-start
-            display:flex
-            justify-content:flex-start
+        smooth()
+        overflow-y: scroll
+        .fieldset__field
             smooth()
-            .fieldset__field
-                flex-grow: 1
-                margin-left: 0
-                smooth()
-            .fieldset__button
-                align-self: flex-end
-    &__field
-        height: 0;
-        visibility: hidden;
-        align-self: flex-end;
-        flex-basis: 0%;
-        width: 95%;
-        &--upload
-            flex-basis: 100%
-            width: 95%;
-        &.js-shrink
-            ~ .fieldset__inputWrapper
-                 .fieldset__field
-                    visibility: visible
-                    height: auto
-                    width: 75%
     &--externalLibs
-        width: 4em;
-        .fieldset__wrapper
-            flex-shrink: 1;
-            height: 3em;
-            overflow: scroll;
-            flex-direction: row;
-            justify-content:center;
-            align-items: stretch;
-            align-content: flex-start;
-            flex-wrap: wrap;
         .fieldset
             &__field
                 height: 2.3em;
@@ -304,110 +209,23 @@ textarea, code
         align-items: flex-end
         .fieldset__wrapper
             justify-content: flex-end
-    &--html
-        order: 1
-    &--css
-        order: 2
-    &--js
-        order: 3
-
 .control
     visibility: hidden;
     width: 0%;
     height: 0;
 
-        
-.control--html:checked 
-    ~ .editor__fieldsetWrap 
-        .fieldset--html
-            flex-grow: 1;
-            flex-basis: 33%;
-            height: 100%;
-            .field
-                visibility: visible;
-                width: 100%;
-                height: 80%;
-                &.js-shrink
-                    height: 10%;  
-            .fieldset__label
-                color: activePeach;
-                font-weight: bold;
-                border-bottom:1px solid activePeach
-                background:activeHeadingColor
-                &:hover
-                    background: inactiveHeadingColor
-      
-.control--css:checked
-    ~ .editor__fieldsetWrap
-        .fieldset--css
-            flex-grow: 1;
-            flex-basis: 33%;
-            visibility: visible;                
-            height: 100%;
-            flex-grow: 1;
-            .field
-                visibility: visible;
-                width: 100%;
-                height: 80%;
-                &.js-shrink
-                    height: 10%;  
-            .fieldset__label
-                color: activePeach;
-                font-weight: bold;
-                border-bottom:1px solid activePeach
-                background:activeHeadingColor
-                &:hover
-                    background:inactiveHeadingColor
-                      
-.control--js:checked
-    ~ .editor__fieldsetWrap
-        .fieldset--js
-            flex-grow: 1;
-            flex-basis: 33%;
-            visibility: visible;
-            height: 100%;
-            flex-grow: 1;
-            .field
-                visibility: visible;
-                width: 100%;
-                height: 80%;  
-                &.js-shrink
-                    height: 10%;  
-            .fieldset__label
-                color: activePeach;
-                font-weight: bold;
-                border-bottom:1px solid activePeach
-                background:activeHeadingColor
-                &:hover
-                    background:inactiveHeadingColor
-            
-.control--html:not(:checked) + .control--css:not(:checked) + .control--js:not(:checked)
-    ~ .editor__fieldsetWrap
-        .fieldset 
-            flex-grow:1;
+.fieldsetGroup
+    smooth()
 
-.mcsandy__result
-    display: flex;
-    flex-direction: column;
-    flex-grow: 2;
-    width: 100%;
-    &__iframe
-        flex-grow:1;
-        width: 100%;
-        outline: none;
-        border: none;
+.field
+    &--textarea
+        resize: vertical
 
 .mpGlobal__footer
     &__editor
-        flex-direction:row
-        flex-shrink: 1
-        align-self: flex-start
-        flex-basis: 4.5em
-        width: 100%
         border-top: .125em solid borderColor
         background: bgColor
-        .fieldset
-            flex-grow:1
+
 .mpModal
     display:none
     position:fixed
@@ -449,6 +267,10 @@ textarea, code
         height: 0
         .fieldset__legend,.fieldset__wrapper
             display:none
+    .fieldset__userOptions
+            display:none
+    .field--textarea
+        height: 26vh
 .anim-flash
     mcanimate(saved)
 
@@ -457,3 +279,8 @@ textarea, code
     
 .anim-slideDown
     mcanimate(slideDown)
+
+
+
+
+                

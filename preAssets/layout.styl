@@ -34,6 +34,8 @@ body
 			flex-direction: row
 			align-items: baseline
 			justify-content: space-between
+			&--visible
+				max-height: 2rem;
 		.editor
 			&__label
 				order: 2
@@ -85,15 +87,21 @@ body
 		align-items: stretch
 	&__button
 		flex-basis: 2.5em
+	&__userOptions
+		display:flex
+		flex-wrap: wrap
 	&__inputWrapper
-		align-self: flex-start
+		flex-grow: 1
+		align-self: auto
 		display: flex
 		justify-content: flex-start
 		.fieldset__field
 			flex-grow: 1
 			margin-left: 0
+			margin-right: 0
 		.fieldset__button
 			align-self: flex-end
+			margin-left: 0
 	&__field
 		align-self: flex-end
 		flex-basis: 0%
@@ -159,6 +167,9 @@ body
 		width: 100%
 		.fieldset
 			flex-grow: 1
+			&--externalLibs
+				flex-basis: 12rem
+				flex-shrink:0
 
 .mcsandy
 	&--horizontal
