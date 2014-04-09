@@ -1,5 +1,5 @@
 /* MCSANDY: THE OFFLINE HTML5 SANDBOX */
-var store, mcsandy, mcsandyUI;
+var store, mcsandyAppData, mcsandy, mcsandyUI;
 // Source: preAssets/js/store.js
 store = {
     types: [localStorage,sessionStorage],
@@ -242,10 +242,17 @@ var saveAs = saveAs
     || this.content
 ));
 if (typeof module !== "undefined") module.exports = saveAs;
-// Source: preAssets/js/mcsandy.js
+// Source: preAssets/js/mcsandyAppData.js
 /*MCSANDY APPDATA */
 mcsandyAppData = {
-    version: '0.2.1',
+    self: {
+        version: '0.2.1',
+        repo: 'https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox',
+        authors: {
+            author: 'Frank M Taylor',
+            author: 'Alex A Klock'
+        }
+    },
     ui : {
         onlineState: 'online',
         onlineCtrl: document.getElementById('js-onlineStatus'),
@@ -313,6 +320,8 @@ mcsandyProject = {
         }
     }
 };
+// Source: preAssets/js/mcsandy.js
+
 
 /*MCSANDYUI: the main user interactions with the app*/
 mcsandyUI = {
@@ -321,28 +330,7 @@ mcsandyUI = {
         console.info("McSandyUI is Running");
         _this.bindUiEvents();
     },
-    data: {
-        onlineState: 'online',
-        onlineCtrl: document.getElementById('js-onlineStatus'),
-        ctrls: {
-            projectDownload: document.getElementById('js-projectDownload'),
-            projectSelect: document.getElementById('js-selectProjects'),
-            projectLoad: document.getElementById('js-projectLoad')
-        },
-        fields: {
-            fieldsets: document.querySelectorAll('.fieldsetGroup__fieldset'),
-            upload: document.querySelectorAll('.fieldset__field--upload'),
-            add: '.fieldset__button--add',
-            rem: '.fieldset__button--rem',
-            assets: '.fieldset__field--url'
-        },
-        modal:{
-            container: document.getElementById('js-modal'),
-            overlay: document.getElementById('js-modal__overlay'),
-            content: document.getElementById('js-modal__content'),
-            title: document.getElementById('js-modal__title')
-        }
-    },
+    data: mcsandyAppData.ui,
     helpers: {
         keyDown: function (e) {
             var _this = mcsandyUI;
@@ -796,35 +784,7 @@ mcsandy = {
             _this.functions.createLibSelect();
         }
     },
-    appVersion: '2.1',
-    data: {
-        ctrls: {
-            projectLoad: document.getElementById('js-projectLoad'),
-            projectSave: document.getElementById('js-projectSave'),
-            projectDel: document.getElementById('js-projectDel'),
-            projectNew: document.getElementById('js-projectNew'),
-            projectName: document.getElementById('js-projectName'),
-            html: document.getElementById('js-html'),
-            css: document.getElementById('js-css'),
-            js: document.getElementById('js-js'),
-            jsLibs: '.fieldset__field--jsLib',
-            cssExtras: '.fieldset--css .fieldset__field--url',
-            jsExtras: '.fieldset--js .fieldset__field--url'
-        },
-        targets: {
-            iframe: document.getElementById('js-result')
-        },
-        externalJS: {
-            AngularJS: '//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js',
-            Dojo: '//ajax.googleapis.com/ajax/libs/dojo/1.9.2/dojo/dojo.js',
-            jQuery: 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
-            jQueryMobile: '//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.0/jquery.mobile.min.js',
-            jQueryUi: '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js',
-            mooTools: '//ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js',
-            prototype: '//ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js',
-            scriptaculous: '//ajax.googleapis.com/ajax/libs/scriptaculous/1.9.0/scriptaculous.js'
-        }
-    },
+    data: mcsandyAppData.core,
     blobData: {
         reset: 'html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}',
         jquery: 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
