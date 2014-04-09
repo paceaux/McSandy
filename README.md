@@ -105,11 +105,18 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
  + can now drag your editor fields out, drop them on a desktop, to create a separate file, just for that asset
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>e</kbd> to toggle the editors
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>p</kbd> to toggle the project panel
+ + fixed peakabo animation for McSandy header.
+ +  using stylus' NIB library to make animations work in all browsers. 
+ +  split the styles into styles and layout files
+ + Animation works in all browsers
+ + Now storing and recalling external assets such as CSS and JS
+ + Set width of jQuery libraries in footer so it doesn't get all weird in diff viewports
+ + set the textareas to be resizeable
 
 ## Known issues ##
- + the peakabo animation that shows the McSandy header only seems to work in Chrome for Mac. this maybe be an issue w/ CSS minification. 
- + animation doesn't work on buttons when user saves. 
-
+ + external CSS files aren't getting added into the preview
+ + FireFox doesn't show the names of the jQuery libraries
+ + the jQuery libraries list seems to be duplicated
  
 
 
