@@ -10,9 +10,615 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
-/* 
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+body {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: distribute;
+  -moz-box-pack: distribute;
+  -o-box-pack: distribute;
+  -ms-flex-pack: distribute;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-box-align: start;
+  -moz-box-align: start;
+  -o-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+}
+.mpGlobal__header,
+.mpGlobal__footer {
+  -webkit-flex-shrink: 1;
+  flex-shrink: 1;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -o-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+.mpGlobal__header {
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -o-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+}
+.mpGlobal__header__onlineStatus {
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+  -ms-flex-item-align: end;
+}
+.mpGlobal__header__editor__wrapper {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.mpGlobal__header__hgroup {
+  font-size: 1rem;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  -ms-flex-item-align: start;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: baseline;
+  -moz-box-align: baseline;
+  -o-box-align: baseline;
+  -ms-flex-align: baseline;
+  -webkit-align-items: baseline;
+  align-items: baseline;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.mpGlobal__header__hgroup--visible {
+  max-height: 2rem;
+}
+.mpGlobal__header .editor__label {
+  -webkit-box-ordinal-group: 2;
+  -moz-box-ordinal-group: 2;
+  -o-box-ordinal-group: 2;
+  -ms-flex-order: 2;
+  -webkit-order: 2;
+  order: 2;
+}
+.editor {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.editor__toggle:checked ~ .mpGlobal__header__editor,
+.editor__toggle:checked ~ .mpGlobal__footer__editor,
+.editor__toggle:checked ~ .mpGlobal__footer__editor > .editor__fieldset {
+  -webkit-flex-basis: 0;
+  flex-basis: 0;
+  height: 0;
+  overflow: hidden;
+}
+.editor__label {
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  -ms-flex-item-align: start;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.editor__fieldset {
+  -webkit-flex-shrink: 1;
+  flex-shrink: 1;
+}
+.editor__input--name {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+.editor__fieldset {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+.fieldsetGroup {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  height: 30vh;
+}
+.fieldsetGroup__fieldset {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-flex-basis: 10%;
+  flex-basis: 10%;
+}
+.fieldset {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-flex-shrink: 1;
+  flex-shrink: 1;
+}
+.fieldset__label {
+  display: block;
+}
+.fieldset__wrapper {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -o-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -o-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+}
+.fieldset__button {
+  -webkit-flex-basis: 2.5em;
+  flex-basis: 2.5em;
+}
+.fieldset__userOptions {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  -o-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.fieldset__inputWrapper {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-align-self: auto;
+  align-self: auto;
+  -ms-flex-item-align: auto;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -o-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+.fieldset__inputWrapper .fieldset__field {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  margin-left: 0;
+  margin-right: 0;
+}
+.fieldset__inputWrapper .fieldset__button {
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+  -ms-flex-item-align: end;
+  margin-left: 0;
+}
+.fieldset__field {
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+  -ms-flex-item-align: end;
+  -webkit-flex-basis: 0%;
+  flex-basis: 0%;
+  width: 99%;
+}
+.fieldset--html {
+  -webkit-box-ordinal-group: 1;
+  -moz-box-ordinal-group: 1;
+  -o-box-ordinal-group: 1;
+  -ms-flex-order: 1;
+  -webkit-order: 1;
+  order: 1;
+}
+.fieldset--css {
+  -webkit-box-ordinal-group: 2;
+  -moz-box-ordinal-group: 2;
+  -o-box-ordinal-group: 2;
+  -ms-flex-order: 2;
+  -webkit-order: 2;
+  order: 2;
+}
+.fieldset--js {
+  -webkit-box-ordinal-group: 3;
+  -moz-box-ordinal-group: 3;
+  -o-box-ordinal-group: 3;
+  -ms-flex-order: 3;
+  -webkit-order: 3;
+  order: 3;
+}
+.fieldset--externalLibs {
+  width: 4em;
+}
+.fieldset--externalLibs .fieldset__wrapper {
+  -webkit-flex-shrink: 1;
+  flex-shrink: 1;
+  height: 3em;
+  overflow: scroll;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  -o-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -o-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  -ms-flex-line-pack: start;
+  -webkit-align-content: flex-start;
+  align-content: flex-start;
+}
+.fieldset.js-shrunk {
+  -webkit-flex-basis: 0%;
+  flex-basis: 0%;
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -o-box-flex: 0;
+  -ms-box-flex: 0;
+  box-flex: 0;
+  -webkit-flex-grow: 0;
+  flex-grow: 0;
+  -webkit-flex-shrink: 2;
+  flex-shrink: 2;
+}
+.fieldset.js-shrunk .field,
+.fieldset.js-shrunk .fieldset__inputWrapper {
+  display: none;
+}
+.field {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+.field--upload {
+  -webkit-flex-basis: 100%;
+  flex-basis: 100%;
+  width: 95%;
+}
+.field--textarea {
+  height: 20vh;
+}
+.field--html {
+  height: 26.5vh;
+}
+.field.js-shrink {
+  height: 0;
+}
+.field.js-shrink ~ .fieldset__inputWrapper .fieldset__field {
+  visibility: visible;
+  height: auto;
+  width: 75%;
+}
+.mpGlobal__result {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-flex: 2;
+  -moz-box-flex: 2;
+  -o-box-flex: 2;
+  -ms-box-flex: 2;
+  box-flex: 2;
+  -webkit-flex-grow: 2;
+  flex-grow: 2;
+}
+.mpGlobal__result__iframe {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  width: 100%;
+  outline: none;
+  border: none;
+}
+.mpGlobal__footer__editor {
+  -webkit-flex-shrink: 1;
+  flex-shrink: 1;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  -ms-flex-item-align: start;
+  -webkit-flex-basis: 4.5em;
+  flex-basis: 4.5em;
+  width: 100%;
+}
+.mpGlobal__footer__editor .fieldset {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+.mpGlobal__footer__editor .fieldset--externalLibs {
+  -webkit-flex-basis: 12rem;
+  flex-basis: 12rem;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+.mcsandy--horizontal {
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+.mcsandy--horizontal .mpGlobal__header {
+  width: 40vw;
+}
+.mcsandy--horizontal .mpGlobal__header .editor {
+  -webkit-flex-basis: 95vh;
+  flex-basis: 95vh;
+  height: 95vh;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.mcsandy--horizontal .mpGlobal__header .editor .fieldset {
+  -webkit-flex-basis: 5%;
+  flex-basis: 5%;
+}
+.mcsandy--horizontal .mpGlobal__result {
+  height: 100%;
+}
+.mcsandy--horizontal .mpGlobal__footer {
+  -webkit-flex-basis: 30vw;
+  flex-basis: 30vw;
+  height: 95vh;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+  -ms-flex-item-align: end;
+}
+.mcsandy--horizontal .mpGlobal__footer__editor {
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-basis: none;
+  flex-basis: none;
+  height: 100%;
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+  -ms-flex-item-align: end;
+}
+.mcsandy--horizontal .mpGlobal__footer__editor .fieldset {
+  font-size: 0.9em;
+  width: 100%;
+}
+.mcsandy--horizontal .mpGlobal__footer__editor .fieldset__wrapper {
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.mcsandy--horizontal .editor__toggle:checked ~ .mpGlobal__footer__editor {
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -o-box-flex: 0;
+  -ms-box-flex: 0;
+  box-flex: 0;
+  -webkit-flex-grow: 0;
+  flex-grow: 0;
+}
+.mcsandy--horizontal > .editor__fieldset {
+  height: initial;
+  width: 0;
+}
 
-*/
 html,
 body,
 h1,
@@ -37,18 +643,7 @@ iframe {
 fieldset {
   border: none;
 }
-body,
-html {
-  height: 100%;
-  width: 100%;
-}
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-start;
-  height: 100%;
-  width: 100%;
   color: #091e36;
 }
 h1,
@@ -99,6 +694,10 @@ label {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 a:hover,
@@ -119,6 +718,10 @@ label:focus {
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
 kbd {
@@ -126,11 +729,16 @@ kbd {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 10px;
   padding: 1px 4px;
+  -webkit-border-radius: 2px;
   border-radius: 2px;
   border: 1px solid #ddd;
   border-bottom-color: #ccc;
   border-right-color: #ccc;
   background-color: #ddd;
+  background-image: -webkit-linear-gradient(#f1f1f1, #ddd);
+  background-image: -moz-linear-gradient(#f1f1f1, #ddd);
+  background-image: -o-linear-gradient(#f1f1f1, #ddd);
+  background-image: -ms-linear-gradient(#f1f1f1, #ddd);
   background-image: linear-gradient(#f1f1f1, #ddd);
   background-repeat: repeat-x;
 }
@@ -150,12 +758,15 @@ textarea:hover {
 button,
 input,
 select {
-  padding: 0.618em;
-  margin: 0.618em;
+  font-size: 1vw;
+  padding: 0.618vw;
+  margin: 0.618vw;
 }
 button,
 .editor__label {
   background: #f5e1bf;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
 }
 button:hover,
 .editor__label:hover,
@@ -164,69 +775,93 @@ button:focus,
   background: #eece97;
 }
 button:active {
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  -o-animation-delay: 0.5s;
+  -ms-animation-delay: 0.5s;
   animation-delay: 0.5s;
+  -webkit-animation-duration: 3.5s;
+  -moz-animation-duration: 3.5s;
+  -o-animation-duration: 3.5s;
+  -ms-animation-duration: 3.5s;
   animation-duration: 3.5s;
+  -webkit-animation-name: saved;
+  -moz-animation-name: saved;
+  -o-animation-name: saved;
+  -ms-animation-name: saved;
   animation-name: saved;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+  -o-animation-iteration-count: 1;
+  -ms-animation-iteration-count: 1;
   animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+  -moz-animation-direction: normal;
+  -o-animation-direction: normal;
+  -ms-animation-direction: normal;
   animation-direction: normal;
 }
 textarea,
 code {
   font-family: Courier, monospace;
 }
-.mpGlobal__header,
-.mpGlobal__footer {
-  flex-shrink: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-}
 .mpGlobal__header {
-  align-items: stretch;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 .mpGlobal__header__onlineStatus {
-  align-self: flex-end;
   padding: 0 0.618em;
 }
 .mpGlobal__header__editor__wrapper {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 .mpGlobal__header__hgroup {
-  flex-shrink: 0;
-  flex-grow: 1;
-  align-self: flex-start;
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: space-between;
   font-size: 1em;
-  width: 100%;
-  max-height: 0;
   background: #eef5fc;
   border-bottom: 0.125em solid #113968;
-  overflow: hidden;
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  -o-animation-delay: 0.5s;
+  -ms-animation-delay: 0.5s;
   animation-delay: 0.5s;
+  -webkit-animation-duration: 3.5s;
+  -moz-animation-duration: 3.5s;
+  -o-animation-duration: 3.5s;
+  -ms-animation-duration: 3.5s;
   animation-duration: 3.5s;
+  -webkit-animation-name: slideUp;
+  -moz-animation-name: slideUp;
+  -o-animation-name: slideUp;
+  -ms-animation-name: slideUp;
   animation-name: slideUp;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+  -o-animation-iteration-count: 1;
+  -ms-animation-iteration-count: 1;
   animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+  -moz-animation-direction: normal;
+  -o-animation-direction: normal;
+  -ms-animation-direction: normal;
   animation-direction: normal;
 }
 .mpGlobal__header .editor {
   border-bottom: 0.125em solid #113968;
 }
 .mpGlobal__header .editor__label {
-  order: 2;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-left-radius: 0.5em;
@@ -234,14 +869,13 @@ code {
   cursor: pointer;
 }
 .editor {
-  display: flex;
-  flex-basis: 30vh;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
 .editor__toggle {
@@ -249,17 +883,7 @@ code {
   position: fixed;
   left: -9999em;
 }
-.editor__toggle:checked ~ .mpGlobal__header__editor,
-.editor__toggle:checked ~ .mpGlobal__footer__editor,
-.editor__toggle:checked ~ .mpGlobal__footer__editor > .editor__fieldset {
-  flex-basis: 0;
-  height: 0;
-  overflow: hidden;
-}
 .editor__label {
-  flex-shrink: 0;
-  align-self: flex-start;
-  display: inline-block;
   padding: 0.25em;
   border: 1px solid #e1e1e1;
   border-top-right-radius: 0.25em;
@@ -269,44 +893,38 @@ code {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-}
-.editor__fieldset {
-  flex-shrink: 1;
 }
 .editor__control {
   display: none;
 }
 .editor__input--name {
-  flex-grow: 1;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.editor .editor__fieldsetWrap {
-  display: flex;
-  height: 30vh;
-}
-.editor .editor__fieldsetWrap .fieldset {
-  flex-grow: 0;
-  flex-shrink: 1;
-  flex-basis: 0%;
-  height: 2em;
-  overflow: hidden;
-}
 .fieldset {
-  display: flex;
-  flex-direction: column;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 .fieldset__label {
   text-align: center;
   color: #f5e1bf;
-  display: block;
   font-size: 0.8em;
   padding: 0.618em;
   border-bottom: 1px solid #091e36;
@@ -314,6 +932,10 @@ code {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 .fieldset__label:hover {
@@ -322,78 +944,61 @@ code {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+}
+.fieldset__label.js-shrunk {
+  color: #eece97;
+  background: #5799e4;
+}
+.fieldset__label.js-shrunk:hover,
+.fieldset__label.js-shrunk:focus,
+.fieldset__label.js-shrunk:active {
+  color: #f5e1bf;
+  background: #729bc9;
 }
 .fieldset__wrapper {
-  flex-grow: 1;
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: stretch;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-}
-.fieldset__button {
-  flex-basis: 2.5em;
 }
 .fieldset__inputWrapper {
-  align-self: flex-start;
-  display: flex;
-  justify-content: flex-start;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+  overflow-y: scroll;
 }
 .fieldset__inputWrapper .fieldset__field {
-  flex-grow: 1;
-  margin-left: 0;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-}
-.fieldset__inputWrapper .fieldset__button {
-  align-self: flex-end;
-}
-.fieldset__field {
-  height: 0;
-  visibility: hidden;
-  align-self: flex-end;
-  flex-basis: 0%;
-  width: 95%;
-}
-.fieldset__field--upload {
-  flex-basis: 100%;
-  width: 95%;
-}
-.fieldset__field.js-shrink ~ .fieldset__inputWrapper .fieldset__field {
-  visibility: visible;
-  height: auto;
-  width: 75%;
-}
-.fieldset--externalLibs {
-  width: 4em;
-}
-.fieldset--externalLibs .fieldset__wrapper {
-  flex-shrink: 1;
-  height: 3em;
-  overflow: scroll;
-  flex-direction: row;
-  justify-content: center;
-  align-items: stretch;
-  align-content: flex-start;
-  flex-wrap: wrap;
 }
 .fieldset--externalLibs .fieldset__field {
   height: 2.3em;
   visibility: visible;
+  -webkit-flex-basis: 1.3em;
   flex-basis: 1.3em;
 }
 .fieldset--externalLibs .fieldset__label {
+  -webkit-flex-basis: 70%;
   flex-basis: 70%;
   margin: 0.5em;
 }
@@ -403,121 +1008,42 @@ code {
   background: #5799e4;
 }
 .fieldset--otherProjects {
+  -webkit-box-align: end;
+  -moz-box-align: end;
+  -o-box-align: end;
+  -ms-flex-align: end;
+  -webkit-align-items: flex-end;
   align-items: flex-end;
 }
 .fieldset--otherProjects .fieldset__wrapper {
+  -webkit-box-pack: end;
+  -moz-box-pack: end;
+  -o-box-pack: end;
+  -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
   justify-content: flex-end;
-}
-.fieldset--html {
-  order: 1;
-}
-.fieldset--css {
-  order: 2;
-}
-.fieldset--js {
-  order: 3;
 }
 .control {
   visibility: hidden;
   width: 0%;
   height: 0;
 }
-.control--html:checked ~ .editor__fieldsetWrap .fieldset--html {
-  flex-grow: 1;
-  flex-basis: 33%;
-  height: 100%;
+.fieldsetGroup {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
-.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .field {
-  visibility: visible;
-  width: 100%;
-  height: 80%;
-}
-.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .field.js-shrink {
-  height: 10%;
-}
-.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .fieldset__label {
-  color: #eece97;
-  font-weight: bold;
-  border-bottom: 1px solid #eece97;
-  background: #5799e4;
-}
-.control--html:checked ~ .editor__fieldsetWrap .fieldset--html .fieldset__label:hover {
-  background: #729bc9;
-}
-.control--css:checked ~ .editor__fieldsetWrap .fieldset--css {
-  flex-grow: 1;
-  flex-basis: 33%;
-  visibility: visible;
-  height: 100%;
-  flex-grow: 1;
-}
-.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .field {
-  visibility: visible;
-  width: 100%;
-  height: 80%;
-}
-.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .field.js-shrink {
-  height: 10%;
-}
-.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .fieldset__label {
-  color: #eece97;
-  font-weight: bold;
-  border-bottom: 1px solid #eece97;
-  background: #5799e4;
-}
-.control--css:checked ~ .editor__fieldsetWrap .fieldset--css .fieldset__label:hover {
-  background: #729bc9;
-}
-.control--js:checked ~ .editor__fieldsetWrap .fieldset--js {
-  flex-grow: 1;
-  flex-basis: 33%;
-  visibility: visible;
-  height: 100%;
-  flex-grow: 1;
-}
-.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .field {
-  visibility: visible;
-  width: 100%;
-  height: 80%;
-}
-.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .field.js-shrink {
-  height: 10%;
-}
-.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .fieldset__label {
-  color: #eece97;
-  font-weight: bold;
-  border-bottom: 1px solid #eece97;
-  background: #5799e4;
-}
-.control--js:checked ~ .editor__fieldsetWrap .fieldset--js .fieldset__label:hover {
-  background: #729bc9;
-}
-.control--html:not(:checked) + .control--css:not(:checked) + .control--js:not(:checked) ~ .editor__fieldsetWrap .fieldset {
-  flex-grow: 1;
-}
-.mcsandy__result {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 2;
-  width: 100%;
-}
-.mcsandy__result__iframe {
-  flex-grow: 1;
-  width: 100%;
-  outline: none;
-  border: none;
+.field--textarea {
+  resize: vertical;
 }
 .mpGlobal__footer__editor {
-  flex-direction: row;
-  flex-shrink: 1;
-  align-self: flex-start;
-  flex-basis: 4.5em;
-  width: 100%;
   border-top: 0.125em solid #113968;
   background: #eef5fc;
-}
-.mpGlobal__footer__editor .fieldset {
-  flex-grow: 1;
 }
 .mpModal {
   display: none;
@@ -529,6 +1055,7 @@ code {
   max-height: 61.8%;
   width: 38.2%;
   background: #fefefe;
+  -webkit-border-radius: 0.25em;
   border-radius: 0.25em;
 }
 .mpModal.visible {
@@ -544,11 +1071,31 @@ code {
 }
 .mpModal__overlay.visible {
   display: block;
+  -webkit-box-ordinal-group: -1;
+  -moz-box-ordinal-group: -1;
+  -o-box-ordinal-group: -1;
+  -ms-flex-order: -1;
+  -webkit-order: -1;
   order: -1;
 }
 .mpModal__content {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
   justify-content: space-between;
 }
 .online {
@@ -558,7 +1105,14 @@ code {
   color: #f00;
 }
 .mcsandy--offline .fieldset--externalLibs {
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -o-box-flex: 0;
+  -ms-box-flex: 0;
+  box-flex: 0;
+  -webkit-flex-grow: 0;
   flex-grow: 0;
+  -webkit-flex-basis: 0%;
   flex-basis: 0%;
   width: 0;
   height: 0;
@@ -567,25 +1121,91 @@ code {
 .mcsandy--offline .fieldset--externalLibs .fieldset__wrapper {
   display: none;
 }
+.mcsandy--offline .fieldset__userOptions {
+  display: none;
+}
+.mcsandy--offline .field--textarea {
+  height: 26vh;
+}
 .anim-flash {
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  -o-animation-delay: 0.5s;
+  -ms-animation-delay: 0.5s;
   animation-delay: 0.5s;
+  -webkit-animation-duration: 3.5s;
+  -moz-animation-duration: 3.5s;
+  -o-animation-duration: 3.5s;
+  -ms-animation-duration: 3.5s;
   animation-duration: 3.5s;
+  -webkit-animation-name: saved;
+  -moz-animation-name: saved;
+  -o-animation-name: saved;
+  -ms-animation-name: saved;
   animation-name: saved;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+  -o-animation-iteration-count: 1;
+  -ms-animation-iteration-count: 1;
   animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+  -moz-animation-direction: normal;
+  -o-animation-direction: normal;
+  -ms-animation-direction: normal;
   animation-direction: normal;
 }
 .anim-slideUp {
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  -o-animation-delay: 0.5s;
+  -ms-animation-delay: 0.5s;
   animation-delay: 0.5s;
+  -webkit-animation-duration: 3.5s;
+  -moz-animation-duration: 3.5s;
+  -o-animation-duration: 3.5s;
+  -ms-animation-duration: 3.5s;
   animation-duration: 3.5s;
+  -webkit-animation-name: slideUp;
+  -moz-animation-name: slideUp;
+  -o-animation-name: slideUp;
+  -ms-animation-name: slideUp;
   animation-name: slideUp;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+  -o-animation-iteration-count: 1;
+  -ms-animation-iteration-count: 1;
   animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+  -moz-animation-direction: normal;
+  -o-animation-direction: normal;
+  -ms-animation-direction: normal;
   animation-direction: normal;
 }
 .anim-slideDown {
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  -o-animation-delay: 0.5s;
+  -ms-animation-delay: 0.5s;
   animation-delay: 0.5s;
+  -webkit-animation-duration: 3.5s;
+  -moz-animation-duration: 3.5s;
+  -o-animation-duration: 3.5s;
+  -ms-animation-duration: 3.5s;
   animation-duration: 3.5s;
+  -webkit-animation-name: slideDown;
+  -moz-animation-name: slideDown;
+  -o-animation-name: slideDown;
+  -ms-animation-name: slideDown;
   animation-name: slideDown;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+  -o-animation-iteration-count: 1;
+  -ms-animation-iteration-count: 1;
   animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+  -moz-animation-direction: normal;
+  -o-animation-direction: normal;
+  -ms-animation-direction: normal;
   animation-direction: normal;
 }
 @-moz-keyframes slideUp {
@@ -771,43 +1391,41 @@ code {
             <div class="mpGlobal__header__hgroup">
                 <h1 class="mpGlobal__header__h1 h1">McSandy</h1>
                 <h2 class="mpGlobal__header__h2 h2">The offline HTML sandbox</h2>
-                <span id="js-onlineStatus" class="mpGlobal__header__onlineStatus online">&#9673;</span>
+                <span id="js-onlineStatus" title="You're online" class="mpGlobal__header__onlineStatus online">&#9673;</span>
             </div>
             <div class="mpGlobal__header__editor__wrapper wrapper">
                 <label for="js-editor-toggle" class="editor__label">Editor</label>
                 <input type="checkbox" id="js-editor-toggle" class="editor__toggle" />
             <form class="mpGlobal__header__editor editor">
-                <input type="checkbox" id="js-htmlSwitch" class="editor__control editor__control--html control control--html" checked />
-                <input type="checkbox" id="js-cssSwitch" class="editor__control editor__control--css control control--css" checked/>
-                <input type="checkbox" id="js-jsSwitch" class="editor__control editor__control--js control control--js" checked/>
-
-                <div class="editor__fieldsetWrap">
-                    <fieldset class="editor__fieldset fieldset fieldset--html" draggable="true">
-                        <label class="fieldset__label fieldset__label--html" for="js-htmlSwitch">HTML</label>
-                        <textarea  id="js-html" tabindex="1" class="fieldset__field fieldset__field--html field field--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
+                    <fieldset id="js-fieldset--html" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--html" draggable="true" data-mimeoutput="text/html" data-fileext="html">
+                        <label class="fieldset__label fieldset__label--html" for="js-html">HTML</label>
+                        <textarea  id="js-html" tabindex="1" class="fieldset__field fieldset__field--html field field--textarea field--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
                     </fieldset>
-                    <fieldset class="editor__fieldset fieldset fieldset--css" draggable="true">
-                        <label class="fieldset__label fieldset__label--css" for="js-cssSwitch">CSS</label>
-                        <textarea id="js-css" tabindex="2" class="fieldset__field fieldset__field--css field field--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
-                        <div class="fieldset__inputWrapper">
-                            <input type="url" class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.css"/>
-                            <button class="fieldset__button fieldset__button--add">+</button>
+                    <fieldset id="js-fieldset--css" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--css" draggable="true" data-mimeoutput="text/css" data-fileext="css">
+                        <label class="fieldset__label fieldset__label--css" for="js-css">CSS</label>
+                        <textarea id="js-css" tabindex="2" class="fieldset__field fieldset__field--css field field--textarea field--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
+                        <div class="fieldset__userOptions userOptions">
+                            <div class="fieldset__inputWrapper fieldset__inputWrapper--first">
+                                <input type="url" class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.css" data-externaltype="css"/>
+                                <button class="fieldset__button fieldset__button--add">+</button>
+                            </div>
                         </div>
                     </fieldset>
-                    <fieldset class="editor__fieldset fieldset fieldset--js" draggable="true">
-                        <label class="fieldset__label fieldset__label--js" for="js-jsSwitch" title="ctrl + r">JS</label>
-                        <textarea id="js-js" tabindex="3" class="fieldset__field fieldset__field--js field field--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
-                        <div class="fieldset__inputWrapper">
-                            <input type="url"  class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.js"/>
-                            <button class="fieldset__button fieldset__button--add">+</button>
+                    <fieldset id="js-fieldset--js" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--js" draggable="true" data-mimeoutput="application/javascript" data-fileext="js">
+                        <label class="fieldset__label fieldset__label--js" for="js-js" title="ctrl + r">JS</label>
+                        <textarea id="js-js" tabindex="3" class="fieldset__field fieldset__field--js field field--textarea field--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
+                        <div class="fieldset__userOptions userOptions">
+                            <div class="fieldset__inputWrapper fieldset__inputWrapper--first">
+                                <input type="url"  class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.js" data-externaltype="js"/>
+                                <button class="fieldset__button fieldset__button--add">+</button>
+                            </div>
                         </div>
                     </fieldset>
-            </div>
             </form>
         </div>
         </header>
-    <main class="mcsandy__result">
-        <iframe id="js-result" class="mcsandy__result__iframe"></iframe>
+    <main class="mpGlobal__result">
+        <iframe id="js-result" class="mpGlobal__result__iframe"></iframe>
     </main>
     <footer class="mpGlobal__footer">
         <label for="js-footer-editor-toggle" class="editor__label">Projects</label>
@@ -1112,6 +1730,77 @@ var saveAs = saveAs
 ));
 if (typeof module !== "undefined") module.exports = saveAs;
 // Source: preAssets/js/mcsandy.js
+/*MCSANDY APPDATA */
+mcsandyAppData = {
+    version: '0.2.1',
+    ui : {
+        onlineState: 'online',
+        onlineCtrl: document.getElementById('js-onlineStatus'),
+        ctrls: {
+            projectDownload: document.getElementById('js-projectDownload'),
+            projectSelect: document.getElementById('js-selectProjects'),
+            projectLoad: document.getElementById('js-projectLoad')
+        },
+        fields: {
+            fieldsets: document.querySelectorAll('.fieldsetGroup__fieldset'),
+            upload: document.querySelectorAll('.fieldset__field--upload'),
+            add: '.fieldset__button--add',
+            rem: '.fieldset__button--rem',
+            assets: '.fieldset__field--url'
+        },
+        modal:{
+            container: document.getElementById('js-modal'),
+            overlay: document.getElementById('js-modal__overlay'),
+            content: document.getElementById('js-modal__content'),
+            title: document.getElementById('js-modal__title')
+        }
+    }, 
+    core: {
+        ctrls: {
+            projectLoad: document.getElementById('js-projectLoad'),
+            projectSave: document.getElementById('js-projectSave'),
+            projectDel: document.getElementById('js-projectDel'),
+            projectNew: document.getElementById('js-projectNew'),
+            projectName: document.getElementById('js-projectName'),
+            html: document.getElementById('js-html'),
+            css: document.getElementById('js-css'),
+            js: document.getElementById('js-js'),
+            jsLibs: '.fieldset__field--jsLib',
+            cssExtras: '.fieldset--css .fieldset__field--url',
+            jsExtras: '.fieldset--js .fieldset__field--url'
+        },
+        targets: {
+            iframe: document.getElementById('js-result')
+        },
+        externalJS: {
+            AngularJS: '//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js',
+            Dojo: '//ajax.googleapis.com/ajax/libs/dojo/1.9.2/dojo/dojo.js',
+            jQuery: 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+            jQueryMobile: '//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.0/jquery.mobile.min.js',
+            jQueryUi: '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js',
+            mooTools: '//ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js',
+            prototype: '//ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js',
+            scriptaculous: '//ajax.googleapis.com/ajax/libs/scriptaculous/1.9.0/scriptaculous.js'
+        }
+    },
+    modalContent: {
+        shortcuts: '<dl><dt><kbd>ctrl</kbd>+<kbd>s</kbd></dt><dd>save</dd><dt><kbd>ctrl</kbd>+<kbd>r</kbd></dt><dd>run</dd><dt><kbd>ctrl</kbd>+<kbd>f</kbd></dt><dd>download</dd><dt><kbd>ctrl</kbd>+<kbd>l</kbd></dt><dd>load</dd></dl><dl><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>e</kbd></dt><dd>Toggle Editor Panel</dd><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd></dt><dd>Toggle Project Panel</dd><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>del</kbd></dt><dd>Delete Project</dd><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>+</kbd></dt><dd>New Project</dd></dl>'
+    }
+};
+mcsandyProject = {
+    blobArray : [],
+    externals : {
+        assets: {
+            css: [],
+            js: []
+        },
+        libraries: {
+            css: [],
+            js: []
+        }
+    }
+};
+
 /*MCSANDYUI: the main user interactions with the app*/
 mcsandyUI = {
     init: function () {
@@ -1126,6 +1815,13 @@ mcsandyUI = {
             projectDownload: document.getElementById('js-projectDownload'),
             projectSelect: document.getElementById('js-selectProjects'),
             projectLoad: document.getElementById('js-projectLoad')
+        },
+        fields: {
+            fieldsets: document.querySelectorAll('.fieldsetGroup__fieldset'),
+            upload: document.querySelectorAll('.fieldset__field--upload'),
+            add: '.fieldset__button--add',
+            rem: '.fieldset__button--rem',
+            assets: '.fieldset__field--url'
         },
         modal:{
             container: document.getElementById('js-modal'),
@@ -1175,6 +1871,9 @@ mcsandyUI = {
                         case 8:
                             mcsandy.functions.delContent(e);
                             break;
+                        case 72: 
+                            _this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
+                            break;
                         default: 
                             break;
                     }
@@ -1222,17 +1921,18 @@ mcsandyUI = {
         cloneParent: function (el) {
             var clone = el.parentNode.cloneNode(true),
                 grandparent = el.parentNode.parentNode;
+            clone.querySelector('input').value = '';
             grandparent.appendChild(clone);
         },
-        toggleLabelClick: function (e) {
+        toggleEditorField: function (e) {
             var label = e.target,
-                input = document.getElementById(e.target.getAttribute('for'));
-            if (!label.className.match('js-checked')) {
-                label.className = label.className + ' ' + 'js-checked';
-                input.className = input.className + ' ' + 'js-checked';
+                parent = label.parentElement;
+            if (!label.className.match('js-shrunk')) {
+                label.className = label.className + ' ' + 'js-shrunk';
+                parent.className = parent.className + ' ' + 'js-shrunk';
             } else {
-                label.className = label.className.replace(/(?:^|\s)js-checked(?!\S)/g, "");
-                input.className = input.className.replace(/(?:^|\s)js-checked(?!\S)/g, "");
+                label.className = label.className.replace(/(?:^|\s)js-shrunk(?!\S)/g, "");
+                parent.className = parent.className.replace(/(?:^|\s)js-shrunk(?!\S)/g, "");
             }
         },
         toggleClass: function (el, className) {
@@ -1246,17 +1946,67 @@ mcsandyUI = {
             [].forEach.call(els, function (el) {
                 el.addEventListener(evt, func);
             });
+        },
+        getExternalJsLibs: function () {
+            var _this = mcsandy,
+                libEls = document.querySelectorAll(_this.data.ctrls.jsLibs),
+                jsLibs = [];
+            [].forEach.call(libEls, function (lib) {
+                if (lib.checked) {
+                    jsLibs.push(_this.data.externalJS[lib.value]);
+                }
+            });
+            return jsLibs;
+        },
+        getAssetsByType: function (type) {
+            var _this = mcsandyUI,
+                fieldset = document.querySelector('.fieldset--' + type),
+                inputs = fieldset.querySelectorAll(_this.data.fields.assets),
+                assets = [];
+            [].forEach.call(inputs, function(input) {
+                if (input.value.length > 0) {
+                    assets.push(input.value);
+                }
+            });
+            return assets;
+        },
+        createExternalFileWrapper: function () {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'fieldset__inputWrapper';
+            return wrapper;
+        },
+        createExternalFileButton: function (buttonClass, buttonText) {
+            var button = document.createElement('button');
+            button.className = 'fieldset__button ' + buttonClass;
+            button.innerHTML = "&mdash;";
+            return button;
+        },
+        // createInput: function (inputType, inputClass) {
+        //     var input = document.createElement('input');
+        //     input.className = 'fieldset__field ' + inputClass;
+        //     input.type = inputType;
+        //     return input;
+        // },
+        createExternalFileSet: function (file, inputType, inputClass, buttonClass, buttonText) {
+            var _this = mcsandyUI,
+                wrapper = _this.helpers.createExternalFileWrapper(),
+                input = _this.helpers.createInput(inputType,'js-'+ Math.ceil(Math.random() * 10), inputClass, file, file),
+                button = _this.helpers.createExternalFileButton(buttonClass, buttonText);
+            wrapper.appendChild(input);
+            wrapper.appendChild(button);
+            return wrapper;
         }
     },
     bindUiEvents: function () {
         var _this = mcsandyUI,
             helpers = _this.helpers,
-            ctrls = _this.data.ctrls,
-            editors = document.querySelectorAll('.fieldset__field'),
-            editorFieldsets = document.querySelectorAll('.editor__fieldset'),
-            fileUploads = document.querySelectorAll('.fieldset__field--upload'),
-            addExternalFile = document.querySelectorAll('.fieldset__button--add'),
-            removeExternalFile = document.querySelectorAll('.fieldset__button--rem');
+            data = _this.data,
+            ctrls = data.ctrls,
+            editors = document.querySelectorAll('.field--textarea'),
+            editorFieldsets = data.fields.fieldsets,
+            fileUploads = data.fields.upload,
+            addExternalFile = document.querySelectorAll(data.fields.add),
+            removeExternalFile = document.querySelectorAll(data.fields.rem);
 
         /*CHECK FOR INTERNET CONNECTION*/
         window.addEventListener('load', function () {
@@ -1296,12 +2046,13 @@ mcsandyUI = {
         /*DRAG AND DROP FILES INTO EDITORS */
         helpers.addEvents(fileUploads, 'change', _this.helpers.handleFileUpload);
 
-        helpers.addEvents(editorFieldsets, 'dragend', _this.functions.handleFileDragout)
+        helpers.addEvents(editorFieldsets, 'dragend', _this.functions.handleFileDragout);
+        helpers.addEvents(editorFieldsets, 'drop', _this.functions.handleFileDrop);
         /*ADD EXTERNAL LINK*/
         helpers.addEvents(addExternalFile, 'click', _this.functions.handleAddExternalFile);
         helpers.addEvents(removeExternalFile, 'click', _this.functions.handleRemoveExternalFile);
         /*LABEL/INPUT SHENANIGANS*/
-        _this.functions.bindJsCheck();
+        _this.functions.bindFieldsetCollapse();
         _this.data.modal.overlay.addEventListener('click', _this.functions.toggleModal);
     },
     functions: {
@@ -1314,7 +2065,6 @@ mcsandyUI = {
                 document.title = "McSandy | Online";
                 document.querySelector('body').className = document.querySelector('body').className.replace(/(?:^|\s)mcsandy--offline(?!\S)/g, " mcsandy--online");
                 mcsandy.functions.createLibSelect();
-                _this.functions.handleHash();
             } else {
                 ctrl.className = ctrl.className.replace(/(?:^|\s)online(?!\S)/g, " offline");
                 document.title = "McSandy | Offline";
@@ -1349,6 +2099,9 @@ mcsandyUI = {
         loadProject: function (project) {
             var _this = mcsandyUI,
                 projData = store.get(0, project);
+            window.mcsandyProject = projData;
+            console.info("McSandy Loaded a Project");
+            console.info(projData);
             mcsandy.functions.updateContent(projData); // this is in the McSandy interface
             _this.functions.updateEditors(projData.rawParts.html, projData.rawParts.css, projData.rawParts.js);
             _this.functions.updateCtrls(projData);
@@ -1358,6 +2111,21 @@ mcsandyUI = {
             var _this = mcsandyUI,
                 helpers = _this.helpers;
             helpers.removeParent(e.target);
+            mcsandyProject.externals
+
+        },
+        handleFileDrop: function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log(e);
+            var _this = mcsandyUI,
+                files = e.dataTransfer.files;
+            for (var i = 0, f; f = files[i]; i++) {
+                console.log(f);
+                var input = _this.helpers.createExternalFileSet(f);
+                e.target.appendChild(input);
+            }
+
         },
         handleAddExternalFile: function (e) {
             e.preventDefault();
@@ -1369,6 +2137,16 @@ mcsandyUI = {
             el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
             el.innerHTML = "&mdash;";
             _this.bindUiEvents();
+        },
+        handleLibToggle: function (e) {
+            var _this = mcsandy,
+                value = e.target.value,
+                exJs = e.target.getAttribute('data-mcsandy');
+            if (!e.target.checked) {
+                mcsandy.blobData.externalJS.splice(_this.blobData.externalJS.indexOf(exJs, 1));
+            } else {
+                mcsandy.blobData.externalJS.push(exJs);
+            }
         },
         handleDownloadProject: function (e) {
             e.preventDefault();
@@ -1394,23 +2172,34 @@ mcsandyUI = {
             e.dataTransfer.dropEffect = 'copy';
         },
         handleDragStart: function (e) {
+            console.log('drag start');
             e.stopPropagation();
             e.preventDefault();
+            // e.dataTransfer.dropEffect = 'none';
+            // e.dataTransfer.effectAllowed = 'all'; 
+            // e.dataTransfer.setData(e.target.dataset.mimeoutput,e.target.querySelector('textarea').value);
+            //             console.log(e);
+
+            // e.dataTransfer.effectAllowed = 'copy';
+            // var source = e.target.querySelector('textarea').value,
+            // type = e.target.dataset.type !== "js" ? 'text/' + e.target.dataset.type : 'application/javascript';
+            // e.dataTransfer.setData(type, source);
+            // console.log(e);
         },
         handleFileDragout: function (e) {
             e.stopPropagation();
             e.preventDefault();
+            e.dataTransfer.dropEffect = 'none';
+            e.dataTransfer.effectAllowed = 'all';
             var _this = mcsandyUI,
                 source = e.target.querySelector('textarea').value,
-                classes = e.target.classList,
                 projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy',
                 downloadObj = {
                     project: projectName,
                     blobArray: [source]
-                };
-                typeString= classes[2].replace('fieldset--','');
-                type = typeString !== 'js' ? typeString : 'javascript';        
-
+                },
+                type = e.target.dataset.fileext;       
+            var data = e.dataTransfer.getData(e.target.dataset.mimeoutput);
             mcsandy.functions.downloadContent(downloadObj, type);
         },
         updateEditors: function (html, css, js) {
@@ -1420,26 +2209,52 @@ mcsandyUI = {
             ctrls.css.value = css;
             ctrls.js.value = js;
         },
+        populateExternalAssetFields: function (typeOfFieldset, val) {
+            var _this = mcsandyUI,
+                fieldset = document.querySelector('.fieldset--' + typeOfFieldset),
+            inputSet = _this.helpers.createExternalFileSet(val, 'url', 'fieldset__field--url', 'fieldset__button--add', '+');
+            inputSet.querySelector('input').value = val;
+            inputSet.querySelector('input').setAttribute('data-externaltype', typeOfFieldset)
+            fieldset.appendChild(inputSet);
+            _this.bindUiEvents();
+        },
         updateCtrls: function (projData) {
             var _this = mcsandyUI,
                 projectField = mcsandy.data.ctrls.projectName,
-                ctrls = _this.data.ctrls;
+                ctrls = _this.data.ctrls
             projectField.value = projData.project;
             projectField.placeholder = projData.project;
             ctrls.projectDownload.value = projData.project;
-            if(projData.rawParts.external){
-                projData.rawParts.external.js.forEach(function (el) {
-                    var exJsInput = document.querySelector('[data-mcsandy="' + el + '"]');
+            if(projData.externals.libraries){
+                projData.externals.libraries.js.forEach(function (el) {
+                    var exJsInput = document.querySelector('.fieldset--externalLibs').querySelector('[data-mcsandy="' + el + '"]');
                         exJsInput.checked = true;
                 });
+            };
+            if (projData.externals) {
+               _this.functions.updateExternalAssetFields(projData, 'css');
+               _this.functions.updateExternalAssetFields(projData, 'js');
+                _this.bindUiEvents();
             }
         },
-        bindJsCheck: function () {
+        updateExternalAssetFields: function (projData, type) {
             var _this = mcsandyUI,
-                labels = document.querySelectorAll('label');
+                currentAssets = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper'),
+                xAssets = projData.externals.assets;
+            xAssets[type].forEach(function (val, i) {
+                var input = currentAssets[i].querySelector('input'),
+                    button = currentAssets[i].querySelector('button');
+                _this.helpers.cloneParent(input);
+                input.value = val;
+                button.innerHTML = '&mdash;'
+            });
+        },
+        bindFieldsetCollapse: function () {
+            var _this = mcsandyUI,
+                labels = document.querySelectorAll('.fieldset__label');
             for (i=0; i<labels.length; i++) {
                 var l = labels[i];
-                l.addEventListener('click', _this.helpers.toggleLabelClick);
+                l.addEventListener('click', _this.helpers.toggleEditorField);
             }
         },
         addModalContent: function (title, content){
@@ -1478,7 +2293,10 @@ mcsandy = {
             projectName: document.getElementById('js-projectName'),
             html: document.getElementById('js-html'),
             css: document.getElementById('js-css'),
-            js: document.getElementById('js-js')
+            js: document.getElementById('js-js'),
+            jsLibs: '.fieldset__field--jsLib',
+            cssExtras: '.fieldset--css .fieldset__field--url',
+            jsExtras: '.fieldset--js .fieldset__field--url'
         },
         targets: {
             iframe: document.getElementById('js-result')
@@ -1517,20 +2335,50 @@ mcsandy = {
             }
             return '<script type="text\/javascript" src="' + js + '"><\/script>';
         },
-        createExternalLibs: function () {
+        prepareExternalCSS: function (css) {
+            return '<link rel="stylesheet" href="' + css + '"/>';
+        },
+        createExternalLibs: function (libList) {
             var _this = mcsandy,
-                externalLibs = _this.blobData.externalJS,
                 externalJSSet = '';
             if (navigator.onLine) {
                 /*only add external libraries if we're online*/
-                externalLibs.forEach(function (el) {
+                libList.forEach(function (el) {
                     externalJSSet+= _this.helpers.prepareExternalJS(el);
                 });
             }
             return externalJSSet;
         },
+        createExternalCSS: function () {
+            var _this = mcsandy,
+                externalCSSSet = '';
+            if (navigator.onLine) {
+                /*only add external libraries if we're online*/
+                libList.forEach(function (el) {
+                    externalCSSSet+= _this.helpers.prepareExternalCSS(el);
+                });
+            }
+            return externalCSSSet;
+        },
         prepareInternalJS: function (js) {
             return '<script type="text\/javascript">' + js + '<\/script>';
+        },
+        getExternalAssets: function (type) {
+            var _this = mcsandy;
+            return mcsandyUI.helpers.getAssetsByType(type);
+        },
+        createExternalAssetsObj: function () {
+            var _this = mcsandy,
+                jsLibs = mcsandyUI.helpers.getExternalJsLibs();
+            return {
+                libraries: {
+                    js: jsLibs
+                },
+                assets: {
+                    css: mcsandyUI.helpers.getAssetsByType('css'),
+                    js: mcsandyUI.helpers.getAssetsByType('js')
+                }
+            };
         },
         createRawParts: function (html, css, js, externalJS) {
             var rawParts = {
@@ -1543,25 +2391,37 @@ mcsandy = {
             };
             return rawParts;
         },
-        wrapBlobParts: function () {
+        constructHead: function () {
             var _this = mcsandy,
                 helpers = _this.helpers,
+                reset = helpers.prepareCSS(_this.blobData.reset),
+                ctrls = _this.data.ctrls,
+                css = helpers.prepareCSS(ctrls.css.value),
+                externalLibraries = helpers.createExternalLibs(mcsandyProject.externals.libraries.js);
+            return '<head>' + reset + css + externalLibraries +'</head>';
+        },
+        constructFoot: function () {
+            var _this = mcsandy, 
+                userJs = _this.helpers.prepareInternalJS(_this.data.ctrls.js.value),
+                extraJs = _this.helpers.createExternalLibs(mcsandyProject.externals.assets.js);
+            return extraJs + '\n' + userJs;
+        },
+        wrapBlobParts: function () {
+            var _this = mcsandy,
                 blobData = _this.blobData,
                 ctrls = _this.data.ctrls,
-                html = helpers.prepareHTML(ctrls.html.value),
-                reset = helpers.prepareCSS(blobData.reset),
-                externalLibraries = helpers.createExternalLibs(),
-                css =  helpers.prepareCSS(ctrls.css.value),
-                head = '<head>' + css + externalLibraries +'</head>',
-                js = helpers.prepareInternalJS(ctrls.js.value),
-                blobKit = [head,html,js];
+                html = _this.helpers.prepareHTML(ctrls.html.value),
+                head = _this.helpers.constructHead(),
+                footer = _this.helpers.constructFoot(),
+                blobKit = [head,html,footer];
             return blobKit;
         },
-        createProjectObj: function (projectName, rawParts, blobArray) {
+        createProjectObj: function (projectName, rawParts, blobArray, assets) {
             return {
                 'project': projectName,
                 blobArray: blobArray,
-                rawParts: rawParts
+                rawParts: rawParts,
+                externals: assets
             }; 
         },
         buildBlob: function (parts, type) {
@@ -1615,7 +2475,7 @@ mcsandy = {
             functions.updateContent();
         });
 
-        //BIND EVENTS TO BUTTONS
+        //BIND EVENTS TO BUTTONSl
         ctrls.projectSave.addEventListener('click', functions.saveContent);
         ctrls.projectDel.addEventListener('click', functions.delContent);
         ctrls.projectNew.addEventListener('click', functions.clearContent);
@@ -1652,7 +2512,7 @@ mcsandy = {
                 libWrap.appendChild(label);
             }
             
-            mcsandyUI.functions.bindJsCheck();
+            mcsandyUI.functions.bindFieldsetCollapse();
         },
         handleLibToggle: function (e) {
             var _this = mcsandy,
@@ -1660,8 +2520,10 @@ mcsandy = {
                 exJs = e.target.getAttribute('data-mcsandy');
             if (!e.target.checked) {
                 _this.blobData.externalJS.splice(_this.blobData.externalJS.indexOf(exJs, 1));
+                mcsandyProject.externals.libraries.js.splice(mcsandyProject.externals.libraries.js.indexOf(exJs, 1));
             } else {
                 _this.blobData.externalJS.push(exJs);
+                mcsandyProject.externals.libraries.js.push(exJs);
             }
         },
         updateContent: function (loadedParts) {
@@ -1695,9 +2557,10 @@ mcsandy = {
                 rawParts = _this.helpers.createRawParts(ctrls.html.value, ctrls.css.value, ctrls.js.value, _this.blobData.externalJS),
                 blobArray = _this.helpers.wrapBlobParts(),
                 projectName = _this.data.ctrls.projectName.value,
-                project = _this.helpers.createProjectObj(projectName, rawParts, blobArray)
+                externalAssets = _this.helpers.createExternalAssetsObj(),
+                project = _this.helpers.createProjectObj(projectName, rawParts, blobArray, externalAssets);
             store.set(0, projectName, project);
-            mcsandyUI.functions.setHash(projectName)
+            mcsandyUI.functions.setHash(projectName);
             _this.functions.createProjectSelect();
         },
         downloadContent: function (downloadObj, type) {

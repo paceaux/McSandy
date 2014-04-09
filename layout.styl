@@ -1,0 +1,35 @@
+html, body
+	height: 100%
+	width: 100%
+body
+	display:flex
+	flex-direction: column
+	justify-content: space-around
+	align-items: flex-start
+
+.mpGlobal
+	&__header, &__footer
+		flex-shrink: 1
+		display: flex
+		width: 100%
+		flex-direction: column
+		justify-content: flex-start
+	&__header
+		align-items: stretch;
+		&__onlineStatus
+			align-self: flex-end
+		&__editor__wrapper
+			flex-grow: 1;
+			display: flex
+			flex-direction: column
+		&__hgroup
+			font-size: 1rem
+			flex-shrink: 0
+			flex-grow: 1
+			align-self: flex-start
+			display: flex
+			width: 100%
+			max-height: 0
+			flex-direction: row
+			align-items: baseline
+			justify-content: space-between
