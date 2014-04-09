@@ -2,38 +2,36 @@
             <div class="mpGlobal__header__hgroup">
                 <h1 class="mpGlobal__header__h1 h1">McSandy</h1>
                 <h2 class="mpGlobal__header__h2 h2">The offline HTML sandbox</h2>
-                <span id="js-onlineStatus" class="mpGlobal__header__onlineStatus online">&#9673;</span>
+                <span id="js-onlineStatus" title="You're online" class="mpGlobal__header__onlineStatus online">&#9673;</span>
             </div>
             <div class="mpGlobal__header__editor__wrapper wrapper">
                 <label for="js-editor-toggle" class="editor__label">Editor</label>
                 <input type="checkbox" id="js-editor-toggle" class="editor__toggle" />
             <form class="mpGlobal__header__editor editor">
-                <input type="checkbox" id="js-htmlSwitch" class="editor__control editor__control--html control control--html" checked />
-                <input type="checkbox" id="js-cssSwitch" class="editor__control editor__control--css control control--css" checked/>
-                <input type="checkbox" id="js-jsSwitch" class="editor__control editor__control--js control control--js" checked/>
-
-                <div class="editor__fieldsetWrap">
-                    <fieldset class="editor__fieldset fieldset fieldset--html" draggable="true">
-                        <label class="fieldset__label fieldset__label--html" for="js-htmlSwitch">HTML</label>
-                        <textarea  id="js-html" tabindex="1" class="fieldset__field fieldset__field--html field field--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
+                    <fieldset id="js-fieldset--html" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--html" draggable="true" data-mimeoutput="text/html" data-fileext="html">
+                        <label class="fieldset__label fieldset__label--html" for="js-html">HTML</label>
+                        <textarea  id="js-html" tabindex="1" class="fieldset__field fieldset__field--html field field--textarea field--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
                     </fieldset>
-                    <fieldset class="editor__fieldset fieldset fieldset--css" draggable="true">
-                        <label class="fieldset__label fieldset__label--css" for="js-cssSwitch">CSS</label>
-                        <textarea id="js-css" tabindex="2" class="fieldset__field fieldset__field--css field field--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
-                        <div class="fieldset__inputWrapper">
-                            <input type="url" class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.css"/>
-                            <button class="fieldset__button fieldset__button--add">+</button>
+                    <fieldset id="js-fieldset--css" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--css" draggable="true" data-mimeoutput="text/css" data-fileext="css">
+                        <label class="fieldset__label fieldset__label--css" for="js-css">CSS</label>
+                        <textarea id="js-css" tabindex="2" class="fieldset__field fieldset__field--css field field--textarea field--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
+                        <div class="fieldset__userOptions userOptions">
+                            <div class="fieldset__inputWrapper fieldset__inputWrapper--first">
+                                <input type="url" class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.css" data-externaltype="css"/>
+                                <button class="fieldset__button fieldset__button--add">+</button>
+                            </div>
                         </div>
                     </fieldset>
-                    <fieldset class="editor__fieldset fieldset fieldset--js" draggable="true">
-                        <label class="fieldset__label fieldset__label--js" for="js-jsSwitch" title="ctrl + r">JS</label>
-                        <textarea id="js-js" tabindex="3" class="fieldset__field fieldset__field--js field field--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
-                        <div class="fieldset__inputWrapper">
-                            <input type="url"  class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.js"/>
-                            <button class="fieldset__button fieldset__button--add">+</button>
+                    <fieldset id="js-fieldset--js" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--js" draggable="true" data-mimeoutput="application/javascript" data-fileext="js">
+                        <label class="fieldset__label fieldset__label--js" for="js-js" title="ctrl + r">JS</label>
+                        <textarea id="js-js" tabindex="3" class="fieldset__field fieldset__field--js field field--textarea field--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
+                        <div class="fieldset__userOptions userOptions">
+                            <div class="fieldset__inputWrapper fieldset__inputWrapper--first">
+                                <input type="url"  class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.js" data-externaltype="js"/>
+                                <button class="fieldset__button fieldset__button--add">+</button>
+                            </div>
                         </div>
                     </fieldset>
-            </div>
             </form>
         </div>
         </header>
