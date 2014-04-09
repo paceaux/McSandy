@@ -47,10 +47,11 @@ module.exports = function(grunt) {
       standard:{
         options: {
           linenos: false,
-          compress: false
+          compress: false,
+          import: ['nib']
         },
         files : {
-          'postAssets/mcsandy.min.css' : ['preAssets/mcsandy.styl'],
+          'postAssets/mcsandy.min.css' : ['preAssets/layout.styl','preAssets/mcsandy.styl'],
         }
       }
     },
