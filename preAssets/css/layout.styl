@@ -114,13 +114,20 @@ body
 		order: 3
 	&--externalLibs
 		width: 4em
+		.fieldset
+			&__field
+				height: 2.3em
+				flex-basis: 6%
+				align-self: center
+			&__label
+				flex-basis: 61%
 		.fieldset__wrapper
 			flex-shrink: 1
 			height: 3em
 			overflow: scroll
 			flex-direction: row
 			flex-wrap: wrap
-			justify-content: center
+			justify-content: flex-start
 			align-items: stretch;
 			align-content: flex-start
 	&.js-shrunk
@@ -169,7 +176,7 @@ body
 		.fieldset
 			flex-grow: 1
 			&--externalLibs
-				flex-basis: 12rem
+				flex-basis: 9rem
 				flex-shrink:0
 
 .mcsandy
