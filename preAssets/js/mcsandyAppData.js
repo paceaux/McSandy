@@ -4,11 +4,10 @@ mcsandyAppData = {
         version: '0.2.1',
         repo: 'https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox',
         authors: {
-            author: 'Frank M Taylor',
-            author: 'Alex A Klock'
+            author: 'Frank M Taylor'
         }
     },
-    ui : {
+    ui: {
         onlineState: 'online',
         onlineCtrl: document.getElementById('js-onlineStatus'),
         ctrls: {
@@ -23,13 +22,13 @@ mcsandyAppData = {
             rem: '.fieldset__button--rem',
             assets: '.fieldset__field--url'
         },
-        modal:{
+        modal: {
             container: document.getElementById('js-modal'),
             overlay: document.getElementById('js-modal__overlay'),
             content: document.getElementById('js-modal__content'),
             title: document.getElementById('js-modal__title')
         }
-    }, 
+    },
     core: {
         ctrls: {
             projectLoad: document.getElementById('js-projectLoad'),
@@ -63,8 +62,8 @@ mcsandyAppData = {
     }
 };
 mcsandyProject = {
-    blobArray : [],
-    externals : {
+    blobArray: [],
+    externals: {
         assets: {
             css: [],
             js: []
