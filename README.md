@@ -112,12 +112,12 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
  + Now storing and recalling external assets such as CSS and JS
  + Set width of jQuery libraries in footer so it doesn't get all weird in diff viewports
  + set the textareas to be resizeable
+ + fixed bug where the projects weren't getting loaded in project selector
+ + external CSS files are getting added to preview
+ + Firefox is showing the names of jQuery libraries (innerHTML instead of .text or innerText)
 
 ## Known issues ##
- + external CSS files aren't getting added into the preview
- + FireFox doesn't show the names of the jQuery libraries
- + the jQuery libraries list seems to be duplicated
- 
+ + after a few minutes of development, it stops previewing the code. 
 
 
 
