@@ -56,6 +56,8 @@ fieldset
     border: none;
 
 
+html
+    font-family: Helvetica, sans-serif;
 
 body
     color: bodyColor; 
@@ -114,6 +116,10 @@ button, input, select
     padding: .618vw;
     margin: .618vw;
 
+@media screen and (max-width: 700px)
+    button, input, select
+        font-size: .75em
+
 button, .editor__label
     background: inactivePeach;
     flex-shrink: 0
@@ -170,7 +176,6 @@ textarea, code
     &__label
         text-align: center
         color: inactivePeach;
-        font-size: .8em;
         padding: .618em;
         border-bottom: 1px solid bodyColor;
         background: inactiveHeadingColor
@@ -195,12 +200,9 @@ textarea, code
     &--externalLibs
         .fieldset
             &__field
-                height: 2.3em;
                 visibility:visible
-                flex-basis: 1.3em;
             &__label
-                flex-basis: 70%;
-                margin: .5em;
+                margin: .5em 4vw .5em .5em;
         .fieldset__field:checked + .fieldset__label
             color: activePeach;
             font-weight: bold;
@@ -233,12 +235,15 @@ textarea, code
     top: 19.1%
     left: 30.9%
     padding: .618em
-    max-height: 61.8%
-    width: 38.2%
+
     background: #fefefe
     border-radius: .25em
+    smooth-out()
     &.visible
         display:block
+        max-height: 61.8%
+        width: 38.2%
+        smooth()
     &__overlay
         display:none
         position: fixed
@@ -256,7 +261,6 @@ textarea, code
 
 .online
     color: standardGreen;
-
 .offline
     color: red;
 .mcsandy--offline
