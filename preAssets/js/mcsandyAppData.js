@@ -22,6 +22,11 @@ mcsandyAppData = {
             rem: '.fieldset__button--rem',
             assets: '.fieldset__field--url'
         },
+        fieldsets: {
+            html: document.getElementById('js-fieldset--html'),
+            css: document.getElementById('js-fieldset--css'),
+            js: document.getElementById('js-fieldset--js')
+        },
         modal: {
             container: document.getElementById('js-modal'),
             overlay: document.getElementById('js-modal__overlay'),
