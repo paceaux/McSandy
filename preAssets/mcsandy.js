@@ -487,12 +487,6 @@ mcsandyUI = {
             button.innerHTML = "&mdash;";
             return button;
         },
-        // createInput: function (inputType, inputClass) {
-        //     var input = document.createElement('input');
-        //     input.className = 'fieldset__field ' + inputClass;
-        //     input.type = inputType;
-        //     return input;
-        // },
         createExternalFileSet: function (file, inputType, inputClass, buttonClass, buttonText) {
             var _this = mcsandyUI,
                 wrapper = _this.helpers.createExternalFileWrapper(),
@@ -616,6 +610,7 @@ mcsandyUI = {
                 projData = store.get(0, project);
             window.mcsandyProject = projData;
             console.info("McSandy Loaded a Project");
+            console.info(projData);
             mcsandy.functions.updateContent(projData); // this is in the McSandy interface
             _this.functions.updateEditors(projData.rawParts.html, projData.rawParts.css, projData.rawParts.js);
             _this.functions.updateCtrls(projData);
@@ -626,7 +621,6 @@ mcsandyUI = {
                 helpers = _this.helpers;
             helpers.removeParent(e.target);
             mcsandyProject.externals
-
         },
         handleFileDrop: function (e) {
             e.preventDefault();
@@ -650,6 +644,7 @@ mcsandyUI = {
             helpers.cloneParent(el);
             el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
             el.innerHTML = "&mdash;";
+            mcsandy.functions.loadProject();
             _this.bindUiEvents();
         },
         handleLibToggle: function (e) {
@@ -686,7 +681,6 @@ mcsandyUI = {
             e.dataTransfer.dropEffect = 'copy';
         },
         handleDragStart: function (e) {
-            console.log('drag start');
             e.stopPropagation();
             e.preventDefault();
             // e.dataTransfer.dropEffect = 'none';
@@ -739,6 +733,7 @@ mcsandyUI = {
             projectField.value = projData.project;
             projectField.placeholder = projData.project;
             ctrls.projectDownload.value = projData.project;
+
             if (projData.externals.libraries) {
                 projData.externals.libraries.js.forEach(function (el) {
                     var exJsInput = document.querySelector('.fieldset--externalLibs').querySelector('[data-mcsandy="' + el + '"]');
@@ -753,18 +748,30 @@ mcsandyUI = {
         },
         updateExternalAssetFields: function (projData, type) {
             var _this = mcsandyUI,
-                currentAssets = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper'),
-                xAssets = projData.externals.assets;
-            console.log(xAssets[type]);
-            console.log(currentAssets);
-            xAssets[type].forEach(function (val, i) {
-                console.log(currentAssets);
-                var input = currentAssets[i].querySelector('input'),
-                    button = currentAssets[i].querySelector('button');
-                _this.helpers.cloneParent(input);
-                input.value = val;
-                button.innerHTML = '&mdash;'
+                assetFields = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper'),
+                xAssets = projData.externals.assets[type];
+
+                console.log(xAssets);
+            //if I don't have as many fields as I do assets, there's a problem
+            if(xAssets.length)
+            do {
+                var input = assetFields[0].querySelector('input'),
+                clone = input.parentNode.cloneNode(true),
+                grandparent = input.parentNode.parentNode;
+                grandparent.appendChild(clone);
+                clone.className = 'fieldset__inputWrapper';
+            }
+            while (document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper').length < xAssets.length + 1 && assetFields.length !== 0) ;
+
+
+            [].forEach.call(xAssets, function (asset, i) {
+                console.log(asset, i);
+                var input = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper')[i].querySelector('input'),
+                    button = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper')[i].querySelector('button');
+                input.value = asset;
+                button.innerHTML = '&mdash;';
             });
+
         },
         bindFieldsetCollapse: function () {
             var _this = mcsandyUI,
@@ -953,18 +960,13 @@ mcsandy = {
 
         //BIND EVENTS TO TEXTAREAS
         ctrls.css.addEventListener('keyup',function (e) {
-            keyUpCounter++;
-            if (keyUpCounter == 5){
-                functions.updateContent();
-                keyUpCounter = 0;
-            }
+            clearTimeout(timer);
+            var timer = setTimeout(functions.updateContent(), 750);
+
         });
         ctrls.html.addEventListener('keyup',function (e) {
-            keyUpCounter++;
-            if (keyUpCounter == 4){
-                functions.updateContent();
-                keyUpCounter = 0;
-            }
+            clearTimeout(timer);
+            var timer = setTimeout(functions.updateContent(), 750);
         });
         ctrls.js.addEventListener('change',function (e) {
             functions.updateContent();
