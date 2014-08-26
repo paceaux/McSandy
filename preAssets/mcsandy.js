@@ -293,9 +293,7 @@ mcsandyAppData = {
             html: document.getElementById('js-html'),
             css: document.getElementById('js-css'),
             js: document.getElementById('js-js'),
-            jsLibs: '.fieldset__field--jsLib',
-            cssExtras: '.fieldset--css .fieldset__field--url',
-            jsExtras: '.fieldset--js .fieldset__field--url'
+            jsLibs: '.fieldset__field--jsLib'
         },
         targets: {
             iframe: document.getElementById('js-result')
@@ -712,15 +710,6 @@ mcsandyUI = {
             ctrls.css.value = css;
             ctrls.js.value = js;
         },
-        populateExternalAssetFields: function (typeOfFieldset, val) {
-            var _this = mcsandyUI,
-                fieldset = document.querySelector('.fieldset--' + typeOfFieldset),
-            inputSet = _this.helpers.createExternalFileSet(val, 'url', 'fieldset__field--url', 'fieldset__button--add', '+');
-            inputSet.querySelector('input').value = val;
-            inputSet.querySelector('input').setAttribute('data-externaltype', typeOfFieldset)
-            fieldset.appendChild(inputSet);
-            _this.bindUiEvents();
-        },
         updateCtrls: function (projData) {
             var _this = mcsandyUI,
                 projectField = mcsandy.data.ctrls.projectName,
@@ -761,6 +750,8 @@ mcsandyUI = {
                 input.value = asset;
                 input.parentNode.dataset.saved = true;
                 button.innerHTML = '&mdash;';
+                button.classList.remove('fieldset__button--add');
+                button.classList.add(('fieldset__button--rem'));
             });
 
         },
@@ -899,29 +890,29 @@ mcsandy = {
                 helpers = _this.helpers,
                 reset = helpers.prepareCSS(_this.blobData.reset),
                 ctrls = _this.data.ctrls,
-                css = helpers.prepareCSS(ctrls.css.value),
+                userCSS = helpers.prepareCSS(ctrls.css.value),
                 externalLibraries = helpers.createExternalJS(mcsandyProject.externals.libraries.js),
                 externalSavedCSS = helpers.createExternalCSS(mcsandyProject.externals.assets.css),
                 externalUnsavedCSS = helpers.createExternalCSS(helpers.inputArray(appData.ui.fieldsets.css, appData.ui.fields.unsaved));
-            return '<head>' + reset + css + externalSavedCSS + externalUnsavedCSS + externalLibraries  + '</head>';
+            return '<head>' + reset + externalSavedCSS + externalUnsavedCSS + userCSS + externalLibraries  + '</head>';
         },
         constructBodyOpen: function () {
             var _this = mcsandy,
                 appData = mcsandyAppData, 
                 helpers = _this.helpers,
                 ctrls = _this.data.ctrls,
-                html = helpers.prepareHTML(ctrls.html.value);
-            return '<body>' + html ;
+                userHTML = helpers.prepareHTML(ctrls.html.value);
+            return '<body>' + userHTML ;
         },
         constructBodyClose: function () {
             var _this = mcsandy,
                 appData = mcsandyAppData, 
                 helpers = _this.helpers,
-                userJs = helpers.prepareInternalJS(_this.data.ctrls.js.value),
+                userJS = helpers.prepareInternalJS(_this.data.ctrls.js.value),
                 externalSavedJS = helpers.createExternalJS(mcsandyProject.externals.assets.js),
                 externalUnsavedJS = helpers.createExternalJS(helpers.inputArray(appData.ui.fieldsets.js, appData.ui.fields.unsaved));
 
-            return externalSavedJS + '\n' + externalUnsavedJS + '\n' + userJs + '</body>';
+            return externalSavedJS + '\n' + externalUnsavedJS + '\n' + userJS + '</body>';
         },
         wrapBlobParts: function () {
             var _this = mcsandy,
@@ -931,7 +922,6 @@ mcsandy = {
                 head = _this.helpers.constructHead(),
                 bodyClose = _this.helpers.constructBodyClose(),
                 blobKit = [head,bodyOpen,bodyClose];
-                console.log(blobKit);
             return blobKit;
         },
         createProjectObj: function (projectName, rawParts, blobArray, assets) {
