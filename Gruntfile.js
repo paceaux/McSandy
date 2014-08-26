@@ -51,7 +51,7 @@ module.exports = function(grunt) {
           import: ['nib']
         },
         files : {
-          'postAssets/mcsandy.min.css' : ['preAssets/layout.styl','preAssets/mcsandy.styl'],
+          'postAssets/mcsandy.min.css' : ['preAssets/css/layout.styl','preAssets/css/mcsandy.styl'],
         }
       }
     },
@@ -75,7 +75,7 @@ module.exports = function(grunt) {
     },
     watch: {
       stylus:{
-        files: ['preAssets/*.styl'],
+        files: ['preAssets/**/*.styl'],
         tasks: ['stylus:standard', 'htmlbuild', 'copy:main']
       },
       html: {
@@ -97,6 +97,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-stylus');
   // Default task(s).
-  grunt.registerTask('default', ['watch', 'htmlbuild']);
+  grunt.registerTask('default', ['stylus:standard',  'htmlbuild', 'watch']);
 
 };
