@@ -393,6 +393,18 @@ body {
 .fieldset--externalLibs {
   width: 4em;
 }
+.fieldset--externalLibs .fieldset__field {
+  height: 2.3em;
+  -webkit-flex-basis: 6%;
+  flex-basis: 6%;
+  -webkit-align-self: center;
+  align-self: center;
+  -ms-flex-item-align: center;
+}
+.fieldset--externalLibs .fieldset__label {
+  -webkit-flex-basis: 61%;
+  flex-basis: 61%;
+}
 .fieldset--externalLibs .fieldset__wrapper {
   -webkit-flex-shrink: 1;
   flex-shrink: 1;
@@ -410,12 +422,12 @@ body {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-pack: center;
-  -moz-box-pack: center;
-  -o-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -o-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
   -webkit-box-align: stretch;
   -moz-box-align: stretch;
   -o-box-align: stretch;
@@ -436,8 +448,8 @@ body {
   box-flex: 0;
   -webkit-flex-grow: 0;
   flex-grow: 0;
-  -webkit-flex-shrink: 2;
-  flex-shrink: 2;
+  -webkit-flex-shrink: 3;
+  flex-shrink: 3;
 }
 .fieldset.js-shrunk .field,
 .fieldset.js-shrunk .fieldset__inputWrapper {
@@ -531,8 +543,8 @@ body {
   flex-grow: 1;
 }
 .mpGlobal__footer__editor .fieldset--externalLibs {
-  -webkit-flex-basis: 12rem;
-  flex-basis: 12rem;
+  -webkit-flex-basis: 9rem;
+  flex-basis: 9rem;
   -webkit-flex-shrink: 0;
   flex-shrink: 0;
 }
@@ -642,6 +654,9 @@ iframe {
 }
 fieldset {
   border: none;
+}
+html {
+  font-family: Helvetica, sans-serif;
 }
 body {
   color: #091e36;
@@ -761,6 +776,13 @@ select {
   font-size: 1vw;
   padding: 0.618vw;
   margin: 0.618vw;
+}
+@media screen and (max-width: 700px) {
+  button,
+  input,
+  select {
+    font-size: 0.75em;
+  }
 }
 button,
 .editor__label {
@@ -925,7 +947,6 @@ code {
 .fieldset__label {
   text-align: center;
   color: #f5e1bf;
-  font-size: 0.8em;
   padding: 0.618em;
   border-bottom: 1px solid #091e36;
   background: #729bc9;
@@ -992,15 +1013,10 @@ code {
   transition: all 0.3s ease-in-out;
 }
 .fieldset--externalLibs .fieldset__field {
-  height: 2.3em;
   visibility: visible;
-  -webkit-flex-basis: 1.3em;
-  flex-basis: 1.3em;
 }
 .fieldset--externalLibs .fieldset__label {
-  -webkit-flex-basis: 70%;
-  flex-basis: 70%;
-  margin: 0.5em;
+  margin: 0.5em 4vw 0.5em 0.5em;
 }
 .fieldset--externalLibs .fieldset__field:checked + .fieldset__label {
   color: #eece97;
@@ -1052,14 +1068,30 @@ code {
   top: 19.1%;
   left: 30.9%;
   padding: 0.618em;
-  max-height: 61.8%;
-  width: 38.2%;
   background: #fefefe;
   -webkit-border-radius: 0.25em;
   border-radius: 0.25em;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
 }
 .mpModal.visible {
   display: block;
+  max-height: 61.8%;
+  width: 38.2%;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .mpModal__overlay {
   display: none;
@@ -1494,23 +1526,25 @@ store = {
         return typeof v !== "object" ? v : JSON.stringify(v);
     },
     unconvertValue: function (v) {
-        if ( v.indexOf("{") === 0 || v.indexOf("[") === 0 ){
+        if ( v.indexOf("{") === 0 || v.indexOf("[") === 0 ) {
             var v = JSON.parse(v);
+            return v;
+        } else {
+            return null;
         }
-        return v;
     },
     set: function (type, k, v) {
         var v = this.convertValue(v);
         store.types[type].setItem(k,v); 
     },
     get: function (type, k) {
-        var v = typeof k !== "number" ? store.types[type].getItem(k) : store.types[type].key(k);
+        var v = typeof k !== "number" ? store.types[type].getItem(k) : store.types[type].getItem(store.types[type].key(k));
         return  this.unconvertValue(v);
     },
-    del: function (type, k){
+    del: function (type, k) {
         store.types[type].removeItem(k);       
     },
-    clr: function (type){
+    clr: function (type) {
         store.types[type].clear();
     }
 };
@@ -1736,11 +1770,10 @@ mcsandyAppData = {
         version: '0.2.1',
         repo: 'https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox',
         authors: {
-            author: 'Frank M Taylor',
-            author: 'Alex A Klock'
+            author: 'Frank M Taylor'
         }
     },
-    ui : {
+    ui: {
         onlineState: 'online',
         onlineCtrl: document.getElementById('js-onlineStatus'),
         ctrls: {
@@ -1755,13 +1788,13 @@ mcsandyAppData = {
             rem: '.fieldset__button--rem',
             assets: '.fieldset__field--url'
         },
-        modal:{
+        modal: {
             container: document.getElementById('js-modal'),
             overlay: document.getElementById('js-modal__overlay'),
             content: document.getElementById('js-modal__content'),
             title: document.getElementById('js-modal__title')
         }
-    }, 
+    },
     core: {
         ctrls: {
             projectLoad: document.getElementById('js-projectLoad'),
@@ -1795,8 +1828,8 @@ mcsandyAppData = {
     }
 };
 mcsandyProject = {
-    blobArray : [],
-    externals : {
+    blobArray: [],
+    externals: {
         assets: {
             css: [],
             js: []
@@ -1808,8 +1841,6 @@ mcsandyProject = {
     }
 };
 // Source: preAssets/js/mcsandy.js
-
-
 /*MCSANDYUI: the main user interactions with the app*/
 mcsandyUI = {
     init: function () {
@@ -1844,31 +1875,37 @@ mcsandyUI = {
                 }
                 if (e.shiftKey) {
                     switch (e.keyCode) {
-                        case 69:
-                            document.getElementById('js-editor-toggle').checked = document.getElementById('js-editor-toggle').checked === true ? false : true;
-                            break;
-                        case 80:
-                            document.getElementById('js-footer-editor-toggle').checked = document.getElementById('js-footer-editor-toggle').checked === true ? false : true;
-                            break;
-                        case 187: 
-                            mcsandy.functions.clearContent(e);
-                            break;
-                        case 107: 
-                            mcsandy.functions.clearContent(e);
-                            break;
-                        case 8:
-                            mcsandy.functions.delContent(e);
-                            break;
-                        case 72: 
-                            _this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
-                            break;
-                        default: 
-                            break;
+                    case 69:
+                        document.getElementById('js-editor-toggle').checked = document.getElementById('js-editor-toggle').checked === true ? false : true;
+                        break;
+                    case 80:
+                        document.getElementById('js-footer-editor-toggle').checked = document.getElementById('js-footer-editor-toggle').checked === true ? false : true;
+                        break;
+                    case 187:
+                        mcsandy.functions.clearContent(e);
+                        break;
+                    case 107:
+                        mcsandy.functions.clearContent(e);
+                        break;
+                    case 8:
+                        mcsandy.functions.delContent(e);
+                        break;
+                    case 72:
+                        _this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
+                        break;
+                    case 73:
+                        _this.functions.toggleModal();
+                        break;
+                    case 84:
+                        _this.helpers.runTest(e);
+                        break;
+                    default:
+                        break;
                     }
                 }
             }
         },
-        keyUp: function (e) {
+        keyUp: function () {
             var _this = mcsandyUI;
         },
         convertHash: function (hash) {
@@ -1892,7 +1929,7 @@ mcsandyUI = {
             var label = document.createElement('label');
             label.className = c;
             label.setAttribute('for', id);
-            label.innerText = t;
+            label.innerHTML = t;
             return label;
         },
         createExternalInput: function (type, classes, placeholder) {
@@ -1951,7 +1988,7 @@ mcsandyUI = {
                 fieldset = document.querySelector('.fieldset--' + type),
                 inputs = fieldset.querySelectorAll(_this.data.fields.assets),
                 assets = [];
-            [].forEach.call(inputs, function(input) {
+            [].forEach.call(inputs, function (input) {
                 if (input.value.length > 0) {
                     assets.push(input.value);
                 }
@@ -1963,26 +2000,28 @@ mcsandyUI = {
             wrapper.className = 'fieldset__inputWrapper';
             return wrapper;
         },
-        createExternalFileButton: function (buttonClass, buttonText) {
+        createExternalFileButton: function (buttonClass) {
             var button = document.createElement('button');
             button.className = 'fieldset__button ' + buttonClass;
             button.innerHTML = "&mdash;";
             return button;
         },
-        // createInput: function (inputType, inputClass) {
-        //     var input = document.createElement('input');
-        //     input.className = 'fieldset__field ' + inputClass;
-        //     input.type = inputType;
-        //     return input;
-        // },
         createExternalFileSet: function (file, inputType, inputClass, buttonClass, buttonText) {
             var _this = mcsandyUI,
                 wrapper = _this.helpers.createExternalFileWrapper(),
-                input = _this.helpers.createInput(inputType,'js-'+ Math.ceil(Math.random() * 10), inputClass, file, file),
+                input = _this.helpers.createInput(inputType, 'js-' + Math.ceil(Math.random() * 10), inputClass, file, file),
                 button = _this.helpers.createExternalFileButton(buttonClass, buttonText);
             wrapper.appendChild(input);
             wrapper.appendChild(button);
             return wrapper;
+        },
+        runTest: function (e) {
+            var _this = mcsandyUI;
+            _this.functions.toggleModal();
+            console.log("I\'m a test");
+            var url = mcsandyAppData.core.targets.iframe.src;
+            window.open(url);
+
         }
     },
     bindUiEvents: function () {
@@ -2029,7 +2068,7 @@ mcsandyUI = {
         });
 
         /*GLOBAL BUTTON STUFF*/
-        helpers.addEvents(document.querySelectorAll('button'), 'click', _this.functions.flashClass)
+        helpers.addEvents(document.querySelectorAll('button'), 'click', _this.functions.flashClass);
 
         /*DRAG AND DROP FILES INTO EDITORS */
         helpers.addEvents(fileUploads, 'change', _this.helpers.handleFileUpload);
@@ -2044,11 +2083,12 @@ mcsandyUI = {
         _this.data.modal.overlay.addEventListener('click', _this.functions.toggleModal);
     },
     functions: {
-        handleConnection: function () {
+        handleConnection: function (override) {
             var _this = mcsandyUI,
                 ctrl = document.getElementById('js-onlineStatus');
-            _this.data.onlineState = navigator.onLine ? "online" : "offline";
-            if (_this.data.onlineState === "online") {
+            mcsandyAppData.ui.onlineState = navigator.onLine ? "online" : "offline";
+            if (override) mcsandyAppData.ui.onlineState = override; // Added this for debugging when I'm on an airplane. 
+            if (mcsandyAppData.ui.onlineState === "online") {
                 ctrl.className = ctrl.className.replace(/(?:^|\s)offline(?!\S)/g, " online");
                 document.title = "McSandy | Online";
                 document.querySelector('body').className = document.querySelector('body').className.replace(/(?:^|\s)mcsandy--offline(?!\S)/g, " mcsandy--online");
@@ -2100,16 +2140,15 @@ mcsandyUI = {
                 helpers = _this.helpers;
             helpers.removeParent(e.target);
             mcsandyProject.externals
-
         },
         handleFileDrop: function (e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log(e);
+
             var _this = mcsandyUI,
-                files = e.dataTransfer.files;
-            for (var i = 0, f; f = files[i]; i++) {
-                console.log(f);
+                files = e.dataTransfer.files, 
+                i;
+            for (i = 0, f; f = files[i]; i++) {
                 var input = _this.helpers.createExternalFileSet(f);
                 e.target.appendChild(input);
             }
@@ -2124,6 +2163,7 @@ mcsandyUI = {
             helpers.cloneParent(el);
             el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
             el.innerHTML = "&mdash;";
+            mcsandy.functions.loadProject();
             _this.bindUiEvents();
         },
         handleLibToggle: function (e) {
@@ -2160,7 +2200,6 @@ mcsandyUI = {
             e.dataTransfer.dropEffect = 'copy';
         },
         handleDragStart: function (e) {
-            console.log('drag start');
             e.stopPropagation();
             e.preventDefault();
             // e.dataTransfer.dropEffect = 'none';
@@ -2213,7 +2252,8 @@ mcsandyUI = {
             projectField.value = projData.project;
             projectField.placeholder = projData.project;
             ctrls.projectDownload.value = projData.project;
-            if(projData.externals.libraries){
+
+            if (projData.externals.libraries) {
                 projData.externals.libraries.js.forEach(function (el) {
                     var exJsInput = document.querySelector('.fieldset--externalLibs').querySelector('[data-mcsandy="' + el + '"]');
                         exJsInput.checked = true;
@@ -2227,15 +2267,30 @@ mcsandyUI = {
         },
         updateExternalAssetFields: function (projData, type) {
             var _this = mcsandyUI,
-                currentAssets = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper'),
-                xAssets = projData.externals.assets;
-            xAssets[type].forEach(function (val, i) {
-                var input = currentAssets[i].querySelector('input'),
-                    button = currentAssets[i].querySelector('button');
-                _this.helpers.cloneParent(input);
-                input.value = val;
-                button.innerHTML = '&mdash;'
+                assetFields = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper'),
+                xAssets = projData.externals.assets[type];
+
+                console.log(xAssets);
+            //if I don't have as many fields as I do assets, there's a problem
+            if(xAssets.length)
+            do {
+                var input = assetFields[0].querySelector('input'),
+                clone = input.parentNode.cloneNode(true),
+                grandparent = input.parentNode.parentNode;
+                grandparent.appendChild(clone);
+                clone.className = 'fieldset__inputWrapper';
+            }
+            while (document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper').length < xAssets.length + 1 && assetFields.length !== 0) ;
+
+
+            [].forEach.call(xAssets, function (asset, i) {
+                console.log(asset, i);
+                var input = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper')[i].querySelector('input'),
+                    button = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper')[i].querySelector('button');
+                input.value = asset;
+                button.innerHTML = '&mdash;';
             });
+
         },
         bindFieldsetCollapse: function () {
             var _this = mcsandyUI,
@@ -2251,11 +2306,14 @@ mcsandyUI = {
             modal.title.innerText = title;
             modal.content.innerHTML = content;
         },
-        toggleModal: function () {
+        toggleModal: function (content) {
             var _this = mcsandyUI,
                 modal = _this.data.modal;
             _this.helpers.toggleClass(modal.container, 'visible');
             _this.helpers.toggleClass(modal.overlay, 'visible');
+            if (content) {
+                modal.content.innerHTML = content;
+            }
         }
     }
 };
@@ -2298,10 +2356,10 @@ mcsandy = {
         prepareExternalCSS: function (css) {
             return '<link rel="stylesheet" href="' + css + '"/>';
         },
-        createExternalLibs: function (libList) {
+        createExternalJS: function (libList) {
             var _this = mcsandy,
                 externalJSSet = '';
-            if (navigator.onLine) {
+            if (mcsandyAppData.ui.onlineState === 'online') {
                 /*only add external libraries if we're online*/
                 libList.forEach(function (el) {
                     externalJSSet+= _this.helpers.prepareExternalJS(el);
@@ -2309,12 +2367,12 @@ mcsandy = {
             }
             return externalJSSet;
         },
-        createExternalCSS: function () {
+        createExternalCSS: function (cssList) {
             var _this = mcsandy,
                 externalCSSSet = '';
-            if (navigator.onLine) {
+            if (mcsandyAppData.ui.onlineState === 'online') {
                 /*only add external libraries if we're online*/
-                libList.forEach(function (el) {
+                cssList.forEach(function (el) {
                     externalCSSSet+= _this.helpers.prepareExternalCSS(el);
                 });
             }
@@ -2357,13 +2415,15 @@ mcsandy = {
                 reset = helpers.prepareCSS(_this.blobData.reset),
                 ctrls = _this.data.ctrls,
                 css = helpers.prepareCSS(ctrls.css.value),
-                externalLibraries = helpers.createExternalLibs(mcsandyProject.externals.libraries.js);
-            return '<head>' + reset + css + externalLibraries +'</head>';
+                externalLibraries = helpers.createExternalJS(mcsandyProject.externals.libraries.js),
+                externalJS = helpers.createExternalJS(mcsandyProject.externals.assets.js),
+                externalCSS = helpers.createExternalCSS(mcsandyProject.externals.assets.css);
+            return '<head>' + reset + css + externalLibraries + externalCSS + '</head>';
         },
         constructFoot: function () {
             var _this = mcsandy, 
                 userJs = _this.helpers.prepareInternalJS(_this.data.ctrls.js.value),
-                extraJs = _this.helpers.createExternalLibs(mcsandyProject.externals.assets.js);
+                extraJs = _this.helpers.createExternalJS(mcsandyProject.externals.assets.js);
             return extraJs + '\n' + userJs;
         },
         wrapBlobParts: function () {
@@ -2388,14 +2448,15 @@ mcsandy = {
             var _this = mcsandy,
                 helpers = _this.helpers;
                 blobType = type !== undefined ? type + ';charset=utf-8' : 'text/html;charset=utf-8';
-                var blob = new Blob(parts, {type : blobType});
+            var blob = new Blob(parts, {type : blobType});
+            window.mcsandyblob = blob;
                 return blob;                   
         },
         getStoredProjects: function () {
             var _this = mcsandy,
                 len = localStorage.length,
                 projects = [];
-            for (i = 0; i < len; i ++) {
+            for (i = 0; i < len; i++) {
                 var projectKey = store.get(0,i);
                 projects.push(projectKey);
             }
@@ -2418,18 +2479,13 @@ mcsandy = {
 
         //BIND EVENTS TO TEXTAREAS
         ctrls.css.addEventListener('keyup',function (e) {
-            keyUpCounter++;
-            if (keyUpCounter == 5){
-                functions.updateContent();
-                keyUpCounter = 0;
-            }
+            clearTimeout(timer);
+            var timer = setTimeout(functions.updateContent(), 750);
+
         });
         ctrls.html.addEventListener('keyup',function (e) {
-            keyUpCounter++;
-            if (keyUpCounter == 4){
-                functions.updateContent();
-                keyUpCounter = 0;
-            }
+            clearTimeout(timer);
+            var timer = setTimeout(functions.updateContent(), 750);
         });
         ctrls.js.addEventListener('change',function (e) {
             functions.updateContent();
@@ -2447,9 +2503,9 @@ mcsandy = {
                 select = document.getElementById('js-selectProjects'),
                 pageHash = window.location.hash;
             select.innerHTML = '';//clear pre-exiting options
-            projects.forEach(function(el) {
-                var option = _this.helpers.createSelectOption(el);
-                if (mcsandyUI.helpers.unconvertHash(el) === mcsandyUI.helpers.unconvertHash(pageHash)){
+            projects.forEach(function (el) {
+                var option = _this.helpers.createSelectOption(el.project);
+                if (mcsandyUI.helpers.unconvertHash(el.project) === mcsandyUI.helpers.unconvertHash(pageHash)){
                     select.selected = true;
                 }
                 select.appendChild(option);
