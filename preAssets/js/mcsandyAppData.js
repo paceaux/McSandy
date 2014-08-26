@@ -46,9 +46,7 @@ mcsandyAppData = {
             html: document.getElementById('js-html'),
             css: document.getElementById('js-css'),
             js: document.getElementById('js-js'),
-            jsLibs: '.fieldset__field--jsLib',
-            cssExtras: '.fieldset--css .fieldset__field--url',
-            jsExtras: '.fieldset--js .fieldset__field--url'
+            jsLibs: '.fieldset__field--jsLib'
         },
         targets: {
             iframe: document.getElementById('js-result')
