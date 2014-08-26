@@ -506,13 +506,6 @@ mcsandyUI = {
         runTest: function () {
             var exCss = mcsandyProject.externals.assets.css,
                 dataUI = mcsandyAppData.ui;
-            console.log(exCss);
-            var inputArray = mcsandy.helpers.inputArray(dataUI.fieldsets.css, dataUI.fields.assets);
-            console.log(inputArray);
-
-
-
-
         }
     },
     bindUiEvents: function () {
@@ -695,16 +688,6 @@ mcsandyUI = {
         handleDragStart: function (e) {
             e.stopPropagation();
             e.preventDefault();
-            // e.dataTransfer.dropEffect = 'none';
-            // e.dataTransfer.effectAllowed = 'all'; 
-            // e.dataTransfer.setData(e.target.dataset.mimeoutput,e.target.querySelector('textarea').value);
-            //             console.log(e);
-
-            // e.dataTransfer.effectAllowed = 'copy';
-            // var source = e.target.querySelector('textarea').value,
-            // type = e.target.dataset.type !== "js" ? 'text/' + e.target.dataset.type : 'application/javascript';
-            // e.dataTransfer.setData(type, source);
-            // console.log(e);
         },
         handleFileDragout: function (e) {
             e.stopPropagation();
