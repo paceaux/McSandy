@@ -570,26 +570,37 @@ mcsandy = {
                 ctrls = _this.data.ctrls,
                 css = helpers.prepareCSS(ctrls.css.value),
                 externalLibraries = helpers.createExternalJS(mcsandyProject.externals.libraries.js),
-                externalJS = helpers.createExternalJS(mcsandyProject.externals.assets.js),
-                externalUnsavedJS = helpers.createExternalJS(helpers.inputArray(appData.ui.fieldsets.js, appData.ui.fields.unsaved));
                 externalSavedCSS = helpers.createExternalCSS(mcsandyProject.externals.assets.css),
                 externalUnsavedCSS = helpers.createExternalCSS(helpers.inputArray(appData.ui.fieldsets.css, appData.ui.fields.unsaved));
-            return '<head>' + reset + css + externalSavedCSS + externalUnsavedCSS + externalLibraries  + externalJS + externalUnsavedJS + '</head>';
+            return '<head>' + reset + css + externalSavedCSS + externalUnsavedCSS + externalLibraries  + '</head>';
         },
-        constructFoot: function () {
-            var _this = mcsandy, 
-                userJs = _this.helpers.prepareInternalJS(_this.data.ctrls.js.value),
-                extraJs = _this.helpers.createExternalJS(mcsandyProject.externals.assets.js);
-            return extraJs + '\n' + userJs;
+        constructBodyOpen: function () {
+            var _this = mcsandy,
+                appData = mcsandyAppData, 
+                helpers = _this.helpers,
+                ctrls = _this.data.ctrls,
+                html = helpers.prepareHTML(ctrls.html.value);
+            return '<body>' + html ;
+        },
+        constructBodyClose: function () {
+            var _this = mcsandy,
+                appData = mcsandyAppData, 
+                helpers = _this.helpers,
+                userJs = helpers.prepareInternalJS(_this.data.ctrls.js.value),
+                externalSavedJS = helpers.createExternalJS(mcsandyProject.externals.assets.js),
+                externalUnsavedJS = helpers.createExternalJS(helpers.inputArray(appData.ui.fieldsets.js, appData.ui.fields.unsaved));
+
+            return externalSavedJS + '\n' + externalUnsavedJS + '\n' + userJs + '</body>';
         },
         wrapBlobParts: function () {
             var _this = mcsandy,
                 blobData = _this.blobData,
                 ctrls = _this.data.ctrls,
-                html = _this.helpers.prepareHTML(ctrls.html.value),
+                bodyOpen = _this.helpers.constructBodyOpen(),
                 head = _this.helpers.constructHead(),
-                footer = _this.helpers.constructFoot(),
-                blobKit = [head,html,footer];
+                bodyClose = _this.helpers.constructBodyClose(),
+                blobKit = [head,bodyOpen,bodyClose];
+                console.log(blobKit);
             return blobKit;
         },
         createProjectObj: function (projectName, rawParts, blobArray, assets) {
@@ -603,10 +614,10 @@ mcsandy = {
         buildBlob: function (parts, type) {
             var _this = mcsandy,
                 helpers = _this.helpers;
-                blobType = type !== undefined ? type + ';charset=utf-8' : 'text/html;charset=utf-8';
-            var blob = new Blob(parts, {type : blobType});
+                blobType = type !== undefined ? type + ';charset=utf-8' : 'text/html;charset=utf-8',
+                blob = new Blob(parts, {type : blobType});
             window.mcsandyblob = blob;
-                return blob;                   
+            return blob;                   
         },
         getStoredProjects: function () {
             var _this = mcsandy,
@@ -629,9 +640,7 @@ mcsandy = {
     bindUiEvents: function () {
         var _this = mcsandy,
             functions = _this.functions,
-            ctrls = _this.data.ctrls,
-            keyUpCounter = 0;
-
+            ctrls = _this.data.ctrls;
 
         //BIND EVENTS TO TEXTAREAS
         ctrls.css.addEventListener('keyup',function (e) {
