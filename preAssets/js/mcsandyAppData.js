@@ -20,7 +20,9 @@ mcsandyAppData = {
             upload: document.querySelectorAll('.fieldset__field--upload'),
             add: '.fieldset__button--add',
             rem: '.fieldset__button--rem',
-            assets: '.fieldset__field--url'
+            assets: '.fieldset__field--url',
+            saved: '.fieldset__inputWrapper[data-saved="true"] .fieldset__field',
+            unsaved: '.fieldset__inputWrapper[data-saved="false"] .fieldset__field'
         },
         fieldsets: {
             html: document.getElementById('js-fieldset--html'),
