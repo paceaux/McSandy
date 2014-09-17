@@ -8,11 +8,11 @@
                 <label for="js-editor-toggle" class="editor__label">Editor</label>
                 <input type="checkbox" id="js-editor-toggle" class="editor__toggle" />
             <form class="mpGlobal__header__editor editor">
-                    <fieldset id="js-fieldset--html" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--html" draggable="true" data-mimeoutput="text/html" data-fileext="html">
+                    <div id="js-fieldset--html" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--html" draggable="true" data-mimeoutput="text/html" data-fileext="html">
                         <label class="fieldset__label fieldset__label--html" for="js-html">HTML</label>
                         <textarea  id="js-html" tabindex="1" class="fieldset__field fieldset__field--html field field--textarea field--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
-                    </fieldset>
-                    <fieldset id="js-fieldset--css" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--css" draggable="true" data-mimeoutput="text/css" data-fileext="css">
+                    </div>
+                    <div id="js-fieldset--css" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--css" draggable="true" data-mimeoutput="text/css" data-fileext="css">
                         <label class="fieldset__label fieldset__label--css" for="js-css">CSS</label>
                         <textarea id="js-css" tabindex="2" class="fieldset__field fieldset__field--css field field--textarea field--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
                         <div class="fieldset__userOptions userOptions">
@@ -21,8 +21,8 @@
                                 <button class="fieldset__button fieldset__button--add">+</button>
                             </div>
                         </div>
-                    </fieldset>
-                    <fieldset id="js-fieldset--js" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--js" draggable="true" data-mimeoutput="application/javascript" data-fileext="js">
+                    </div>
+                    <div id="js-fieldset--js" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--js" draggable="true" data-mimeoutput="application/javascript" data-fileext="js">
                         <label class="fieldset__label fieldset__label--js" for="js-js" title="ctrl + r">JS</label>
                         <textarea id="js-js" tabindex="3" class="fieldset__field fieldset__field--js field field--textarea field--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
                         <div class="fieldset__userOptions userOptions">
@@ -31,7 +31,7 @@
                                 <button class="fieldset__button fieldset__button--add">+</button>
                             </div>
                         </div>
-                    </fieldset>
+                    </div>
             </form>
         </div>
         </header>
