@@ -12,6 +12,8 @@ standardGreen = keyColor - 90deg
 inactiveGreen = lighten(standardGreen, 61.8%)
 activeGreen = lighten(standardGreen, 32.8%)
 
+panelBorder = .125em solid borderColor;
+
 smooth()
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
@@ -141,10 +143,10 @@ textarea, code
     &__hgroup
         font-size: 1em;
         background: bgColor
-        border-bottom: .125em solid borderColor;
+        border-bottom: panelBorder
         mcanimate(slideUp)
     .editor
-        border-bottom: .125em solid borderColor
+        border-bottom: panelBorder
         &__label
             border-top-left-radius: 0
             border-top-right-radius: 0
@@ -202,15 +204,12 @@ textarea, code
             &__field
                 visibility:visible
             &__label
-                margin: .5em 4vw .5em .5em;
+                margin: .5em .5em .5em .5em;
         .fieldset__field:checked + .fieldset__label
             color: activePeach;
             font-weight: bold;
             background:activeHeadingColor
-    &--otherProjects
-        align-items: flex-end
-        .fieldset__wrapper
-            justify-content: flex-end
+
 .control
     visibility: hidden;
     width: 0%;
@@ -225,7 +224,7 @@ textarea, code
 
 .mpGlobal__footer
     &__editor
-        border-top: .125em solid borderColor
+        border-top: panelBorder
         background: bgColor
 
 .mpModal
@@ -258,7 +257,34 @@ textarea, code
         display:flex
         flex-direction: row
         justify-content:space-between
+.mcsandy
+    &--horizontal
+        .mpGlobal
+            &__header
+                &__editor
+                    border-top: panelBorder
+                    border-bottom: none
+                    &__wrapper
+                        .editor
+                            &__label
+                                align-self:flex-start
+                                transform-origin: .5rem 1rem
+                                transform: rotate(0deg)
+                        &.js-collapsed
+                            .editor
+                                &__label
+                                    transform: rotate(90deg)
 
+            &__footer
+                .editor
+                    &__label
+                        align-self: flex-start
+                        transform-origin: 3rem 2rem
+                        transform:rotate(0deg)
+                &.js-collapsed
+                    .editor
+                        &__label
+                            transform: rotate(-90deg)
 .online
     color: standardGreen;
 .offline
@@ -283,6 +309,7 @@ textarea, code
     
 .anim-slideDown
     mcanimate(slideDown)
+
 
 
 
