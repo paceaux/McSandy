@@ -20,6 +20,8 @@ McSandy isn't the only web-based, live preview editor out there. Here's what mak
 
 
 ## Keyboard Shortcuts ##
+ + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>i</kbd>: Toggle information window
+
 
  + <kbd>ctrl</kbd> + <kbd>s</kbd>: save
  + <kbd>ctrl</kbd> + <kbd>r</kbd>: run
@@ -29,6 +31,7 @@ McSandy isn't the only web-based, live preview editor out there. Here's what mak
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>:  toggle projects
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>del</kbd>:   delete project
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>+</kbd>:  New Project
+ + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>h</kbd>: toggle Horizontal layout
 
 ### The Technologies Behind McSandy ###
 McSandy is an HTML5 application. It's using Vanilla JavaScript, but it makes use of three API's in particular
@@ -74,54 +77,6 @@ If you'd like to contribute, just pull the repo. All of the 'editable' assets ar
 
 
 
-
-## Recently done ##
- + got the flex layout working properly, header, main area, and footer distributely evenly
- + can now load projects from local storage
- + loading projects from LS puts the content in the editors
- + can delete projects
- + changed orientation of the editor buttons
- + can now save with <kbd>ctrl</kbd> + <kbd>s</kbd>
- + live updating when editing the CSS
- + corrected font in editor boxes
- + Can now load a project by simply adding the name of the project as a hash to the url: `index.html#test`
- + fixed animation for expand collapse sections
- + improved the UI a bit, set the theme around one central color, threw some stylus variables around it
- + load button, instead of loading when user chooses select button
- + header hides after initial page load. 
- + the Title element is also updated with online/offline state
- + shortcut for running JS: <kbd>ctrl</kbd> + <kbd>r</kbd>
- + Export to File for the project
- + add external JS/CSS (can get JS libraries from Google's CDN)
- + fixed relative protocol issue with jQuery
- + Gruntfile wasn't copying the post-assets mcsandy into the root folder. Fixed
- + added a small green flash to the load and save buttons so you know you've clicked the button or fired the keystroke
- + fixed keystrokes
- + Broke the JavaScript into smaller JS files so grunt can concatenate them
- + <kbd>ctrl</kbd> + <kbd>`</kbd>to see external file input fields (the functionality for adding the files isn't there yet)
- + <kbd>ctrl</kbd> + <kbd>d </kbd> for downloading
- + can now drag files into the editors
- + created fields for adding external URLs (not working yet)
- + can now drag your editor fields out, drop them on a desktop, to create a separate file, just for that asset
- + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>e</kbd> to toggle the editors
- + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>p</kbd> to toggle the project panel
- + fixed peakabo animation for McSandy header.
- +  using stylus' NIB library to make animations work in all browsers. 
- +  split the styles into styles and layout files
- + Animation works in all browsers
- + Now storing and recalling external assets such as CSS and JS
- + Set width of jQuery libraries in footer so it doesn't get all weird in diff viewports
- + set the textareas to be resizeable
- + fixed bug where the projects weren't getting loaded in project selector
- + external CSS files are getting added to preview
- + Firefox is showing the names of jQuery libraries (innerHTML instead of .text or innerText)
-
-## Known issues ##
- + after a few minutes of development, it stops previewing the code. 
-
-
-
- 
 
 
 
