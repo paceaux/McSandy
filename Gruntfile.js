@@ -12,7 +12,8 @@ module.exports = function(grunt) {
             layout: {
               header: 'preAssets/html/header.html',
               main: 'preAssets/html/main.html',
-              footer: 'preAssets/html/footer.html'
+              footer: 'preAssets/html/footer.html',
+              modal: 'preAssets/html/modal.html'
             },
             assets:{
               styles: 'postAssets/mcsandy.min.css',
