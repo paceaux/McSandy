@@ -261,6 +261,8 @@ body {
   flex-grow: 1;
   -webkit-flex-shrink: 1;
   flex-shrink: 1;
+  -webkit-flex-basis: 33%;
+  flex-basis: 33%;
 }
 .fieldset__label {
   display: block;
@@ -362,8 +364,8 @@ body {
   -webkit-align-self: flex-end;
   align-self: flex-end;
   -ms-flex-item-align: end;
-  -webkit-flex-basis: 0%;
-  flex-basis: 0%;
+  -webkit-flex-basis: 4.5rem;
+  flex-basis: 4.5rem;
   width: 99%;
 }
 .fieldset--html {
@@ -390,9 +392,6 @@ body {
   -webkit-order: 3;
   order: 3;
 }
-.fieldset--externalLibs {
-  width: 4em;
-}
 .fieldset--externalLibs .fieldset__field {
   height: 2.3em;
   -webkit-flex-basis: 6%;
@@ -402,8 +401,8 @@ body {
   -ms-flex-item-align: center;
 }
 .fieldset--externalLibs .fieldset__label {
-  -webkit-flex-basis: 61%;
-  flex-basis: 61%;
+  -webkit-flex-basis: 75%;
+  flex-basis: 75%;
 }
 .fieldset--externalLibs .fieldset__wrapper {
   -webkit-flex-shrink: 1;
@@ -439,8 +438,6 @@ body {
   align-content: flex-start;
 }
 .fieldset.js-shrunk {
-  -webkit-flex-basis: 0%;
-  flex-basis: 0%;
   -webkit-box-flex: 0;
   -moz-box-flex: 0;
   -o-box-flex: 0;
@@ -450,6 +447,8 @@ body {
   flex-grow: 0;
   -webkit-flex-shrink: 3;
   flex-shrink: 3;
+  -webkit-flex-basis: 5%;
+  flex-basis: 5%;
 }
 .fieldset.js-shrunk .field,
 .fieldset.js-shrunk .fieldset__inputWrapper {
@@ -468,12 +467,6 @@ body {
   -webkit-flex-basis: 100%;
   flex-basis: 100%;
   width: 95%;
-}
-.field--textarea {
-  height: 20vh;
-}
-.field--html {
-  height: 26.5vh;
 }
 .field.js-shrink {
   height: 0;
@@ -543,8 +536,8 @@ body {
   flex-grow: 1;
 }
 .mpGlobal__footer__editor .fieldset--externalLibs {
-  -webkit-flex-basis: 9rem;
-  flex-basis: 9rem;
+  -webkit-flex-basis: 15rem;
+  flex-basis: 15rem;
   -webkit-flex-shrink: 0;
   flex-shrink: 0;
 }
@@ -557,9 +550,12 @@ body {
   flex-direction: row;
 }
 .mcsandy--horizontal .mpGlobal__header {
-  width: 40vw;
+  width: auto;
 }
-.mcsandy--horizontal .mpGlobal__header .editor {
+.mcsandy--horizontal .mpGlobal__header__hgroup {
+  width: 0;
+}
+.mcsandy--horizontal .mpGlobal__header__editor[class] {
   -webkit-flex-basis: 95vh;
   flex-basis: 95vh;
   height: 95vh;
@@ -569,27 +565,38 @@ body {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  border-bottom: none;
 }
-.mcsandy--horizontal .mpGlobal__header .editor .fieldset {
+.mcsandy--horizontal .mpGlobal__header__editor[class] .fieldset {
   -webkit-flex-basis: 5%;
   flex-basis: 5%;
+}
+.mcsandy--horizontal .mpGlobal__header .editor__label {
+  -webkit-border-radius: 0.5em 0.5em 0 0;
+  border-radius: 0.5em 0.5em 0 0;
+  -webkit-box-ordinal-group: -1;
+  -moz-box-ordinal-group: -1;
+  -o-box-ordinal-group: -1;
+  -ms-flex-order: -1;
+  -webkit-order: -1;
+  order: -1;
 }
 .mcsandy--horizontal .mpGlobal__result {
   height: 100%;
 }
 .mcsandy--horizontal .mpGlobal__footer {
-  -webkit-flex-basis: 30vw;
-  flex-basis: 30vw;
-  height: 95vh;
-  -webkit-box-orient: horizontal;
-  -moz-box-orient: horizontal;
-  -o-box-orient: horizontal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-self: flex-end;
-  align-self: flex-end;
-  -ms-flex-item-align: end;
+  height: 100vh;
+  width: auto;
+  max-width: 17rem;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  -ms-flex-item-align: start;
 }
 .mcsandy--horizontal .mpGlobal__footer__editor {
   -webkit-box-orient: vertical;
@@ -617,7 +624,20 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
 }
-.mcsandy--horizontal .editor__toggle:checked ~ .mpGlobal__footer__editor {
+.mcsandy--horizontal .mpGlobal__footer__editor .fieldset--externalLibs {
+  -webkit-flex-basis: 33%;
+  flex-basis: 33%;
+}
+.mcsandy--horizontal .mpGlobal__footer__editor .fieldset--externalLibs .fieldset__wrapper {
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+.mcsandy--horizontal .editor__toggle:checked ~ .mpGlobal__footer__editor,
+.mcsandy--horizontal .editor__toggle:checked ~ .mpGlobal__header__editor {
   -webkit-box-flex: 0;
   -moz-box-flex: 0;
   -o-box-flex: 0;
@@ -625,10 +645,25 @@ body {
   box-flex: 0;
   -webkit-flex-grow: 0;
   flex-grow: 0;
+  width: 0;
 }
 .mcsandy--horizontal > .editor__fieldset {
   height: initial;
   width: 0;
+}
+.mcsandy--horizontal .fieldset--externalLibs .fieldset__label {
+  -webkit-flex-basis: 60%;
+  flex-basis: 60%;
+  margin-right: 1em;
+}
+.mcsandy--horizontal .editor__input--name {
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -o-box-flex: 0;
+  -ms-box-flex: 0;
+  box-flex: 0;
+  -webkit-flex-grow: 0;
+  flex-grow: 0;
 }
 
 html,
@@ -1016,28 +1051,12 @@ code {
   visibility: visible;
 }
 .fieldset--externalLibs .fieldset__label {
-  margin: 0.5em 4vw 0.5em 0.5em;
+  margin: 0.5em 0.5em 0.5em 0.5em;
 }
 .fieldset--externalLibs .fieldset__field:checked + .fieldset__label {
   color: #eece97;
   font-weight: bold;
   background: #5799e4;
-}
-.fieldset--otherProjects {
-  -webkit-box-align: end;
-  -moz-box-align: end;
-  -o-box-align: end;
-  -ms-flex-align: end;
-  -webkit-align-items: flex-end;
-  align-items: flex-end;
-}
-.fieldset--otherProjects .fieldset__wrapper {
-  -webkit-box-pack: end;
-  -moz-box-pack: end;
-  -o-box-pack: end;
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
 }
 .control {
   visibility: hidden;
@@ -1129,6 +1148,54 @@ code {
   -ms-flex-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+}
+.mcsandy--horizontal .mpGlobal__header__editor {
+  border-top: 0.125em solid #113968;
+  border-bottom: none;
+}
+.mcsandy--horizontal .mpGlobal__header__editor__wrapper .editor__label {
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  -ms-flex-item-align: start;
+  -webkit-transform-origin: 0.5rem 1rem;
+  -moz-transform-origin: 0.5rem 1rem;
+  -o-transform-origin: 0.5rem 1rem;
+  -ms-transform-origin: 0.5rem 1rem;
+  transform-origin: 0.5rem 1rem;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.mcsandy--horizontal .mpGlobal__header__editor__wrapper.js-collapsed .editor__label {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.mcsandy--horizontal .mpGlobal__footer .editor__label {
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  -ms-flex-item-align: start;
+  -webkit-transform-origin: 3rem 2rem;
+  -moz-transform-origin: 3rem 2rem;
+  -o-transform-origin: 3rem 2rem;
+  -ms-transform-origin: 3rem 2rem;
+  transform-origin: 3rem 2rem;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.mcsandy--horizontal .mpGlobal__footer.js-collapsed .editor__label {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 .online {
   color: #57e45c;
@@ -1429,11 +1496,11 @@ code {
                 <label for="js-editor-toggle" class="editor__label">Editor</label>
                 <input type="checkbox" id="js-editor-toggle" class="editor__toggle" />
             <form class="mpGlobal__header__editor editor">
-                    <fieldset id="js-fieldset--html" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--html" draggable="true" data-mimeoutput="text/html" data-fileext="html">
+                    <div id="js-fieldset--html" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--html" draggable="true" data-mimeoutput="text/html" data-fileext="html">
                         <label class="fieldset__label fieldset__label--html" for="js-html">HTML</label>
                         <textarea  id="js-html" tabindex="1" class="fieldset__field fieldset__field--html field field--textarea field--html"  data-target="js-html-content" placeholder="<h1>"></textarea>
-                    </fieldset>
-                    <fieldset id="js-fieldset--css" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--css" draggable="true" data-mimeoutput="text/css" data-fileext="css">
+                    </div>
+                    <div id="js-fieldset--css" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--css" draggable="true" data-mimeoutput="text/css" data-fileext="css">
                         <label class="fieldset__label fieldset__label--css" for="js-css">CSS</label>
                         <textarea id="js-css" tabindex="2" class="fieldset__field fieldset__field--css field field--textarea field--css"  data-target="js-css-content" placeholder="h1{}"></textarea>
                         <div class="fieldset__userOptions userOptions">
@@ -1442,8 +1509,8 @@ code {
                                 <button class="fieldset__button fieldset__button--add">+</button>
                             </div>
                         </div>
-                    </fieldset>
-                    <fieldset id="js-fieldset--js" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--js" draggable="true" data-mimeoutput="application/javascript" data-fileext="js">
+                    </div>
+                    <div id="js-fieldset--js" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--js" draggable="true" data-mimeoutput="application/javascript" data-fileext="js">
                         <label class="fieldset__label fieldset__label--js" for="js-js" title="ctrl + r">JS</label>
                         <textarea id="js-js" tabindex="3" class="fieldset__field fieldset__field--js field field--textarea field--js"  data-target="js-js-content" placeholder="var blah;"></textarea>
                         <div class="fieldset__userOptions userOptions">
@@ -1452,7 +1519,7 @@ code {
                                 <button class="fieldset__button fieldset__button--add">+</button>
                             </div>
                         </div>
-                    </fieldset>
+                    </div>
             </form>
         </div>
         </header>
@@ -2081,6 +2148,7 @@ mcsandyUI = {
         helpers.addEvents(removeExternalFile, 'click', _this.functions.handleRemoveExternalFile);
         /*LABEL/INPUT SHENANIGANS*/
         _this.functions.bindFieldsetCollapse();
+        helpers.addEvents(document.querySelectorAll('.editor__label'),'click', _this.functions.handleCollapsePanel)
         _this.data.modal.overlay.addEventListener('click', _this.functions.toggleModal);
     },
     functions: {
@@ -2099,6 +2167,12 @@ mcsandyUI = {
                 document.title = "McSandy | Offline";
                 document.querySelector('body').className = document.querySelector('body').className.replace(/(?:^|\s)mcsandy--online(?!\S)/g, " mcsandy--offline");
             }
+        },
+        handleCollapsePanel: function (e) {
+            var _this = mcsandyUI,
+                target = e.target,
+            parent = target.parentElement;
+            _this.helpers.toggleClass(parent,'js-collapsed');
         },
         handleHash: function () {
             var _this = mcsandyUI;
