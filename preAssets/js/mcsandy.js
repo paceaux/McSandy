@@ -233,6 +233,7 @@ mcsandyUI = {
         helpers.addEvents(removeExternalFile, 'click', _this.functions.handleRemoveExternalFile);
         /*LABEL/INPUT SHENANIGANS*/
         _this.functions.bindFieldsetCollapse();
+        helpers.addEvents(document.querySelectorAll('.editor__label'),'click', _this.functions.handleCollapsePanel)
         _this.data.modal.overlay.addEventListener('click', _this.functions.toggleModal);
     },
     functions: {
@@ -251,6 +252,12 @@ mcsandyUI = {
                 document.title = "McSandy | Offline";
                 document.querySelector('body').className = document.querySelector('body').className.replace(/(?:^|\s)mcsandy--online(?!\S)/g, " mcsandy--offline");
             }
+        },
+        handleCollapsePanel: function (e) {
+            var _this = mcsandyUI,
+                target = e.target,
+            parent = target.parentElement;
+            _this.helpers.toggleClass(parent,'js-collapsed');
         },
         handleHash: function () {
             var _this = mcsandyUI;
