@@ -781,7 +781,7 @@ mcsandyUI = {
                 modal = _this.data.modal;
             _this.helpers.toggleClass(modal.container, 'visible');
             _this.helpers.toggleClass(modal.overlay, 'visible');
-            if (content) {
+            if (typeof content === "string") {
                 modal.content.innerHTML = content;
             }
         }
