@@ -21,8 +21,6 @@ McSandy isn't the only web-based, live preview editor out there. Here's what mak
 
 ## Keyboard Shortcuts ##
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>i</kbd>: Toggle information window
-
-
  + <kbd>ctrl</kbd> + <kbd>s</kbd>: save
  + <kbd>ctrl</kbd> + <kbd>r</kbd>: run
  + <kbd>ctrl</kbd> + <kbd>d</kbd>: download
@@ -44,10 +42,7 @@ McSandy is an HTML5 application. It's using Vanilla JavaScript, but it makes use
  + CSS3's Flexbox module for layout. Flexbox is supported in IE10+ 
 
 ## Upcoming Features ##
- + manually enter external libraries
- + drag in/out additional files (that you don't want to edit)
- + "tips" window for seeing available keyboard shortcuts
- + warning/alert window for various errors
+If you'd like a feature, jump on over to the Issues page and request one. Label it as an enhancement and assign it to me. 
 
 ## FAQs ##
 ###What's an SFWA? ###
@@ -72,12 +67,9 @@ McSandy gives you the option to load JavaScript libraries from Google's CDN. In 
 At the bottom of McSandy is a <kbd>download</kbd> button. This will export your current project to a static HTML file. 
 
 
-### How can I make it better ?
-If you'd like to contribute, just pull the repo. All of the 'editable' assets are in the `preAssets` folder. The HTML files are in their own folder.  Grunt.js will build the files in `postAssets`, and generate a file called `post-mcsandy.html` for you. 
-
-
-
-
+## License
+McSandy is not open-sourced. 
+Copyright and all rights reserved by Frank M. Taylor, 2014. 
 
 
 	       
