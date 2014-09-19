@@ -555,7 +555,8 @@ mcsandyUI = {
         /*DRAG AND DROP FILES INTO EDITORS */
         helpers.addEvents(fileUploads, 'change', _this.helpers.handleFileUpload);
 
-        helpers.addEvents(editorFieldsets, 'dragend', _this.functions.handleFileDragout);
+       // helpers.addEvents(editorFieldsets, 'dragend', _this.functions.handleFileDragout);
+        helpers.addEvents(editorFieldsets, 'dragstart', _this.functions.handleDragStart);
         helpers.addEvents(editorFieldsets, 'drop', _this.functions.handleFileDrop);
         /*ADD EXTERNAL LINK*/
         helpers.addEvents(addExternalFile, 'click', _this.functions.handleAddExternalFile);
@@ -677,13 +678,26 @@ mcsandyUI = {
         handleFileUpload: function (e) {
             e.stopPropagation();
             e.preventDefault();
-            var files = e.dataTransfer.files,
-                file = files[0],
-                reader = new FileReader();
-            reader.onload = function (evt) {
-                e.toElement.value = evt.target.result;
+            var files = e.dataTransfer.files;
+            for (var i = 0, f; f = files[i]; i++) {
+                var reader = new FileReader();
+              if (f.type.match('image.*') && !f.type.match('svg')) {
+                reader.onload = function (evt) {
+                    if (e.toElement.parentNode.dataset.fileext === "html") {
+                        var newImage = '<img src="' + evt.target.result + '"/>';
+                    } else {
+                        var newImage = "url('" + evt.target.result + "')";
+                    }
+                    e.toElement.value = e.toElement.value + newImage
+                }
+                reader.readAsDataURL(f);
+              } else {
+                reader.onload = function (evt) {
+                    e.toElement.value = e.toElement.value + evt.target.result;
+                }
+                    reader.readAsText(f);
+                }
             }
-            reader.readAsText(file);
         }, 
         handleDragOver: function (e){
             e.stopPropagation();
@@ -691,8 +705,12 @@ mcsandyUI = {
             e.dataTransfer.dropEffect = 'copy';
         },
         handleDragStart: function (e) {
-            e.stopPropagation();
-            e.preventDefault();
+            var _this = mcsandyUI,
+                source = e.target.querySelector('textarea').value,
+                projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy',
+                type = e.target.dataset.fileext,
+                fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + window.location.href;   
+            e.dataTransfer.setData("DownloadURL", fileDetails  );
         },
         handleFileDragout: function (e) {
             e.stopPropagation();
@@ -706,9 +724,11 @@ mcsandyUI = {
                     project: projectName,
                     blobArray: [source]
                 },
-                type = e.target.dataset.fileext;       
+                type = e.target.dataset.fileext,
+                fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + window.location.href      
             var data = e.dataTransfer.getData(e.target.dataset.mimeoutput);
-            mcsandy.functions.downloadContent(downloadObj, type);
+            e.dataTransfer.setData("DownloadURL", fileDetails );
+            //mcsandy.functions.downloadContent(downloadObj, type);
         },
         updateEditors: function (html, css, js) {
             var _this = mcsandyUI, 
