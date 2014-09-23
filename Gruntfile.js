@@ -34,7 +34,7 @@ module.exports = function(grunt) {
       js:{
         options: {
           banner: '/* MCSANDY: THE OFFLINE HTML5 SANDBOX */\n' + 'var store, mcsandyAppData, mcsandy, mcsandyPrefs, mcsandyUI;\n',
-          footer: '\n' + 'mcsandyUI.init();\n' + 'mcsandy.init();\n',
+          footer: '\n' + 'mcsandyUI.init();\n' + 'mcsandy.init();\n' + 'mcsandyPrefs.init();\n',
           process: function (src, filepath) {
             return '// Source: ' + filepath + '\n' + src
           }
