@@ -33,14 +33,14 @@ module.exports = function(grunt) {
     concat: {
       js:{
         options: {
-          banner: '/* MCSANDY: THE OFFLINE HTML5 SANDBOX */\n' + 'var store, mcsandyAppData, mcsandy, mcsandyUI;\n',
+          banner: '/* MCSANDY: THE OFFLINE HTML5 SANDBOX */\n' + 'var store, mcsandyAppData, mcsandy, mcsandyPrefs, mcsandyUI;\n',
           footer: '\n' + 'mcsandyUI.init();\n' + 'mcsandy.init();\n',
           process: function (src, filepath) {
             return '// Source: ' + filepath + '\n' + src
           }
         },
         files: {
-          'preAssets/mcsandy.js' : ['preAssets/js/store.js', 'preAssets/js/filesaver.js','preAssets/js/mcsandyAppData.js', 'preAssets/js/mcsandy.js']
+          'preAssets/mcsandy.js' : ['preAssets/js/store.js', 'preAssets/js/filesaver.js','preAssets/js/mcsandyAppData.js','preAssets/js/mcsandyPrefs.js', 'preAssets/js/mcsandy.js']
         }
       }
     },
