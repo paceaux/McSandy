@@ -1,3 +1,4 @@
+
 /*MCSANDYUI: the main user interactions with the app*/
 mcsandyUI = {
     init: function () {
@@ -49,6 +50,8 @@ mcsandyUI = {
                         break;
                     case 72:
                         _this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
+                        mcsandyAppData.userPrefs.ui.hLayout = true;
+                        mcsandyPrefs.functions.savePreferences();
                         break;
                     case 73:
                         _this.functions.toggleModal();
@@ -287,7 +290,7 @@ mcsandyUI = {
         },
         loadProject: function (project) {
             var _this = mcsandyUI,
-                projData = store.get(0, project);
+                projData = store.get(0, 'mp-' + project);
             window.mcsandyProject = projData;
             console.info("McSandy Loaded a Project");
             console.info(projData);
@@ -643,8 +646,9 @@ mcsandy = {
                 len = localStorage.length,
                 projects = [];
             for (i = 0; i < len; i++) {
-                var projectKey = store.get(0,i);
-                projects.push(projectKey);
+                if (localStorage.key(i).indexOf('mp-') !== -1) {
+                    projects.push(store.get(0,i));
+                }
             }
             return projects;
         },
@@ -689,12 +693,12 @@ mcsandy = {
             select.innerHTML = '';//clear pre-exiting options
             projects.forEach(function (el) {
                 var option = _this.helpers.createSelectOption(el.project);
-                if (mcsandyUI.helpers.unconvertHash(el.project) === mcsandyUI.helpers.unconvertHash(pageHash)){
+                if (mcsandyUI.helpers.unconvertHash(el.project) === mcsandyUI.helpers.unconvertHash(pageHash)) {
                     select.selected = true;
                 }
                 select.appendChild(option);
             })
-            if(window.location.hash){
+            if (window.location.hash) {
                 select.value = mcsandyUI.helpers.unconvertHash(window.location.hash);
             }
         },
@@ -759,7 +763,7 @@ mcsandy = {
                 projectName = _this.data.ctrls.projectName.value,
                 externalAssets = _this.helpers.createExternalAssetsObj(),
                 project = _this.helpers.createProjectObj(projectName, rawParts, blobArray, externalAssets);
-            store.set(0, projectName, project);
+            store.set(0, 'mp-' + projectName, project);
             mcsandyUI.functions.setHash(projectName);
             _this.functions.createProjectSelect();
         },
