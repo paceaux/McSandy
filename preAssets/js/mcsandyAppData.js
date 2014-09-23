@@ -7,6 +7,11 @@ mcsandyAppData = {
             author: 'Frank M Taylor'
         }
     },
+    userPrefs: {
+        ui: {
+            hLayout: false
+        }
+    },
     ui: {
         onlineState: 'online',
         onlineCtrl: document.getElementById('js-onlineStatus'),
