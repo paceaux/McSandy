@@ -318,19 +318,38 @@ mcsandyUI = {
             }
 
         },
+        addError: function (el, msg) {
+            var _this = mcsandyUI,
+                helpers = _this.helpers,
+                errTimeout = function () {
+                    el.placeholder = el.dataset.originalPlaceholder
+                };
+            el.dataset.originalPlaceholder = el.placeholder;
+            el.placeholder = msg;
+            window.setTimeout(errTimeout, 5000)
+        },
         handleAddExternalFile: function (e) {
             e.preventDefault();
             var _this = mcsandyUI,
                 helpers = _this.helpers,
+                functions = _this.functions,
                 el = e.target,
+                clonedParent,
+                exFileField = e.target.parentNode.querySelector('.fieldset__field');
+            if (exFileField.value) {
                 clonedParent = helpers.cloneParent(el);
-            clonedParent.dataset.saved = false;
-            e.target.removeEventListener('click',_this.functions.handleAddExternalFile);
-            el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
-            el.innerHTML = "&mdash;";
-            el.parentNode.parentNode.appendChild(clonedParent);
-            mcsandy.functions.updateContent();    
-            _this.bindUiEvents();
+                e.target.removeEventListener('click',_this.functions.handleAddExternalFile);
+                el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
+                el.innerHTML = "&mdash;";
+                el.parentNode.parentNode.appendChild(clonedParent);
+                mcsandy.functions.updateContent();    
+                _this.bindUiEvents();
+                clonedParent.dataset.saved = false;
+            } else {
+                console.log ('no value');
+                functions.addError(exFileField, "Please add a field");
+            }
+
         },
         handleLibToggle: function (e) {
             var _this = mcsandy,
