@@ -9,7 +9,9 @@ mcsandyAppData = {
     },
     userPrefs: {
         ui: {
-            hLayout: false
+            hLayout: false,
+            editPanel: true,
+            projectPanel: true,
         }
     },
     ui: {
@@ -39,6 +41,11 @@ mcsandyAppData = {
             overlay: document.getElementById('js-modal__overlay'),
             content: document.getElementById('js-modal__content'),
             title: document.getElementById('js-modal__title')
+        }, 
+        fieldErrorMessages: {
+            empty: "Please add a value",
+            fileNotValid: "That's not a valid file type",
+            notURL: "Please use a valid URL"
         }
     },
     core: {
