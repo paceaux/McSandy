@@ -46,7 +46,12 @@ mcsandyAppData = {
             empty: "Please add a value",
             fileNotValid: "That's not a valid file type",
             notURL: "Please use a valid URL"
-        }
+        },
+        fieldRegexPatterns: {
+            url: new RegExp('@^(https?|ftp)://[^\s/$.?#].[^\s]*$@iS','i'),
+            css: new RegExp("(\.css)","i"),
+            js:  new RegExp("(\.js)","i")
+       }
     },
     core: {
         ctrls: {
