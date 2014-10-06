@@ -4,11 +4,13 @@ store = {
         return typeof v !== "object" ? v : JSON.stringify(v);
     },
     unconvertValue: function (v) {
-        if ( v.indexOf("{") === 0 || v.indexOf("[") === 0 ) {
-            var v = JSON.parse(v);
-            return v;
-        } else {
-            return null;
+        if (v !== null) {
+            if ( v.indexOf("{") === 0 || v.indexOf("[") === 0 ) {
+                var v = JSON.parse(v);
+                return v;
+            } else {
+                return null;
+            }
         }
     },
     set: function (type, k, v) {
