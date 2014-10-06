@@ -245,7 +245,7 @@ mcsandyUI = {
             var _this = mcsandyUI,
                 ctrl = document.getElementById('js-onlineStatus');
             mcsandyAppData.ui.onlineState = navigator.onLine ? "online" : "offline";
-            if (override) mcsandyAppData.ui.onlineState = override; // Added this for debugging when I'm on an airplane. 
+            if (override !== undefined && typeof override === 'string') mcsandyAppData.ui.onlineState = override; // Added this for debugging when I'm on an airplane. 
             if (mcsandyAppData.ui.onlineState === "online") {
                 ctrl.className = ctrl.className.replace(/(?:^|\s)offline(?!\S)/g, " online");
                 document.title = "McSandy | Online";
@@ -318,9 +318,11 @@ mcsandyUI = {
             }
 
         },
-        addError: function (el, msg) {
+        addError: function (el, msgType) {
             var _this = mcsandyUI,
                 helpers = _this.helpers,
+                errorMsgs = mcsandyAppData.ui.fieldErrorMessages,
+                msg = errorMsgs[msgType],
                 errTimeout = function () {
                     el.placeholder = el.dataset.originalPlaceholder
                 };
@@ -333,21 +335,28 @@ mcsandyUI = {
             var _this = mcsandyUI,
                 helpers = _this.helpers,
                 functions = _this.functions,
+                fieldPatterns = mcsandyAppData.ui.fieldRegexPatterns,
                 el = e.target,
                 clonedParent,
                 exFileField = e.target.parentNode.querySelector('.fieldset__field');
+            
             if (exFileField.value) {
-                clonedParent = helpers.cloneParent(el);
-                e.target.removeEventListener('click',_this.functions.handleAddExternalFile);
-                el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
-                el.innerHTML = "&mdash;";
-                el.parentNode.parentNode.appendChild(clonedParent);
-                mcsandy.functions.updateContent();    
-                _this.bindUiEvents();
-                clonedParent.dataset.saved = false;
+                if (exFileField.value.match(fieldPatterns.url) !== null) {
+                    clonedParent = helpers.cloneParent(el);
+                    e.target.removeEventListener('click',_this.functions.handleAddExternalFile);
+                    el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
+                    el.innerHTML = "&mdash;";
+                    el.parentNode.parentNode.appendChild(clonedParent);
+                    mcsandy.functions.updateContent();    
+                    _this.bindUiEvents();
+                    clonedParent.dataset.saved = false;
+                }  else {
+                    functions.addError(exFileField, 'notURL'); 
+                }               
+                console.log(exFileField.value.match(fieldPatterns.url));
+
             } else {
-                console.log ('no value');
-                functions.addError(exFileField, "Please add a field");
+                functions.addError(exFileField, 'empty');
             }
 
         },
