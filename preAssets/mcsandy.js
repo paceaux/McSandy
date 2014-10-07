@@ -1,5 +1,5 @@
 /* MCSANDY: THE OFFLINE HTML5 SANDBOX */
-var store, mcsandyAppData, mcsandy, mcsandyUI;
+var store, mcsandyAppData, mcsandy, mcsandyPrefs, mcsandyUI;
 // Source: preAssets/js/store.js
 store = {
     types: [localStorage,sessionStorage],
@@ -7,11 +7,13 @@ store = {
         return typeof v !== "object" ? v : JSON.stringify(v);
     },
     unconvertValue: function (v) {
-        if ( v.indexOf("{") === 0 || v.indexOf("[") === 0 ) {
-            var v = JSON.parse(v);
-            return v;
-        } else {
-            return null;
+        if (v !== null) {
+            if ( v.indexOf("{") === 0 || v.indexOf("[") === 0 ) {
+                var v = JSON.parse(v);
+                return v;
+            } else {
+                return null;
+            }
         }
     },
     set: function (type, k, v) {
@@ -254,6 +256,13 @@ mcsandyAppData = {
             author: 'Frank M Taylor'
         }
     },
+    userPrefs: {
+        ui: {
+            hLayout: false,
+            editPanel: true,
+            projectPanel: true,
+        }
+    },
     ui: {
         onlineState: 'online',
         onlineCtrl: document.getElementById('js-onlineStatus'),
@@ -281,7 +290,17 @@ mcsandyAppData = {
             overlay: document.getElementById('js-modal__overlay'),
             content: document.getElementById('js-modal__content'),
             title: document.getElementById('js-modal__title')
-        }
+        }, 
+        fieldErrorMessages: {
+            empty: "Please add a value",
+            fileNotValid: "That's not a valid file type",
+            notURL: "Please use a valid URL"
+        },
+        fieldRegexPatterns: {
+            url: new RegExp('@^(https?|ftp)://[^\s/$.?#].[^\s]*$@iS','i'),
+            css: new RegExp("(\.css)","i"),
+            js:  new RegExp("(\.js)","i")
+       }
     },
     core: {
         ctrls: {
@@ -326,7 +345,53 @@ mcsandyProject = {
         }
     }
 };
+// Source: preAssets/js/mcsandyPrefs.js
+/*MCSANDYPREFS: A user's preferences with the interface*/
+mcsandyPrefs =  {
+    init : function () {
+        console.log("Mcsandy Preferences Loaded");
+        var _this = mcsandyPrefs;
+        _this.functions.loadPreferences();
+        _this.functions.runPreferences();
+    },
+    prefUpdaters : {
+        hLayout: function () {
+            console.log('layout');
+            var _this = mcsandyPrefs;
+            mcsandyUI.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
+        },
+        editPanel: function () {
+        },
+        projectPanel: function () {
+        }
+    },
+    functions : {
+        loadPreferences : function () {
+            var _this = mcsandyPrefs;
+            if (store.get(0, 'mcsandyPrefs') !== undefined) {
+                mcsandyAppData.userPrefs = store.get(0, 'mcsandyPrefs');
+            } else {
+                _this.functions.savePreferences(mcsandyAppData.userPrefs); 
+            }
+        },
+        savePreferences: function (prefs) {
+            var _this = mcsandyPrefs;
+            prefs = prefs !== undefined ? prefs : mcsandyAppData.userPrefs;
+            store.set(0, 'mcsandyPrefs', prefs);
+        },
+        runPreferences: function () {
+            var _this = mcsandyPrefs,
+                uiPrefs = mcsandyAppData.userPrefs.ui;
+            for (pref in uiPrefs) {
+                if (uiPrefs[pref]) {
+                    _this.prefUpdaters[pref]();
+                }
+            }
+        }
+    }
+};
 // Source: preAssets/js/mcsandy.js
+
 /*MCSANDYUI: the main user interactions with the app*/
 mcsandyUI = {
     init: function () {
@@ -378,6 +443,8 @@ mcsandyUI = {
                         break;
                     case 72:
                         _this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
+                        mcsandyAppData.userPrefs.ui.hLayout = mcsandyAppData.userPrefs.ui.hLayout === true ? false : true;
+                        mcsandyPrefs.functions.savePreferences();
                         break;
                     case 73:
                         _this.functions.toggleModal();
@@ -571,7 +638,7 @@ mcsandyUI = {
             var _this = mcsandyUI,
                 ctrl = document.getElementById('js-onlineStatus');
             mcsandyAppData.ui.onlineState = navigator.onLine ? "online" : "offline";
-            if (override) mcsandyAppData.ui.onlineState = override; // Added this for debugging when I'm on an airplane. 
+            if (override !== undefined && typeof override === 'string') mcsandyAppData.ui.onlineState = override; // Added this for debugging when I'm on an airplane. 
             if (mcsandyAppData.ui.onlineState === "online") {
                 ctrl.className = ctrl.className.replace(/(?:^|\s)offline(?!\S)/g, " online");
                 document.title = "McSandy | Online";
@@ -616,7 +683,7 @@ mcsandyUI = {
         },
         loadProject: function (project) {
             var _this = mcsandyUI,
-                projData = store.get(0, project);
+                projData = store.get(0, 'mp-' + project);
             window.mcsandyProject = projData;
             console.info("McSandy Loaded a Project");
             console.info(projData);
@@ -644,19 +711,47 @@ mcsandyUI = {
             }
 
         },
+        addError: function (el, msgType) {
+            var _this = mcsandyUI,
+                helpers = _this.helpers,
+                errorMsgs = mcsandyAppData.ui.fieldErrorMessages,
+                msg = errorMsgs[msgType],
+                errTimeout = function () {
+                    el.placeholder = el.dataset.originalPlaceholder
+                };
+            el.dataset.originalPlaceholder = el.placeholder;
+            el.placeholder = msg;
+            window.setTimeout(errTimeout, 5000)
+        },
         handleAddExternalFile: function (e) {
             e.preventDefault();
             var _this = mcsandyUI,
                 helpers = _this.helpers,
+                functions = _this.functions,
+                fieldPatterns = mcsandyAppData.ui.fieldRegexPatterns,
                 el = e.target,
-                clonedParent = helpers.cloneParent(el);
-            clonedParent.dataset.saved = false;
-            e.target.removeEventListener('click',_this.functions.handleAddExternalFile);
-            el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
-            el.innerHTML = "&mdash;";
-            el.parentNode.parentNode.appendChild(clonedParent);
-            mcsandy.functions.updateContent();    
-            _this.bindUiEvents();
+                clonedParent,
+                exFileField = e.target.parentNode.querySelector('.fieldset__field');
+            
+            if (exFileField.value) {
+                if (exFileField.value.match(fieldPatterns.url) !== null) {
+                    clonedParent = helpers.cloneParent(el);
+                    e.target.removeEventListener('click',_this.functions.handleAddExternalFile);
+                    el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
+                    el.innerHTML = "&mdash;";
+                    el.parentNode.parentNode.appendChild(clonedParent);
+                    mcsandy.functions.updateContent();    
+                    _this.bindUiEvents();
+                    clonedParent.dataset.saved = false;
+                }  else {
+                    functions.addError(exFileField, 'notURL'); 
+                }               
+                console.log(exFileField.value.match(fieldPatterns.url));
+
+            } else {
+                functions.addError(exFileField, 'empty');
+            }
+
         },
         handleLibToggle: function (e) {
             var _this = mcsandy,
@@ -972,8 +1067,9 @@ mcsandy = {
                 len = localStorage.length,
                 projects = [];
             for (i = 0; i < len; i++) {
-                var projectKey = store.get(0,i);
-                projects.push(projectKey);
+                if (localStorage.key(i).indexOf('mp-') !== -1) {
+                    projects.push(store.get(0,i));
+                }
             }
             return projects;
         },
@@ -1018,12 +1114,12 @@ mcsandy = {
             select.innerHTML = '';//clear pre-exiting options
             projects.forEach(function (el) {
                 var option = _this.helpers.createSelectOption(el.project);
-                if (mcsandyUI.helpers.unconvertHash(el.project) === mcsandyUI.helpers.unconvertHash(pageHash)){
+                if (mcsandyUI.helpers.unconvertHash(el.project) === mcsandyUI.helpers.unconvertHash(pageHash)) {
                     select.selected = true;
                 }
                 select.appendChild(option);
             })
-            if(window.location.hash){
+            if (window.location.hash) {
                 select.value = mcsandyUI.helpers.unconvertHash(window.location.hash);
             }
         },
@@ -1088,7 +1184,7 @@ mcsandy = {
                 projectName = _this.data.ctrls.projectName.value,
                 externalAssets = _this.helpers.createExternalAssetsObj(),
                 project = _this.helpers.createProjectObj(projectName, rawParts, blobArray, externalAssets);
-            store.set(0, projectName, project);
+            store.set(0, 'mp-' + projectName, project);
             mcsandyUI.functions.setHash(projectName);
             _this.functions.createProjectSelect();
         },
@@ -1109,3 +1205,4 @@ mcsandy = {
 };
 mcsandyUI.init();
 mcsandy.init();
+mcsandyPrefs.init();
