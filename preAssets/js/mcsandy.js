@@ -50,7 +50,7 @@ mcsandyUI = {
                         break;
                     case 72:
                         _this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
-                        mcsandyAppData.userPrefs.ui.hLayout = true;
+                        mcsandyAppData.userPrefs.ui.hLayout = mcsandyAppData.userPrefs.ui.hLayout === true ? false : true;
                         mcsandyPrefs.functions.savePreferences();
                         break;
                     case 73:
