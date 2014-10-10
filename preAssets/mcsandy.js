@@ -800,12 +800,16 @@ mcsandyUI = {
             e.dataTransfer.dropEffect = 'copy';
         },
         handleDragStart: function (e) {
+            console.log('dragstart');
+            console.log(e.target);
             var _this = mcsandyUI,
                 source = e.target.querySelector('textarea').value,
                 projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy',
                 type = e.target.dataset.fileext,
-                fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + window.location.href;   
-            e.dataTransfer.setData("DownloadURL", fileDetails  );
+                blob = new Blob([source], {type: type}),
+                sourceURL = URL.createObjectURL(blob),
+                fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + sourceURL;   
+            e.dataTransfer.setData("DownloadURL", fileDetails );
         },
         handleFileDragout: function (e) {
             e.stopPropagation();
