@@ -734,12 +734,14 @@ mcsandyUI = {
                 exFileField = e.target.parentNode.querySelector('.fieldset__field');
             
             if (exFileField.value) {
+                console.log('has value');
                 if (exFileField.value.match(fieldPatterns.url) !== null) {
                     clonedParent = helpers.cloneParent(el);
                     e.target.removeEventListener('click',_this.functions.handleAddExternalFile);
                     el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
                     el.innerHTML = "&mdash;";
                     el.parentNode.parentNode.appendChild(clonedParent);
+                    console.log(el.parentNode);
                     mcsandy.functions.updateContent();    
                     _this.bindUiEvents();
                     clonedParent.dataset.saved = false;
@@ -859,27 +861,26 @@ mcsandyUI = {
         updateExternalAssetFields: function (projData, type) {
             var _this = mcsandyUI,
                 assetFields = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper'),
-                xAssets = projData.externals.assets[type];
-           //if I don't have as many fields as I do assets, there's a problem
-            do {
-                var input = assetFields[0].querySelector('input'),
-                clone = input.parentNode.cloneNode(true),
-                grandparent = input.parentNode.parentNode;
-                grandparent.appendChild(clone);
-                clone.className = 'fieldset__inputWrapper';
+                xAssets = projData.externals.assets[type],
+                assetFieldsArr = Array.prototype.slice.call(assetFields),
+                lastField, 
+                neededFields = xAssets.length - assetFields.length ;
+            for (var i = 0; i < neededFields+1; i++) {
+                lastField = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper').item(i);
+                var clone = lastField.cloneNode(true);
+                lastField.parentNode.appendChild(clone);
             }
-            while (document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper').length < xAssets.length + 1 && assetFields.length !== 0) ;
-
-            [].forEach.call(xAssets, function (asset, i) {
-                var input = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper')[i].querySelector('input'),
-                    button = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper')[i].querySelector('button');
-                input.value = asset;
-                input.parentNode.dataset.saved = true;
-                button.innerHTML = '&mdash;';
-                button.classList.remove('fieldset__button--add');
-                button.classList.add(('fieldset__button--rem'));
+            Array.prototype.slice.call(document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper')).forEach(function (el, i) {
+                var field = el.querySelector('.fieldset__field');
+                field.value =xAssets[i] !== undefined ? xAssets[i] : '';
             });
-
+            if ( neededFields < -1) {
+                    var availFields = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper').length;
+                for (var i = availFields-1; i >= xAssets.length+1; i--) {
+                    lastField = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper').item(i);
+                    lastField.parentNode.removeChild(lastField);
+                }
+            }
         },
         bindFieldsetCollapse: function () {
             var _this = mcsandyUI,
