@@ -203,11 +203,16 @@ mcsandyUI = {
 
         /*WINDOW HASH CHANGE */
         window.addEventListener("hashchange", _this.functions.handleHash);
+
+
         /*SELECT A PROJECT*/
         ctrls.projectLoad.addEventListener('click', _this.functions.handleProjectLoad);
 
         /* DOWNLOAD A PROJECT */
         ctrls.projectDownload.addEventListener('click', _this.functions.handleDownloadProject);
+
+        /*Info button */
+        ctrls.appInfo.addEventListener('click', _this.functions.toggleModal);
 
         /*THE EDITOR FIELDS */
         document.addEventListener('keydown', helpers.keyDown);
@@ -229,7 +234,6 @@ mcsandyUI = {
         /*DRAG AND DROP FILES INTO EDITORS */
         helpers.addEvents(fileUploads, 'change', _this.helpers.handleFileUpload);
 
-       // helpers.addEvents(editorFieldsets, 'dragend', _this.functions.handleFileDragout);
         helpers.addEvents(editorFieldsets, 'dragstart', _this.functions.handleDragStart);
         helpers.addEvents(editorFieldsets, 'drop', _this.functions.handleFileDrop);
         /*ADD EXTERNAL LINK*/
@@ -341,21 +345,18 @@ mcsandyUI = {
                 exFileField = e.target.parentNode.querySelector('.fieldset__field');
             
             if (exFileField.value) {
-                console.log('has value');
                 if (exFileField.value.match(fieldPatterns.url) !== null) {
                     clonedParent = helpers.cloneParent(el);
                     e.target.removeEventListener('click',_this.functions.handleAddExternalFile);
                     el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
                     el.innerHTML = "&mdash;";
                     el.parentNode.parentNode.appendChild(clonedParent);
-                    console.log(el.parentNode);
                     mcsandy.functions.updateContent();    
                     _this.bindUiEvents();
                     clonedParent.dataset.saved = false;
                 }  else {
                     functions.addError(exFileField, 'notURL'); 
                 }               
-                console.log(exFileField.value.match(fieldPatterns.url));
 
             } else {
                 functions.addError(exFileField, 'empty');
@@ -409,8 +410,6 @@ mcsandyUI = {
             e.dataTransfer.dropEffect = 'copy';
         },
         handleDragStart: function (e) {
-            console.log('dragstart');
-            console.log(e.target);
             var _this = mcsandyUI,
                 source = e.target.querySelector('textarea').value,
                 projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy',

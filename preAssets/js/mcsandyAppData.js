@@ -7,6 +7,13 @@ mcsandyAppData = {
             author: 'Frank M Taylor'
         }
     },
+    appInfo: {
+        title: 'Mcsandy',
+        subtitle: 'Drag, drop, code. Shirt, shoes, and WiFi not required',
+        author: "Frank M. Taylor",
+        wiki: "https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox/wiki",
+        bugs: "https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox/issues"
+    },
     userPrefs: {
         ui: {
             hLayout: false,
@@ -18,6 +25,7 @@ mcsandyAppData = {
         onlineState: 'online',
         onlineCtrl: document.getElementById('js-onlineStatus'),
         ctrls: {
+            appInfo: document.getElementById('js-globalInfo'),
             projectDownload: document.getElementById('js-projectDownload'),
             projectSelect: document.getElementById('js-selectProjects'),
             projectLoad: document.getElementById('js-projectLoad')
