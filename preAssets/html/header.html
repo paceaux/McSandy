@@ -1,8 +1,11 @@
 <header class="mpGlobal__header">
             <div class="mpGlobal__header__hgroup">
                 <h1 class="mpGlobal__header__h1 h1">McSandy</h1>
-                <h2 class="mpGlobal__header__h2 h2">The offline HTML sandbox</h2>
-                <span id="js-onlineStatus" title="You're online" class="mpGlobal__header__onlineStatus online">&#9673;</span>
+                <h2 class="mpGlobal__header__h2 h2">Drag, drop, code. Shirt, shoes, WiFi not Required.</h2>
+                <aside>
+                    <span id="js-onlineStatus" title="You're online" class="mpGlobal__header__onlineStatus online">&#9673;</span>
+                    <span id="js-globalInfo" class="mpGlobal__header__info">i</span>
+                </aside>
             </div>
             <div class="mpGlobal__header__editor__wrapper wrapper">
                 <label for="js-editor-toggle" class="editor__label" title="Toggle Panel">Editor</label>
@@ -10,11 +13,11 @@
             <form class="mpGlobal__header__editor editor">
                     <div id="js-fieldset--html" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--html" draggable="true" data-mimeoutput="text/html" data-fileext="html">
                         <label class="fieldset__label fieldset__label--html" for="js-html" title="Click to Toggle | Drag to desktop">HTML</label>
-                        <textarea  id="js-html" tabindex="1" class="fieldset__field fieldset__field--html field field--textarea field--html"  data-target="js-html-content" placeholder="<h1>" title="Drop Text or Image"></textarea>
+                        <textarea  id="js-html" tabindex="1" class="fieldset__field fieldset__field--html field field--textarea field--html"  data-target="js-html-content" placeholder="<br />dancer" title="Drop Text or Image"></textarea>
                     </div>
                     <div id="js-fieldset--css" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--css" draggable="true" data-mimeoutput="text/css" data-fileext="css">
                         <label class="fieldset__label fieldset__label--css" for="js-css" title="Click to Toggle | Drag to desktop">CSS</label>
-                        <textarea id="js-css" tabindex="2" class="fieldset__field fieldset__field--css field field--textarea field--css"  data-target="js-css-content" placeholder="h1{}" title="Drop text or image"></textarea>
+                        <textarea id="js-css" tabindex="2" class="fieldset__field fieldset__field--css field field--textarea field--css"  data-target="js-css-content" placeholder=".cup{color:#c0ffee}" title="Drop text or image"></textarea>
                         <div class="fieldset__userOptions userOptions">
                             <div class="fieldset__inputWrapper fieldset__inputWrapper--first" data-saved="false">
                                 <input type="url" class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.css" data-externaltype="css"/>

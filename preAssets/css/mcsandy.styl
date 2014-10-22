@@ -284,6 +284,8 @@ textarea, code
     background: #fefefe
     border-radius: .25em
     smooth-out()
+    &__title
+        color: neutralDark
     &.visible
         display:block
         max-height: 61.8%
@@ -300,9 +302,18 @@ textarea, code
             display:block
             order:-1
     &__content
-        display:flex
-        flex-direction: row
-        justify-content:space-between
+        &__title
+            color: neutralDark
+            flex-basis: 100%
+        &--list
+            display:flex
+            flex-direction: row
+            justify-content:space-between
+            flex-wrap: wrap
+        small
+            text-align: center
+        input
+            border: none
 .mcsandy
     &--horizontal
         .mpGlobal
