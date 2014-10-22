@@ -1,18 +1,25 @@
 keyColor = hsl(212, 72%, 61.8%)
 headingColor= keyColor
-inactiveHeadingColor = desaturate(keyColor, 38.2%)
 activeHeadingColor = headingColor
-borderColor = darken(keyColor, 61.8%)
-bodyColor = darken(keyColor, 80%)
-bgColor = lighten(keyColor, 90%)
-standardPeach = keyColor - 174deg
-inactivePeach = lighten(standardPeach, 61.8%)  
-activePeach = lighten(standardPeach, 38.2%)
-standardGreen = keyColor - 90deg
-inactiveGreen = lighten(standardGreen, 61.8%)
-activeGreen = lighten(standardGreen, 32.8%)
+neutralDark = #545454
+neutralLight = #f5f5ff
+coolDark = darken(keyColor, 61.8%)
+coolDarker = darken(keyColor, 80%)
+coolDarkest = darken(desaturate(keyColor, 63%), 61.8%)
+coolLightest = lighten(keyColor, 90%)
+standardWarm = keyColor - 180deg
+inactiveWarm = lighten(standardWarm, 38.2%)  
+activeWarm = lighten(standardWarm, 61.8%)
+standardCool = darken(saturate(keyColor - 90deg, 15%), 40%)
+inactiveCool = lighten(standardCool, 61.8%)
+activeCool = lighten(standardCool, 32.8%)
 
-panelBorder = .125em solid borderColor;
+panelBorder = .125em solid coolDark;
+coolDarkestGradient = linear-gradient(to bottom, coolDarker 0%, coolDarkest 10%, coolDarker 99%, coolDarkest 100%)
+coolDarkestGradientInverse = linear-gradient(to bottom, coolDarker 0%, coolDarkest 50%, coolDarker 100%)
+coolDarkerGradient = linear-gradient(to bottom, coolDarker 0%, coolDark 50%, coolDarker 100%)
+coolDarkerGradientInverse = linear-gradient(to bottom, coolDark 0%, coolDarker 50%, coolDark 100%)
+
 
 smooth()
     -webkit-transition: all .3s ease-in-out;
@@ -46,9 +53,9 @@ mcanimate(name)
         max-height: 7.5vh
 @keyframes saved
     0%
-        background: standardGreen
+        background: standardCool
     50%
-        background: activeGreen
+        background: activeCool
 
 html, body, h1, h2, h3, h4, h5, h6, div, fieldset, form, input, header, footer, section, article, figure, iframe
     padding:0;
@@ -62,7 +69,7 @@ html
     font-family: Helvetica, sans-serif;
 
 body
-    color: bodyColor; 
+    color: coolDarker; 
 
 h1, .h1,
 h2, .h2,
@@ -70,7 +77,9 @@ h3, .h3,
 h4, .h4, 
 h5, .h5, 
 h6, .h6{
-    color: headingColor; /* rgb(88, 155, 215);*/
+    color: neutralLight; /* rgb(88, 155, 215);*/
+    font-weight: normal
+    letter-spacing: .1ex
 }
 h1, .h1{
     font-size: 1.2em;
@@ -107,28 +116,61 @@ kbd
     background-color: #ddd
     background-image: linear-gradient(#f1f1f1, #ddd);
     background-repeat: repeat-x;
-button,input,select,textarea
-    border:1px solid inactivePeach
-    outline: none;
-    &:hover
-        border:1px solid activePeach
 
+button, input, select, textarea
+    outline: none;
+    &:hover, &:focus, &:active
+        outline: none
 button, input, select
     font-size: 1vw
     padding: .618vw;
     margin: .618vw;
 
+button, .button, select, input
+    border-style:solid
+    border-width: 2px
+    border-color: coolDarker
+    border-radius:3px
+    &:hover
+        border-color: coolDarkest
+
+button, .editor__label
+    background: activeWarm;
+    flex-shrink: 0
+    &:hover, &:focus
+        background: inactiveWarm
+
+button:active
+    mcanimate(saved)        
+
+input, select, textarea
+    background: rgba(255,255,255,.9)
+    &:hover
+        background: rgba(255,255,255,.95)
+    &:focus, &:active
+        background: rgba(255,255,255,1)
+
+        
+
+input, select
+    border-right: 0px
+    border-radius:3px 0px 0px 3px
+    margin-right: 0
+
+input + button, input + .button, select + button, select + .button
+    margin-left: 0
+    border-left: none
+    border-radius: 0 3px 3px 0
+
+textarea
+    border-width: 1px
+    border-color: transparent
+    &:hover, &:focus, &:active
+        border-color:transparent
 @media screen and (max-width: 700px)
     button, input, select
         font-size: .75em
 
-button, .editor__label
-    background: inactivePeach;
-    flex-shrink: 0
-    &:hover, &:focus
-        background: activePeach
-button:active
-    mcanimate(saved)        
 
 textarea, code
     font-family: Courier, monospace;
@@ -138,13 +180,17 @@ textarea, code
     smooth()  
     &__onlineStatus
         padding: 0 .618em;
+    &__info
+        font-size:.8rem
+        display: inline-block;
+        padding: .2em .6em;
+        background: neutralLight
+        border-radius:50%;
     &__editor__wrapper
         smooth() 
     &__hgroup
         font-size: 1em;
-        background: bgColor
-        border-bottom: panelBorder
-        mcanimate(slideUp)
+        background: coolDarkestGradient
     .editor
         border-bottom: panelBorder
         &__label
@@ -154,6 +200,7 @@ textarea, code
             border-bottom-right-radius: .5em
             cursor: pointer;
 .editor
+    background: coolDarkest
     smooth-out()
     &__toggle
         visibility:hidden
@@ -177,21 +224,19 @@ textarea, code
     smooth()
     &__label
         text-align: center
-        color: inactivePeach;
+        color: neutralLight;
         padding: .618em;
-        border-bottom: 1px solid bodyColor;
-        background: inactiveHeadingColor
+        background: coolDark
         smooth() 
         &:hover
-            color: activePeach 
-            background: activeHeadingColor
+            background: coolDarker
             smooth()
         &.js-shrunk
-            color: activePeach
-            background: activeHeadingColor
+            color: neutralLight
+            background: coolDarker
             &:hover, &:focus, &:active
-                color: inactivePeach
-                background: inactiveHeadingColor
+                color: neutralLight
+                background: coolDarkest
     &__wrapper
         smooth()
     &__inputWrapper
@@ -204,11 +249,12 @@ textarea, code
             &__field
                 visibility:visible
             &__label
+                color: coolDark
                 margin: .5em .5em .5em .5em;
+                background: rgba(255,255,255,.75)
         .fieldset__field:checked + .fieldset__label
-            color: activePeach;
-            font-weight: bold;
-            background:activeHeadingColor
+            color: coolDarkest;
+            background:rgba(255,255,255,.9)
 
 .control
     visibility: hidden;
@@ -225,7 +271,7 @@ textarea, code
 .mpGlobal__footer
     &__editor
         border-top: panelBorder
-        background: bgColor
+        background: coolDarkest
 
 .mpModal
     display:none
@@ -286,7 +332,7 @@ textarea, code
                         &__label
                             transform: rotate(-90deg)
 .online
-    color: standardGreen;
+    color: standardCool;
 .offline
     color: red;
 .mcsandy--offline
