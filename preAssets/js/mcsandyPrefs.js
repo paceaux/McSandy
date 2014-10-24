@@ -34,7 +34,7 @@ mcsandyPrefs =  {
         runPreferences: function () {
             var _this = mcsandyPrefs,
                 uiPrefs = mcsandyAppData.userPrefs.ui;
-            for (pref in uiPrefs) {
+            for (var pref in uiPrefs) {
                 if (uiPrefs[pref]) {
                     _this.prefUpdaters[pref]();
                 }
