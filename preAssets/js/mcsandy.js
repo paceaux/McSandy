@@ -235,13 +235,14 @@ mcsandyUI = {
         helpers.addEvents(fileUploads, 'change', _this.helpers.handleFileUpload);
 
         helpers.addEvents(editorFieldsets, 'dragstart', _this.functions.handleDragStart);
+        helpers.addEvents(editorFieldsets, 'dragend', _this.functions.handleDragEnd);
         helpers.addEvents(editorFieldsets, 'drop', _this.functions.handleFileDrop);
         /*ADD EXTERNAL LINK*/
         helpers.addEvents(addExternalFile, 'click', _this.functions.handleAddExternalFile);
         helpers.addEvents(removeExternalFile, 'click', _this.functions.handleRemoveExternalFile);
         /*LABEL/INPUT SHENANIGANS*/
         _this.functions.bindFieldsetCollapse();
-        helpers.addEvents(document.querySelectorAll('.editor__label'),'click', _this.functions.handleCollapsePanel)
+        helpers.addEvents(document.querySelectorAll('.editor__label'),'click', _this.functions.handleCollapsePanel);
         _this.data.modal.overlay.addEventListener('click', _this.functions.toggleModal);
     },
     functions: {
@@ -316,7 +317,7 @@ mcsandyUI = {
             var _this = mcsandyUI,
                 files = e.dataTransfer.files, 
                 i;
-            for (i = 0, f; f = files[i]; i++) {
+            for ( i = 0, f; f == files[i]; i++) {
                 var input = _this.helpers.createExternalFileSet(f);
                 e.target.appendChild(input);
             }
@@ -328,11 +329,11 @@ mcsandyUI = {
                 errorMsgs = mcsandyAppData.ui.fieldErrorMessages,
                 msg = errorMsgs[msgType],
                 errTimeout = function () {
-                    el.placeholder = el.dataset.originalPlaceholder
+                    el.placeholder = el.dataset.originalPlaceholder;
                 };
             el.dataset.originalPlaceholder = el.placeholder;
             el.placeholder = msg;
-            window.setTimeout(errTimeout, 5000)
+            window.setTimeout(errTimeout, 5000);
         },
         handleAddExternalFile: function (e) {
             e.preventDefault();
@@ -383,33 +384,39 @@ mcsandyUI = {
         handleFileUpload: function (e) {
             e.stopPropagation();
             e.preventDefault();
-            var files = e.dataTransfer.files;
+            var files = e.dataTransfer.files,
+                newImage,
+                toElement = e.toElement || e.target;
+                console.log(e.relatedTarget);
             for (var i = 0, f; f = files[i]; i++) {
                 var reader = new FileReader();
               if (f.type.match('image.*') && !f.type.match('svg')) {
                 reader.onload = function (evt) {
-                    if (e.toElement.parentNode.dataset.fileext === "html") {
-                        var newImage = '<img src="' + evt.target.result + '"/>';
+                    if (toElement.parentNode.dataset.fileext === "html") {
+                        newImage = '<img src="' + evt.target.result + '"/>';
                     } else {
-                        var newImage = "url('" + evt.target.result + "')";
+                        newImage = "url('" + evt.target.result + "')";
                     }
-                    e.toElement.value = e.toElement.value + newImage
-                }
+                    toElement.value = toElement.value + newImage ;
+                };
                 reader.readAsDataURL(f);
               } else {
                 reader.onload = function (evt) {
-                    e.toElement.value = e.toElement.value + evt.target.result;
-                }
+                    toElement.value = toElement.value + evt.target.result;
+                };
                     reader.readAsText(f);
                 }
             }
         }, 
-        handleDragOver: function (e){
+        handleDragOver: function (e) {
             e.stopPropagation();
             e.preventDefault();
             e.dataTransfer.dropEffect = 'copy';
         },
         handleDragStart: function (e) {
+            e.stopPropagation();
+            e.dataTransfer.dropEffect = 'copy';
+            e.dataTransfer.effectAllowed = 'copy';
             var _this = mcsandyUI,
                 source = e.target.querySelector('textarea').value,
                 projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy',
@@ -418,6 +425,18 @@ mcsandyUI = {
                 sourceURL = URL.createObjectURL(blob),
                 fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + sourceURL;   
             e.dataTransfer.setData("DownloadURL", fileDetails );
+        },
+        handleDragEnd: function (e) {
+            e.dataTransfer.dropEffect = 'copy';
+            var _this = mcsandyUI,
+                source = e.target.querySelector('textarea').value,
+                projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy',
+                type = e.target.dataset.fileext,
+                blob = new Blob([source], {type: type}),
+                sourceURL = URL.createObjectURL(blob),
+                fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + sourceURL;   
+            e.dataTransfer.getData(type);
+            console.log(e.dataTransfer);
         },
         handleFileDragout: function (e) {
             e.stopPropagation();
@@ -432,7 +451,7 @@ mcsandyUI = {
                     blobArray: [source]
                 },
                 type = e.target.dataset.fileext,
-                fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + window.location.href      
+                fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + window.location.href; 
             var data = e.dataTransfer.getData(e.target.dataset.mimeoutput);
             e.dataTransfer.setData("DownloadURL", fileDetails );
             //mcsandy.functions.downloadContent(downloadObj, type);
@@ -447,7 +466,7 @@ mcsandyUI = {
         updateCtrls: function (projData) {
             var _this = mcsandyUI,
                 projectField = mcsandy.data.ctrls.projectName,
-                ctrls = _this.data.ctrls
+                ctrls = _this.data.ctrls;
             projectField.value = projData.project;
             projectField.placeholder = projData.project;
             ctrls.projectDownload.value = projData.project;
@@ -457,7 +476,7 @@ mcsandyUI = {
                     var exJsInput = document.querySelector('.fieldset--externalLibs').querySelector('[data-mcsandy="' + el + '"]');
                         exJsInput.checked = true;
                 });
-            };
+            }
             if (projData.externals) {
                _this.functions.updateExternalAssetFields(projData, 'css');
                _this.functions.updateExternalAssetFields(projData, 'js');
@@ -470,8 +489,9 @@ mcsandyUI = {
                 xAssets = projData.externals.assets[type],
                 assetFieldsArr = Array.prototype.slice.call(assetFields),
                 lastField, 
-                neededFields = xAssets.length - assetFields.length ;
-            for (var i = 0; i < neededFields+1; i++) {
+                neededFields = xAssets.length - assetFields.length, 
+                i;
+            for (i = 0; i < neededFields+1; i++) {
                 lastField = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper').item(i);
                 var clone = lastField.cloneNode(true);
                 lastField.parentNode.appendChild(clone);
@@ -482,7 +502,7 @@ mcsandyUI = {
             });
             if ( neededFields < -1) {
                     var availFields = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper').length;
-                for (var i = availFields-1; i >= xAssets.length+1; i--) {
+                for (i = availFields-1; i >= xAssets.length+1; i--) {
                     lastField = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper').item(i);
                     lastField.parentNode.removeChild(lastField);
                 }
@@ -537,7 +557,7 @@ mcsandy = {
                 valueArray = [];
             [].forEach.call(inputArray, function (el, i) {
                 if (el.value) {
-                    valueArray.push(el.value)
+                    valueArray.push(el.value);
                 }
             });
             return valueArray;
@@ -729,7 +749,7 @@ mcsandy = {
                     select.selected = true;
                 }
                 select.appendChild(option);
-            })
+            });
             if (window.location.hash) {
                 select.value = mcsandyUI.helpers.unconvertHash(window.location.hash);
             }
@@ -739,7 +759,7 @@ mcsandy = {
                 libs = _this.data.externalJS,
                 libFieldset = document.querySelector('.fieldset--externalLibs'),
                 libWrap = libFieldset.querySelector('.fieldset__wrapper');
-            for (lib in libs) {
+            for (var lib in libs) {
                 var exJs = libs[lib],
                     input = mcsandyUI.helpers.createInput('checkbox', lib, 'fieldset__field fieldset__field--jsLib', lib, exJs);
                     label = mcsandyUI.helpers.createLabel(lib,'fieldset__label fieldset__label--jsLib', lib);
