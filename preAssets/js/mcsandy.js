@@ -129,7 +129,7 @@ mcsandyUI = {
         },
         addEvents: function (els, evt, func) {
             [].forEach.call(els, function (el) {
-                el.addEventListener(evt, func);
+                el.addEventListener(evt, func, false);
             });
         },
         getExternalJsLibs: function () {
@@ -387,7 +387,6 @@ mcsandyUI = {
             var files = e.dataTransfer.files,
                 newImage,
                 toElement = e.toElement || e.target;
-                console.log(e.relatedTarget);
             for (var i = 0, f; f = files[i]; i++) {
                 var reader = new FileReader();
               if (f.type.match('image.*') && !f.type.match('svg')) {
@@ -414,47 +413,23 @@ mcsandyUI = {
             e.dataTransfer.dropEffect = 'copy';
         },
         handleDragStart: function (e) {
-            e.stopPropagation();
-            e.dataTransfer.dropEffect = 'copy';
-            e.dataTransfer.effectAllowed = 'copy';
-            var _this = mcsandyUI,
-                source = e.target.querySelector('textarea').value,
-                projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy',
-                type = e.target.dataset.fileext,
-                blob = new Blob([source], {type: type}),
-                sourceURL = URL.createObjectURL(blob),
-                fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + sourceURL;   
-            e.dataTransfer.setData("DownloadURL", fileDetails );
-        },
-        handleDragEnd: function (e) {
-            e.dataTransfer.dropEffect = 'copy';
-            var _this = mcsandyUI,
-                source = e.target.querySelector('textarea').value,
-                projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy',
-                type = e.target.dataset.fileext,
-                blob = new Blob([source], {type: type}),
-                sourceURL = URL.createObjectURL(blob),
-                fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + sourceURL;   
-            e.dataTransfer.getData(type);
-            console.log(e.dataTransfer);
-        },
-        handleFileDragout: function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'none';
+            e.dataTransfer.dropEffect = 'all';
             e.dataTransfer.effectAllowed = 'all';
             var _this = mcsandyUI,
                 source = e.target.querySelector('textarea').value,
                 projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy',
-                downloadObj = {
-                    project: projectName,
-                    blobArray: [source]
-                },
                 type = e.target.dataset.fileext,
-                fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + window.location.href; 
-            var data = e.dataTransfer.getData(e.target.dataset.mimeoutput);
-            e.dataTransfer.setData("DownloadURL", fileDetails );
-            //mcsandy.functions.downloadContent(downloadObj, type);
+                blob = new Blob([source], {type: type}),
+                sourceURL = URL.createObjectURL(blob),
+                fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + sourceURL;   
+//            console.log(e.target.dataset.mimeoutput,projectName, type, sourceURL); ONly FF will log anything
+            e.dataTransfer.setData("DownloadURL", fileDetails);
+        },
+        handleDragEnd: function (e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'all';
+            var _this = mcsandyUI;  
+            e.dataTransfer.getData('DownloadURL',0);
         },
         updateEditors: function (html, css, js) {
             var _this = mcsandyUI, 
