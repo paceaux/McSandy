@@ -1,6 +1,10 @@
+*, :before, :after 
+	box-sizing: inherit
+
 html, body
 	height: 100%
 	width: 100%
+	box-sizing: border-box
 body
 	display:flex
 	flex-direction: column
@@ -15,13 +19,15 @@ body
 		flex-direction: column
 		justify-content: flex-start
 	&__header
-		align-items: stretch;
+		align-items: stretch
 		&__onlineStatus
 			align-self: flex-end
 		&__editor__wrapper
 			flex-grow: 1;
 			display: flex
 			flex-direction: column
+			resize: both
+			overflow: auto
 		&__hgroup
 			font-size: 1rem
 			flex-grow: 1
@@ -33,7 +39,7 @@ body
 			align-items: baseline
 			justify-content: space-between
 			&--visible
-				max-height: 2rem;
+				max-height: 2rem
 		.editor
 			&__label
 				order: 2
@@ -42,6 +48,7 @@ body
 	display: flex
 	flex-direction: row
 	justify-content: space-between
+	padding: 0
 	&__toggle
 		&:checked
 			~ .mpGlobal__header__editor, 
@@ -76,8 +83,11 @@ body
 	flex-grow: 1
 	flex-shrink: 1
 	flex-basis:33%
+	position: relative
 	&__label
 		display: block
+		position: absolute
+		right: 0
 	&__wrapper
 		flex-grow: 1
 		width: 100%
@@ -104,7 +114,7 @@ body
 			margin-left: 0
 	&__field
 		align-self: flex-end
-		flex-basis: 4.5rem
+		flex-basis: 8rem
 		width: 99%
 	&--html
 		order: 1
@@ -120,6 +130,7 @@ body
 				align-self: center
 			&__label
 				flex-basis: 75%
+				position: static;
 		.fieldset__wrapper
 			flex-shrink: 1
 			height: 3em
@@ -136,6 +147,12 @@ body
 		.field, .fieldset__inputWrapper
 			display:none
 
+.fieldset__label
+		display: flex
+		flex-direction: column
+		justify-content: center
+	&.js-shrunk
+		flex-grow: 1
 
 .field
 	flex-grow: 1

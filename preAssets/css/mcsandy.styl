@@ -3,6 +3,7 @@ headingColor= keyColor
 activeHeadingColor = headingColor
 neutralDark = #545454
 neutralLight = #f5f5ff
+neutralLightest = #fefefe
 coolDark = darken(keyColor, 61.8%)
 coolDarker = darken(keyColor, 80%)
 coolDarkest = darken(desaturate(keyColor, 63%), 61.8%)
@@ -67,6 +68,8 @@ fieldset
 
 html
     font-family: Helvetica, sans-serif;
+    font-size: calc(.5vw + 1rem);
+    line-height: 1.618
 
 body
     color: coolDarker; 
@@ -77,7 +80,7 @@ h3, .h3,
 h4, .h4, 
 h5, .h5, 
 h6, .h6{
-    color: neutralLight; /* rgb(88, 155, 215);*/
+    color: neutralLightest; /* rgb(88, 155, 215);*/
     font-weight: normal
     letter-spacing: .1ex
 }
@@ -122,13 +125,13 @@ button, input, select, textarea
     &:hover, &:focus, &:active
         outline: none
 button, input, select
-    font-size: 1vw
-    padding: .618vw;
-    margin: .618vw;
+    font-size: .618rem
+    padding: .618em;
+    margin: .618em;
 
 button, .button, select, input
     border-style:solid
-    border-width: 2px
+    border-width: 1px
     border-color: coolDarker
     border-radius:3px
     &:hover
@@ -144,9 +147,9 @@ button:active
     mcanimate(saved)        
 
 input, select, textarea
-    background: rgba(255,255,255,.9)
+    background: rgba(255,255,255, 1)
     &:hover
-        background: rgba(255,255,255,.95)
+        background: rgba(255,255,255,.98)
     &:focus, &:active
         background: rgba(255,255,255,1)
 
@@ -163,6 +166,8 @@ input + button, input + .button, select + button, select + .button
     border-radius: 0 3px 3px 0
 
 textarea
+    font-size: .618rem
+    padding: .4em
     border-width: 1px
     border-color: transparent
     &:hover, &:focus, &:active
@@ -190,7 +195,7 @@ textarea, code
         smooth() 
     &__hgroup
         font-size: 1em;
-        background: coolDarkestGradient
+        background-color: coolDarkest
     .editor
         border-bottom: panelBorder
         &__label
@@ -200,7 +205,6 @@ textarea, code
             border-bottom-right-radius: .5em
             cursor: pointer;
 .editor
-    background: coolDarkest
     smooth-out()
     &__toggle
         visibility:hidden
@@ -222,21 +226,25 @@ textarea, code
 
 .fieldset
     smooth()
+    border-right: 4px solid;
+    &:last-child
+        border-right: none;
     &__label
-        text-align: center
-        color: neutralLight;
+        text-align: right
+        color: coolDarker;
+        font-size: .7rem;
         padding: .618em;
-        background: coolDark
+        background-color: rgba(120,120,120,.05);
+        border-bottom-left-radius: 4px;
         smooth() 
         &:hover
-            background: coolDarker
+            color: coolDarkest
             smooth()
         &.js-shrunk
-            color: neutralLight
-            background: coolDarker
+            position: relative
+            color: coolDark
             &:hover, &:focus, &:active
-                color: neutralLight
-                background: coolDarkest
+                color: coolDarkest
     &__wrapper
         smooth()
     &__inputWrapper
@@ -266,7 +274,7 @@ textarea, code
 
 .field
     &--textarea
-        resize: vertical
+        resize: none
 
 .mpGlobal__footer
     &__editor
