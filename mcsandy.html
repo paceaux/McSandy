@@ -99,6 +99,8 @@ body {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  resize: both;
+  overflow: auto;
 }
 .mpGlobal__header__hgroup {
   font-size: 1rem;
@@ -262,9 +264,12 @@ body {
   flex-shrink: 1;
   -webkit-flex-basis: 33%;
   flex-basis: 33%;
+  position: relative;
 }
 .fieldset__label {
   display: block;
+  position: absolute;
+  right: 0;
 }
 .fieldset__wrapper {
   -webkit-box-flex: 1;
@@ -363,8 +368,8 @@ body {
   -webkit-align-self: flex-end;
   align-self: flex-end;
   -ms-flex-item-align: end;
-  -webkit-flex-basis: 4.5rem;
-  flex-basis: 4.5rem;
+  -webkit-flex-basis: 8rem;
+  flex-basis: 8rem;
   width: 99%;
 }
 .fieldset--html {
@@ -402,6 +407,7 @@ body {
 .fieldset--externalLibs .fieldset__label {
   -webkit-flex-basis: 75%;
   flex-basis: 75%;
+  position: static;
 }
 .fieldset--externalLibs .fieldset__wrapper {
   -webkit-flex-shrink: 1;
@@ -452,6 +458,35 @@ body {
 .fieldset.js-shrunk .field,
 .fieldset.js-shrunk .fieldset__inputWrapper {
   display: none;
+}
+.fieldset__label {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.js-shrunk {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
 }
 .field {
   -webkit-box-flex: 1;
@@ -691,6 +726,8 @@ fieldset {
 }
 html {
   font-family: Helvetica, sans-serif;
+  font-size: calc(0.5vw + 1rem);
+  line-height: 1.618;
 }
 body {
   color: #091e36;
@@ -707,7 +744,7 @@ h5,
 .h5,
 h6,
 .h6 {
-  color: #f5f5ff;
+  color: #fefefe;
 /* rgb(88, 155, 215);*/
   font-weight: normal;
   letter-spacing: 0.1ex;
@@ -816,16 +853,16 @@ textarea:active {
 button,
 input,
 select {
-  font-size: 1vw;
-  padding: 0.618vw;
-  margin: 0.618vw;
+  font-size: 0.618rem;
+  padding: 0.618em;
+  margin: 0.618em;
 }
 button,
 .button,
 select,
 input {
   border-style: solid;
-  border-width: 2px;
+  border-width: 1px;
   border-color: #091e36;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -878,12 +915,12 @@ button:active {
 input,
 select,
 textarea {
-  background: rgba(255,255,255,0.9);
+  background: #fff;
 }
 input:hover,
 select:hover,
 textarea:hover {
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.98);
 }
 input:focus,
 select:focus,
@@ -910,6 +947,7 @@ select + .button {
   border-radius: 0 3px 3px 0;
 }
 textarea {
+  font-size: 0.618rem;
   border-width: 1px;
   border-color: transparent;
 }
@@ -962,11 +1000,7 @@ code {
 }
 .mpGlobal__header__hgroup {
   font-size: 1em;
-  background: -webkit-linear-gradient(top, #091e36 0%, #2c3b4d 10%, #091e36 99%, #2c3b4d 100%);
-  background: -moz-linear-gradient(top, #091e36 0%, #2c3b4d 10%, #091e36 99%, #2c3b4d 100%);
-  background: -o-linear-gradient(top, #091e36 0%, #2c3b4d 10%, #091e36 99%, #2c3b4d 100%);
-  background: -ms-linear-gradient(top, #091e36 0%, #2c3b4d 10%, #091e36 99%, #2c3b4d 100%);
-  background: linear-gradient(to bottom, #091e36 0%, #2c3b4d 10%, #091e36 99%, #2c3b4d 100%);
+  background-color: #2c3b4d;
 }
 .mpGlobal__header .editor {
   border-bottom: 0.125em solid #113968;
@@ -979,7 +1013,6 @@ code {
   cursor: pointer;
 }
 .editor {
-  background: #2c3b4d;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
@@ -1032,12 +1065,18 @@ code {
   -o-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+  border-right: 4px solid;
+}
+.fieldset:last-child {
+  border-right: none;
 }
 .fieldset__label {
-  text-align: center;
-  color: #f5f5ff;
+  text-align: right;
+  color: #091e36;
+  font-size: 0.7rem;
   padding: 0.618em;
-  background: #113968;
+  background-color: rgba(120,120,120,0.05);
+  border-bottom-left-radius: 4px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -1048,7 +1087,7 @@ code {
   transition: all 0.3s ease-in-out;
 }
 .fieldset__label:hover {
-  background: #091e36;
+  color: #2c3b4d;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -1059,14 +1098,13 @@ code {
   transition: all 0.3s ease-in-out;
 }
 .fieldset__label.js-shrunk {
-  color: #f5f5ff;
-  background: #091e36;
+  position: relative;
+  color: #113968;
 }
 .fieldset__label.js-shrunk:hover,
 .fieldset__label.js-shrunk:focus,
 .fieldset__label.js-shrunk:active {
-  color: #f5f5ff;
-  background: #2c3b4d;
+  color: #2c3b4d;
 }
 .fieldset__wrapper {
   -webkit-transition: all 0.3s ease-in-out;
@@ -1127,7 +1165,7 @@ code {
   transition: all 0.3s ease-in-out;
 }
 .field--textarea {
-  resize: vertical;
+  resize: none;
 }
 .mpGlobal__footer__editor {
   border-top: 0.125em solid #113968;
@@ -1563,7 +1601,6 @@ code {
 <header class="mpGlobal__header">
             <div class="mpGlobal__header__hgroup">
                 <h1 class="mpGlobal__header__h1 h1">McSandy</h1>
-                <h2 class="mpGlobal__header__h2 h2">Drag, drop, code. Shirt, shoes, WiFi not Required.</h2>
                 <aside>
                     <span id="js-onlineStatus" title="You're online" class="mpGlobal__header__onlineStatus online">&#9673;</span>
                     <span id="js-globalInfo" class="mpGlobal__header__info">i</span>
