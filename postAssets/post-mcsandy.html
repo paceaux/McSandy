@@ -11,10 +11,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Frank M. Taylor"/>
 <style type="text/css">
+*,
+:before,
+:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
 html,
 body {
   height: 100%;
   width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 body {
   display: -webkit-box;
@@ -178,6 +188,7 @@ body {
   -ms-flex-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  padding: 0;
 }
 .editor__toggle:checked ~ .mpGlobal__header__editor,
 .editor__toggle:checked ~ .mpGlobal__footer__editor,
@@ -948,6 +959,7 @@ select + .button {
 }
 textarea {
   font-size: 0.618rem;
+  padding: 0.4em;
   border-width: 1px;
   border-color: transparent;
 }
