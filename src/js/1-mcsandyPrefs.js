@@ -37,7 +37,6 @@ mcsandyPrefs =  {
                 uiPrefs = mcsandyAppData.userPrefs.ui;
             for (var pref in uiPrefs) {
                 if (uiPrefs[pref]) {
-                    console.log(pref);
                     _this.prefUpdaters[pref]();
                 }
             }
