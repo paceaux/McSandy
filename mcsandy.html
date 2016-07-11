@@ -1730,38 +1730,7 @@ code {
 <script type="text/javascript">
 /* MCSANDY: THE OFFLINE HTML5 SANDBOX */
 var store, mcsandyAppData, mcsandy, mcsandyPrefs, mcsandyUI;
-// Source: src/js/store.js
-store = {
-    types: [localStorage,sessionStorage],
-    convertValue: function (v) {
-        return typeof v !== 'object' ? v : JSON.stringify(v);
-    },
-    unconvertValue: function (v) {
-        if (v !== null) {
-            if ( v.indexOf('{') === 0 || v.indexOf('[') === 0 ) {
-                v = JSON.parse(v);
-                return v;
-            } else {
-                return null;
-            }
-        }
-    },
-    set: function (type, k, v) {
-        v = this.convertValue(v);
-        store.types[type].setItem(k,v); 
-    },
-    get: function (type, k) {
-        v = typeof k !== 'number' ? store.types[type].getItem(k) : store.types[type].getItem(store.types[type].key(k));
-        return  this.unconvertValue(v);
-    },
-    del: function (type, k) {
-        store.types[type].removeItem(k);       
-    },
-    clr: function (type) {
-        store.types[type].clear();
-    }
-};
-// Source: src/js/filesaver.js
+// Source: /Users/franktaylor/Dropbox/Web-apps-sites/McSandy--the-HTML5-offline-Sandbox/src/js/0-filesaver.js
 /*! FileSaver.js
  *  A saveAs() FileSaver implementation.
  *  2014-01-24
@@ -1976,7 +1945,38 @@ var saveAs = saveAs
     || this.content
 ));
 if (typeof module !== "undefined") module.exports = saveAs;
-// Source: src/js/mcsandyAppData.js
+// Source: /Users/franktaylor/Dropbox/Web-apps-sites/McSandy--the-HTML5-offline-Sandbox/src/js/0-store.js
+store = {
+    types: [localStorage,sessionStorage],
+    convertValue: function (v) {
+        return typeof v !== 'object' ? v : JSON.stringify(v);
+    },
+    unconvertValue: function (v) {
+        if (v !== null) {
+            if ( v.indexOf('{') === 0 || v.indexOf('[') === 0 ) {
+                v = JSON.parse(v);
+                return v;
+            } else {
+                return null;
+            }
+        }
+    },
+    set: function (type, k, v) {
+        v = this.convertValue(v);
+        store.types[type].setItem(k,v); 
+    },
+    get: function (type, k) {
+        v = typeof k !== 'number' ? store.types[type].getItem(k) : store.types[type].getItem(store.types[type].key(k));
+        return  this.unconvertValue(v);
+    },
+    del: function (type, k) {
+        store.types[type].removeItem(k);       
+    },
+    clr: function (type) {
+        store.types[type].clear();
+    }
+};
+// Source: /Users/franktaylor/Dropbox/Web-apps-sites/McSandy--the-HTML5-offline-Sandbox/src/js/1-mcsandyAppData.js
 /*MCSANDY APPDATA */
 mcsandyAppData = {
     self: {
@@ -2083,7 +2083,7 @@ mcsandyProject = {
         }
     }
 };
-// Source: src/js/mcsandyPrefs.js
+// Source: /Users/franktaylor/Dropbox/Web-apps-sites/McSandy--the-HTML5-offline-Sandbox/src/js/1-mcsandyPrefs.js
 /*MCSANDYPREFS: A user's preferences with the interface*/
 mcsandyPrefs =  {
     init : function () {
@@ -2128,7 +2128,7 @@ mcsandyPrefs =  {
         }
     }
 };
-// Source: src/js/mcsandy.js
+// Source: /Users/franktaylor/Dropbox/Web-apps-sites/McSandy--the-HTML5-offline-Sandbox/src/js/2-mcsandy.js
 
 /*MCSANDYUI: the main user interactions with the app*/
 mcsandyUI = {
@@ -2939,6 +2939,86 @@ mcsandy = {
         }
     }
 };
+// Source: /Users/franktaylor/Dropbox/Web-apps-sites/McSandy--the-HTML5-offline-Sandbox/src/js/3-mcsandytools.js
+mcsandyTools = {
+    init: function () {
+        console.info("mcsandyTools is running");
+        var _this = mcsandyTools;
+        for (f in _this.modules) {
+            _this[f] = _this.modules[f];
+        }
+        _this.functions.getAppVersion();
+    },
+    data :{
+        scripts: {
+            githubJS: 'http://raw.github.com/michael/github/master/github.js',
+            selfPackage: 'http://raw.github.com/paceaux/McSandy--the-HTML5-offline-Sandbox/master/package.json',
+            mcsandyApp: 'preAssets/js/mcsandyApp.js'
+        }
+    },
+    helpers: {
+        addScript: function (js, type) {
+            var head= document.getElementsByTagName('head')[0],
+                script= document.createElement('script');
+            script.type= 'text/javascript';
+            if (type === 'text') {
+                script.innerText = js;
+            }
+            head.appendChild(script);
+        },
+        gitLoad: function (username, password) {
+            var github = new Github({
+                username: username,
+                password: password,
+                auth: 'basic'
+            });
+        }
+    },
+    bindUievents: function () {},
+    functions: {
+        loadScript: function (src, async, callback) {
+            var _this = mcsandyTools,
+            head= document.getElementsByTagName('head')[0],
+            script= document.createElement('script');
+            script.type= 'text/javascript';
+            script.src= src;
+            script.async = async;
+            script.onload = callback;
+            head.appendChild(script);
+        },
+        addScript: function (src, async) {
+            var _this = mcsandyTools,
+            head= document.getElementsByTagName('head')[0],
+            script= document.createElement('script');
+            script.type= 'text/javascript';
+            script.innerText= src;
+            script.async = async;
+            head.appendChild(script);
+        },
+        getAppVersion: function () {
+            var _this = mcsandyTools,
+                success, error,
+                xmlHttp = new XMLHttpRequest(success, error);
+            xmlHttp.open('get', _this.data.scripts.mcsandyApp, true);
+            xmlHttp.send(null);
+            xmlHttp.onreadystatechange = function() {
+                if (xmlHttp.readyState === 4) {
+                    if (xmlHttp.status === 200) {
+                        console.log(xmlHttp);
+                        success = xmlHttp.responseText;
+                        _this.functions.addScript(success,true)
+                        } else {
+                        }
+                    } else {
+                    //still processing
+                    }
+                };
+            }
+    }, 
+    modules: {
+    }
+};
+
 mcsandyUI.init();
 mcsandy.init();
 mcsandyPrefs.init();
