@@ -1730,7 +1730,7 @@ code {
 <script type="text/javascript">
 /* MCSANDY: THE OFFLINE HTML5 SANDBOX */
 var store, mcsandyAppData, mcsandy, mcsandyPrefs, mcsandyUI;
-// Source: preAssets/js/store.js
+// Source: src/js/store.js
 store = {
     types: [localStorage,sessionStorage],
     convertValue: function (v) {
@@ -1761,7 +1761,7 @@ store = {
         store.types[type].clear();
     }
 };
-// Source: preAssets/js/filesaver.js
+// Source: src/js/filesaver.js
 /*! FileSaver.js
  *  A saveAs() FileSaver implementation.
  *  2014-01-24
@@ -1976,7 +1976,7 @@ var saveAs = saveAs
     || this.content
 ));
 if (typeof module !== "undefined") module.exports = saveAs;
-// Source: preAssets/js/mcsandyAppData.js
+// Source: src/js/mcsandyAppData.js
 /*MCSANDY APPDATA */
 mcsandyAppData = {
     self: {
@@ -2083,7 +2083,7 @@ mcsandyProject = {
         }
     }
 };
-// Source: preAssets/js/mcsandyPrefs.js
+// Source: src/js/mcsandyPrefs.js
 /*MCSANDYPREFS: A user's preferences with the interface*/
 mcsandyPrefs =  {
     init : function () {
@@ -2128,7 +2128,7 @@ mcsandyPrefs =  {
         }
     }
 };
-// Source: preAssets/js/mcsandy.js
+// Source: src/js/mcsandy.js
 
 /*MCSANDYUI: the main user interactions with the app*/
 mcsandyUI = {

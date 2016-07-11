@@ -1,6 +1,1736 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="js"> <!--<![endif]-->
+<head>
+    <title>McSandy | Online</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Drag, drop, code. Shirt, shoes, and WiFi not required">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Frank M. Taylor"/>
+<style type="text/css">
+*,
+:before,
+:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: distribute;
+  -moz-box-pack: distribute;
+  -o-box-pack: distribute;
+  -ms-flex-pack: distribute;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-box-align: start;
+  -moz-box-align: start;
+  -o-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+}
+.mpGlobal__header,
+.mpGlobal__footer {
+  -webkit-flex-shrink: 1;
+  flex-shrink: 1;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -o-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+.mpGlobal__header {
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -o-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+}
+.mpGlobal__header__onlineStatus {
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+  -ms-flex-item-align: end;
+}
+.mpGlobal__header__editor__wrapper {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  resize: both;
+  overflow: auto;
+}
+.mpGlobal__header__hgroup {
+  font-size: 1rem;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  -ms-flex-item-align: start;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: baseline;
+  -moz-box-align: baseline;
+  -o-box-align: baseline;
+  -ms-flex-align: baseline;
+  -webkit-align-items: baseline;
+  align-items: baseline;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.mpGlobal__header__hgroup--visible {
+  max-height: 2rem;
+}
+.mpGlobal__header .editor__label {
+  -webkit-box-ordinal-group: 2;
+  -moz-box-ordinal-group: 2;
+  -o-box-ordinal-group: 2;
+  -ms-flex-order: 2;
+  -webkit-order: 2;
+  order: 2;
+}
+.editor {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding: 0;
+}
+.editor__toggle:checked ~ .mpGlobal__header__editor,
+.editor__toggle:checked ~ .mpGlobal__footer__editor,
+.editor__toggle:checked ~ .mpGlobal__footer__editor > .editor__fieldset {
+  -webkit-flex-basis: 0;
+  flex-basis: 0;
+  height: 0;
+  overflow: hidden;
+}
+.editor__label {
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  -ms-flex-item-align: start;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.editor__fieldset {
+  -webkit-flex-shrink: 1;
+  flex-shrink: 1;
+}
+.editor__input--name {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  margin-right: -1em;
+}
+.editor__fieldset {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+.fieldsetGroup {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  height: 30vh;
+}
+.fieldsetGroup__fieldset {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-flex-basis: 10%;
+  flex-basis: 10%;
+}
+.fieldset {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-flex-shrink: 1;
+  flex-shrink: 1;
+  -webkit-flex-basis: 33%;
+  flex-basis: 33%;
+  position: relative;
+}
+.fieldset__label {
+  display: block;
+  position: absolute;
+  right: 0;
+}
+.fieldset__wrapper {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -o-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -o-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+}
+.fieldset__button {
+  -webkit-flex-basis: 2.5em;
+  flex-basis: 2.5em;
+}
+.fieldset__userOptions {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  -o-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.fieldset__inputWrapper {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-align-self: auto;
+  align-self: auto;
+  -ms-flex-item-align: auto;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -o-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+.fieldset__inputWrapper .fieldset__field {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  margin-left: 0;
+  margin-right: 0;
+}
+.fieldset__inputWrapper .fieldset__button {
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+  -ms-flex-item-align: end;
+  margin-left: 0;
+}
+.fieldset__field {
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+  -ms-flex-item-align: end;
+  -webkit-flex-basis: 8rem;
+  flex-basis: 8rem;
+  width: 99%;
+}
+.fieldset--html {
+  -webkit-box-ordinal-group: 1;
+  -moz-box-ordinal-group: 1;
+  -o-box-ordinal-group: 1;
+  -ms-flex-order: 1;
+  -webkit-order: 1;
+  order: 1;
+}
+.fieldset--css {
+  -webkit-box-ordinal-group: 2;
+  -moz-box-ordinal-group: 2;
+  -o-box-ordinal-group: 2;
+  -ms-flex-order: 2;
+  -webkit-order: 2;
+  order: 2;
+}
+.fieldset--js {
+  -webkit-box-ordinal-group: 3;
+  -moz-box-ordinal-group: 3;
+  -o-box-ordinal-group: 3;
+  -ms-flex-order: 3;
+  -webkit-order: 3;
+  order: 3;
+}
+.fieldset--externalLibs .fieldset__field {
+  height: 2.3em;
+  -webkit-flex-basis: 6%;
+  flex-basis: 6%;
+  -webkit-align-self: center;
+  align-self: center;
+  -ms-flex-item-align: center;
+}
+.fieldset--externalLibs .fieldset__label {
+  -webkit-flex-basis: 75%;
+  flex-basis: 75%;
+  position: static;
+}
+.fieldset--externalLibs .fieldset__wrapper {
+  -webkit-flex-shrink: 1;
+  flex-shrink: 1;
+  height: 3em;
+  overflow: scroll;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  -o-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -o-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -o-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  -ms-flex-line-pack: start;
+  -webkit-align-content: flex-start;
+  align-content: flex-start;
+}
+.fieldset.js-shrunk {
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -o-box-flex: 0;
+  -ms-box-flex: 0;
+  box-flex: 0;
+  -webkit-flex-grow: 0;
+  flex-grow: 0;
+  -webkit-flex-shrink: 3;
+  flex-shrink: 3;
+  -webkit-flex-basis: 5%;
+  flex-basis: 5%;
+}
+.fieldset.js-shrunk .field,
+.fieldset.js-shrunk .fieldset__inputWrapper {
+  display: none;
+}
+.fieldset__label {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.js-shrunk {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+.field {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+.field--upload {
+  -webkit-flex-basis: 100%;
+  flex-basis: 100%;
+  width: 95%;
+}
+.field.js-shrink {
+  height: 0;
+}
+.field.js-shrink ~ .fieldset__inputWrapper .fieldset__field {
+  visibility: visible;
+  height: auto;
+  width: 75%;
+}
+.mpGlobal__result {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-flex: 2;
+  -moz-box-flex: 2;
+  -o-box-flex: 2;
+  -ms-box-flex: 2;
+  box-flex: 2;
+  -webkit-flex-grow: 2;
+  flex-grow: 2;
+}
+.mpGlobal__result__iframe {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  width: 100%;
+  outline: none;
+  border: none;
+}
+.mpGlobal__footer__editor {
+  -webkit-flex-shrink: 1;
+  flex-shrink: 1;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  -ms-flex-item-align: start;
+  -webkit-flex-basis: 4.5em;
+  flex-basis: 4.5em;
+  width: 100%;
+}
+.mpGlobal__footer__editor .fieldset {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+.mpGlobal__footer__editor .fieldset--externalLibs {
+  -webkit-flex-basis: 15rem;
+  flex-basis: 15rem;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+.mcsandy--horizontal {
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+.mcsandy--horizontal .mpGlobal__header {
+  width: auto;
+}
+.mcsandy--horizontal .mpGlobal__header__hgroup {
+  width: 0;
+}
+.mcsandy--horizontal .mpGlobal__header__editor[class] {
+  -webkit-flex-basis: 95vh;
+  flex-basis: 95vh;
+  height: 95vh;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  border-bottom: none;
+}
+.mcsandy--horizontal .mpGlobal__header__editor[class] .fieldset {
+  -webkit-flex-basis: 5%;
+  flex-basis: 5%;
+}
+.mcsandy--horizontal .mpGlobal__header .editor__label {
+  -webkit-border-radius: 0.5em 0.5em 0 0;
+  border-radius: 0.5em 0.5em 0 0;
+  -webkit-box-ordinal-group: -1;
+  -moz-box-ordinal-group: -1;
+  -o-box-ordinal-group: -1;
+  -ms-flex-order: -1;
+  -webkit-order: -1;
+  order: -1;
+}
+.mcsandy--horizontal .mpGlobal__result {
+  height: 100%;
+}
+.mcsandy--horizontal .mpGlobal__footer {
+  height: 100vh;
+  width: auto;
+  max-width: 17rem;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  -ms-flex-item-align: start;
+}
+.mcsandy--horizontal .mpGlobal__footer__editor {
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-basis: none;
+  flex-basis: none;
+  height: 100%;
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+  -ms-flex-item-align: end;
+}
+.mcsandy--horizontal .mpGlobal__footer__editor .fieldset {
+  font-size: 0.9em;
+  width: 100%;
+}
+.mcsandy--horizontal .mpGlobal__footer__editor .fieldset__wrapper {
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.mcsandy--horizontal .mpGlobal__footer__editor .fieldset--externalLibs {
+  -webkit-flex-basis: 33%;
+  flex-basis: 33%;
+}
+.mcsandy--horizontal .mpGlobal__footer__editor .fieldset--externalLibs .fieldset__wrapper {
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+.mcsandy--horizontal .editor__toggle:checked ~ .mpGlobal__footer__editor,
+.mcsandy--horizontal .editor__toggle:checked ~ .mpGlobal__header__editor {
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -o-box-flex: 0;
+  -ms-box-flex: 0;
+  box-flex: 0;
+  -webkit-flex-grow: 0;
+  flex-grow: 0;
+  width: 0;
+}
+.mcsandy--horizontal > .editor__fieldset {
+  height: initial;
+  width: 0;
+}
+.mcsandy--horizontal .fieldset--externalLibs .fieldset__label {
+  -webkit-flex-basis: 60%;
+  flex-basis: 60%;
+  margin-right: 1em;
+}
+.mcsandy--horizontal .editor__input--name {
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -o-box-flex: 0;
+  -ms-box-flex: 0;
+  box-flex: 0;
+  -webkit-flex-grow: 0;
+  flex-grow: 0;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+fieldset,
+form,
+input,
+header,
+footer,
+section,
+article,
+figure,
+iframe {
+  padding: 0;
+  margin: 0;
+}
+fieldset {
+  border: none;
+}
+html {
+  font-family: Helvetica, sans-serif;
+  font-size: calc(0.5vw + 1rem);
+  line-height: 1.618;
+}
+body {
+  color: #091e36;
+}
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  color: #fefefe;
+/* rgb(88, 155, 215);*/
+  font-weight: normal;
+  letter-spacing: 0.1ex;
+}
+h1,
+.h1 {
+  font-size: 1.2em;
+  padding: 0 0.618em;
+}
+h2,
+.h2 {
+  font-size: 1.1em;
+}
+dt,
+dd {
+  display: inline-block;
+  float: left;
+  margin: 0.618em 0.618em 0.618em 0;
+}
+dt {
+  clear: left;
+}
+dd::after {
+  content: ' ';
+  display: table;
+  clear: both;
+}
+a,
+input,
+textarea,
+form,
+fieldset,
+button,
+label {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+a:hover,
+input:hover,
+textarea:hover,
+form:hover,
+fieldset:hover,
+button:hover,
+label:hover,
+a:focus,
+input:focus,
+textarea:focus,
+form:focus,
+fieldset:focus,
+button:focus,
+label:focus {
+  outline: none;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+kbd {
+  font-size: 1rem;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 10px;
+  padding: 1px 4px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid #ddd;
+  border-bottom-color: #ccc;
+  border-right-color: #ccc;
+  background-color: #ddd;
+  background-image: -webkit-linear-gradient(#f1f1f1, #ddd);
+  background-image: -moz-linear-gradient(#f1f1f1, #ddd);
+  background-image: -o-linear-gradient(#f1f1f1, #ddd);
+  background-image: -ms-linear-gradient(#f1f1f1, #ddd);
+  background-image: linear-gradient(#f1f1f1, #ddd);
+  background-repeat: repeat-x;
+}
+button,
+input,
+select,
+textarea {
+  outline: none;
+}
+button:hover,
+input:hover,
+select:hover,
+textarea:hover,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+button:active,
+input:active,
+select:active,
+textarea:active {
+  outline: none;
+}
+button,
+input,
+select {
+  font-size: 0.618rem;
+  padding: 0.618em;
+  margin: 0.618em;
+}
+button,
+.button,
+select,
+input {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #091e36;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+button:hover,
+.button:hover,
+select:hover,
+input:hover {
+  border-color: #2c3b4d;
+}
+button,
+.editor__label {
+  background: #f5dbbf;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+button:hover,
+.editor__label:hover,
+button:focus,
+.editor__label:focus {
+  background: #eec697;
+}
+button:active {
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  -o-animation-delay: 0.5s;
+  -ms-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+  -webkit-animation-duration: 3.5s;
+  -moz-animation-duration: 3.5s;
+  -o-animation-duration: 3.5s;
+  -ms-animation-duration: 3.5s;
+  animation-duration: 3.5s;
+  -webkit-animation-name: saved;
+  -moz-animation-name: saved;
+  -o-animation-name: saved;
+  -ms-animation-name: saved;
+  animation-name: saved;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+  -o-animation-iteration-count: 1;
+  -ms-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+  -moz-animation-direction: normal;
+  -o-animation-direction: normal;
+  -ms-animation-direction: normal;
+  animation-direction: normal;
+}
+input,
+select,
+textarea {
+  background: #fff;
+}
+input:hover,
+select:hover,
+textarea:hover {
+  background: rgba(255,255,255,0.98);
+}
+input:focus,
+select:focus,
+textarea:focus,
+input:active,
+select:active,
+textarea:active {
+  background: #fff;
+}
+input,
+select {
+  border-right: 0px;
+  -webkit-border-radius: 3px 0px 0px 3px;
+  border-radius: 3px 0px 0px 3px;
+  margin-right: 0;
+}
+input + button,
+input + .button,
+select + button,
+select + .button {
+  margin-left: 0;
+  border-left: none;
+  -webkit-border-radius: 0 3px 3px 0;
+  border-radius: 0 3px 3px 0;
+}
+textarea {
+  font-size: 0.618rem;
+  padding: 0.4em;
+  border-width: 1px;
+  border-color: transparent;
+}
+textarea:hover,
+textarea:focus,
+textarea:active {
+  border-color: transparent;
+}
+@media screen and (max-width: 700px) {
+  button,
+  input,
+  select {
+    font-size: 0.75em;
+  }
+}
+textarea,
+code {
+  font-family: Courier, monospace;
+}
+.mpGlobal__header {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.mpGlobal__header__onlineStatus {
+  padding: 0 0.618em;
+}
+.mpGlobal__header__info {
+  font-size: 0.8rem;
+  display: inline-block;
+  padding: 0.2em 0.6em;
+  background: #f5f5ff;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.mpGlobal__header__editor__wrapper {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.mpGlobal__header__hgroup {
+  font-size: 1em;
+  background-color: #2c3b4d;
+}
+.mpGlobal__header .editor {
+  border-bottom: 0.125em solid #113968;
+}
+.mpGlobal__header .editor__label {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  cursor: pointer;
+}
+.editor {
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.editor__toggle {
+  visibility: hidden;
+  position: fixed;
+  left: -9999em;
+}
+.editor__label {
+  padding: 0.25em;
+  border: 1px solid #e1e1e1;
+  border-top-right-radius: 0.25em;
+  border-top-left-radius: 0.25em;
+  margin: 0;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.editor__control {
+  display: none;
+}
+.editor__input--name {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.fieldset {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-right: 4px solid;
+}
+.fieldset:last-child {
+  border-right: none;
+}
+.fieldset__label {
+  text-align: right;
+  color: #091e36;
+  font-size: 0.7rem;
+  padding: 0.618em;
+  background-color: rgba(120,120,120,0.05);
+  border-bottom-left-radius: 4px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.fieldset__label:hover {
+  color: #2c3b4d;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.fieldset__label.js-shrunk {
+  position: relative;
+  color: #113968;
+}
+.fieldset__label.js-shrunk:hover,
+.fieldset__label.js-shrunk:focus,
+.fieldset__label.js-shrunk:active {
+  color: #2c3b4d;
+}
+.fieldset__wrapper {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.fieldset__inputWrapper {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  overflow-y: scroll;
+}
+.fieldset__inputWrapper .fieldset__field {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.fieldset--externalLibs .fieldset__field {
+  visibility: visible;
+}
+.fieldset--externalLibs .fieldset__label {
+  color: #113968;
+  margin: 0.5em 0.5em 0.5em 0.5em;
+  background: rgba(255,255,255,0.75);
+}
+.fieldset--externalLibs .fieldset__field:checked + .fieldset__label {
+  color: #2c3b4d;
+  background: rgba(255,255,255,0.9);
+}
+.control {
+  visibility: hidden;
+  width: 0%;
+  height: 0;
+}
+.fieldsetGroup {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.field--textarea {
+  resize: none;
+}
+.mpGlobal__footer__editor {
+  border-top: 0.125em solid #113968;
+  background: #2c3b4d;
+}
+.mpModal {
+  display: none;
+  position: fixed;
+  z-index: 1100;
+  top: 19.1%;
+  left: 30.9%;
+  padding: 0.618em;
+  background: #fefefe;
+  -webkit-border-radius: 0.25em;
+  border-radius: 0.25em;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.mpModal__title {
+  color: #545454;
+}
+.mpModal.visible {
+  display: block;
+  max-height: 61.8%;
+  width: 38.2%;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.mpModal__overlay {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.7);
+}
+.mpModal__overlay.visible {
+  display: block;
+  -webkit-box-ordinal-group: -1;
+  -moz-box-ordinal-group: -1;
+  -o-box-ordinal-group: -1;
+  -ms-flex-order: -1;
+  -webkit-order: -1;
+  order: -1;
+}
+.mpModal__content__title {
+  color: #545454;
+  -webkit-flex-basis: 100%;
+  flex-basis: 100%;
+}
+.mpModal__content--list {
+  font-size: 0.8em;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  -o-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.mpModal__content small {
+  text-align: center;
+}
+.mpModal__content input {
+  border: none;
+}
+.mcsandy--horizontal .mpGlobal__header__editor {
+  border-top: 0.125em solid #113968;
+  border-bottom: none;
+}
+.mcsandy--horizontal .mpGlobal__header__editor__wrapper .editor__label {
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  -ms-flex-item-align: start;
+  -webkit-transform-origin: 0.5rem 1rem;
+  -moz-transform-origin: 0.5rem 1rem;
+  -o-transform-origin: 0.5rem 1rem;
+  -ms-transform-origin: 0.5rem 1rem;
+  transform-origin: 0.5rem 1rem;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.mcsandy--horizontal .mpGlobal__header__editor__wrapper.js-collapsed .editor__label {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.mcsandy--horizontal .mpGlobal__footer .editor__label {
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  -ms-flex-item-align: start;
+  -webkit-transform-origin: 3rem 2rem;
+  -moz-transform-origin: 3rem 2rem;
+  -o-transform-origin: 3rem 2rem;
+  -ms-transform-origin: 3rem 2rem;
+  transform-origin: 3rem 2rem;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.mcsandy--horizontal .mpGlobal__footer.js-collapsed .editor__label {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+.online {
+  color: #10ad15;
+}
+.offline {
+  color: #f00;
+}
+.mcsandy--offline .fieldset--externalLibs {
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -o-box-flex: 0;
+  -ms-box-flex: 0;
+  box-flex: 0;
+  -webkit-flex-grow: 0;
+  flex-grow: 0;
+  -webkit-flex-basis: 0%;
+  flex-basis: 0%;
+  width: 0;
+  height: 0;
+}
+.mcsandy--offline .fieldset--externalLibs .fieldset__legend,
+.mcsandy--offline .fieldset--externalLibs .fieldset__wrapper {
+  display: none;
+}
+.mcsandy--offline .fieldset__userOptions {
+  display: none;
+}
+.mcsandy--offline .field--textarea {
+  height: 26vh;
+}
+.anim-flash {
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  -o-animation-delay: 0.5s;
+  -ms-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+  -webkit-animation-duration: 3.5s;
+  -moz-animation-duration: 3.5s;
+  -o-animation-duration: 3.5s;
+  -ms-animation-duration: 3.5s;
+  animation-duration: 3.5s;
+  -webkit-animation-name: saved;
+  -moz-animation-name: saved;
+  -o-animation-name: saved;
+  -ms-animation-name: saved;
+  animation-name: saved;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+  -o-animation-iteration-count: 1;
+  -ms-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+  -moz-animation-direction: normal;
+  -o-animation-direction: normal;
+  -ms-animation-direction: normal;
+  animation-direction: normal;
+}
+.anim-slideUp {
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  -o-animation-delay: 0.5s;
+  -ms-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+  -webkit-animation-duration: 3.5s;
+  -moz-animation-duration: 3.5s;
+  -o-animation-duration: 3.5s;
+  -ms-animation-duration: 3.5s;
+  animation-duration: 3.5s;
+  -webkit-animation-name: slideUp;
+  -moz-animation-name: slideUp;
+  -o-animation-name: slideUp;
+  -ms-animation-name: slideUp;
+  animation-name: slideUp;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+  -o-animation-iteration-count: 1;
+  -ms-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+  -moz-animation-direction: normal;
+  -o-animation-direction: normal;
+  -ms-animation-direction: normal;
+  animation-direction: normal;
+}
+.anim-slideDown {
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  -o-animation-delay: 0.5s;
+  -ms-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+  -webkit-animation-duration: 3.5s;
+  -moz-animation-duration: 3.5s;
+  -o-animation-duration: 3.5s;
+  -ms-animation-duration: 3.5s;
+  animation-duration: 3.5s;
+  -webkit-animation-name: slideDown;
+  -moz-animation-name: slideDown;
+  -o-animation-name: slideDown;
+  -ms-animation-name: slideDown;
+  animation-name: slideDown;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+  -o-animation-iteration-count: 1;
+  -ms-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+  -moz-animation-direction: normal;
+  -o-animation-direction: normal;
+  -ms-animation-direction: normal;
+  animation-direction: normal;
+}
+@-moz-keyframes slideUp {
+  0% {
+    max-height: 0;
+  }
+
+  50% {
+    max-height: 7.5vh;
+  }
+
+  100% {
+    max-height: 0;
+  }
+}
+@-webkit-keyframes slideUp {
+  0% {
+    max-height: 0;
+  }
+
+  50% {
+    max-height: 7.5vh;
+  }
+
+  100% {
+    max-height: 0;
+  }
+}
+@-o-keyframes slideUp {
+  0% {
+    max-height: 0;
+  }
+
+  50% {
+    max-height: 7.5vh;
+  }
+
+  100% {
+    max-height: 0;
+  }
+}
+@-ms-keyframes slideUp {
+  0% {
+    max-height: 0;
+  }
+
+  50% {
+    max-height: 7.5vh;
+  }
+
+  100% {
+    max-height: 0;
+  }
+}
+@keyframes slideUp {
+  0% {
+    max-height: 0;
+  }
+
+  50% {
+    max-height: 7.5vh;
+  }
+
+  100% {
+    max-height: 0;
+  }
+}
+@-moz-keyframes slideDown {
+  0% {
+    max-height: 7.5vh;
+  }
+
+  50% {
+    max-height: 0;
+  }
+
+  100% {
+    max-height: 7.5vh;
+  }
+}
+@-webkit-keyframes slideDown {
+  0% {
+    max-height: 7.5vh;
+  }
+
+  50% {
+    max-height: 0;
+  }
+
+  100% {
+    max-height: 7.5vh;
+  }
+}
+@-o-keyframes slideDown {
+  0% {
+    max-height: 7.5vh;
+  }
+
+  50% {
+    max-height: 0;
+  }
+
+  100% {
+    max-height: 7.5vh;
+  }
+}
+@-ms-keyframes slideDown {
+  0% {
+    max-height: 7.5vh;
+  }
+
+  50% {
+    max-height: 0;
+  }
+
+  100% {
+    max-height: 7.5vh;
+  }
+}
+@keyframes slideDown {
+  0% {
+    max-height: 7.5vh;
+  }
+
+  50% {
+    max-height: 0;
+  }
+
+  100% {
+    max-height: 7.5vh;
+  }
+}
+@-moz-keyframes saved {
+  0% {
+    background: #10ad15;
+  }
+
+  50% {
+    background: #3aed3f;
+  }
+}
+@-webkit-keyframes saved {
+  0% {
+    background: #10ad15;
+  }
+
+  50% {
+    background: #3aed3f;
+  }
+}
+@-o-keyframes saved {
+  0% {
+    background: #10ad15;
+  }
+
+  50% {
+    background: #3aed3f;
+  }
+}
+@-ms-keyframes saved {
+  0% {
+    background: #10ad15;
+  }
+
+  50% {
+    background: #3aed3f;
+  }
+}
+@keyframes saved {
+  0% {
+    background: #10ad15;
+  }
+
+  50% {
+    background: #3aed3f;
+  }
+}
+
+</style>
+</head>
+<body class="mcsandy mcsandy--online">
+<header class="mpGlobal__header">
+            <div class="mpGlobal__header__hgroup">
+                <h1 class="mpGlobal__header__h1 h1">McSandy</h1>
+                <aside>
+                    <span id="js-onlineStatus" title="You're online" class="mpGlobal__header__onlineStatus online">&#9673;</span>
+                    <span id="js-globalInfo" class="mpGlobal__header__info">i</span>
+                </aside>
+            </div>
+            <div class="mpGlobal__header__editor__wrapper wrapper">
+                <label for="js-editor-toggle" class="editor__label" title="Toggle Panel">Editor</label>
+                <input type="checkbox" id="js-editor-toggle" class="editor__toggle" />
+            <form class="mpGlobal__header__editor editor">
+                    <div id="js-fieldset--html" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--html" draggable="true" data-mimeoutput="text/html" data-fileext="html">
+                        <label class="fieldset__label fieldset__label--html" for="js-html" title="Click to Toggle | Drag to desktop">HTML</label>
+                        <textarea  id="js-html" tabindex="1" class="fieldset__field fieldset__field--html field field--textarea field--html"  data-target="js-html-content" placeholder="<br />dancer" title="Drop Text or Image"></textarea>
+                    </div>
+                    <div id="js-fieldset--css" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--css" draggable="true" data-mimeoutput="text/css" data-fileext="css">
+                        <label class="fieldset__label fieldset__label--css" for="js-css" title="Click to Toggle | Drag to desktop">CSS</label>
+                        <textarea id="js-css" tabindex="2" class="fieldset__field fieldset__field--css field field--textarea field--css"  data-target="js-css-content" placeholder=".cup{color:#c0ffee}" title="Drop text or image"></textarea>
+                        <div class="fieldset__userOptions userOptions">
+                            <div class="fieldset__inputWrapper fieldset__inputWrapper--first" data-saved="false">
+                                <input type="url" class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.css" data-externaltype="css"/>
+                                <button class="fieldset__button fieldset__button--add" title="Add external file">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="js-fieldset--js" class="fieldsetGroup__fieldset editor__fieldset fieldset fieldset--js" draggable="true" data-mimeoutput="application/javascript" data-fileext="js">
+                        <label class="fieldset__label fieldset__label--js" for="js-js" title="Click to Toggle | Drag to desktop | ctrl + r">JS</label>
+                        <textarea id="js-js" tabindex="3" class="fieldset__field fieldset__field--js field field--textarea field--js"  data-target="js-js-content" placeholder="var blah;" title="Drop text"></textarea>
+                        <div class="fieldset__userOptions userOptions">
+                            <div class="fieldset__inputWrapper fieldset__inputWrapper--first">
+                                <input type="url"  class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.js" data-externaltype="js"/>
+                                <button class="fieldset__button fieldset__button--add" title="Add external file">+</button>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+        </div>
+        </header>
+    <main class="mpGlobal__result">
+        <iframe id="js-result" class="mpGlobal__result__iframe"></iframe>
+    </main>
+    <footer class="mpGlobal__footer">
+        <label for="js-footer-editor-toggle" class="editor__label" title="Toggle Panel">Projects</label>
+        <input type="checkbox" id="js-footer-editor-toggle" class="editor__toggle" />
+        <form class="mpGlobal__footer__editor editor">
+            <div class="editor__fieldset fieldset fieldset--thisProject">
+                <h3 class="fieldset__legend">
+                    This Sandbox
+                </h3>
+                <div class="fieldset__wrapper">
+                    <input id="js-projectName" class="editor__input editor__input--name" type="text" placeholder="Name of Project">
+                    <button id="js-projectSave" class="editor__button editor__button--save" title="save this project">Save</button>
+                    <button id="js-projectDel" class="editor__button editor__button--del" title="Delete this project">Delete</button>
+                    <button id="js-projectNew" class="editor__button editor__button--new" title="Clear Everything and Start Over">New</button>
+                </div>
+            </div>
+            <div class="editor__fieldset fieldset fieldset--externalLibs">
+                <h3 class="fieldset__legend">
+                    External Libraries
+                </h3>
+                <div class="fieldset__wrapper">
+
+                </div>
+            </div>
+            <div class="editor__fieldset fieldset fieldset--otherProjects">
+                <h3 class-"fieldset__legend">
+                    Other Sandboxes
+                </h3>
+                <div class="fieldset__wrapper">
+                    <select class="editor__input editor__input--name" id="js-selectProjects">
+                        <option></option>
+                    </select>
+                    <button id="js-projectLoad" class="editor__button editor__button--load" title="Load the sandbox">Load </button>
+                    <button id="js-projectDownload" class="editor__button editor__button--download" title="Export this sandbox to a single file">Download</button>
+                </div>
+            </div>
+        </form>
+    </footer>
+
+        <section id="js-modal" class="mpModal">
+            <h2 id="js-modal__title" class="mpModal__title">About McSandy</h2>
+            <article id="js-modal__content" class="mpModal__content mpModal__content--list">
+            <h3  class="mpModal__content__title">Keyboard Shortcuts</h3>
+                <dl>
+                    <dt><kbd>ctrl</kbd>+<kbd>s</kbd></dt><dd>save</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>r</kbd></dt><dd>run</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>f</kbd></dt><dd>download</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>l</kbd></dt><dd>load</dd>
+                </dl>
+                <dl>
+                    <dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>e</kbd></dt><dd>Toggle Editor Panel</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd></dt><dd>Toggle Project Panel</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>del</kbd></dt><dd>Delete Project</dd>
+                    <dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>+</kbd></dt><dd>New Project</dd>
+                </dl>
+            </article>
+            <article class="mpModal__content">
+            <h3  class="mpModal__content__title"> Want to buy me a cup of coffee?</h3>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="8NT2GJELFQ94C">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
+            </article>
+            <footer class="mpModal__content">
+              <p>Do a <kbd>Save As</kbd> for this page and it'll work on your desktop</p>
+                    <p>Found a bug? Have a request? Let me know on <a href="https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox/issues">Github</a>. Or read up on McSandy at the <a href="https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox">Wiki</a></p>
+                    <small>McSandy's source code is copyrighted, with All Rights Reserved by Frank M. Taylor</small>
+            </footer>
+        </section>
+    <div id="js-modal__overlay" class="mpModal__overlay">
+    </div>
+
+
+</body>
+<script type="text/javascript">
 /* MCSANDY: THE OFFLINE HTML5 SANDBOX */
 var store, mcsandyAppData, mcsandy, mcsandyPrefs, mcsandyUI;
-// Source: preAssets/js/store.js
+// Source: src/js/store.js
 store = {
     types: [localStorage,sessionStorage],
     convertValue: function (v) {
@@ -31,7 +1761,7 @@ store = {
         store.types[type].clear();
     }
 };
-// Source: preAssets/js/filesaver.js
+// Source: src/js/filesaver.js
 /*! FileSaver.js
  *  A saveAs() FileSaver implementation.
  *  2014-01-24
@@ -246,7 +1976,7 @@ var saveAs = saveAs
     || this.content
 ));
 if (typeof module !== "undefined") module.exports = saveAs;
-// Source: preAssets/js/mcsandyAppData.js
+// Source: src/js/mcsandyAppData.js
 /*MCSANDY APPDATA */
 mcsandyAppData = {
     self: {
@@ -353,7 +2083,7 @@ mcsandyProject = {
         }
     }
 };
-// Source: preAssets/js/mcsandyPrefs.js
+// Source: src/js/mcsandyPrefs.js
 /*MCSANDYPREFS: A user's preferences with the interface*/
 mcsandyPrefs =  {
     init : function () {
@@ -398,7 +2128,7 @@ mcsandyPrefs =  {
         }
     }
 };
-// Source: preAssets/js/mcsandy.js
+// Source: src/js/mcsandy.js
 
 /*MCSANDYUI: the main user interactions with the app*/
 mcsandyUI = {
@@ -1212,3 +2942,6 @@ mcsandy = {
 mcsandyUI.init();
 mcsandy.init();
 mcsandyPrefs.init();
+
+</script>
+</html>

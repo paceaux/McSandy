@@ -4,20 +4,20 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     htmlbuild: {
       dist: {
-        src: 'preAssets/pre-mcsandy.html',
-        dest:'postAssets/post-mcsandy.html',
+        src: 'src/pre-mcsandy.html',
+        dest:'dist/post-mcsandy.html',
         options: {
           beautify: false,
           sections: {
             layout: {
-              header: 'preAssets/html/header.html',
-              main: 'preAssets/html/main.html',
-              footer: 'preAssets/html/footer.html',
-              modal: 'preAssets/html/modal.html'
+              header: 'src/html/header.html',
+              main: 'src/html/main.html',
+              footer: 'src/html/footer.html',
+              modal: 'src/html/modal.html'
             },
             assets:{
-              styles: 'postAssets/mcsandy.min.css',
-              script: 'preAssets/mcsandy.js'
+              styles: 'dist/mcsandy.min.css',
+              script: 'src/mcsandy.js'
             }
           }
         }
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
     },
     copy: {
       main: {
-        src:'postAssets/post-mcsandy.html',
+        src:'dist/post-mcsandy.html',
         dest: 'mcsandy.html',
         filter: 'isFile'
       }
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'preAssets/mcsandy.js' : ['preAssets/js/store.js', 'preAssets/js/filesaver.js','preAssets/js/mcsandyAppData.js','preAssets/js/mcsandyPrefs.js', 'preAssets/js/mcsandy.js']
+          'src/mcsandy.js' : ['src/js/store.js', 'src/js/filesaver.js','src/js/mcsandyAppData.js','src/js/mcsandyPrefs.js', 'src/js/mcsandy.js']
         }
       }
     },
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
           import: ['nib']
         },
         files : {
-          'postAssets/mcsandy.min.css' : ['preAssets/css/layout.styl','preAssets/css/mcsandy.styl'],
+          'dist/mcsandy.min.css' : ['src/css/layout.styl','src/css/mcsandy.styl'],
         }
       }
     },
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
       },
       my_target: {
         files: {
-          'postAssets/mcsandy.min.js' : ['preAssets/mcsandy.js']
+          'dist/mcsandy.min.js' : ['src/mcsandy.js']
         }
       }
     },
@@ -70,21 +70,21 @@ module.exports = function(grunt) {
       minify: {
         expand: true,
         files: {
-          'postAssets/mcsandy.min.css' :['postAssets/mcsandy.css']
+          'dist/mcsandy.min.css' :['dist/mcsandy.css']
         }
       }
     },
     watch: {
       stylus:{
-        files: ['preAssets/**/*.styl'],
+        files: ['src/**/*.styl'],
         tasks: ['stylus:standard', 'htmlbuild', 'copy:main']
       },
       html: {
-        files: ['preAssets/html/*.html', 'preAssets/*.html'],
+        files: ['src/html/*.html', 'src/*.html'],
         tasks: ['stylus:standard', 'htmlbuild', 'copy:main']
       },
       js: {
-        files: ['preAssets/js/*.js'],
+        files: ['src/js/*.js'],
         tasks: ['concat:js','uglify', 'htmlbuild', 'copy:main']
       }
     }
