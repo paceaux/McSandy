@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "grunt": "~0.4.2",
-    "grunt-build-html": "~0.1.0",
     "grunt-contrib": "~0.9.0",
     "grunt-contrib-compress": "~0.6.1",
     "grunt-contrib-concat": "~0.3.0",
@@ -27,6 +26,7 @@
     "grunt-contrib-watch": "~0.5.3",
     "gulp": "^3.9.1",
     "gulp-concat-util": "^0.5.5",
+    "gulp-inline": "^0.1.1",
     "gulp-stylus": "^2.5.0",
     "gulp-uglify": "^1.5.4",
     "nib": "~1.0.1",
