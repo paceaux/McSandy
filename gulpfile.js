@@ -3,7 +3,8 @@ var		gulp = require('gulp'),
 		nib = require('nib'),
 		concat = require('gulp-concat-util'),
 		uglify = require('gulp-uglify'),
-		inline = require('gulp-inline');
+		replace = require('gulp-replace'),
+		fs = require('fs');
 
 var config = {
 	src: {
@@ -58,4 +59,22 @@ gulp.task('componentbuild', function () {
 		)
 	)
 	.pipe(gulp.dest('dist/'));
+});
+
+gulp.task('build',['componentbuild', 'stylus', 'js'] ,function () {
+	return gulp.src('src/pre-mcsandy.html')
+		.pipe(replace(/<link href="mcsandy.min.css"[^>]*>/, function(s) {
+			var style = fs.readFileSync('dist/mcsandy.min.css', 'utf8');
+			console.log('style');
+			return '<style type="text/css">\n' + style + '\n</style>';
+		}))
+		.pipe(replace(/<components src="components.html"[^>]*>/, function(s) {
+			var components = fs.readFileSync('dist/components.html', 'utf8');
+			return  '\n'+ components + '\n';
+		}))
+		.pipe(replace(/<scripts src="mcsandy.min.js"[^>]*>/, function(s) {
+			var script = fs.readFileSync('dist/mcsandy.min.js', 'utf8');
+			return '<script type="text/javascript">\n' + script + '\n</script>';
+		}))
+		.pipe(gulp.dest(''));
 });
