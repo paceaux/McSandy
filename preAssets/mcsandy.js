@@ -714,7 +714,6 @@ mcsandyUI = {
         handleFileDrop: function (e) {
             e.preventDefault();
             e.stopPropagation();
-
             var _this = mcsandyUI,
                 files = e.dataTransfer.files, 
                 i;
@@ -778,7 +777,7 @@ mcsandyUI = {
         handleDownloadProject: function (e) {
             e.preventDefault();
             var _this = mcsandyUI,
-                project = store.get(0, _this.data.ctrls.projectSelect.value); // don't get the value of the button, but the one from the select box. 
+                project = store.get(0, 'mp-' + _this.data.ctrls.projectSelect.value); // don't get the value of the button, but the one from the select box. 
             _this.functions.flashClass(document.getElementById('js-projectDownload'));
             mcsandy.functions.downloadContent(project);
         },
