@@ -1,17 +1,18 @@
-var gulp = require('gulp');
-var stylus = require('gulp-stylus');
-var nib = require('nib');
-var concat = require('gulp-concat');
+var		gulp = require('gulp'),
+		stylus = require('gulp-stylus'),
+		nib = require('nib'),
+		concat = require('gulp-concat-util'),
+		uglify = require('gulp-uglify');
 
 var config = {
 	src: {
 		css: 'src/css/*.styl',
-		js: 'src/js',
+		js: 'src/js/*.js',
 		html: 'src/html'
 	},
 	dist: {
 		css: 'mcsandy.min.css',
-		js: 'McSandy.min.js'
+		js: 'mcsandy.min.js'
 	}
 }
 
@@ -26,5 +27,22 @@ gulp.task('stylus', function () {
 			})
 		)
 		.pipe(concat(config.dist.css))
+		.pipe(gulp.dest('dist/'));
+});
+
+gulp.task('js', function () {
+	return gulp.src(config.src.js)
+		.pipe(
+			concat(
+				config.dist.js,
+				{
+					process: function (src, filepath) {
+						return '// Source: ' + filepath + '\n' + src;
+					}
+				}
+			)
+		)
+		.pipe(concat.header('/* MCSANDY: THE OFFLINE HTML5 SANDBOX */\n' + 'var store, mcsandyAppData, mcsandy, mcsandyPrefs, mcsandyUI;\n'))
+		.pipe(concat.footer('\n' + 'mcsandyUI.init();\n' + 'mcsandy.init();\n' + 'mcsandyPrefs.init();\n'))
 		.pipe(gulp.dest('dist/'));
 });

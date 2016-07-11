@@ -40,7 +40,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'src/mcsandy.js' : ['src/js/store.js', 'src/js/filesaver.js','src/js/mcsandyAppData.js','src/js/mcsandyPrefs.js', 'src/js/mcsandy.js']
+          'src/mcsandy.js' : ['src/js/0-store.js', 'src/js/0-filesaver.js','src/js/1-mcsandyAppData.js','src/js/1-mcsandyPrefs.js', '2-src/js/mcsandy.js']
         }
       }
     },
@@ -85,7 +85,7 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['src/js/*.js'],
-        tasks: ['concat:js','uglify', 'htmlbuild', 'copy:main']
+        tasks: ['concat:js', 'htmlbuild', 'copy:main']
       }
     }
   });
