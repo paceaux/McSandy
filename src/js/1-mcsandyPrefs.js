@@ -10,6 +10,12 @@ mcsandyPrefs =  {
         hLayout: function () {
             var _this = mcsandyPrefs;
             mcsandyUI.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
+        },
+        editPanel: function () {
+            //do something about the edit panel
+        },
+        projectPanel: function () {
+            //do something about the project panel
         }
     },
     functions : {
@@ -31,6 +37,7 @@ mcsandyPrefs =  {
                 uiPrefs = mcsandyAppData.userPrefs.ui;
             for (var pref in uiPrefs) {
                 if (uiPrefs[pref]) {
+                    console.log(pref);
                     _this.prefUpdaters[pref]();
                 }
             }
