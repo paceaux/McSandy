@@ -4,29 +4,32 @@
   "author": "Paceaux <me@frankmtaylor.com>",
   "description": "McSandy: the Offline HTML5 sandbox",
   "Mcsandy": {
-    "pre": {
-      "assets": "preAssets/mcsandy.styl",
-      "html": "preAssets/html/",
-      "js": "preAssets/js"
+    "src": {
+      "assets": "src/mcsandy.styl",
+      "html": "src/html/",
+      "js": "src/js"
     },
-    "post": {
-      "html": "postAssets/post-mcsandy.html"
-    }, 
+    "dist": {
+      "html": "dist/post-mcsandy.html"
+    },
     "final": "mcsandy.html"
   },
   "devDependencies": {
-    "nib": "~1.0.1",
-    "stylus": "~0.37.0",
     "grunt": "~0.4.2",
-    "grunt-contrib-stylus": "~0.12.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-cssmin": "~0.7.0",
-    "grunt-contrib-copy": "~0.5.0",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.3.2",
-    "grunt-contrib-compress": "~0.6.1",
+    "grunt-build-html": "~0.1.0",
     "grunt-contrib": "~0.9.0",
-    "grunt-build-html": "~0.1.0"
+    "grunt-contrib-compress": "~0.6.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-stylus": "~0.12.0",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-stylus": "^2.5.0",
+    "nib": "~1.0.1",
+    "stylus": "~0.37.0"
   },
   "main": "Gruntfile.js",
   "repository": {
