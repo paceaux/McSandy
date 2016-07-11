@@ -10,7 +10,7 @@ var config = {
 	src: {
 		css: 'src/css/*.styl',
 		js: 'src/js/*.js',
-		shell: 'src/pre-mcsandy.html',
+		shell: 'src/mcsandy.html',
 		html: 'src/html/*.html'
 	},
 	dist: {
@@ -51,7 +51,7 @@ gulp.task('js', function () {
 		.pipe(gulp.dest('dist/'));
 });
 
-gulp.task('componentbuild', function () {
+gulp.task('componentbuild',['stylus', 'js'], function () {
 	return gulp.src(['src/html/header.html', 'src/html/main.html', 'src/html/footer.html', 'src/html/modal.html'])
 	.pipe(
 		concat(
@@ -62,7 +62,7 @@ gulp.task('componentbuild', function () {
 });
 
 gulp.task('build',['componentbuild', 'stylus', 'js'] ,function () {
-	return gulp.src('src/pre-mcsandy.html')
+	return gulp.src(config.src.shell)
 		.pipe(replace(/<link href="mcsandy.min.css"[^>]*>/, function(s) {
 			var style = fs.readFileSync('dist/mcsandy.min.css', 'utf8');
 			console.log('style');
@@ -78,3 +78,13 @@ gulp.task('build',['componentbuild', 'stylus', 'js'] ,function () {
 		}))
 		.pipe(gulp.dest(''));
 });
+
+gulp.task('watch', function () {
+	gulp.watch(config.src.js, ['build']);
+	gulp.watch(config.src.css, ['build']);
+	gulp.watch(config.src.html, ['build']);
+})
+
+gulp.task('default', ['componentbuild','js','stylus','build','watch']);
+
+
