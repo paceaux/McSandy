@@ -1,3 +1,4 @@
+var mcsandyTools;
 mcsandyTools = {
     init: function () {
         console.info("mcsandyTools is running");
@@ -7,7 +8,7 @@ mcsandyTools = {
         }
         _this.functions.getAppVersion();
     },
-    data :{
+    data: {
         scripts: {
             githubJS: 'http://raw.github.com/michael/github/master/github.js',
             selfPackage: 'http://raw.github.com/paceaux/McSandy--the-HTML5-offline-Sandbox/master/package.json',
@@ -16,9 +17,9 @@ mcsandyTools = {
     },
     helpers: {
         addScript: function (js, type) {
-            var head= document.getElementsByTagName('head')[0],
-                script= document.createElement('script');
-            script.type= 'text/javascript';
+            var head = document.getElementsByTagName('head')[0],
+                script = document.createElement('script');
+            script.type = 'text/javascript';
             if (type === 'text') {
                 script.innerText = js;
             }
@@ -32,24 +33,23 @@ mcsandyTools = {
             });
         }
     },
-    bindUievents: function () {},
     functions: {
         loadScript: function (src, async, callback) {
             var _this = mcsandyTools,
-            head= document.getElementsByTagName('head')[0],
-            script= document.createElement('script');
-            script.type= 'text/javascript';
-            script.src= src;
+                head = document.getElementsByTagName('head')[0],
+                script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = src;
             script.async = async;
             script.onload = callback;
             head.appendChild(script);
         },
         addScript: function (src, async) {
             var _this = mcsandyTools,
-            head= document.getElementsByTagName('head')[0],
-            script= document.createElement('script');
-            script.type= 'text/javascript';
-            script.innerText= src;
+                head = document.getElementsByTagName('head')[0],
+                script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.innerText = src;
             script.async = async;
             head.appendChild(script);
         },
@@ -59,20 +59,15 @@ mcsandyTools = {
                 xmlHttp = new XMLHttpRequest(success, error);
             xmlHttp.open('get', _this.data.scripts.mcsandyApp, true);
             xmlHttp.send(null);
-            xmlHttp.onreadystatechange = function() {
+            xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState === 4) {
                     if (xmlHttp.status === 200) {
                         console.log(xmlHttp);
                         success = xmlHttp.responseText;
-                        _this.functions.addScript(success,true)
-                        } else {
-                        }
-                    } else {
-                    //still processing
+                        _this.functions.addScript(success, true);
                     }
-                };
-            }
-    }, 
-    modules: {
+                }
+            };
+        }
     }
 };

@@ -8,13 +8,8 @@ mcsandyPrefs =  {
     },
     prefUpdaters : {
         hLayout: function () {
-            console.log('layout');
             var _this = mcsandyPrefs;
             mcsandyUI.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
-        },
-        editPanel: function () {
-        },
-        projectPanel: function () {
         }
     },
     functions : {
@@ -23,7 +18,7 @@ mcsandyPrefs =  {
             if (store.get(0, 'mcsandyPrefs') !== undefined) {
                 mcsandyAppData.userPrefs = store.get(0, 'mcsandyPrefs');
             } else {
-                _this.functions.savePreferences(mcsandyAppData.userPrefs); 
+                _this.functions.savePreferences(mcsandyAppData.userPrefs);
             }
         },
         savePreferences: function (prefs) {

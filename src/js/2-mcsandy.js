@@ -250,7 +250,9 @@ mcsandyUI = {
             var _this = mcsandyUI,
                 ctrl = document.getElementById('js-onlineStatus');
             mcsandyAppData.ui.onlineState = navigator.onLine ? "online" : "offline";
-            if (override !== undefined && typeof override === 'string') mcsandyAppData.ui.onlineState = override; // Added this for debugging when I'm on an airplane. 
+            if (override !== undefined && typeof override === 'string') {
+                mcsandyAppData.ui.onlineState = override; // Added this for debugging when I'm on an airplane.
+            }
             if (mcsandyAppData.ui.onlineState === "online") {
                 ctrl.className = ctrl.className.replace(/(?:^|\s)offline(?!\S)/g, " online");
                 document.title = "McSandy | Online";
@@ -314,9 +316,9 @@ mcsandyUI = {
             e.preventDefault();
             e.stopPropagation();
             var _this = mcsandyUI,
-                files = e.dataTransfer.files, 
-                i;
-            for ( i = 0, f; f == files[i]; i++) {
+                files = e.dataTransfer.files,
+                i = 0;
+            for ( var f; f == files[i]; i++) {
                 var input = _this.helpers.createExternalFileSet(f);
                 e.target.appendChild(input);
             }
@@ -343,7 +345,6 @@ mcsandyUI = {
                 el = e.target,
                 clonedParent,
                 exFileField = e.target.parentNode.querySelector('.fieldset__field');
-            
             if (exFileField.value) {
                 if (exFileField.value.match(fieldPatterns.url) !== null) {
                     clonedParent = helpers.cloneParent(el);
@@ -351,12 +352,12 @@ mcsandyUI = {
                     el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
                     el.innerHTML = "&mdash;";
                     el.parentNode.parentNode.appendChild(clonedParent);
-                    mcsandy.functions.updateContent();    
+                    mcsandy.functions.updateContent();
                     _this.bindUiEvents();
                     clonedParent.dataset.saved = false;
                 }  else {
-                    functions.addError(exFileField, 'notURL'); 
-                }               
+                    functions.addError(exFileField, 'notURL');
+                }
 
             } else {
                 functions.addError(exFileField, 'empty');
@@ -376,7 +377,7 @@ mcsandyUI = {
         handleDownloadProject: function (e) {
             e.preventDefault();
             var _this = mcsandyUI,
-                project = store.get(0, 'mp-' + _this.data.ctrls.projectSelect.value); // don't get the value of the button, but the one from the select box. 
+                project = store.get(0, 'mp-' + _this.data.ctrls.projectSelect.value); // don't get the value of the button, but the one from the select box.
             _this.functions.flashClass(document.getElementById('js-projectDownload'));
             mcsandy.functions.downloadContent(project);
         },
@@ -405,7 +406,7 @@ mcsandyUI = {
                     reader.readAsText(f);
                 }
             }
-        }, 
+        },
         handleDragOver: function (e) {
             e.stopPropagation();
             e.preventDefault();
@@ -420,18 +421,18 @@ mcsandyUI = {
                 type = e.target.dataset.fileext,
                 blob = new Blob([source], {type: type}),
                 sourceURL = URL.createObjectURL(blob),
-                fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + sourceURL;   
+                fileDetails = e.target.dataset.mimeoutput + ":" + projectName +"." + type +":" + sourceURL;
 //            console.log(e.target.dataset.mimeoutput,projectName, type, sourceURL); ONly FF will log anything
             e.dataTransfer.setData("DownloadURL", fileDetails);
         },
         handleDragEnd: function (e) {
             e.preventDefault();
             e.dataTransfer.dropEffect = 'all';
-            var _this = mcsandyUI;  
+            var _this = mcsandyUI;
             e.dataTransfer.getData('DownloadURL',0);
         },
         updateEditors: function (html, css, js) {
-            var _this = mcsandyUI, 
+            var _this = mcsandyUI,
                 ctrls = mcsandy.data.ctrls;
             ctrls.html.value = html;
             ctrls.css.value = css;
@@ -462,8 +463,8 @@ mcsandyUI = {
                 assetFields = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper'),
                 xAssets = projData.externals.assets[type],
                 assetFieldsArr = Array.prototype.slice.call(assetFields),
-                lastField, 
-                neededFields = xAssets.length - assetFields.length, 
+                lastField,
+                neededFields = xAssets.length - assetFields.length,
                 i;
             for (i = 0; i < neededFields+1; i++) {
                 lastField = document.getElementById('js-fieldset--' + type).querySelectorAll('.fieldset__inputWrapper').item(i);
@@ -549,7 +550,7 @@ mcsandy = {
             if (!window.location.protocol.match('http')) {
                 js = 'http://' + js;
             } else {
-                js = window.location.protocol + '//' + js;          
+                js = window.location.protocol + '//' + js;
             }
             return '<script type="text\/javascript" src="' + js + '"><\/script>';
         },
@@ -625,15 +626,15 @@ mcsandy = {
         },
         constructBodyOpen: function () {
             var _this = mcsandy,
-                appData = mcsandyAppData, 
+                appData = mcsandyAppData,
                 helpers = _this.helpers,
                 ctrls = _this.data.ctrls,
                 userHTML = helpers.prepareHTML(ctrls.html.value);
-            return '<body>' + userHTML ;
+            return '<body>' + userHTML;
         },
         constructBodyClose: function () {
             var _this = mcsandy,
-                appData = mcsandyAppData, 
+                appData = mcsandyAppData,
                 helpers = _this.helpers,
                 userJS = helpers.prepareInternalJS(_this.data.ctrls.js.value),
                 externalSavedJS = helpers.createExternalJS(mcsandyProject.externals.assets.js),
@@ -657,7 +658,7 @@ mcsandy = {
                 blobArray: blobArray,
                 rawParts: rawParts,
                 externals: assets
-            }; 
+            };
         },
         buildBlob: function (parts, type) {
             var _this = mcsandy,
@@ -665,7 +666,7 @@ mcsandy = {
                 blobType = type !== undefined ? type + ';charset=utf-8' : 'text/html;charset=utf-8',
                 blob = new Blob(parts, {type : blobType});
             window.mcsandyblob = blob;
-            return blob;                   
+            return blob;
         },
         getStoredProjects: function () {
             var _this = mcsandy,
@@ -741,7 +742,6 @@ mcsandy = {
                 libWrap.appendChild(input);
                 libWrap.appendChild(label);
             }
-            
             mcsandyUI.functions.bindFieldsetCollapse();
         },
         handleLibToggle: function (e) {
@@ -794,8 +794,8 @@ mcsandy = {
             _this.functions.createProjectSelect();
         },
         downloadContent: function (downloadObj, type) {
-            //downloadObj should be an object. 
-            //It should have in it an array called blobArray. 
+            //downloadObj should be an object.
+            //It should have in it an array called blobArray.
             //there must be a minimum of one item in the array, which contains the stuff we want to download
             //type is presumed to be either html, css, or js
             var _this = mcsandy,
