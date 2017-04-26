@@ -14,8 +14,10 @@ module.exports = {
         }
     },
     js: {
+        filename: 'main.js',
         src: `${jsPath}/*.js`,
         dest: `${dest}/main.js`,
+        destmin: `${dest}/main.min.js`,
         uglify: {
             mangle: false,
         }
