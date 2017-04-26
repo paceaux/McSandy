@@ -18,7 +18,6 @@ var stylStream = gulp.src([stylConfig.src], {read: true})
 
 var jsStream = gulp.src([jsConfig.src], {read: true})
     .pipe(concat('main.js'))
-    .pipe(uglify(jsConfig.uglify))
     .pipe(gulp.dest('build/'));
 
 gulp.task('build', ()=> {
@@ -32,11 +31,16 @@ gulp.task('build', ()=> {
             }
         }))
         .pipe(inject(jsStream ,{
-            starttag: '<!-- inject:js-->',
+            starttag: '<!-- inject:js -->',
             removeTags: true,
             transform: function( filePath, file) {
-                console.log(file.contents.toString());
-                return `<script type="text/javascript">${file.contents.toString()}</script>`;
+                return `<script type="text/javascript">
+                var store, mcsandyAppData, mcsandy, mcsandyPrefs, mcsandyUI;
+                ${file.contents.toString()}
+                mcsandyUI.init();
+                mcsandy.init();
+                mcsandyPrefs.init();
+                </script>`;
                 
             }
         }))
@@ -44,7 +48,7 @@ gulp.task('build', ()=> {
             starttag: '<!-- inject:styl -->',
             removeTags: true,
             transform: function (filePath, file) {
-                return `<style type="text/css">
+                return `<style type="text/css"> 
                 ${file.contents.toString('utf8')}</style>`;
             }
         }))
