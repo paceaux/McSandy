@@ -3,6 +3,8 @@
 *.tmPreferences.cache
 *.stTheme.cache
 
+build
+build/*.*
 # workspace files are user-specific
 *.sublime-workspace
 
