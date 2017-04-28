@@ -16,4 +16,4 @@ gulp.task('js-min', ()=>{
         .pipe(concat(config.filename.replace('.js', '.min.js')))
         .pipe(uglify(config.uglify))
         .pipe(gulp.dest('build/'));
-})
+});

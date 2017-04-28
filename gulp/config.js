@@ -1,7 +1,7 @@
 'use strict';
 const dest = "public";
 const src = "src";
-const templatePath = `${src}/templates`;
+const partialPath = `${src}/html/`;
 const cssPath = `${src}/css`;
 const jsPath = `${src}/js`;
 
@@ -24,9 +24,14 @@ module.exports = {
     },
     build: {
         scaffold: `${src}/shell.html`,
-        partials: `${src}/html/`,
+        partials: partialPath,
         rename: {
             basename: 'index'
         }
+    },
+    watch: {
+        html: `${partialPath}**/*.html`,
+        css: `${cssPath}/**/*.styl`,
+        js: `${jsPath}/**/*.js`
     }
 };
