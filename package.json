@@ -10,7 +10,7 @@
       "js": "src/js"
     },
     "dist": {
-      "html": "dist/mcsandy.html"
+      "html": "build/mcsandy.html"
     },
     "final": "mcsandy.html"
   },
