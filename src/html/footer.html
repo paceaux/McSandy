@@ -1,8 +1,8 @@
-    <footer class="g-footer">
-        <label for="js-footer-editor-toggle" class="editor__label" title="Toggle Panel">Projects</label>
+    <section class="projectManager">
+        <label for="js-footer-editor-toggle" class="projectManager__toggle editor__label" title="Toggle Panel">Projects</label>
         <input type="checkbox" id="js-footer-editor-toggle" class="editor__toggle" />
-        <form class="g-footer__editor editor">
-            <div class="editor__fieldset fieldset fieldset--thisProject">
+        <form class="projectManager__fieldsets">
+            <fieldset class="fieldset fieldset--thisProject">
                 <h3 class="fieldset__legend">
                     This Sandbox 
                 </h3>
@@ -12,16 +12,16 @@
                     <button id="js-projectDel" class="editor__button editor__button--del" title="Delete this project">Delete</button>
                     <button id="js-projectNew" class="editor__button editor__button--new" title="Clear Everything and Start Over">New</button>
                 </div>
-            </div>
-            <div class="editor__fieldset fieldset fieldset--externalLibs">
+            </fieldset>
+            <fieldset class="fieldset fieldset--externalLibs">
                 <h3 class="fieldset__legend">
                     External Libraries
                 </h3>
                 <div class="fieldset__wrapper">
 
                 </div>
-            </div>
-            <div class="editor__fieldset fieldset fieldset--otherProjects">
+            </fieldset>
+            <fieldset class="fieldset fieldset--otherProjects">
                 <h3 class-"fieldset__legend">
                     Other Sandboxes
                 </h3>
@@ -32,6 +32,6 @@
                     <button id="js-projectLoad" class="editor__button editor__button--load" title="Load the sandbox">Load </button>
                     <button id="js-projectDownload" class="editor__button editor__button--download" title="Export this sandbox to a single file">Download</button>
                 </div>
-            </div>
+            </fieldset>
         </form>
-    </footer>
+    </section>
