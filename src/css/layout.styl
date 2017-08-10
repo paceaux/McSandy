@@ -11,8 +11,26 @@ body
 	justify-content: space-around
 	align-items: flex-start
 
+.g-footer
+	flex-shrink: 1
+	display: flex
+	width: 100%
+	flex-direction: column
+	justify-content: flex-start
+
+.g-footer__editor
+		flex-shrink: 1
+		flex-direction: row
+		align-self: flex-start
+		flex-basis: 4.5em
+		width: 100%
+		.fieldset
+			flex-grow: 1
+		.fieldset--externalLibs
+			flex-basis: 15rem
+			flex-shrink:0
 .mpGlobal
-	&__header, &__footer
+	&__header
 		flex-shrink: 1
 		display: flex
 		width: 100%
@@ -52,8 +70,8 @@ body
 	&__toggle
 		&:checked
 			~ .mpGlobal__header__editor, 
-			~ .mpGlobal__footer__editor, 
-			~ .mpGlobal__footer__editor > .editor__fieldset
+			~ .g-footer__editor, 
+			~ .g-footer__editor > .editor__fieldset
 				flex-basis: 0
 				height: 0
 				overflow:hidden
@@ -178,18 +196,7 @@ body
 		width: 100%
 		outline: none
 		border: none
-.mpGlobal__footer
-	&__editor
-		flex-shrink: 1
-		flex-direction: row
-		align-self: flex-start
-		flex-basis: 4.5em
-		width: 100%
-		.fieldset
-			flex-grow: 1
-			&--externalLibs
-				flex-basis: 15rem
-				flex-shrink:0
+
 
 .mcsandy
 	&--horizontal
@@ -233,7 +240,7 @@ body
 							flex-basis: 33%
 							.fieldset__wrapper
 								flex-direction: row
-		.editor__toggle:checked ~ .mpGlobal__footer__editor,
+		.editor__toggle:checked ~ .g-footer__editor,
 		.editor__toggle:checked ~ .mpGlobal__header__editor
 			flex-grow:0
 			width:0

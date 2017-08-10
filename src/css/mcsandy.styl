@@ -276,10 +276,9 @@ textarea, code
     &--textarea
         resize: none
 
-.mpGlobal__footer
-    &__editor
-        border-top: panelBorder
-        background: coolDarkest
+.g-footer__editor
+    border-top: panelBorder
+    background: coolDarkest
 
 .mpModal
     display:none
@@ -341,16 +340,15 @@ textarea, code
                                 &__label
                                     transform: rotate(90deg)
 
-            &__footer
-                .editor
-                    &__label
-                        align-self: flex-start
-                        transform-origin: 3rem 2rem
-                        transform:rotate(0deg)
-                &.js-collapsed
-                    .editor
-                        &__label
-                            transform: rotate(-90deg)
+        .g-footer
+            .editor__label
+                align-self: flex-start
+                transform-origin: 3rem 2rem
+                transform:rotate(0deg)
+            &.js-collapsed
+                .editor__label
+                    transform: rotate(-90deg)
+
 .online
     color: standardCool;
 .offline
