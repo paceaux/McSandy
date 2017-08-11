@@ -224,30 +224,30 @@ textarea, code
     border-right: 1px solid;
     &:last-child
         border-right: none;
-    &__label
-        text-align: right
-        color: coolDarker;
-        font-size: .7rem;
-        padding: .618em;
-        background-color: neutralLighter;
-        border-bottom-left-radius: 4px;
-        smooth() 
-        &:hover
+.fieldset__label
+    text-align: right
+    color: coolDarker;
+    font-size: .7rem;
+    padding: .618em;
+    background-color: neutralLighter;
+    border-bottom-left-radius: 4px;
+    smooth() 
+    &:hover
+        color: coolDarkest
+        background-color: neutralLight
+        smooth()
+    &.js-shrunk
+        position: relative
+        color: coolDark
+        &:hover, &:focus, &:active
             color: coolDarkest
-            background-color: neutralLight
-            smooth()
-        &.js-shrunk
-            position: relative
-            color: coolDark
-            &:hover, &:focus, &:active
-                color: coolDarkest
-    &__wrapper
+.fieldset__wrapper
+    smooth()
+.fieldset__inputWrapper
+    smooth()
+    overflow-y: scroll
+    .fieldset__field
         smooth()
-    &__inputWrapper
-        smooth()
-        overflow-y: scroll
-        .fieldset__field
-            smooth()
 
 .projectManager__jsLib__label
     text-align: right
