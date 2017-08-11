@@ -145,30 +145,27 @@ body
 		order: 2
 	&--js
 		order: 3
-	&--externalLibs
-		.fieldset
-			&__field
-				height: 2.3em
-				flex-basis: 6%
-				align-self: center
-			&__label
-				flex-basis: 75%
-				position: static;
-		.fieldset__wrapper
-			flex-shrink: 1
-			height: 3em
-			overflow: scroll
-			flex-direction: row
-			flex-wrap: wrap
-			justify-content: flex-start
-			align-items: stretch;
-			align-content: flex-start
 	&.js-shrunk
 		flex-grow: 0
 		flex-shrink: 3
 		flex-basis: 5%
 		.field, .fieldset__inputWrapper
 			display:none
+
+.fieldset--externalLibs
+	.fieldset__field
+		height: 2.3em
+		width: 15%
+		margin-left: 5%;
+	.fieldset__label
+		position: static
+		display:inline-block
+		width: 75%
+	.fieldset__wrapper
+		display: block
+		flex-shrink: 1
+		height: 3em
+		overflow-y: scroll
 
 .fieldset__label
 		display: flex
