@@ -1,3 +1,10 @@
+/*===============
+ #Variables
+===============*/
+/*
+most colors are based off of the keyColor; idea is to create an easily adjusted pallette
+*/
+
 keyColor = hsl(212, 72%, 61.8%)
 headingColor= keyColor
 activeHeadingColor = headingColor
@@ -25,15 +32,11 @@ coolDarkerGradientInverse = linear-gradient(to bottom, coolDark 0%, coolDarker 5
 
 
 smooth()
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out; 
+
 smooth-out()
-    -webkit-transition: all .3s ease-out;
-    -moz-transition: all .3s ease-out;
-    -o-transition: all .3s ease-out;
     transition: all .3s ease-out;
+
 mcanimate(name)
         animation-delay: .5s
         animation-duration: 3.5s
@@ -60,13 +63,15 @@ mcanimate(name)
     50%
         background: activeCool
 
+/*===============
+ #BASELINE
+===============*/
 html, body, h1, h2, h3, h4, h5, h6, div, fieldset, form, input, header, footer, section, article, figure, iframe
     padding:0;
     margin: 0;
 
 fieldset
     border: none;
-
 
 html
     font-family: Helvetica, sans-serif;
@@ -99,6 +104,7 @@ dt, dd
     margin: .618em .618em .618em 0
 dt
     clear:left
+
 dd::after
     content: ' '
     display:table
@@ -106,6 +112,7 @@ dd::after
 
 a, input, textarea, form,fieldset, button, label
     smooth()    
+
     &:hover, &:focus
         outline: none;
         smooth-out()    
@@ -124,8 +131,10 @@ kbd
 
 button, input, select, textarea
     outline: none;
+
     &:hover, &:focus, &:active
         outline: none
+
 button, input, select
     font-size: .618rem
     padding: .618em;
@@ -136,12 +145,14 @@ button, .button, select, input
     border-width: 1px
     border-color: coolDarker
     border-radius:3px
+
     &:hover
         border-color: coolDarkest
 
 button
     background: activeWarm;
     flex-shrink: 0
+
     &:hover, &:focus
         background: inactiveWarm
 
@@ -150,9 +161,6 @@ button:active
 
 input, select, textarea
     background: neutralLightest
-
-
-        
 
 input, select
     border-right: 0px
@@ -169,19 +177,32 @@ textarea
     padding: .4em
     border-width: 1px
     border-color: transparent
+
     &:hover, &:focus, &:active
         border-color:transparent
+
 @media screen and (max-width: 700px)
     button, input, select
         font-size: .75em
 
-
 textarea, code
     font-family: Courier, monospace;
 
+/*===============
+ #HEADER
+===============*/
+/*=== g-header===
+__onlineStatus
+__getInfo
+__
+  
+--
+--
+===============*/
 .g-header
     font-size: 1em;
     background-color: coolDarkest
+
 .g-header__onlineStatus
     padding: 0 .618em;
 
@@ -192,6 +213,17 @@ textarea, code
     background: neutralLighter
     border-radius:50%;
 
+
+/*===============
+ #PANEL
+===============*/
+/*=== panel===
+__toggle__label
+__toggle__input
+  
+--bottom
+--top
+===============*/
 .panel
     background:coolDarkest
 
@@ -201,7 +233,6 @@ textarea, code
 .panel--top
     border-bottom: panelBorder
 
-
 .panel__toggle__label
     padding: .25em;
     border: 1px solid neutralLighter
@@ -210,6 +241,7 @@ textarea, code
     cursor: pointer;
     background: rgba(neutralLighter, .5)
     smooth()
+
     .panel--bottom &
         border-bottom-left-radius: 0
         border-bottom-right-radius: 0
@@ -219,11 +251,25 @@ textarea, code
     position: fixed
     left: -9999em
 
+
+/*===============
+ #FIELDSET
+===============*/
+/*=== fieldset===
+__label
+__wrapper
+__inputWrapper
+__field
+__
+===============*/
+
 .fieldset
     smooth()
     border-right: 1px solid;
+
     &:last-child
         border-right: none;
+
 .fieldset__label
     text-align: right
     color: coolDarker;
@@ -232,23 +278,32 @@ textarea, code
     background-color: neutralLighter;
     border-bottom-left-radius: 4px;
     smooth() 
+
     &:hover
         color: coolDarkest
         background-color: neutralLight
         smooth()
+
     &.js-shrunk
         position: relative
         color: coolDark
+
         &:hover, &:focus, &:active
             color: coolDarkest
+
 .fieldset__wrapper
     smooth()
+
 .fieldset__inputWrapper
     smooth()
     overflow-y: scroll
+
     .fieldset__field
         smooth()
 
+/*===============
+ #PROJECTMANAGER #TOGGLE
+===============*/
 .projectManager__jsLib__label
     text-align: right
     color: coolDark
@@ -257,29 +312,37 @@ textarea, code
     background-color: neutralLightest;
     border-radius: 0 10px 10px 0
     smooth()
+
     &:hover
         color: coolDarker
         background: rgba(neutralLightest, .7)
+
 .projectManager__jsLib__check
     position: relative
+
     &:checked + .projectManager__jsLib__label
         color: coolDarkest;
         background: neutralLighter   
-
-
 
 .control
     visibility: hidden;
     width: 0%;
     height: 0;
 
-.fieldsetGroup
-    smooth()
-
-.field
-    &--textarea
+.field--textarea
         resize: none
 
+/*===============
+ #MODAL
+===============*/
+/*=== .g-modal===
+__title
+__overlay
+__content
+  
+--
+--
+===============*/
 .g-modal
     display:none
     position:fixed
@@ -310,6 +373,16 @@ textarea, code
         display:block
         order:-1
 
+/*===============
+ #ARTICLE
+===============*/
+/*=== article===
+__title
+__
+__
+  
+--list
+===============*/
 .article
     small
         text-align: center
