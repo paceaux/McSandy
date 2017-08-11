@@ -280,56 +280,54 @@ textarea, code
     &--textarea
         resize: none
 
-.mpModal
+.g-modal
     display:none
     position:fixed
     z-index: 1100
     top: 19.1%
     left: 30.9%
     padding: .618em
-
     background: #fefefe
     border-radius: .25em
-    smooth-out()
-    &__title
-        color: neutralDark
     &.visible
         display:block
         max-height: 61.8%
         width: 38.2%
         smooth()
-    &__overlay
-        display:none
-        position: fixed
-        z-index: 1000
-        height: 100%
-        width: 100%
-        background: rgba(0, 0, 0, .7)
-        &.visible
-            display:block
-            order:-1
-    &__content
-        &__title
-            color: neutralDark
-            flex-basis: 100%
-        &--list
-            font-size: .8em
-            display:flex
-            flex-direction: row
-            justify-content:space-between
-            flex-wrap: wrap
-        small
-            text-align: center
-        input
-            border: none
 
-        .projectManager
-            .editor__label
-                transform-origin: 3rem 2rem
-                transform:rotate(0deg)
-            &.js-collapsed
-                .editor__label
-                    transform: rotate(-90deg)
+.g-modal__title
+    color: neutralDark
+
+.g-modal__overlay
+    display:none
+    position: fixed
+    z-index: 1000
+    height: 100%
+    width: 100%
+    background: rgba(0, 0, 0, .7)
+    &.visible
+        display:block
+        order:-1
+
+.article
+    small
+        text-align: center
+    input
+        border: none
+
+.article__title
+    color: neutralDark
+    flex-basis: 100%
+
+.article--list
+    font-size: .8em
+    display:flex
+    flex-direction: row
+    justify-content:space-between
+    flex-wrap: wrap
+
+
+        
 
 .online
     color: standardCool;
