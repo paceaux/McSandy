@@ -145,7 +145,7 @@ mcsandyUI = {
         },
         getAssetsByType: function (type) {
             var _this = mcsandyUI,
-                fieldset = document.querySelector('.fieldset--' + type),
+                fieldset = document.querySelector('.editor__' + type),
                 inputs = fieldset.querySelectorAll(_this.data.fields.assets),
                 assets = [];
             [].forEach.call(inputs, function (input) {

@@ -8,14 +8,14 @@
 <section class="panel panel--top editor">
     <label for="js-editor-toggle" class="panel__toggle__label js-panelToggleLabel" title="Toggle Panel">Editor</label>
     <input type="checkbox" id="js-editor-toggle" class="panel__toggle__input" />
-    <form class="mpGlobal__header__editor editor__fieldsets">
-        <div id="js-fieldset--html" class="editor__fieldset fieldset fieldset--html" draggable="true" data-mimeoutput="text/html" data-fileext="html">
-            <label class="fieldset__label fieldset__label--html" for="js-html" title="Click to Toggle | Drag to desktop">HTML</label>
-            <textarea  id="js-html" tabindex="1" class="fieldset__field fieldset__field--html field field--textarea field--html"  data-target="js-html-content" placeholder="<br />dancer" title="Drop Text or Image"></textarea>
+    <form class="editor__fieldsets fieldsets">
+        <div id="js-fieldset--html" class="editor__fieldset fieldset editor__html" draggable="true" data-mimeoutput="text/html" data-fileext="html">
+            <label class="fieldset__label " for="js-html" title="Click to Toggle | Drag to desktop">HTML</label>
+            <textarea  id="js-html" tabindex="1" class="fieldset__field field field--textarea "  data-target="js-html-content" placeholder="<br />dancer" title="Drop Text or Image"></textarea>
         </div>
-        <div id="js-fieldset--css" class="editor__fieldset fieldset fieldset--css" draggable="true" data-mimeoutput="text/css" data-fileext="css">
-            <label class="fieldset__label fieldset__label--css" for="js-css" title="Click to Toggle | Drag to desktop">CSS</label>
-            <textarea id="js-css" tabindex="2" class="fieldset__field fieldset__field--css field field--textarea field--css"  data-target="js-css-content" placeholder=".cup{color:#c0ffee}" title="Drop text or image"></textarea>
+        <div id="js-fieldset--css" class="editor__fieldset fieldset editor__css" draggable="true" data-mimeoutput="text/css" data-fileext="css">
+            <label class="fieldset__label " for="js-css" title="Click to Toggle | Drag to desktop">CSS</label>
+            <textarea id="js-css" tabindex="2" class="fieldset__field  field field--textarea "  data-target="js-css-content" placeholder=".cup{color:#c0ffee}" title="Drop text or image"></textarea>
             <div class="fieldset__userOptions userOptions">
                 <div class="fieldset__inputWrapper fieldset__inputWrapper--first" data-saved="false">
                     <input type="url" class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.css" data-externaltype="css"/>
@@ -23,9 +23,9 @@
                 </div>
             </div>
         </div>
-        <div id="js-fieldset--js" class="editor__fieldset fieldset fieldset--js" draggable="true" data-mimeoutput="application/javascript" data-fileext="js">
-            <label class="fieldset__label fieldset__label--js" for="js-js" title="Click to Toggle | Drag to desktop | ctrl + r">JS</label>
-            <textarea id="js-js" tabindex="3" class="fieldset__field fieldset__field--js field field--textarea field--js"  data-target="js-js-content" placeholder="var blah;" title="Drop text"></textarea>
+        <div id="js-fieldset--js" class="editor__fieldset fieldset editor__js" draggable="true" data-mimeoutput="application/javascript" data-fileext="js">
+            <label class="fieldset__label " for="js-js" title="Click to Toggle | Drag to desktop | ctrl + r">JS</label>
+            <textarea id="js-js" tabindex="3" class="fieldset__field  field field--textarea "  data-target="js-js-content" placeholder="var blah;" title="Drop text"></textarea>
             <div class="fieldset__userOptions userOptions">
                 <div class="fieldset__inputWrapper fieldset__inputWrapper--first">
                     <input type="url"  class="fieldset__field fieldset__field--url" placeholder="http://somedomain/some.js" data-externaltype="js"/>
