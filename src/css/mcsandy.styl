@@ -30,6 +30,29 @@ coolDarkestGradientInverse = linear-gradient(to bottom, coolDarker 0%, coolDarke
 coolDarkerGradient = linear-gradient(to bottom, coolDarker 0%, coolDark 50%, coolDarker 100%)
 coolDarkerGradientInverse = linear-gradient(to bottom, coolDark 0%, coolDarker 50%, coolDark 100%)
 
+:root {
+    --keyColor : hsl(212, 72%, 61.8%)
+    --headingColor: keyColor
+    --activeHeadingColor : headingColor
+    --neutralDark : #545454
+    --neutralLighter : rgb(227,227,227)
+    --neutralLightest : rgb(254,254,254)
+    --coolDark : darken(keyColor, 61.8%)
+    --coolDarker : darken(keyColor, 80%)
+    --coolDarkest : darken(desaturate(keyColor, 63%), 61.8%)
+    --coolLight : lighten(keyColor, 61.8%)
+    --coolLighter : lighten(keyColor, 80%)
+    --coolLightest : lighten(keyColor, 90%)
+    --standardWarm : keyColor - 180deg
+    --inactiveWarm : lighten(standardWarm, 38.2%)  
+    --activeWarm : lighten(standardWarm, 61.8%)
+    --standardCool : darken(saturate(keyColor - 90deg, 15%), 40%)
+    --inactiveCool : lighten(standardCool, 61.8%)
+    --activeCool : lighten(standardCool, 32.8%)
+
+    --panelBorder : 2px solid var(--coolDark);
+
+}
 
 smooth()
     transition: all .3s ease-in-out; 
@@ -87,7 +110,8 @@ h3, .h3,
 h4, .h4, 
 h5, .h5, 
 h6, .h6{
-    color: neutralLightest; /* rgb(88, 155, 215);*/
+    color: coolDarkest; /* rgb(88, 155, 215);*/
+    color: var(--coolDarkest)
     font-weight: normal
     letter-spacing: .1ex
 }
@@ -143,24 +167,29 @@ button, input, select
 button, .button, select, input
     border-style:solid
     border-width: 1px
-    border-color: coolDarker
+    border-color: activeWarm
+    border-color: var(--activeWarm)
     border-radius:3px
 
     &:hover
-        border-color: coolDarkest
+        border-color: inactiveWarm
+        border-color: var(--inactiveWarm)
 
 button
     background: activeWarm;
+    background: var(--activeWarm)
     flex-shrink: 0
 
     &:hover, &:focus
         background: inactiveWarm
+        background: var(--inactiveWarm)
 
 button:active
     mcanimate(saved)        
 
 input, select, textarea
     background: neutralLightest
+    background: var(--neutralLightest)
 
 input, select
     border-right: 0px
@@ -201,7 +230,8 @@ __
 ===============*/
 .g-header
     font-size: 1em;
-    background-color: coolDarkest
+    background-color: headingColor
+    background-color: var(--headingColor)
 
 .g-header__onlineStatus
     padding: 0 .618em;
@@ -211,6 +241,7 @@ __
     display: inline-block;
     padding: .2em .6em;
     background: neutralLighter
+    background: var(--neutralLighter)
     border-radius:50%;
 
 
@@ -225,16 +256,20 @@ __toggle__input
 --top
 ===============*/
 .panel
-    background:coolDarkest
+    background:coolLightest
+    background: var(--coolLightest)
 
 .panel--bottom 
     border-top: panelBorder
+    border-top: var(--panelBorder)
 
 .panel--top
     border-bottom: panelBorder
+    border-bottom: var(--panelBorder)
 
 .panel__toggle__label
     padding: .25em;
+    border-color: var(--neutralLighter)
     border: 1px solid neutralLighter
     border-radius: 3px
     margin:0;
@@ -276,20 +311,24 @@ __
     font-size: .7rem;
     padding: .618em;
     background-color: neutralLighter;
+    background-color: var(--neutralLighter);
     border-bottom-left-radius: 4px;
     smooth() 
 
     &:hover
         color: coolDarkest
-        background-color: neutralLight
+        color: var(--coolDarkest)
+        background-color: var(--neutralLight)
         smooth()
 
     &.js-shrunk
         position: relative
         color: coolDark
+        color: var(--coolDark)
 
         &:hover, &:focus, &:active
             color: coolDarkest
+            color: var(--coolDarkest)
 
 .fieldset__wrapper
     smooth()
@@ -310,11 +349,13 @@ __
     font-size: .7rem
     padding: .618em
     background-color: neutralLightest;
+    background-color: var(--neutralLightest);
     border-radius: 0 10px 10px 0
     smooth()
 
     &:hover
         color: coolDarker
+        color: var(--coolDarker)
         background: rgba(neutralLightest, .7)
 
 .projectManager__jsLib__check
@@ -322,7 +363,9 @@ __
 
     &:checked + .projectManager__jsLib__label
         color: coolDarkest;
-        background: neutralLighter   
+        color: var(--coolDarkest);
+        background: neutralLighter 
+        background: var(--neutralLighter)  
 
 .control
     visibility: hidden;
