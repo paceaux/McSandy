@@ -19,11 +19,15 @@ body
 	transition: all .3s ease-in-out
 	&.js-collapsed
 		max-height: 0
+		.projectManager__fieldsets
+			max-height: 0
 
 
 .projectManager__fieldsets
 		display: grid
 		grid-template-columns: 33% auto 33%
+		max-height: 20rem
+		overflow: hidden;
 
 .projectManager__toggle
 	position: absolute;
