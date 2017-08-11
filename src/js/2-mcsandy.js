@@ -242,7 +242,7 @@ mcsandyUI = {
         helpers.addEvents(removeExternalFile, 'click', _this.functions.handleRemoveExternalFile);
         /*LABEL/INPUT SHENANIGANS*/
         _this.functions.bindFieldsetCollapse();
-        helpers.addEvents(document.querySelectorAll('.editor__label'),'click', _this.functions.handleCollapsePanel);
+        helpers.addEvents(document.querySelectorAll('.editor__label, .js-panelToggleLabel'),'click', _this.functions.handleCollapsePanel);
         _this.data.modal.overlay.addEventListener('click', _this.functions.toggleModal);
     },
     functions: {

@@ -139,7 +139,7 @@ button, .button, select, input
     &:hover
         border-color: coolDarkest
 
-button, .editor__label
+button
     background: activeWarm;
     flex-shrink: 0
     &:hover, &:focus
@@ -211,7 +211,8 @@ textarea, code
         left: -9999em
     &__label
         padding: .25em;
-        border: 1px solid #e1e1e1;
+        background: rgba(neutralLighter, .5)
+        border: 1px solid neutralLighter
         border-top-right-radius: .25em
         border-top-left-radius: .25em
         margin:0;
@@ -222,6 +223,23 @@ textarea, code
     &__input
         &--name
             smooth()
+
+.panel__toggle__label
+    padding: .25em;
+    border: 1px solid neutralLighter
+    border-radius: 3px
+    margin:0;
+    cursor: pointer;
+    background: rgba(neutralLighter, .5)
+    smooth()
+    .panel--bottom &
+        border-bottom-left-radius: 0
+        border-bottom-right-radius: 0
+
+.panel__toggle__input
+    visibility:hidden
+    position: fixed
+    left: -9999em
 
 .fieldset
     smooth()
