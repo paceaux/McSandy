@@ -732,8 +732,7 @@ mcsandy = {
         createLibSelect: function () {
             var _this = mcsandy,
                 libs = _this.data.externalJS,
-                libFieldset = document.querySelector('.fieldset--externalLibs'),
-                libWrap = libFieldset.querySelector('.fieldset__wrapper');
+                libWrap = document.querySelector('[data-populate="externalLibs"]');
             for (var lib in libs) {
                 var exJs = libs[lib],
                     input = mcsandyUI.helpers.createInput('checkbox', lib, 'fieldset__field fieldset__field--jsLib', lib, exJs);
