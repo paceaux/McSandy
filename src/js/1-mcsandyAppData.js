@@ -31,7 +31,7 @@ mcsandyAppData = {
             projectLoad: document.getElementById('js-projectLoad')
         },
         fields: {
-            fieldsets: document.querySelectorAll('.fieldsetGroup__fieldset'),
+            fieldsets: document.querySelectorAll('.js-editorDragOutField'),
             upload: document.querySelectorAll('.fieldset__field--upload'),
             add: '.fieldset__button--add',
             rem: '.fieldset__button--rem',
