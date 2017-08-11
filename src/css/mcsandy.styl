@@ -179,30 +179,19 @@ textarea
 textarea, code
     font-family: Courier, monospace;
 
+.g-header
+    font-size: 1em;
+    background-color: coolDarkest
+.g-header__onlineStatus
+    padding: 0 .618em;
 
-.mpGlobal__header
-    smooth()  
-    &__onlineStatus
-        padding: 0 .618em;
-    &__info
-        font-size:.8rem
-        display: inline-block;
-        padding: .2em .6em;
-        background: neutralLighter
-        border-radius:50%;
-    &__editor__wrapper
-        smooth() 
-    &__hgroup
-        font-size: 1em;
-        background-color: coolDarkest
-    .editor
-        border-bottom: panelBorder
-        &__label
-            border-top-left-radius: 0
-            border-top-right-radius: 0
-            border-bottom-left-radius: .5em
-            border-bottom-right-radius: .5em
-            cursor: pointer;
+.g-header__getInfo
+    font-size:.8rem
+    display: inline-block;
+    padding: .2em .6em;
+    background: neutralLighter
+    border-radius:50%;
+
 .editor
     smooth-out()
     &__toggle
@@ -223,6 +212,16 @@ textarea, code
     &__input
         &--name
             smooth()
+
+.panel
+    background:coolDarkest
+
+.panel--bottom 
+    border-top: panelBorder
+
+.panel--top
+    border-bottom: panelBorder
+
 
 .panel__toggle__label
     padding: .25em;
@@ -302,10 +301,6 @@ textarea, code
     &--textarea
         resize: none
 
-.projectManager
-    border-top: panelBorder
-    background: coolDarkest
-
 .mpModal
     display:none
     position:fixed
@@ -348,23 +343,6 @@ textarea, code
             text-align: center
         input
             border: none
-.mcsandy
-    &--horizontal
-        .mpGlobal
-            &__header
-                &__editor
-                    border-top: panelBorder
-                    border-bottom: none
-                    &__wrapper
-                        .editor
-                            &__label
-                                align-self:flex-start
-                                transform-origin: .5rem 1rem
-                                transform: rotate(0deg)
-                        &.js-collapsed
-                            .editor
-                                &__label
-                                    transform: rotate(90deg)
 
         .projectManager
             .editor__label
