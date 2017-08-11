@@ -58,7 +58,7 @@ __toggle__input
 	transition: .3s ease-in-out
 
 	&.js-collapsed
-		max-height: 0
+		max-height: 0 !important
 
 		.fieldsets
 			max-height: 0
@@ -78,6 +78,27 @@ __toggle__input
 	.panel__toggle__label
 		bottom: -2.25em
 
+.panel.panel--right
+	position: fixed
+	bottom: 0
+	right: 0
+
+.panel.panel--left
+	position: fixed
+	bottom: 0
+	left: 0
+
+.panel.panel--vertical
+	font-size: .6em
+	width: 200px
+	max-height: 70vh
+
+	.panel__toggle__label
+		top:-2em
+	.fieldsets
+		grid-template-columns: auto 
+		grid-template-rows: auto auto auto
+		max-height: initial
 
 
 /*===============
@@ -123,6 +144,7 @@ __
 ===============*/
 
 .fieldsets
+	padding: .25rem
 	max-height: 50vh
 	overflow: hidden
 
@@ -186,6 +208,7 @@ __wrapper
 .fieldset__userOptions
 	display: flex
 	flex-wrap: wrap
+	padding-left: .25em
 
 .fieldset__inputWrapper
 	flex-grow: 1
@@ -274,7 +297,9 @@ __download
 
 .projectManager__name 
 	flex-grow: 1
+	max-width: 67%
 	margin-right: -1em
+
 
 .projectManager__jsLib__check,
 .projectManager__jsLib__label 
@@ -301,7 +326,7 @@ __download
 		height: 3em
 		overflow-y: scroll
 
-
+	
 
 /*===============
  #RESULT
