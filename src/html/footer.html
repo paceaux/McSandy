@@ -1,19 +1,19 @@
     <section class="projectManager">
         <label for="js-footer-editor-toggle" class="projectManager__toggle editor__label" title="Toggle Panel">Projects</label>
         <input type="checkbox" id="js-footer-editor-toggle" class="editor__toggle" />
-        <form class="projectManager__fieldsets">
-            <fieldset class="fieldset fieldset--thisProject">
+        <form class="projectManager__fieldsets fieldsets">
+            <fieldset class="projectManager__thisProject fieldset">
                 <h3 class="fieldset__legend">
                     This Sandbox 
                 </h3>
                 <div class="fieldset__wrapper" >
-                    <input id="js-projectName" class="editor__input editor__input--name" type="text" placeholder="Name of Project">
-                    <button id="js-projectSave" class="editor__button editor__button--save" title="save this project">Save</button>
-                    <button id="js-projectDel" class="editor__button editor__button--del" title="Delete this project">Delete</button>
-                    <button id="js-projectNew" class="editor__button editor__button--new" title="Clear Everything and Start Over">New</button>
+                    <input id="js-projectName" class="input projectManager__name" type="text" placeholder="Name of Project">
+                    <button id="js-projectSave" class="button button--affixedLeft projectManager__save" title="save this project">Save</button>
+                    <button id="js-projectDel" class="button projectManager__del" title="Delete this project">Delete</button>
+                    <button id="js-projectNew" class="button projectManager__new" title="Clear Everything and Start Over">New</button>
                 </div>
             </fieldset>
-            <fieldset class="fieldset fieldset--externalLibs">
+            <fieldset class="projectManager__externalLibs fieldset">
                 <h3 class="fieldset__legend">
                     External Libraries
                 </h3>
@@ -21,16 +21,16 @@
 
                 </div>
             </fieldset>
-            <fieldset class="fieldset fieldset--otherProjects">
+            <fieldset class="projectManager__otherProjects fieldset">
                 <h3 class-"fieldset__legend">
                     Other Sandboxes
                 </h3>
                 <div class="fieldset__wrapper">
-                    <select class="editor__input editor__input--name" id="js-selectProjects">
+                    <select class="input projectManager__name" id="js-selectProjects">
                         <option></option>
                     </select>
-                    <button id="js-projectLoad" class="editor__button editor__button--load" title="Load the sandbox">Load </button>
-                    <button id="js-projectDownload" class="editor__button editor__button--download" title="Export this sandbox to a single file">Download</button>
+                    <button id="js-projectLoad" class="button button--affixedLeft projectManager__load" title="Load the sandbox">Load </button>
+                    <button id="js-projectDownload" class="button projectManager__download" title="Export this sandbox to a single file">Download</button>
                 </div>
             </fieldset>
         </form>

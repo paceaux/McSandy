@@ -38,6 +38,10 @@ body
 	margin: 0
 	cursor: pointer
 
+.projectManager__name 
+	flex-grow: 1
+	margin-right: -1em
+
 .mpGlobal
 	&__header
 		flex-shrink: 1
@@ -90,10 +94,6 @@ body
 		display: inline-block
 	&__fieldset
 		flex-shrink: 1
-	&__input
-		&--name
-			flex-grow: 1
-			margin-right: -1em
 	&__fieldset
 		flex-grow:1
 .fieldsetGroup
@@ -156,7 +156,7 @@ body
 		.field, .fieldset__inputWrapper
 			display:none
 
-.fieldset--externalLibs
+.projectManager__externalLibs
 	.fieldset__field
 		height: 2.3em
 		width: 15%
@@ -253,14 +253,7 @@ body
 		> .editor__fieldset
 			height: initial
 			width: 0
-		.fieldset
-			&--externalLibs
-				.fieldset__label
-					flex-basis: 60%;
-					margin-right:1em
-		.editor
-			&__input
-				&--name
-					flex-grow:0
+
+
 
 	
