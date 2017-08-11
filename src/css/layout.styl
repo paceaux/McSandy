@@ -73,17 +73,6 @@ body
 		height: 3em
 		overflow-y: scroll
 
-.mpGlobal
-	&__header
-		flex-shrink: 1
-		display: flex
-		width: 100%
-		flex-direction: column
-		justify-content: flex-start
-	&__header
-		align-items: stretch
-		&__onlineStatus
-			align-self: flex-end
 .g-header
 	font-size: 1rem
 	flex-grow: 0
@@ -99,19 +88,19 @@ body
 .editor
 	width: 100%;
 
-	&__label
-		align-self: flex-start
-		flex-shrink: 0
-		display: inline-block
-	&__fieldset
-		flex-shrink: 1
-	&__fieldset
-		flex-grow:1
+.editor__label
+	align-self: flex-start
+	flex-shrink: 0
+	display: inline-block
 
 .editor__fieldsets 
 	display: flex
 	flex-direction: row
 	padding: 0
+
+.editor__fieldset
+	flex-shrink: 1
+	flex-grow: 1
 
 .fieldset
 	display: flex
@@ -122,44 +111,6 @@ body
 	flex-shrink: 1
 	flex-basis:33%
 	position: relative
-	&__label
-		display: block
-		position: absolute
-		right: 0
-	&__wrapper
-		flex-grow: 1
-		width: 100%
-		display: flex
-		flex-direction: row
-		justify-content: flex-start
-		align-items: stretch
-	&__button
-		flex-basis: 2.5em
-	&__userOptions
-		display:flex
-		flex-wrap: wrap
-	&__inputWrapper
-		flex-grow: 1
-		align-self: auto
-		display: flex
-		justify-content: flex-start
-		.fieldset__field
-			flex-grow: 1
-			margin-left: 0
-			margin-right: 0
-		.fieldset__button
-			align-self: flex-end
-			margin-left: 0
-	&__field
-		align-self: flex-end
-		flex-basis: 8rem
-		width: 99%
-	&--html
-		order: 1
-	&--css
-		order: 2
-	&--js
-		order: 3
 	&.js-shrunk
 		flex-grow: 0
 		flex-shrink: 3
@@ -168,11 +119,44 @@ body
 			display:none
 
 .fieldset__label
-		display: flex
-		flex-direction: column
-		justify-content: center
+	display: block
+	position: absolute
+	right: 0
 	&.js-shrunk
 		flex-grow: 1
+
+.fieldset__wrapper 
+	flex-grow: 1
+	width: 100%
+	display: flex
+	flex-direction: row
+	justify-content: flex-start
+	align-items: stretch
+
+.fieldset__button
+	flex-basis: 2.5em
+
+.fieldset__userOptions
+	display:flex
+	flex-wrap: wrap
+
+.fieldset__inputWrapper
+	flex-grow: 1
+	align-self: auto
+	display: flex
+	justify-content: flex-start
+	.fieldset__field
+		flex-grow: 1
+		margin-left: 0
+		margin-right: 0
+	.fieldset__button
+		align-self: flex-end
+		margin-left: 0
+
+.fieldset__field
+	align-self: flex-end
+	flex-basis: 8rem
+	width: 99%
 
 .field
 	flex-grow: 1
