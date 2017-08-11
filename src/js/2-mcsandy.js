@@ -735,8 +735,8 @@ mcsandy = {
                 libWrap = document.querySelector('[data-populate="externalLibs"]');
             for (var lib in libs) {
                 var exJs = libs[lib],
-                    input = mcsandyUI.helpers.createInput('checkbox', lib, 'fieldset__field fieldset__field--jsLib', lib, exJs);
-                    label = mcsandyUI.helpers.createLabel(lib,'fieldset__label fieldset__label--jsLib', lib);
+                    input = mcsandyUI.helpers.createInput('checkbox', lib, 'projectManager__jsLib__check input', lib, exJs);
+                    label = mcsandyUI.helpers.createLabel(lib,'projectManager__jsLib__label', lib);
                 input.addEventListener('change', _this.functions.handleLibToggle);
                 libWrap.appendChild(input);
                 libWrap.appendChild(label);

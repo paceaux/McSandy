@@ -2,11 +2,13 @@ keyColor = hsl(212, 72%, 61.8%)
 headingColor= keyColor
 activeHeadingColor = headingColor
 neutralDark = #545454
-neutralLight = #f5f5ff
-neutralLightest = #fefefe
+neutralLighter = rgb(227,227,227)
+neutralLightest = rgb(254,254,254)
 coolDark = darken(keyColor, 61.8%)
 coolDarker = darken(keyColor, 80%)
 coolDarkest = darken(desaturate(keyColor, 63%), 61.8%)
+coolLight = lighten(keyColor, 61.8%)
+coolLighter = lighten(keyColor, 80%)
 coolLightest = lighten(keyColor, 90%)
 standardWarm = keyColor - 180deg
 inactiveWarm = lighten(standardWarm, 38.2%)  
@@ -15,7 +17,7 @@ standardCool = darken(saturate(keyColor - 90deg, 15%), 40%)
 inactiveCool = lighten(standardCool, 61.8%)
 activeCool = lighten(standardCool, 32.8%)
 
-panelBorder = .125em solid coolDark;
+panelBorder = 2px solid coolDark;
 coolDarkestGradient = linear-gradient(to bottom, coolDarker 0%, coolDarkest 10%, coolDarker 99%, coolDarkest 100%)
 coolDarkestGradientInverse = linear-gradient(to bottom, coolDarker 0%, coolDarkest 50%, coolDarker 100%)
 coolDarkerGradient = linear-gradient(to bottom, coolDarker 0%, coolDark 50%, coolDarker 100%)
@@ -147,11 +149,8 @@ button:active
     mcanimate(saved)        
 
 input, select, textarea
-    background: rgba(255,255,255, 1)
-    &:hover
-        background: rgba(255,255,255,.98)
-    &:focus, &:active
-        background: rgba(255,255,255,1)
+    background: neutralLightest
+
 
         
 
@@ -189,7 +188,7 @@ textarea, code
         font-size:.8rem
         display: inline-block;
         padding: .2em .6em;
-        background: neutralLight
+        background: neutralLighter
         border-radius:50%;
     &__editor__wrapper
         smooth() 
@@ -226,7 +225,7 @@ textarea, code
 
 .fieldset
     smooth()
-    border-right: 4px solid;
+    border-right: 1px solid;
     &:last-child
         border-right: none;
     &__label
@@ -234,11 +233,12 @@ textarea, code
         color: coolDarker;
         font-size: .7rem;
         padding: .618em;
-        background-color: rgba(120,120,120,.05);
+        background-color: neutralLighter;
         border-bottom-left-radius: 4px;
         smooth() 
         &:hover
             color: coolDarkest
+            background-color: neutralLight
             smooth()
         &.js-shrunk
             position: relative
@@ -252,17 +252,25 @@ textarea, code
         overflow-y: scroll
         .fieldset__field
             smooth()
-    &--externalLibs
-        .fieldset
-            &__field
-                visibility:visible
-            &__label
-                color: coolDark
-                margin: .5em .5em .5em .5em;
-                background: rgba(255,255,255,.75)
-        .fieldset__field:checked + .fieldset__label
-            color: coolDarkest;
-            background:rgba(255,255,255,.9)
+
+.projectManager__jsLib__label
+    text-align: right
+    color: coolDark
+    font-size: .7rem
+    padding: .618em
+    background-color: neutralLightest;
+    border-radius: 0 10px 10px 0
+    smooth()
+    &:hover
+        color: coolDarker
+        background: rgba(neutralLightest, .7)
+.projectManager__jsLib__check
+    position: relative
+    &:checked + .projectManager__jsLib__label
+        color: coolDarkest;
+        background: neutralLighter   
+
+
 
 .control
     visibility: hidden;
@@ -353,7 +361,7 @@ textarea, code
 .offline
     color: red;
 .mcsandy--offline
-    .fieldset--externalLibs
+    .projectManager__externalLibs
         flex-grow: 0
         flex-basis: 0%
         width:0
