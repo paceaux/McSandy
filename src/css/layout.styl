@@ -25,6 +25,14 @@ body
 
 .panel
 	position: relative
+	max-height: 50vh
+	transition: .3s ease-in-out;
+	&.js-collapsed
+		max-height: 0
+		.fieldsets
+			max-height: 0
+			overflow: hidden
+
 
 .panel__toggle__label
 	position: absolute
@@ -56,6 +64,10 @@ body
 .editor__fieldset
 	flex-shrink: 1
 	flex-grow: 1
+
+.fieldsets
+	max-height: 50vh
+	overflow:hidden
 
 .fieldset
 	display: flex
@@ -132,10 +144,6 @@ body
 	max-height: 5rem;
 	width: 100%
 	transition: all .3s ease-in-out
-	&.js-collapsed
-		max-height: 0
-		.projectManager__fieldsets
-			max-height: 0
 
 
 .projectManager__fieldsets
