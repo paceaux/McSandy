@@ -5,11 +5,26 @@ html, body
 	height: 100%
 	width: 100%
 	box-sizing: border-box
+	
 body
 	display:flex
 	flex-direction: column
 	justify-content: space-around
 	align-items: flex-start
+
+
+
+/*===============
+ #HEADER
+===============*/
+/*=== g-header===
+__onlineStatus
+__getInfo
+__
+  
+--visible
+--
+===============*/
 
 .g-header
 	font-size: 1rem
@@ -20,19 +35,34 @@ body
 	flex-direction: row
 	align-items: baseline
 	justify-content: space-between
-	&--visible
-		max-height: 2rem
+
+.g-header--visible
+	max-height: 2rem
+
+
+
+/*===============
+ #PANEL
+===============*/
+/*=== panel===
+__toggle__label
+__toggle__input
+  
+--bottom
+--top
+===============*/
 
 .panel
 	position: relative
 	max-height: 50vh
-	transition: .3s ease-in-out;
+	transition: .3s ease-in-out
+
 	&.js-collapsed
 		max-height: 0
+
 		.fieldsets
 			max-height: 0
 			overflow: hidden
-
 
 .panel__toggle__label
 	position: absolute
@@ -47,6 +77,22 @@ body
 .panel--top
 	.panel__toggle__label
 		bottom: -2.25em
+
+
+
+/*===============
+ #EDITOR
+===============*/
+/*=== editor===
+__label
+__fieldsets
+__fieldset
+__html
+__css
+__js
+  
+
+===============*/
 
 .editor
 	width: 100%;
@@ -65,9 +111,39 @@ body
 	flex-shrink: 1
 	flex-grow: 1
 
+
+
+/*===============
+ #FIELDSETS
+===============*/
+/*=== fieldsets===
+__fieldset
+__
+  
+===============*/
+
 .fieldsets
 	max-height: 50vh
 	overflow:hidden
+
+
+
+/*===============
+ #FIELDSET
+===============*/
+/*=== fieldset===
+__legend
+__label
+__field
+	--url
+	--textarea
+__inputWrapper
+	--first
+__button
+__userOptions
+__wrapper
+  
+===============*/
 
 .fieldset
 	display: flex
@@ -78,10 +154,12 @@ body
 	flex-shrink: 1
 	flex-basis:33%
 	position: relative
+
 	&.js-shrunk
 		flex-grow: 0
 		flex-shrink: 3
 		flex-basis: 5%
+
 		.field, .fieldset__inputWrapper
 			display:none
 
@@ -89,6 +167,7 @@ body
 	display: block
 	position: absolute
 	right: 0
+
 	&.js-shrunk
 		flex-grow: 1
 
@@ -113,10 +192,12 @@ body
 	align-self: auto
 	display: flex
 	justify-content: flex-start
+
 	.fieldset__field
 		flex-grow: 1
 		margin-left: 0
 		margin-right: 0
+
 	.fieldset__button
 		align-self: flex-end
 		margin-left: 0
@@ -126,18 +207,54 @@ body
 	flex-basis: 8rem
 	width: 99%
 
+
+
+/*===============
+ #FIELD
+===============*/
+/*=== field===
+__
+
+--upload
+===============*/
+
 .field
 	flex-grow: 1
-	&--upload
-		flex-basis: 100%
-		width: 95%
+
 	&.js-shrink
 		height: 0
+
 		~ .fieldset__inputWrapper
+
 			.fieldset__field
 				visibility: visible
 				height: auto
 				width: 75%
+
+.field--upload
+	flex-basis: 100%
+	width: 95%
+
+
+
+/*===============
+ #PROJECTMANAGER
+===============*/
+/*=== projectManager===
+__toggle
+__fieldsets
+__thisproject
+__externalLibs
+__otherProjects
+__jsLib__check
+__jsLib__label
+__name
+__del
+__new
+__load
+__download
+  
+===============*/
 
 .projectManager
 	position: relative
@@ -174,6 +291,7 @@ body
 	transition: all .3s ease-in-out
 
 .projectManager__externalLibs
+
 	.fieldset__wrapper
 		display: flex
 		flex-wrap: wrap
@@ -182,6 +300,16 @@ body
 		flex-shrink: 1
 		height: 3em
 		overflow-y: scroll
+
+
+
+/*===============
+ #RESULT
+===============*/
+/*=== g-result ===
+__iframe
+__
+===============*/
 
 .g-result
 	display:flex
@@ -196,6 +324,11 @@ body
 		border: none
 
 
+
+/*===============
+ #LAYOUT #HORIZONTAL
+===============*/
+/*nuke this, redo it*/
 .mcsandy
 	&--horizontal
 		flex-direction: row
