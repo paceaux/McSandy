@@ -97,8 +97,9 @@ body
 	width: 100%
 	display: flex
 	flex-direction: row
-	justify-content: flex-start
+	justify-content: space-between
 	align-items: stretch
+	flex-wrap: wrap
 
 .fieldset__button
 	flex-basis: 2.5em
@@ -141,7 +142,6 @@ body
 .projectManager
 	position: relative
 	flex-shrink: 1
-	max-height: 5rem;
 	width: 100%
 	transition: all .3s ease-in-out
 
@@ -164,9 +164,13 @@ body
 	line-height: 1.2
 	margin: .5em 1em
 
+.projectManager__jsLib__check
+	flex-grow: 0;
+	flex-basis: calc(11% - 2em)
+
 .projectManager__jsLib__label 
 	display: inline-block
-	width: 80%
+	flex-basis: calc(80% - 2em)
 	transition: all .3s ease-in-out
 
 .projectManager__externalLibs
@@ -179,12 +183,13 @@ body
 		height: 3em
 		overflow-y: scroll
 
-.mpGlobal__result
+.g-result
 	display:flex
 	width: 100%
 	flex-direction: column
 	flex-grow: 2
-	&__iframe
+
+.g-result__iframe
 		flex-grow: 1
 		width: 100%
 		outline: none
