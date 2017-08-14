@@ -811,14 +811,15 @@ mcsandy = {
             var _this = mcsandy,
                 projectName = _this.data.ctrls.projectName.value;
             store.del(0,'mp-' + projectName);
-            window.location.hash = '';
+            window.history.pushState({}, "Create New Project", window.location.pathname);
             _this.functions.createProjectSelect();
             _this.data.ctrls.projectName.value =  '';
         },
         clearContent: function (e) {
             e.preventDefault();
             var _this = mcsandy;
-            window.location.href = window.location.origin + window.location.pathname;
+            window.history.pushState({}, "Create New Project", window.location.pathname);
+
         },
         saveContent: function (e) {
             e.preventDefault();
