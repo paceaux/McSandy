@@ -5,6 +5,7 @@ mcsandyUI = {
         var _this = mcsandyUI;
         console.info("McSandyUI is Running");
         _this.bindUiEvents();
+        _this.bindBroadcastEvents();
     },
     data: mcsandyAppData.ui,
     helpers: {
@@ -244,6 +245,34 @@ mcsandyUI = {
         _this.functions.bindFieldsetCollapse();
         helpers.addEvents(document.querySelectorAll('.editor__label, .js-panelToggleLabel'),'click', _this.functions.handleCollapsePanel);
         _this.data.modal.overlay.addEventListener('click', _this.functions.toggleModal);
+    },
+    bindBroadcastEvents: function () {
+        const _this = mcsandyUI,
+            helpers = _this.helpers,
+            data = _this.data,
+            editors = document.querySelectorAll('.field--textarea'),
+            editorFieldsets = data.fields.fieldsets,
+            fileUploads = data.fields.upload;
+        
+        if ("BroadcastChannel" in window) {
+            const fieldChannel = new BroadcastChannel('field_broadcasts');
+
+            [...data.ctrls.broadcasters ].forEach((broadcaster) => {
+                broadcaster.addEventListener(broadcaster.dataset.broadcast, (evt) => {
+                    fieldChannel.postMessage({id: evt.target.id, value: evt.target.value, eventType: evt.type, projectName: mcsandyProject.project});
+                });
+            }); 
+            
+            fieldChannel.onmessage = (evt) => {
+                const data = evt.data;
+                const targetEl = document.getElementById(data.id);
+
+                if (data.projectName == mcsandyProject.project) {
+                    targetEl.value = data.value;
+                    mcsandy.functions.updateContent();
+                }
+            };
+        }
     },
     functions: {
         handleConnection: function (override) {
@@ -701,7 +730,6 @@ mcsandy = {
         ctrls.css.addEventListener('keyup',function (e) {
             clearTimeout(timer);
             var timer = setTimeout(functions.updateContent(), 750);
-
         });
         ctrls.html.addEventListener('keyup',function (e) {
             clearTimeout(timer);

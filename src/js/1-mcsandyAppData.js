@@ -28,7 +28,8 @@ mcsandyAppData = {
             appInfo: document.getElementById('js-globalInfo'),
             projectDownload: document.getElementById('js-projectDownload'),
             projectSelect: document.getElementById('js-selectProjects'),
-            projectLoad: document.getElementById('js-projectLoad')
+            projectLoad: document.getElementById('js-projectLoad'),
+            broadcasters: document.querySelectorAll('[data-broadcast]')
         },
         fields: {
             fieldsets: document.querySelectorAll('.js-editorDragOutField'),
