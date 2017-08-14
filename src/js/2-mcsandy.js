@@ -769,7 +769,6 @@ mcsandy = {
             e.preventDefault();
             var _this = mcsandy,
                 projectName = _this.data.ctrls.projectName.value;
-            console.log(projectName);
             store.del(0,'mp-' + projectName);
             window.location.hash = '';
             _this.functions.createProjectSelect();
