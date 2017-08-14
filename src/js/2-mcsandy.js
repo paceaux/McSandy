@@ -14,17 +14,21 @@ mcsandyUI = {
             /*SAVE*/
             if (e.ctrlKey) {
                 switch (e.keyCode) {
+                // s
                 case 83:
                     mcsandy.functions.saveContent(e);
                     _this.functions.flashClass(mcsandy.data.ctrls.projectSave);
                     break;
+                // r
                 case 82:
                     mcsandy.functions.updateContent();
                     break;
+                // l
                 case 76:
                     _this.functions.handleProjectLoad(e);
                     _this.functions.flashClass(mcsandy.data.ctrls.projectLoad);
                     break;
+                // f
                 case 70:
                     _this.functions.handleDownloadProject(e);
                     _this.functions.flashClass(mcsandy.data.ctrls.projectDownload);
@@ -34,21 +38,27 @@ mcsandyUI = {
                 }
                 if (e.shiftKey) {
                     switch (e.keyCode) {
+                    // e
                     case 69:
-                        document.getElementById('js-editor-toggle').checked = document.getElementById('js-editor-toggle').checked === true ? false : true;
+                        document.querySelector('[for="js-editor-toggle"]').click();
                         break;
+                    // p
                     case 80:
-                        document.getElementById('js-footer-editor-toggle').checked = document.getElementById('js-footer-editor-toggle').checked === true ? false : true;
+                        document.querySelector('[for="js-footer-editor-toggle"]').click();
                         break;
+                    // =
                     case 187:
                         mcsandy.functions.clearContent(e);
                         break;
+                    // +
                     case 107:
                         mcsandy.functions.clearContent(e);
                         break;
+                    // backspace
                     case 8:
                         mcsandy.functions.delContent(e);
                         break;
+                    // h
                     case 72:
                         _this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
                         mcsandyAppData.userPrefs.ui.hLayout = mcsandyAppData.userPrefs.ui.hLayout === true ? false : true;
@@ -216,8 +226,7 @@ mcsandyUI = {
         ctrls.appInfo.addEventListener('click', _this.functions.toggleModal);
 
         /*THE EDITOR FIELDS */
-        document.addEventListener('keydown', helpers.keyDown);
-        document.addEventListener('keyup', helpers.keyUp);
+        window.addEventListener('keydown', helpers.keyDown);
 
         [].forEach.call(editors, function (editor) {
             editor.addEventListener('keydown', function (e) {
