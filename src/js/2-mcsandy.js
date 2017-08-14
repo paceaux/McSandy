@@ -355,6 +355,9 @@ mcsandyUI = {
                 element.classList.remove('fullwindow');
             }
         },
+        openIdInFullWindow: function (id) {
+            window.open(`${window.location.origin + window.location.pathname}?fullwindow=${id}${window.location.hash}`, '_blank', 'location=yes');
+        },
         handleProjectLoad: function (e) {
             e.preventDefault();
             var _this = mcsandyUI,
