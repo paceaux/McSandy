@@ -6,6 +6,7 @@ mcsandyUI = {
         console.info("McSandyUI is Running");
         _this.bindUiEvents();
         _this.bindBroadcastEvents();
+        _this.functions.handleSearch();
     },
     data: mcsandyAppData.ui,
     helpers: {
@@ -189,6 +190,19 @@ mcsandyUI = {
         runTest: function () {
             var exCss = mcsandyProject.externals.assets.css,
                 dataUI = mcsandyAppData.ui;
+        },
+        getUrlParams: function () {
+            var urlParams = {};
+            var match,
+                pl     = /\+/g,  // Regex for replacing addition symbol with a space
+                search = /([^&=]+)=?([^&]*)/g,
+                decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+                query  = window.location.search.substring(1);
+
+            while (match = search.exec(query)) {
+                urlParams[decode(match[1])] = decode(match[2]);
+            }
+            return urlParams;
         }
     },
     bindUiEvents: function () {
@@ -318,6 +332,28 @@ mcsandyUI = {
         setHash: function (hash) {
             var _this = mcsandyUI;
             window.location.hash = _this.helpers.convertHash(hash);
+        },
+        handleSearch: function () {
+            var _this = mcsandyUI,
+                urlParams = _this.helpers.getUrlParams();
+            
+            if ("fullwindow" in urlParams) {
+                _this.functions.setFullWindow(urlParams.fullwindow)
+            }
+        },
+        setFullWindow: function (element) {
+            if (typeof element === 'string') {
+                document.getElementById(element).classList.add('fullwindow');
+            } else {
+                element.classList.add('fullwindow');
+            }
+        },
+        unsetFullWindow: function (element) {
+            if (typeof element === 'string') {
+                document.getElementById(element).classList.remove('fullwindow');
+            } else {
+                element.classList.remove('fullwindow');
+            }
         },
         handleProjectLoad: function (e) {
             e.preventDefault();
