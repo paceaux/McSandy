@@ -415,8 +415,9 @@ mcsandyUI = {
         handleDragStart: function (e) {
             e.dataTransfer.dropEffect = 'all';
             e.dataTransfer.effectAllowed = 'all';
+            console.log(e);
             var _this = mcsandyUI,
-                source = e.target.querySelector('textarea').value,
+                source = e.target.parentNode.querySelector('textarea').value,
                 projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy',
                 type = e.target.dataset.fileext,
                 blob = new Blob([source], {type: type}),
