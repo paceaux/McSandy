@@ -285,9 +285,13 @@ mcsandyUI = {
             e.preventDefault();
             var _this = mcsandyUI,
                 project = _this.data.ctrls.projectSelect.value;
-            _this.functions.setHash(project);
-            _this.functions.loadProject(project);
-            _this.functions.flashClass(e.currentTarget);
+            if (project) {
+                _this.functions.setHash(project);
+                _this.functions.loadProject(project);
+                _this.functions.flashClass(e.currentTarget);
+            } else {
+                alert('You have no projects to load');
+            }
         },
         flashClass: function (el) {
             el.className = el.className + ' anim-flash';
