@@ -9,7 +9,7 @@ html, body
 body
 	display: flex
 	flex-direction: column
-	justify-content: space-around
+	justify-content: space-between
 	align-items: flex-start
 
 
@@ -54,7 +54,7 @@ __toggle__input
 
 .panel
 	position: relative
-	max-height: 50vh
+	max-height: 100vh
 	transition: .3s ease-in-out
 
 	&.js-collapsed
@@ -117,6 +117,9 @@ __js
 
 .editor
 	width: 100%;
+	display: flex
+	flex-direction: column
+	flex-grow: 1
 
 .editor__label
 	align-self: flex-start
@@ -124,6 +127,7 @@ __js
 	display: inline-block
 
 .editor__fieldsets 
+	flex-grow: 1
 	display: flex
 	flex-direction: row
 	padding: 0
@@ -145,7 +149,7 @@ __
 
 .fieldsets
 	padding: .25rem
-	max-height: 50vh
+	max-height: 100vh
 	overflow: hidden
 
 
@@ -348,61 +352,28 @@ __
 		outline: none
 		border: none
 
+.g-result.js-collapsed
+	flex-grow: 0;
+
+	.g-result__iframe
+		flex-grow: 0;
+		max-height: 0;
+
+
 
 
 /*===============
- #LAYOUT #HORIZONTAL
+ #TRUMPS
 ===============*/
-/*nuke this, redo it*/
-.mcsandy
-	&--horizontal
-		flex-direction: row
-		.mpGlobal
-			&__header
-				width:auto
-				&__hgroup
-					width:0
-				&__editor[class]
-					flex-basis: 95vh
-					height: @flex-basis
-					flex-direction: column
-					border-bottom: none
-					.fieldset
-						flex-basis: 5%
-				.editor
-					&__label
-						border-radius: .5em .5em 0 0;
-						order: -1
-			&__result
-				height: 100%
-			&__footer
-				height: 100vh
-				width: auto
-				max-width:17rem
-				flex-direction: column
-				align-self:flex-start
-				&__editor
-					flex-direction: column
-					flex-basis: none
-					height: 100%
-					align-self: flex-end
-
-					.fieldset
-						font-size: .9em
-						width: 100%
-						&__wrapper
-							flex-direction: column
-						&--externalLibs
-							flex-basis: 33%
-							.fieldset__wrapper
-								flex-direction: row
-		.editor__toggle:checked ~ .projectManager__editor,
-		.editor__toggle:checked ~ .mpGlobal__header__editor
-			flex-grow:0
-			width:0
-		> .editor__fieldset
-			height: initial
-			width: 0
+.fullwindow {
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: #fff;
+}
 
 
 
