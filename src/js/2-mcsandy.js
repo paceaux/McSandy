@@ -252,6 +252,7 @@ mcsandyUI = {
             editor.addEventListener('drop', _this.functions.handleFileUpload);
         });
 
+        window.addEventListener('keydown', _this.functions.ctrlShiftKeydown);
         /*GLOBAL BUTTON STUFF*/
         helpers.addEvents(document.querySelectorAll('button'), 'click', _this.functions.flashClass);
 
@@ -357,6 +358,19 @@ mcsandyUI = {
         },
         openIdInFullWindow: function (id) {
             window.open(`${window.location.origin + window.location.pathname}?fullwindow=${id}${window.location.hash}`, '_blank', 'location=yes');
+        },
+        ctrlShiftKeydown: function (evt) {
+            const _this = mcsandyUI;
+            const ctrlShiftEls = document.querySelectorAll('[data-ctrlshiftkey]');
+            const modifierKey = evt.keyCode;
+            const isCtrlShift = evt.target.dataset.ctrlshiftkey ? true : false;
+            const isParentCtrlShift = evt.target.parentElement.dataset.ctrlshiftkey ? true : false;
+            const ctrlShiftModifier = isCtrlShift ? evt.target.dataset.ctrlshiftkey : evt.target.parentElement.dataset.ctrlshiftkey;
+            const id = isCtrlShift ? evt.target.id : evt.target.parentElement.id;
+
+            if (evt.ctrlKey && evt.shiftKey && (isCtrlShift || isParentCtrlShift) && modifierKey === ctrlShiftModifier.toUpperCase().charCodeAt()) {
+                _this.functions.openIdInFullWindow(id);
+            }
         },
         handleProjectLoad: function (e) {
             e.preventDefault();
