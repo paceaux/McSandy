@@ -29,6 +29,7 @@ McSandy isn't the only web-based, live preview editor out there. Here's what mak
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>:  toggle projects
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>del</kbd>:   delete project
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>+</kbd>:  New Project
+ + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>n</kbd>:  Open Editor panel in a new window
  + <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>h</kbd>: toggle Horizontal layout
 
 ### The Technologies Behind McSandy ###
