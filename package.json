@@ -14,6 +14,10 @@
     },
     "final": "mcsandy.html"
   },
+  "scripts": {
+    "build" : "gulp build",
+    "watch" : "gulp watch"
+  },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
