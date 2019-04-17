@@ -1,0 +1,13 @@
+{
+    "extends": "airbnb-base",
+    "rules" : {
+        "indent": ["warn", 4],
+        "arrow-parens": "off"
+    },
+    "globals": {
+        "before": true,
+        "beforeEach": true,
+        "describe": true,
+        "it": true
+    }
+}
