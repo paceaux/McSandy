@@ -1,7 +1,6 @@
 
 
 const gulp = require('gulp');
-const uglify = require('gulp-uglify');
 const stylus = require('gulp-stylus');
 const inject = require('gulp-inject');
 const concat = require('gulp-concat');
