@@ -17,7 +17,7 @@
   "scripts": {
     "build": "gulp build",
     "watch": "gulp watch",
-    "lint": "eslint src/** gulp/**"
+    "lint": "eslint src/js/** gulp/** gulpfile.js"
   },
   "dependencies": {
     "gulp": "^3.9.1",
