@@ -6,10 +6,11 @@ const store = {
         return typeof val !== 'object' ? val : JSON.stringify(val);
     },
     unconvertValue(val) {
-        let result;
+        if (!val) return null;
 
-        if (val && (val.indexOf('{') === 0 || val.indexOf('[') === 0)) {
-            result = JSON.parse(result);
+        let result = val;
+        if (val.indexOf('{') === 0 || val.indexOf('[') === 0) {
+            result = JSON.parse(val);
         }
 
         return result;
