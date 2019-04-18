@@ -78,7 +78,6 @@ mcsandyUI = {
             }
         },
         keyUp() {
-            const _this = mcsandyUI;
         },
         convertHash(hash) {
             return hash.replace(' ', '_');
@@ -117,7 +116,6 @@ mcsandyUI = {
         },
         cloneParent(el) {
             const clone = el.parentNode.cloneNode(true);
-            const grandparent = el.parentNode.parentNode;
             clone.querySelector('input').value = '';
             return clone;
         },
@@ -188,8 +186,6 @@ mcsandyUI = {
             return wrapper;
         },
         runTest() {
-            const exCss = mcsandyProject.externals.assets.css;
-            const dataUI = mcsandyAppData.ui;
         },
         getUrlParams() {
             const urlParams = {};
@@ -272,11 +268,7 @@ mcsandyUI = {
     },
     bindBroadcastEvents() {
         const _this = mcsandyUI;
-        const { helpers } = _this;
         const { data } = _this;
-        const editors = document.querySelectorAll('.field--textarea');
-        const editorFieldsets = data.fields.fieldsets;
-        const fileUploads = data.fields.upload;
 
         if ('BroadcastChannel' in window) {
             const fieldChannel = new BroadcastChannel('field_broadcasts');
@@ -302,7 +294,6 @@ mcsandyUI = {
     },
     functions: {
         handleConnection(override) {
-            const _this = mcsandyUI;
             const ctrl = document.getElementById('js-onlineStatus');
             mcsandyAppData.ui.onlineState = navigator.onLine ? 'online' : 'offline';
             if (override !== undefined && typeof override === 'string') {
@@ -363,7 +354,6 @@ mcsandyUI = {
         },
         ctrlShiftKeydown(evt) {
             const _this = mcsandyUI;
-            const ctrlShiftEls = document.querySelectorAll('[data-ctrlshiftkey]');
             const modifierKey = evt.keyCode;
             const isCtrlShift = !!evt.target.dataset.ctrlshiftkey;
             const isParentCtrlShift = !!evt.target.parentElement.dataset.ctrlshiftkey;
@@ -422,7 +412,6 @@ mcsandyUI = {
         },
         addError(el, msgType) {
             const _this = mcsandyUI;
-            const { helpers } = _this;
             const errorMsgs = mcsandyAppData.ui.fieldErrorMessages;
             const msg = errorMsgs[msgType];
             const errTimeout = function () {
@@ -460,7 +449,6 @@ mcsandyUI = {
         },
         handleLibToggle(e) {
             const _this = mcsandy;
-            const { value } = e.target;
             const exJs = e.target.getAttribute('data-mcsandy');
             if (!e.target.checked) {
                 mcsandy.blobData.externalJS.splice(_this.blobData.externalJS.indexOf(exJs, 1));
@@ -510,7 +498,6 @@ mcsandyUI = {
             e.dataTransfer.dropEffect = 'all';
             e.dataTransfer.effectAllowed = 'all';
             console.log(e);
-            const _this = mcsandyUI;
             const source = e.target.parentNode.querySelector('textarea').value;
             const projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy';
             const type = e.target.dataset.fileext;
@@ -523,11 +510,9 @@ mcsandyUI = {
         handleDragEnd(e) {
             e.preventDefault();
             e.dataTransfer.dropEffect = 'all';
-            const _this = mcsandyUI;
             e.dataTransfer.getData('DownloadURL', 0);
         },
         updateEditors(html, css, js) {
-            const _this = mcsandyUI;
             const { ctrls } = mcsandy.data;
             ctrls.html.value = html;
             ctrls.css.value = css;
@@ -554,10 +539,8 @@ mcsandyUI = {
             }
         },
         updateExternalAssetFields(projData, type) {
-            const _this = mcsandyUI;
             const assetFields = document.getElementById(`js-fieldset--${type}`).querySelectorAll('.fieldset__inputWrapper');
             const xAssets = projData.externals.assets[type];
-            const assetFieldsArr = Array.prototype.slice.call(assetFields);
             let lastField;
             const neededFields = xAssets.length - assetFields.length;
             let i;
@@ -625,7 +608,7 @@ mcsandy = {
         inputArray(wrapper, inputs) {
             const inputArray = wrapper.querySelectorAll(inputs);
             const valueArray = [];
-            [].forEach.call(inputArray, (el, i) => {
+            [].forEach.call(inputArray, (el) => {
                 if (el.value) {
                     valueArray.push(el.value);
                 }
@@ -680,11 +663,9 @@ mcsandy = {
             return `<script type="text\/javascript">${js}<\/script>`;
         },
         getExternalAssets(type) {
-            const _this = mcsandy;
             return mcsandyUI.helpers.getAssetsByType(type);
         },
         createExternalAssetsObj() {
-            const _this = mcsandy;
             const jsLibs = mcsandyUI.helpers.getExternalJsLibs();
             return {
                 libraries: {
@@ -721,7 +702,6 @@ mcsandy = {
         },
         constructBodyOpen() {
             const _this = mcsandy;
-            const appData = mcsandyAppData;
             const { helpers } = _this;
             const { ctrls } = _this.data;
             const userHTML = helpers.prepareHTML(ctrls.html.value);
@@ -739,8 +719,6 @@ mcsandy = {
         },
         wrapBlobParts() {
             const _this = mcsandy;
-            const { blobData } = _this;
-            const { ctrls } = _this.data;
             const bodyOpen = _this.helpers.constructBodyOpen();
             const head = _this.helpers.constructHead();
             const bodyClose = _this.helpers.constructBodyClose();
@@ -756,15 +734,12 @@ mcsandy = {
             };
         },
         buildBlob(parts, type) {
-            const _this = mcsandy;
-            const { helpers } = _this;
             blobType = type !== undefined ? `${type};charset=utf-8` : 'text/html;charset=utf-8',
             blob = new Blob(parts, { type: blobType });
             window.mcsandyblob = blob;
             return blob;
         },
         getStoredProjects() {
-            const _this = mcsandy;
             const len = localStorage.length;
             const projects = [];
             for (i = 0; i < len; i++) {
@@ -775,7 +750,6 @@ mcsandy = {
             return projects;
         },
         createSelectOption(el) {
-            const _this = mcsandy;
             const option = document.createElement('option');
             option.value = el;
             option.text = el;
@@ -788,15 +762,15 @@ mcsandy = {
         const { ctrls } = _this.data;
 
         // BIND EVENTS TO TEXTAREAS
-        ctrls.css.addEventListener('keyup', (e) => {
+        ctrls.css.addEventListener('keyup', () => {
             clearTimeout(timer);
             var timer = setTimeout(functions.updateContent(), 750);
         });
-        ctrls.html.addEventListener('keyup', (e) => {
+        ctrls.html.addEventListener('keyup', () => {
             clearTimeout(timer);
             var timer = setTimeout(functions.updateContent(), 750);
         });
-        ctrls.js.addEventListener('change', (e) => {
+        ctrls.js.addEventListener('change', () => {
             functions.updateContent();
         });
 
@@ -839,7 +813,6 @@ mcsandy = {
         },
         handleLibToggle(e) {
             const _this = mcsandy;
-            const { value } = e.target;
             const exJs = e.target.getAttribute('data-mcsandy');
             if (!e.target.checked) {
                 _this.blobData.externalJS.splice(_this.blobData.externalJS.indexOf(exJs, 1));
@@ -869,7 +842,6 @@ mcsandy = {
         },
         clearContent(e) {
             e.preventDefault();
-            const _this = mcsandy;
             window.history.pushState({}, 'Create New Project', window.location.pathname);
         },
         saveContent(e) {
