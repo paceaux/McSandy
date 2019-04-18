@@ -1,14 +1,18 @@
 /* MCSANDYPREFS: A user's preferences with the interface */
-mcsandyPrefs = {
+
+// eslint-disable-next-line no-unused-vars
+const mcsandyPrefs = {
     init() {
         console.log('Mcsandy Preferences Loaded');
-        const _this = mcsandyPrefs;
-        _this.functions.loadPreferences();
-        _this.functions.runPreferences();
+        Object.keys(this.functions).forEach((funcName) => {
+            this.functions[funcName] = this.functions[funcName].bind(this);
+        });
+        this.functions.loadPreferences();
+        this.functions.runPreferences();
     },
     prefUpdaters: {
         hLayout() {
-            const _this = mcsandyPrefs;
+            // eslint-disable-next-line no-undef
             mcsandyUI.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
         },
         editPanel() {
@@ -20,26 +24,31 @@ mcsandyPrefs = {
     },
     functions: {
         loadPreferences() {
-            const _this = mcsandyPrefs;
-            if (store.get(0, 'mcsandyPrefs') !== undefined) {
-                mcsandyAppData.userPrefs = store.get(0, 'mcsandyPrefs');
+            // eslint-disable-next-line no-undef
+            const preferences = store.get(0, 'mcsandyPrefs');
+            if (preferences) {
+                // eslint-disable-next-line no-undef
+                mcsandyAppData.userPrefs = preferences;
             } else {
-                _this.functions.savePreferences(mcsandyAppData.userPrefs);
+                // eslint-disable-next-line no-undef
+                this.functions.savePreferences(mcsandyAppData.userPrefs);
             }
         },
         savePreferences(prefs) {
-            const _this = mcsandyPrefs;
-            prefs = prefs !== undefined ? prefs : mcsandyAppData.userPrefs;
-            store.set(0, 'mcsandyPrefs', prefs);
+            // eslint-disable-next-line no-undef
+            preferences = prefs !== undefined ? prefs : mcsandyAppData.userPrefs;
+            // eslint-disable-next-line no-undef
+            store.set(0, 'mcsandyPrefs', preferences);
         },
         runPreferences() {
-            const _this = mcsandyPrefs;
+            // eslint-disable-next-line no-undef
             const uiPrefs = mcsandyAppData.userPrefs.ui;
-            for (const pref in uiPrefs) {
-                if (uiPrefs[pref]) {
-                    _this.prefUpdaters[pref]();
+            Object.entries(uiPrefs).forEach((entry) => {
+                const [key, val] = entry;
+                if (val && this.prefUpdaters[key]) {
+                    this.prefUpdaters[key]();
                 }
-            }
+            });
         },
     },
 };
