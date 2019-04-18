@@ -1,5 +1,6 @@
 /* MCSANDY APPDATA */
-mcsandyAppData = {
+// eslint-disable-next-line no-unused-vars
+const mcsandyAppData = {
     self: {
         version: '0.2.1',
         repo: 'https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox',
@@ -57,9 +58,9 @@ mcsandyAppData = {
             notURL: 'Please use a valid URL',
         },
         fieldRegexPatterns: {
-            url: new RegExp('@^(https?|ftp)://[^\s/$.?#].[^\s]*$@iS', 'i'),
-            css: new RegExp('(\.css)', 'i'),
-            js: new RegExp('(\.js)', 'i'),
+            url: new RegExp('@^(https?|ftp)://[^\\s/$.?#].[^\\s]*$@iS', 'i'),
+            css: new RegExp('(.css)', 'i'),
+            js: new RegExp('(.js)', 'i'),
         },
     },
     core: {
@@ -92,7 +93,9 @@ mcsandyAppData = {
         shortcuts: '<dl><dt><kbd>ctrl</kbd>+<kbd>s</kbd></dt><dd>save</dd><dt><kbd>ctrl</kbd>+<kbd>r</kbd></dt><dd>run</dd><dt><kbd>ctrl</kbd>+<kbd>f</kbd></dt><dd>download</dd><dt><kbd>ctrl</kbd>+<kbd>l</kbd></dt><dd>load</dd></dl><dl><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>e</kbd></dt><dd>Toggle Editor Panel</dd><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd></dt><dd>Toggle Project Panel</dd><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>del</kbd></dt><dd>Delete Project</dd><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>+</kbd></dt><dd>New Project</dd></dl>',
     },
 };
-mcsandyProject = {
+
+// eslint-disable-next-line no-unused-vars
+let mcsandyProject = {
     blobArray: [],
     externals: {
         assets: {
