@@ -1,25 +1,25 @@
-/*MCSANDY APPDATA */
+/* MCSANDY APPDATA */
 mcsandyAppData = {
     self: {
         version: '0.2.1',
         repo: 'https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox',
         authors: {
-            author: 'Frank M Taylor'
-        }
+            author: 'Frank M Taylor',
+        },
     },
     appInfo: {
         title: 'Mcsandy',
         subtitle: 'Drag, drop, code. Shirt, shoes, and WiFi not required',
-        author: "Frank M. Taylor",
-        wiki: "https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox/wiki",
-        bugs: "https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox/issues"
+        author: 'Frank M. Taylor',
+        wiki: 'https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox/wiki',
+        bugs: 'https://github.com/paceaux/McSandy--the-HTML5-offline-Sandbox/issues',
     },
     userPrefs: {
         ui: {
             hLayout: false,
             editPanel: true,
             projectPanel: true,
-        }
+        },
     },
     ui: {
         onlineState: 'online',
@@ -29,7 +29,7 @@ mcsandyAppData = {
             projectDownload: document.getElementById('js-projectDownload'),
             projectSelect: document.getElementById('js-selectProjects'),
             projectLoad: document.getElementById('js-projectLoad'),
-            broadcasters: document.querySelectorAll('[data-broadcast]')
+            broadcasters: document.querySelectorAll('[data-broadcast]'),
         },
         fields: {
             fieldsets: document.querySelectorAll('.js-editorDragOutField'),
@@ -38,29 +38,29 @@ mcsandyAppData = {
             rem: '.fieldset__button--rem',
             assets: '.fieldset__field--url',
             saved: '.fieldset__inputWrapper[data-saved="true"] .fieldset__field',
-            unsaved: '.fieldset__inputWrapper[data-saved="false"] .fieldset__field'
+            unsaved: '.fieldset__inputWrapper[data-saved="false"] .fieldset__field',
         },
         fieldsets: {
             html: document.getElementById('js-fieldset--html'),
             css: document.getElementById('js-fieldset--css'),
-            js: document.getElementById('js-fieldset--js')
+            js: document.getElementById('js-fieldset--js'),
         },
         modal: {
             container: document.getElementById('js-modal'),
             overlay: document.getElementById('js-modal__overlay'),
             content: document.getElementById('js-modal__content'),
-            title: document.getElementById('js-modal__title')
-        }, 
+            title: document.getElementById('js-modal__title'),
+        },
         fieldErrorMessages: {
-            empty: "Please add a value",
+            empty: 'Please add a value',
             fileNotValid: "That's not a valid file type",
-            notURL: "Please use a valid URL"
+            notURL: 'Please use a valid URL',
         },
         fieldRegexPatterns: {
-            url: new RegExp('@^(https?|ftp)://[^\s/$.?#].[^\s]*$@iS','i'),
-            css: new RegExp("(\.css)","i"),
-            js:  new RegExp("(\.js)","i")
-       }
+            url: new RegExp('@^(https?|ftp)://[^\s/$.?#].[^\s]*$@iS', 'i'),
+            css: new RegExp('(\.css)', 'i'),
+            js: new RegExp('(\.js)', 'i'),
+        },
     },
     core: {
         ctrls: {
@@ -72,10 +72,10 @@ mcsandyAppData = {
             html: document.getElementById('js-html'),
             css: document.getElementById('js-css'),
             js: document.getElementById('js-js'),
-            jsLibs: '.fieldset__field--jsLib'
+            jsLibs: '.fieldset__field--jsLib',
         },
         targets: {
-            iframe: document.getElementById('js-result')
+            iframe: document.getElementById('js-result'),
         },
         externalJS: {
             AngularJS: '//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js',
@@ -85,23 +85,23 @@ mcsandyAppData = {
             jQueryUi: '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js',
             mooTools: '//ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js',
             prototype: '//ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js',
-            scriptaculous: '//ajax.googleapis.com/ajax/libs/scriptaculous/1.9.0/scriptaculous.js'
-        }
+            scriptaculous: '//ajax.googleapis.com/ajax/libs/scriptaculous/1.9.0/scriptaculous.js',
+        },
     },
     modalContent: {
-        shortcuts: '<dl><dt><kbd>ctrl</kbd>+<kbd>s</kbd></dt><dd>save</dd><dt><kbd>ctrl</kbd>+<kbd>r</kbd></dt><dd>run</dd><dt><kbd>ctrl</kbd>+<kbd>f</kbd></dt><dd>download</dd><dt><kbd>ctrl</kbd>+<kbd>l</kbd></dt><dd>load</dd></dl><dl><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>e</kbd></dt><dd>Toggle Editor Panel</dd><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd></dt><dd>Toggle Project Panel</dd><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>del</kbd></dt><dd>Delete Project</dd><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>+</kbd></dt><dd>New Project</dd></dl>'
-    }
+        shortcuts: '<dl><dt><kbd>ctrl</kbd>+<kbd>s</kbd></dt><dd>save</dd><dt><kbd>ctrl</kbd>+<kbd>r</kbd></dt><dd>run</dd><dt><kbd>ctrl</kbd>+<kbd>f</kbd></dt><dd>download</dd><dt><kbd>ctrl</kbd>+<kbd>l</kbd></dt><dd>load</dd></dl><dl><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>e</kbd></dt><dd>Toggle Editor Panel</dd><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd></dt><dd>Toggle Project Panel</dd><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>del</kbd></dt><dd>Delete Project</dd><dt><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>+</kbd></dt><dd>New Project</dd></dl>',
+    },
 };
 mcsandyProject = {
     blobArray: [],
     externals: {
         assets: {
             css: [],
-            js: []
+            js: [],
         },
         libraries: {
             css: [],
-            js: []
-        }
-    }
+            js: [],
+        },
+    },
 };

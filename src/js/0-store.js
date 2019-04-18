@@ -1,30 +1,29 @@
 store = {
-    types: [localStorage,sessionStorage],
-    convertValue: function (v) {
+    types: [localStorage, sessionStorage],
+    convertValue(v) {
         return typeof v !== 'object' ? v : JSON.stringify(v);
     },
-    unconvertValue: function (v) {
+    unconvertValue(v) {
         if (v !== null) {
-            if ( v.indexOf('{') === 0 || v.indexOf('[') === 0 ) {
+            if (v.indexOf('{') === 0 || v.indexOf('[') === 0) {
                 v = JSON.parse(v);
                 return v;
-            } else {
-                return null;
             }
+            return null;
         }
     },
-    set: function (type, k, v) {
+    set(type, k, v) {
         v = this.convertValue(v);
-        store.types[type].setItem(k,v); 
+        store.types[type].setItem(k, v);
     },
-    get: function (type, k) {
+    get(type, k) {
         v = typeof k !== 'number' ? store.types[type].getItem(k) : store.types[type].getItem(store.types[type].key(k));
-        return  this.unconvertValue(v);
+        return this.unconvertValue(v);
     },
-    del: function (type, k) {
-        store.types[type].removeItem(k);       
+    del(type, k) {
+        store.types[type].removeItem(k);
     },
-    clr: function (type) {
+    clr(type) {
         store.types[type].clear();
-    }
+    },
 };
