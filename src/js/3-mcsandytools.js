@@ -1,12 +1,12 @@
-let mcsandyTools;
-mcsandyTools = {
+// eslint-disable-next-line no-unused-vars
+const mcsandyTools = {
     init() {
+        // eslint-disable-next-line no-console
         console.info('mcsandyTools is running');
-        const _this = mcsandyTools;
-        for (f in _this.modules) {
-            _this[f] = _this.modules[f];
-        }
-        _this.functions.getAppVersion();
+        Object.keys(this.functions).forEach((funcName) => {
+            this.functions[funcName] = this.functions[funcName].bind(this);
+        });
+        this.functions.getAppVersion();
     },
     data: {
         scripts: {
@@ -25,17 +25,9 @@ mcsandyTools = {
             }
             head.appendChild(script);
         },
-        gitLoad(username, password) {
-            const github = new Github({
-                username,
-                password,
-                auth: 'basic',
-            });
-        },
     },
     functions: {
         loadScript(src, async, callback) {
-            const _this = mcsandyTools;
             const head = document.getElementsByTagName('head')[0];
             const script = document.createElement('script');
             script.type = 'text/javascript';
@@ -45,7 +37,6 @@ mcsandyTools = {
             head.appendChild(script);
         },
         addScript(src, async) {
-            const _this = mcsandyTools;
             const head = document.getElementsByTagName('head')[0];
             const script = document.createElement('script');
             script.type = 'text/javascript';
@@ -54,17 +45,16 @@ mcsandyTools = {
             head.appendChild(script);
         },
         getAppVersion() {
-            const _this = mcsandyTools;
             let success; let error;
+            // eslint-disable-next-line no-undef
             const xmlHttp = new XMLHttpRequest(success, error);
-            xmlHttp.open('get', _this.data.scripts.mcsandyApp, true);
+            xmlHttp.open('get', this.data.scripts.mcsandyApp, true);
             xmlHttp.send(null);
-            xmlHttp.onreadystatechange = function () {
+            xmlHttp.onreadystatechange = function readyStateChange() {
                 if (xmlHttp.readyState === 4) {
                     if (xmlHttp.status === 200) {
-                        console.log(xmlHttp);
                         success = xmlHttp.responseText;
-                        _this.functions.addScript(success, true);
+                        this.functions.addScript(success, true);
                     }
                 }
             };
