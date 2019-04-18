@@ -8,6 +8,8 @@
         "before": true,
         "beforeEach": true,
         "describe": true,
-        "it": true
+        "it": true,
+        "window": true,
+        "document": true
     }
 }
