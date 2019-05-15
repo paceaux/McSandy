@@ -4,6 +4,9 @@ mcsandyUI = {
     init() {
         // eslint-disable-next-line no-console
         console.info('McSandyUI is Running');
+        Object.keys(this.helpers).forEach(helper => {
+            this.helpers[helper] = this.helpers[helper].bind(this);
+        });
         this.bindUiEvents();
         this.bindBroadcastEvents();
         this.functions.handleSearch();
@@ -11,14 +14,14 @@ mcsandyUI = {
     data: mcsandyAppData.ui,
     helpers: {
         keyDown(e) {
-            const _this = mcsandyUI;
+            
             /* SAVE */
             if (e.ctrlKey) {
                 switch (e.keyCode) {
                 // s
                 case 83:
                     mcsandy.functions.saveContent(e);
-                    _this.functions.flashClass(mcsandy.data.ctrls.projectSave);
+                    this.functions.flashClass(mcsandy.data.ctrls.projectSave);
                     break;
                 // r
                 case 82:
@@ -26,13 +29,13 @@ mcsandyUI = {
                     break;
                 // l
                 case 76:
-                    _this.functions.handleProjectLoad(e);
-                    _this.functions.flashClass(mcsandy.data.ctrls.projectLoad);
+                    this.functions.handleProjectLoad(e);
+                    this.functions.flashClass(mcsandy.data.ctrls.projectLoad);
                     break;
                 // f
                 case 70:
-                    _this.functions.handleDownloadProject(e);
-                    _this.functions.flashClass(mcsandy.data.ctrls.projectDownload);
+                    this.functions.handleDownloadProject(e);
+                    this.functions.flashClass(mcsandy.data.ctrls.projectDownload);
                     break;
                 default:
                     break;
@@ -61,15 +64,15 @@ mcsandyUI = {
                         break;
                     // h
                     case 72:
-                        _this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
+                        this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
                         mcsandyAppData.userPrefs.ui.hLayout = mcsandyAppData.userPrefs.ui.hLayout !== true;
                         mcsandyPrefs.functions.savePreferences();
                         break;
                     case 73:
-                        _this.functions.toggleModal();
+                        this.functions.toggleModal();
                         break;
                     case 84:
-                        _this.helpers.runTest(e);
+                        this.helpers.runTest(e);
                         break;
                     default:
                         break;
@@ -155,9 +158,8 @@ mcsandyUI = {
             return jsLibs;
         },
         getAssetsByType(type) {
-            const _this = mcsandyUI;
             const fieldset = document.querySelector(`.editor__${type}`);
-            const inputs = fieldset.querySelectorAll(_this.data.fields.assets);
+            const inputs = fieldset.querySelectorAll(this.data.fields.assets);
             const assets = [];
             [].forEach.call(inputs, (input) => {
                 if (input.value.length > 0) {
@@ -178,10 +180,9 @@ mcsandyUI = {
             return button;
         },
         createExternalFileSet(file, inputType, inputClass, buttonClass, buttonText) {
-            const _this = mcsandyUI;
-            const wrapper = _this.helpers.createExternalFileWrapper();
-            const input = _this.helpers.createInput(inputType, `js-${Math.ceil(Math.random() * 10)}`, inputClass, file, file);
-            const button = _this.helpers.createExternalFileButton(buttonClass, buttonText);
+            const wrapper = this.helpers.createExternalFileWrapper();
+            const input = this.helpers.createInput(inputType, `js-${Math.ceil(Math.random() * 10)}`, inputClass, file, file);
+            const button = this.helpers.createExternalFileButton(buttonClass, buttonText);
             wrapper.appendChild(input);
             wrapper.appendChild(button);
             return wrapper;
