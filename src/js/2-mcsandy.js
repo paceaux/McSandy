@@ -7,6 +7,9 @@ mcsandyUI = {
         Object.keys(this.helpers).forEach(helper => {
             this.helpers[helper] = this.helpers[helper].bind(this);
         });
+        Object.keys(this.functions).forEach(funcName => {
+            this.functions[funcName] = this.functions[funcName].bind(this);
+        });
         this.bindUiEvents();
         this.bindBroadcastEvents();
         this.functions.handleSearch();
@@ -309,28 +312,24 @@ mcsandyUI = {
             }
         },
         handleCollapsePanel(e) {
-            const _this = mcsandyUI;
             const { target } = e;
             const parent = target.parentElement;
-            _this.helpers.toggleClass(parent, 'js-collapsed');
+            this.helpers.toggleClass(parent, 'js-collapsed');
         },
         handleHash() {
-            const _this = mcsandyUI;
             if (window.location.hash.length > 0) {
-                const hash = _this.helpers.unconvertHash(window.location.hash);
-                _this.functions.loadProject(hash);
+                const hash = this.helpers.unconvertHash(window.location.hash);
+                this.functions.loadProject(hash);
             }
         },
         setHash(hash) {
-            const _this = mcsandyUI;
-            window.location.hash = _this.helpers.convertHash(hash);
+            window.location.hash = this.helpers.convertHash(hash);
         },
         handleSearch() {
-            const _this = mcsandyUI;
-            const urlParams = _this.helpers.getUrlParams();
+            const urlParams = this.helpers.getUrlParams();
 
             if ('fullwindow' in urlParams) {
-                _this.functions.setFullWindow(urlParams.fullwindow);
+                this.functions.setFullWindow(urlParams.fullwindow);
             }
         },
         setFullWindow(element) {
@@ -351,7 +350,6 @@ mcsandyUI = {
             window.open(`${window.location.origin + window.location.pathname}?fullwindow=${id}${window.location.hash}`, '_blank', 'location=yes');
         },
         ctrlShiftKeydown(evt) {
-            const _this = mcsandyUI;
             const modifierKey = evt.keyCode;
             const isCtrlShift = !!evt.target.dataset.ctrlshiftkey;
             const isParentCtrlShift = !!evt.target.parentElement.dataset.ctrlshiftkey;
@@ -359,17 +357,16 @@ mcsandyUI = {
             const id = isCtrlShift ? evt.target.id : evt.target.parentElement.id;
 
             if (evt.ctrlKey && evt.shiftKey && (isCtrlShift || isParentCtrlShift) && modifierKey === ctrlShiftModifier.toUpperCase().charCodeAt()) {
-                _this.functions.openIdInFullWindow(id);
+                this.functions.openIdInFullWindow(id);
             }
         },
         handleProjectLoad(e) {
             e.preventDefault();
-            const _this = mcsandyUI;
-            const project = _this.data.ctrls.projectSelect.value;
+            const project = this.data.ctrls.projectSelect.value;
             if (project) {
-                _this.functions.setHash(project);
-                _this.functions.loadProject(project);
-                _this.functions.flashClass(e.currentTarget);
+                this.functions.setHash(project);
+                this.functions.loadProject(project);
+                this.functions.flashClass(e.currentTarget);
             } else {
                 alert('You have no projects to load');
             }
@@ -381,35 +378,31 @@ mcsandyUI = {
             }, 3000);
         },
         loadProject(project) {
-            const _this = mcsandyUI;
             const projData = store.get(0, `mp-${project}`);
             window.mcsandyProject = projData;
             console.info('McSandy Loaded a Project');
             console.info(projData);
             mcsandy.functions.updateContent(projData); // this is in the McSandy interface
-            _this.functions.updateEditors(projData.rawParts.html, projData.rawParts.css, projData.rawParts.js);
-            _this.functions.updateCtrls(projData);
+            this.functions.updateEditors(projData.rawParts.html, projData.rawParts.css, projData.rawParts.js);
+            this.functions.updateCtrls(projData);
         },
         handleRemoveExternalFile(e) {
             e.preventDefault();
-            const _this = mcsandyUI;
-            const { helpers } = _this;
+            const { helpers } = this;
             helpers.removeParent(e.target);
             mcsandy.functions.updateContent();
         },
         handleFileDrop(e) {
             e.preventDefault();
             e.stopPropagation();
-            const _this = mcsandyUI;
             const { files } = e.dataTransfer;
             let i = 0;
             for (var f; f == files[i]; i++) {
-                const input = _this.helpers.createExternalFileSet(f);
+                const input = this.helpers.createExternalFileSet(f);
                 e.target.appendChild(input);
             }
         },
         addError(el, msgType) {
-            const _this = mcsandyUI;
             const errorMsgs = mcsandyAppData.ui.fieldErrorMessages;
             const msg = errorMsgs[msgType];
             const errTimeout = function () {
@@ -421,9 +414,8 @@ mcsandyUI = {
         },
         handleAddExternalFile(e) {
             e.preventDefault();
-            const _this = mcsandyUI;
-            const { helpers } = _this;
-            const { functions } = _this;
+            const { helpers } = this;
+            const { functions } = this;
             const fieldPatterns = mcsandyAppData.ui.fieldRegexPatterns;
             const el = e.target;
             let clonedParent;
@@ -431,12 +423,12 @@ mcsandyUI = {
             if (exFileField.value) {
                 if (exFileField.value.match(fieldPatterns.url) !== null) {
                     clonedParent = helpers.cloneParent(el);
-                    e.target.removeEventListener('click', _this.functions.handleAddExternalFile);
+                    e.target.removeEventListener('click', this.functions.handleAddExternalFile);
                     el.className = el.className.replace('fieldset__button--add', 'fieldset__button--rem');
                     el.innerHTML = '&mdash;';
                     el.parentNode.parentNode.appendChild(clonedParent);
                     mcsandy.functions.updateContent();
-                    _this.bindUiEvents();
+                    this.bindUiEvents();
                     clonedParent.dataset.saved = false;
                 } else {
                     functions.addError(exFileField, 'notURL');
@@ -446,19 +438,17 @@ mcsandyUI = {
             }
         },
         handleLibToggle(e) {
-            const _this = mcsandy;
             const exJs = e.target.getAttribute('data-mcsandy');
             if (!e.target.checked) {
-                mcsandy.blobData.externalJS.splice(_this.blobData.externalJS.indexOf(exJs, 1));
+                mcsandy.blobData.externalJS.splice(mcsandy.blobData.externalJS.indexOf(exJs, 1));
             } else {
                 mcsandy.blobData.externalJS.push(exJs);
             }
         },
         handleDownloadProject(e) {
             e.preventDefault();
-            const _this = mcsandyUI;
-            const project = store.get(0, `mp-${_this.data.ctrls.projectSelect.value}`); // don't get the value of the button, but the one from the select box.
-            _this.functions.flashClass(document.getElementById('js-projectDownload'));
+            const project = store.get(0, `mp-${this.data.ctrls.projectSelect.value}`); // don't get the value of the button, but the one from the select box.
+            this.functions.flashClass(document.getElementById('js-projectDownload'));
             mcsandy.functions.downloadContent(project);
         },
         handleFileUpload(e) {
@@ -517,9 +507,8 @@ mcsandyUI = {
             ctrls.js.value = js;
         },
         updateCtrls(projData) {
-            const _this = mcsandyUI;
             const projectField = mcsandy.data.ctrls.projectName;
-            const { ctrls } = _this.data;
+            const { ctrls } = this.data;
             projectField.value = projData.project;
             projectField.placeholder = projData.project;
             ctrls.projectDownload.value = projData.project;
@@ -531,9 +520,9 @@ mcsandyUI = {
                 });
             }
             if (projData.externals) {
-                _this.functions.updateExternalAssetFields(projData, 'css');
-                _this.functions.updateExternalAssetFields(projData, 'js');
-                _this.bindUiEvents();
+                this.functions.updateExternalAssetFields(projData, 'css');
+                this.functions.updateExternalAssetFields(projData, 'js');
+                this.bindUiEvents();
             }
         },
         updateExternalAssetFields(projData, type) {
@@ -560,24 +549,23 @@ mcsandyUI = {
             }
         },
         bindFieldsetCollapse() {
-            const _this = mcsandyUI;
             const labels = document.querySelectorAll('.fieldset__label');
             for (i = 0; i < labels.length; i++) {
                 const l = labels[i];
-                l.addEventListener('click', _this.helpers.toggleEditorField);
+                l.addEventListener('click', this.helpers.toggleEditorField);
             }
         },
         addModalContent(title, content) {
-            const _this = mcsandyUI;
-            const { modal } = _this.data;
+            const { modal } = this.data;
+
             modal.title.innerText = title;
             modal.content.innerHTML = content;
         },
         toggleModal(content) {
-            const _this = mcsandyUI;
-            const { modal } = _this.data;
-            _this.helpers.toggleClass(modal.container, 'visible');
-            _this.helpers.toggleClass(modal.overlay, 'visible');
+            const { modal } = this.data;
+
+            this.helpers.toggleClass(modal.container, 'visible');
+            this.helpers.toggleClass(modal.overlay, 'visible');
             if (typeof content === 'string') {
                 modal.content.innerHTML = content;
             }
