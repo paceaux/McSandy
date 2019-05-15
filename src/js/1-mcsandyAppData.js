@@ -95,7 +95,7 @@ const mcsandyAppData = {
 };
 
 // eslint-disable-next-line no-unused-vars
-let mcsandyProject = {
+const mcsandyProject = {
     blobArray: [],
     externals: {
         assets: {
