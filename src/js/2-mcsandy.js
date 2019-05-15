@@ -14,7 +14,6 @@ mcsandyUI = {
     data: mcsandyAppData.ui,
     helpers: {
         keyDown(e) {
-            
             /* SAVE */
             if (e.ctrlKey) {
                 switch (e.keyCode) {
@@ -204,9 +203,7 @@ mcsandyUI = {
         },
     },
     bindUiEvents() {
-        const _this = mcsandyUI;
-        const { helpers } = _this;
-        const { data } = _this;
+        const { helpers, data } = this;
         const { ctrls } = data;
         const editors = document.querySelectorAll('.field--textarea');
         const editorFieldsets = data.fields.fieldsets;
@@ -216,26 +213,26 @@ mcsandyUI = {
 
         /* CHECK FOR INTERNET CONNECTION */
         window.addEventListener('load', () => {
-            _this.functions.handleConnection();
+            this.functions.handleConnection();
             if (window.location.hash) {
-                _this.functions.handleHash();
+                this.functions.handleHash();
             }
         });
-        window.addEventListener('offline', _this.functions.handleConnection);
-        window.addEventListener('online', _this.functions.handleConnection);
+        window.addEventListener('offline', this.functions.handleConnection);
+        window.addEventListener('online', this.functions.handleConnection);
 
         /* WINDOW HASH CHANGE */
-        window.addEventListener('hashchange', _this.functions.handleHash);
+        window.addEventListener('hashchange', this.functions.handleHash);
 
 
         /* SELECT A PROJECT */
-        ctrls.projectLoad.addEventListener('click', _this.functions.handleProjectLoad);
+        ctrls.projectLoad.addEventListener('click', this.functions.handleProjectLoad);
 
         /* DOWNLOAD A PROJECT */
-        ctrls.projectDownload.addEventListener('click', _this.functions.handleDownloadProject);
+        ctrls.projectDownload.addEventListener('click', this.functions.handleDownloadProject);
 
         /* Info button */
-        ctrls.appInfo.addEventListener('click', _this.functions.toggleModal);
+        ctrls.appInfo.addEventListener('click', this.functions.toggleModal);
 
         /* THE EDITOR FIELDS */
         window.addEventListener('keydown', helpers.keyDown);
@@ -243,30 +240,30 @@ mcsandyUI = {
         [].forEach.call(editors, (editor) => {
             editor.addEventListener('keydown', (e) => {
                 if (e.ctrlKey && e.keyCode === 192) {
-                    _this.helpers.toggleClass(e.target, 'js-shrink');
+                    this.helpers.toggleClass(e.target, 'js-shrink');
                 }
             });
-            editor.addEventListener('dragover', _this.functions.handleDragOver);
-            editor.addEventListener('drop', _this.functions.handleFileUpload);
+            editor.addEventListener('dragover', this.functions.handleDragOver);
+            editor.addEventListener('drop', this.functions.handleFileUpload);
         });
 
-        window.addEventListener('keydown', _this.functions.ctrlShiftKeydown);
+        window.addEventListener('keydown', this.functions.ctrlShiftKeydown);
         /* GLOBAL BUTTON STUFF */
-        helpers.addEvents(document.querySelectorAll('button'), 'click', _this.functions.flashClass);
+        helpers.addEvents(document.querySelectorAll('button'), 'click', this.functions.flashClass);
 
         /* DRAG AND DROP FILES INTO EDITORS */
-        helpers.addEvents(fileUploads, 'change', _this.helpers.handleFileUpload);
+        helpers.addEvents(fileUploads, 'change', this.helpers.handleFileUpload);
 
-        helpers.addEvents(editorFieldsets, 'dragstart', _this.functions.handleDragStart);
-        helpers.addEvents(editorFieldsets, 'dragend', _this.functions.handleDragEnd);
-        helpers.addEvents(editorFieldsets, 'drop', _this.functions.handleFileDrop);
+        helpers.addEvents(editorFieldsets, 'dragstart', this.functions.handleDragStart);
+        helpers.addEvents(editorFieldsets, 'dragend', this.functions.handleDragEnd);
+        helpers.addEvents(editorFieldsets, 'drop', this.functions.handleFileDrop);
         /* ADD EXTERNAL LINK */
-        helpers.addEvents(addExternalFile, 'click', _this.functions.handleAddExternalFile);
-        helpers.addEvents(removeExternalFile, 'click', _this.functions.handleRemoveExternalFile);
+        helpers.addEvents(addExternalFile, 'click', this.functions.handleAddExternalFile);
+        helpers.addEvents(removeExternalFile, 'click', this.functions.handleRemoveExternalFile);
         /* LABEL/INPUT SHENANIGANS */
-        _this.functions.bindFieldsetCollapse();
-        helpers.addEvents(document.querySelectorAll('.editor__label, .js-panelToggleLabel'), 'click', _this.functions.handleCollapsePanel);
-        _this.data.modal.overlay.addEventListener('click', _this.functions.toggleModal);
+        this.functions.bindFieldsetCollapse();
+        helpers.addEvents(document.querySelectorAll('.editor__label, .js-panelToggleLabel'), 'click', this.functions.handleCollapsePanel);
+        this.data.modal.overlay.addEventListener('click', this.functions.toggleModal);
     },
     bindBroadcastEvents() {
         const _this = mcsandyUI;
