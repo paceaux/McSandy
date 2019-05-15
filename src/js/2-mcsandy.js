@@ -83,9 +83,10 @@ mcsandyUI = {
             return hash.replace(' ', '_');
         },
         unconvertHash(hash) {
-            hash = hash.replace('#', '');
-            hash = hash.replace('_', ' ');
-            return hash;
+            const unconvertedHash = hash
+                .replace('#', '')
+                .replace('_', ' ');
+            return unconvertedHash;
         },
         createInput(t, id, c, v, d) {
             const input = document.createElement('input');
