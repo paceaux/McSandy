@@ -1,5 +1,6 @@
 /* MCSANDY: The preview, storage, and retrieval */
 
+// eslint-disable-next-line no-unused-vars
 const mcsandy = {
     init(data) {
         // eslint-disable-next-line no-console
@@ -106,13 +107,18 @@ const mcsandy = {
         },
         constructHead() {
             const appData = mcsandyAppData;
+            const { ui } = appData;
+            const { fields, fieldsets } = ui;
             const { helpers } = this;
             const reset = helpers.prepareCSS(this.blobData.reset);
             const { ctrls } = this.data;
+            const { externals } = mcsandyProject;
+            const { libraries, assets } = externals;
             const userCSS = helpers.prepareCSS(ctrls.css.value);
-            const externalLibraries = helpers.createExternalJS(mcsandyProject.externals.libraries.js);
-            const externalSavedCSS = helpers.createExternalCSS(mcsandyProject.externals.assets.css);
-            const externalUnsavedCSS = helpers.createExternalCSS(helpers.inputArray(appData.ui.fieldsets.css, appData.ui.fields.unsaved));
+            const externalLibraries = helpers.createExternalJS(libraries.js);
+            const externalSavedCSS = helpers.createExternalCSS(assets.css);
+            const inputArrayOfFields = helpers.inputArray(fieldsets.css, fields.unsaved);
+            const externalUnsavedCSS = helpers.createExternalCSS(inputArrayOfFields);
             return `<head>${reset}${externalSavedCSS}${externalUnsavedCSS}${userCSS}${externalLibraries}</head>`;
         },
         constructBodyOpen() {
@@ -124,9 +130,11 @@ const mcsandy = {
         constructBodyClose() {
             const appData = mcsandyAppData;
             const { helpers } = this;
+            const { ui } = appData;
             const userJS = helpers.prepareInternalJS(this.data.ctrls.js.value);
             const externalSavedJS = helpers.createExternalJS(mcsandyProject.externals.assets.js);
-            const externalUnsavedJS = helpers.createExternalJS(helpers.inputArray(appData.ui.fieldsets.js, appData.ui.fields.unsaved));
+            const inputArrayOfFields = helpers.inputArray(ui.fieldsets.js, ui.fields.unsaved);
+            const externalUnsavedJS = helpers.createExternalJS(inputArrayOfFields);
 
             return `${externalSavedJS}\n${externalUnsavedJS}\n${userJS}</body>`;
         },
@@ -198,7 +206,10 @@ const mcsandy = {
             select.innerHTML = '';// clear pre-exiting options
             projects.forEach((el) => {
                 const option = this.helpers.createSelectOption(el.project);
-                if (mcsandyUI.helpers.unconvertHash(el.project) === mcsandyUI.helpers.unconvertHash(pageHash)) {
+                const projectHash = mcsandyUI.helpers.unconvertHash(el.project);
+                const pageUnconvertedHash = mcsandyUI.helpers.unconvertHash(pageHash);
+
+                if (projectHash === pageUnconvertedHash) {
                     select.selected = true;
                 }
                 select.appendChild(option);
@@ -224,7 +235,11 @@ const mcsandy = {
             const exJs = e.target.getAttribute('data-mcsandy');
             if (!e.target.checked) {
                 this.blobData.externalJS.splice(this.blobData.externalJS.indexOf(exJs, 1));
-                mcsandyProject.externals.libraries.js.splice(mcsandyProject.externals.libraries.js.indexOf(exJs, 1));
+                mcsandyProject
+                    .externals
+                    .libraries
+                    .js
+                    .splice(mcsandyProject.externals.libraries.js.indexOf(exJs, 1));
             } else {
                 this.blobData.externalJS.push(exJs);
                 mcsandyProject.externals.libraries.js.push(exJs);
@@ -234,7 +249,9 @@ const mcsandy = {
             /* load content and bindUIevents call this function */
             /* only mcsandyUI.functions.loadContent sends loadedParts */
             const { iframe } = this.data.targets;
-            const parts = loadedParts !== undefined ? loadedParts.blobArray : this.helpers.wrapBlobParts();
+            const parts = loadedParts !== undefined
+                ? loadedParts.blobArray
+                : this.helpers.wrapBlobParts();
             const result = this.helpers.buildBlob(parts);
             iframe.src = window.URL.createObjectURL(result);
         },
@@ -254,11 +271,21 @@ const mcsandy = {
             e.preventDefault();
             mcsandyUI.functions.flashClass(e.currentTarget);
             const { ctrls } = this.data;
-            const rawParts = this.helpers.createRawParts(ctrls.html.value, ctrls.css.value, ctrls.js.value, this.blobData.externalJS);
+            const rawParts = this.helpers.createRawParts(
+                ctrls.html.value,
+                ctrls.css.value,
+                ctrls.js.value,
+                this.blobData.externalJS,
+            );
             const blobArray = this.helpers.wrapBlobParts();
             const projectName = this.data.ctrls.projectName.value;
             const externalAssets = this.helpers.createExternalAssetsObj();
-            const project = this.helpers.createProjectObj(projectName, rawParts, blobArray, externalAssets);
+            const project = this.helpers.createProjectObj(
+                projectName,
+                rawParts,
+                blobArray,
+                externalAssets,
+            );
             store.set(0, `mp-${projectName}`, project);
             mcsandyUI.functions.setHash(projectName);
             this.functions.createProjectSelect();
@@ -266,11 +293,18 @@ const mcsandy = {
         downloadContent(downloadObj, type) {
             // downloadObj should be an object.
             // It should have in it an array called blobArray.
-            // there must be a minimum of one item in the array, which contains the stuff we want to download
+            // there must be a min of 1 item in the array,
+            // array  contains the stuff we want to download
             // type is presumed to be either html, css, or js
-            const downloadType = type !== undefined ? type : 'html'; // if there's no type, then it must be a dl for the entire project
-            const parts = downloadObj !== undefined ? downloadObj.blobArray : this.helpers.wrapBlobParts();
-            const mimeType = type !== 'javascript' ? `text/${type}` : 'application/javascript';
+            const downloadType = type !== undefined
+                ? type
+                : 'html'; // if there's no type, then it must be a dl for the entire project
+            const parts = downloadObj !== undefined
+                ? downloadObj.blobArray
+                : this.helpers.wrapBlobParts();
+            const mimeType = type !== 'javascript'
+                ? `text/${type}`
+                : 'application/javascript';
             const blob = this.helpers.buildBlob(parts, mimeType);
             const fileName = `${downloadObj.project}.${downloadType}`;
             saveAs(blob, fileName);
