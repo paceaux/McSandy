@@ -411,7 +411,7 @@ const mcsandyUI = {
             e.stopPropagation();
             const { files } = e.dataTransfer;
             let i = 0;
-            for (var f; f == files[i]; i++) {
+            for (let f; f === files[i]; i += 1) {
                 const input = this.helpers.createExternalFileSet(f);
                 e.target.appendChild(input);
             }
@@ -420,7 +420,6 @@ const mcsandyUI = {
             const errorMsgs = mcsandyAppData.ui.fieldErrorMessages;
             const msg = errorMsgs[msgType];
             const errTimeout = () => {
-                
                 // eslint-disable-next-line no-param-reassign
                 el.placeholder = el.dataset.originalPlaceholder;
             };
@@ -475,7 +474,7 @@ const mcsandyUI = {
             const { files } = e.dataTransfer;
             let newImage;
             const toElement = e.toElement || e.target;
-            for (var i = 0, f; f = files[i]; i++) {
+            for (var i = 0, f; f = files[i]; i += 1) {
                 const reader = new FileReader();
                 if (f.type.match('image.*') && !f.type.match('svg')) {
                     reader.onload = function (evt) {
@@ -548,7 +547,7 @@ const mcsandyUI = {
             let lastField;
             const neededFields = xAssets.length - assetFields.length;
             let i;
-            for (i = 0; i < neededFields + 1; i++) {
+            for (i = 0; i < neededFields + 1; i += 1) {
                 lastField = document.getElementById(`js-fieldset--${type}`).querySelectorAll('.fieldset__inputWrapper').item(i);
                 const clone = lastField.cloneNode(true);
                 lastField.parentNode.appendChild(clone);
@@ -559,7 +558,7 @@ const mcsandyUI = {
             });
             if (neededFields < -1) {
                 const availFields = document.getElementById(`js-fieldset--${type}`).querySelectorAll('.fieldset__inputWrapper').length;
-                for (i = availFields - 1; i >= xAssets.length + 1; i--) {
+                for (i = availFields - 1; i >= xAssets.length + 1; i -= 1) {
                     lastField = document.getElementById(`js-fieldset--${type}`).querySelectorAll('.fieldset__inputWrapper').item(i);
                     lastField.parentNode.removeChild(lastField);
                 }
@@ -567,7 +566,7 @@ const mcsandyUI = {
         },
         bindFieldsetCollapse() {
             const labels = document.querySelectorAll('.fieldset__label');
-            for (i = 0; i < labels.length; i++) {
+            for (let i = 0; i < labels.length; i += 1) {
                 const l = labels[i];
                 l.addEventListener('click', this.helpers.toggleEditorField);
             }
