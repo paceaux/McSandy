@@ -390,8 +390,8 @@ const mcsandyUI = {
         loadProject(project) {
             const projData = store.get(0, `mp-${project}`);
             window.mcsandyProject = projData;
-            console.info('McSandy Loaded a Project');
-            console.info(projData);
+            // eslint-disable-next-line no-console
+            console.info('McSandy Loaded a Project', projData);
             mcsandy.functions.updateContent(projData); // this is in the McSandy interface
             this.functions.updateEditors(
                 projData.rawParts.html,
@@ -419,10 +419,14 @@ const mcsandyUI = {
         addError(el, msgType) {
             const errorMsgs = mcsandyAppData.ui.fieldErrorMessages;
             const msg = errorMsgs[msgType];
-            const errTimeout = function () {
+            const errTimeout = () => {
+                
+                // eslint-disable-next-line no-param-reassign
                 el.placeholder = el.dataset.originalPlaceholder;
             };
+            // eslint-disable-next-line no-param-reassign
             el.dataset.originalPlaceholder = el.placeholder;
+            // eslint-disable-next-line no-param-reassign
             el.placeholder = msg;
             window.setTimeout(errTimeout, 5000);
         },
