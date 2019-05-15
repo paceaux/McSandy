@@ -1,14 +1,15 @@
 
 /* MCSANDYUI: the main user interactions with the app */
 mcsandyUI = {
-    init() {
-        const _this = mcsandyUI;
+    init(mcsandyAppData) {
+        // eslint-disable-next-line no-console
         console.info('McSandyUI is Running');
-        _this.bindUiEvents();
-        _this.bindBroadcastEvents();
-        _this.functions.handleSearch();
+        this.data = mcsandyAppData.ui;
+        this.bindUiEvents();
+        this.bindBroadcastEvents();
+        this.functions.handleSearch();
     },
-    data: mcsandyAppData.ui,
+    data: {},
     helpers: {
         keyDown(e) {
             const _this = mcsandyUI;
