@@ -476,27 +476,35 @@ const mcsandyUI = {
             e.stopPropagation();
             e.preventDefault();
             const { files } = e.dataTransfer;
-            let newImage;
             const toElement = e.toElement || e.target;
-            for (var i = 0, f; f = files[i]; i += 1) {
+            const editField = toElement.dataset.fileext;
+
+            Object.values(files).forEach(file => {
+                let newImage;
+                const isImage = file.type.match('image.*');
+                const isSVG = file.type.match('svg');
                 const reader = new FileReader();
-                if (f.type.match('image.*') && !f.type.match('svg')) {
-                    reader.onload = function (evt) {
-                        if (toElement.parentNode.dataset.fileext === 'html') {
+
+                if (isImage && !isSVG) {
+                    reader.onload = (evt) => {
+                        if (editField === 'html') {
                             newImage = `<img src="${evt.target.result}"/>`;
-                        } else {
+                        }
+
+                        if (editField === 'css') {
                             newImage = `url('${evt.target.result}')`;
                         }
-                        toElement.value += newImage;
+
+                        toElement.value = `${toElement.value} ${newImage}`;
                     };
-                    reader.readAsDataURL(f);
+                    reader.readAsDataURL(file);
                 } else {
-                    reader.onload = function (evt) {
+                    reader.onload = (evt) => {
                         toElement.value += evt.target.result;
                     };
-                    reader.readAsText(f);
+                    reader.readAsText(file);
                 }
-            }
+            });
         },
         handleDragOver(e) {
             e.stopPropagation();

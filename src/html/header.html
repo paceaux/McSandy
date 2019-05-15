@@ -10,12 +10,12 @@
     <input type="checkbox" id="js-editor-toggle" class="panel__toggle__input" />
     <form id="js-editor-fieldsets" class="editor__fieldsets fieldsets">
         <div id="js-fieldset--html" class="editor__fieldset fieldset editor__html " data-ctrlshiftkey="N"  >
-            <label class="fieldset__label js-editorDragOutField" draggable="true" data-mimeoutput="text/html" data-fileext="html" for="js-html" title="Click to Toggle | Drag to desktop">HTML</label>
-            <textarea  id="js-html" tabindex="1" class="fieldset__field field field--textarea " data-broadcast="keyup"  data-target="js-html-content" placeholder="<br />dancer" title="Drop Text or Image"></textarea>
+            <label class="fieldset__label js-editorDragOutField" draggable="true" data-mimeoutput="text/html"  for="js-html" title="Click to Toggle | Drag to desktop">HTML</label>
+            <textarea  id="js-html" tabindex="1" class="fieldset__field field field--textarea " data-broadcast="keyup" data-fileext="html"  data-target="js-html-content" placeholder="<br />dancer" title="Drop Text or Image"></textarea>
         </div>
         <div id="js-fieldset--css" class="editor__fieldset fieldset editor__css " data-ctrlshiftkey="N" >
-            <label class="fieldset__label js-editorDragOutField" draggable="true" data-fileext="css" for="js-css" title="Click to Toggle | Drag to desktop">CSS</label>
-            <textarea id="js-css" tabindex="2" class="fieldset__field  field field--textarea " data-broadcast="keyup" data-target="js-css-content" placeholder=".cup{color:#c0ffee}" title="Drop text or image"></textarea>
+            <label class="fieldset__label js-editorDragOutField" draggable="true" for="js-css" title="Click to Toggle | Drag to desktop">CSS</label>
+            <textarea id="js-css" tabindex="2" class="fieldset__field  field field--textarea " data-broadcast="keyup" data-fileext="css" data-target="js-css-content" placeholder=".cup{color:#c0ffee}" title="Drop text or image"></textarea>
             <div class="fieldset__userOptions userOptions">
                 <div class="fieldset__inputWrapper fieldset__inputWrapper--first" data-saved="false">
                     <input type="url" class="fieldset__field fieldset__field--url " data-broadcast="change" placeholder="http://somedomain/some.css" data-externaltype="css"/>
