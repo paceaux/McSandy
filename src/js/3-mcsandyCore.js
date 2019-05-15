@@ -154,8 +154,8 @@ const mcsandy = {
             };
         },
         buildBlob(parts, type) {
-            blobType = type !== undefined ? `${type};charset=utf-8` : 'text/html;charset=utf-8',
-            blob = new Blob(parts, { type: blobType });
+            const blobType = type !== undefined ? `${type};charset=utf-8` : 'text/html;charset=utf-8';
+            const blob = new Blob(parts, { type: blobType });
             window.mcsandyblob = blob;
             return blob;
         },
