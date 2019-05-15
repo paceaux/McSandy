@@ -740,9 +740,8 @@ const mcsandy = {
         },
     },
     bindUiEvents() {
-        const _this = mcsandy;
-        const { functions } = _this;
-        const { ctrls } = _this.data;
+        const { functions } = this;
+        const { ctrls } = this.data;
 
         // BIND EVENTS TO TEXTAREAS
         ctrls.css.addEventListener('keyup', () => {
