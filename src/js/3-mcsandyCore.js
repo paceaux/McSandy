@@ -182,7 +182,7 @@ const mcsandy = {
         const { functions } = this;
         const { ctrls } = this.data;
 
-        function throttle(fn, limit) {  
+        function throttle(fn, limit) {
             let waiting = false;
             return (...args) => {
                 if (!waiting) {
@@ -195,7 +195,7 @@ const mcsandy = {
             };
         }
         // BIND EVENTS TO TEXTAREAS
-        ctrls.css.addEventListener('keyup', throttle(()=> functions.updateContent(), 750));
+        ctrls.css.addEventListener('keyup', throttle(() => functions.updateContent(), 750));
         ctrls.html.addEventListener('keyup', throttle(() => functions.updateContent(), 750));
         ctrls.js.addEventListener('change', () => {
             functions.updateContent();
