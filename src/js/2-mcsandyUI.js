@@ -378,12 +378,16 @@ const mcsandyUI = {
                 this.functions.loadProject(project);
                 this.functions.flashClass(e.currentTarget);
             } else {
+                // TODO: throw a modal instead
+                // eslint-disable-next-line no-alert
                 alert('You have no projects to load');
             }
         },
         flashClass(el) {
+            // eslint-disable-next-line no-param-reassign
             el.className += ' anim-flash';
             setTimeout(() => {
+                // eslint-disable-next-line no-param-reassign
                 el.className = el.className.replace('anim-flash', '');
             }, 3000);
         },
@@ -502,7 +506,6 @@ const mcsandyUI = {
         handleDragStart(e) {
             e.dataTransfer.dropEffect = 'all';
             e.dataTransfer.effectAllowed = 'all';
-            console.log(e);
             const source = e.target.parentNode.querySelector('textarea').value;
             const projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy';
             const type = e.target.dataset.fileext;
@@ -546,8 +549,7 @@ const mcsandyUI = {
             const xAssets = projData.externals.assets[type];
             let lastField;
             const neededFields = xAssets.length - assetFields.length;
-            let i;
-            for (i = 0; i < neededFields + 1; i += 1) {
+            for (let i = 0; i < neededFields + 1; i += 1) {
                 lastField = document.getElementById(`js-fieldset--${type}`).querySelectorAll('.fieldset__inputWrapper').item(i);
                 const clone = lastField.cloneNode(true);
                 lastField.parentNode.appendChild(clone);
@@ -558,7 +560,7 @@ const mcsandyUI = {
             });
             if (neededFields < -1) {
                 const availFields = document.getElementById(`js-fieldset--${type}`).querySelectorAll('.fieldset__inputWrapper').length;
-                for (i = availFields - 1; i >= xAssets.length + 1; i -= 1) {
+                for (let i = availFields - 1; i >= xAssets.length + 1; i -= 1) {
                     lastField = document.getElementById(`js-fieldset--${type}`).querySelectorAll('.fieldset__inputWrapper').item(i);
                     lastField.parentNode.removeChild(lastField);
                 }
