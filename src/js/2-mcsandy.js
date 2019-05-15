@@ -1,9 +1,10 @@
 
 /* MCSANDYUI: the main user interactions with the app */
-mcsandyUI = {
-    init() {
+const mcsandyUI = {
+    init(data) {
         // eslint-disable-next-line no-console
         console.info('McSandyUI is Running');
+        this.data = data;
         Object.keys(this.helpers).forEach(helper => {
             this.helpers[helper] = this.helpers[helper].bind(this);
         });
@@ -14,7 +15,6 @@ mcsandyUI = {
         this.bindBroadcastEvents();
         this.functions.handleSearch();
     },
-    data: mcsandyAppData.ui,
     helpers: {
         keyDown(e) {
             /* SAVE */
