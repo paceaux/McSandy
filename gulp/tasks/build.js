@@ -34,10 +34,9 @@ gulp.task('build', () => {
             removeTags: true,
             transform(filePath, file) {
                 return `<script type="text/javascript">
-                var mcsandy;
                 ${file.contents.toString()}
                 mcsandyUI.init(mcsandyAppData.ui);
-                mcsandy.init();
+                mcsandy.init(mcsandyAppData.core);
                 mcsandyPrefs.init();
                 </script>`;
             },
