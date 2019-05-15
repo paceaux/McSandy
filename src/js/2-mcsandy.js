@@ -18,6 +18,7 @@ const mcsandyUI = {
     helpers: {
         keyDown(e) {
             /* SAVE */
+            const { userPrefs } = mcsandyAppData;
             if (e.ctrlKey) {
                 switch (e.keyCode) {
                 // s
@@ -67,7 +68,7 @@ const mcsandyUI = {
                     // h
                     case 72:
                         this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
-                        mcsandyAppData.userPrefs.ui.hLayout = mcsandyAppData.userPrefs.ui.hLayout !== true;
+                        mcsandyAppData.userPrefs.ui.hLayout = userPrefs.ui.hLayout !== true;
                         mcsandyPrefs.functions.savePreferences();
                         break;
                     case 73:
@@ -129,8 +130,8 @@ const mcsandyUI = {
             const label = e.target;
             const parent = label.parentElement;
             if (!label.className.match('js-shrunk')) {
-                label.className = `${label.className} ` + 'js-shrunk';
-                parent.className = `${parent.className} ` + 'js-shrunk';
+                label.className = `${label.className} js-shrunk`;
+                parent.className = `${parent.className} js-shrunk`;
             } else {
                 label.className = label.className.replace(/(?:^|\s)js-shrunk(?!\S)/g, '');
                 parent.className = parent.className.replace(/(?:^|\s)js-shrunk(?!\S)/g, '');
@@ -138,8 +139,10 @@ const mcsandyUI = {
         },
         toggleClass(el, className) {
             if (el.className.match(className)) {
+                // eslint-disable-next-line no-param-reassign
                 el.className = el.className.replace(className, '');
             } else {
+                // eslint-disable-next-line no-param-reassign
                 el.className = `${el.className} ${className}`;
             }
         },
@@ -149,12 +152,11 @@ const mcsandyUI = {
             });
         },
         getExternalJsLibs() {
-            const _this = mcsandy;
-            const libEls = document.querySelectorAll(_this.data.ctrls.jsLibs);
+            const libEls = document.querySelectorAll(mcsandy.data.ctrls.jsLibs);
             const jsLibs = [];
             [].forEach.call(libEls, (lib) => {
                 if (lib.checked) {
-                    jsLibs.push(_this.data.externalJS[lib.value]);
+                    jsLibs.push(mcsandy.data.externalJS[lib.value]);
                 }
             });
             return jsLibs;
