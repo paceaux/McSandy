@@ -266,8 +266,7 @@ mcsandyUI = {
         this.data.modal.overlay.addEventListener('click', this.functions.toggleModal);
     },
     bindBroadcastEvents() {
-        const _this = mcsandyUI;
-        const { data } = _this;
+        const { data } = this;
 
         if ('BroadcastChannel' in window) {
             const fieldChannel = new BroadcastChannel('field_broadcasts');
@@ -281,11 +280,11 @@ mcsandyUI = {
             });
 
             fieldChannel.onmessage = (evt) => {
-                const { data } = evt;
-                const targetEl = document.getElementById(data.id);
+                const evtData = evt.data;
+                const targetEl = document.getElementById(evtData.id);
 
                 if (data.projectName == mcsandyProject.project) {
-                    targetEl.value = data.value;
+                    targetEl.value = evtData.value;
                     mcsandy.functions.updateContent();
                 }
             };
