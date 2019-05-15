@@ -22,5 +22,6 @@
         "BroadcastChannel" : true,
         "saveAs" : true,
         "FileReader": true,
+        "localStorage": true
     }
 }
