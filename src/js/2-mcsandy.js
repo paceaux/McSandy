@@ -582,6 +582,9 @@ const mcsandy = {
         Object.keys(this.helpers).forEach(helper => {
             this.helpers[helper] = this.helpers[helper].bind(this);
         });
+        Object.keys(this.functions).forEach(funcName => {
+            this.functions[funcName] = this.functions[funcName].bind(this);
+        });
         this.bindUiEvents();
         this.functions.createProjectSelect();
         if (navigator.onLine) {
@@ -763,13 +766,12 @@ const mcsandy = {
     },
     functions: {
         createProjectSelect() {
-            const _this = mcsandy;
-            const projects = _this.helpers.getStoredProjects();
+            const projects = this.helpers.getStoredProjects();
             const select = document.getElementById('js-selectProjects');
             const pageHash = window.location.hash;
             select.innerHTML = '';// clear pre-exiting options
             projects.forEach((el) => {
-                const option = _this.helpers.createSelectOption(el.project);
+                const option = this.helpers.createSelectOption(el.project);
                 if (mcsandyUI.helpers.unconvertHash(el.project) === mcsandyUI.helpers.unconvertHash(pageHash)) {
                     select.selected = true;
                 }
@@ -780,47 +782,43 @@ const mcsandy = {
             }
         },
         createLibSelect() {
-            const _this = mcsandy;
-            const libs = _this.data.externalJS;
+            const libs = this.data.externalJS;
             const libWrap = document.querySelector('[data-populate="externalLibs"]');
             for (const lib in libs) {
                 const exJs = libs[lib];
                 const input = mcsandyUI.helpers.createInput('checkbox', lib, 'projectManager__jsLib__check input', lib, exJs);
                 label = mcsandyUI.helpers.createLabel(lib, 'projectManager__jsLib__label', lib);
-                input.addEventListener('change', _this.functions.handleLibToggle);
+                input.addEventListener('change', this.functions.handleLibToggle);
                 libWrap.appendChild(input);
                 libWrap.appendChild(label);
             }
             mcsandyUI.functions.bindFieldsetCollapse();
         },
         handleLibToggle(e) {
-            const _this = mcsandy;
             const exJs = e.target.getAttribute('data-mcsandy');
             if (!e.target.checked) {
-                _this.blobData.externalJS.splice(_this.blobData.externalJS.indexOf(exJs, 1));
+                this.blobData.externalJS.splice(this.blobData.externalJS.indexOf(exJs, 1));
                 mcsandyProject.externals.libraries.js.splice(mcsandyProject.externals.libraries.js.indexOf(exJs, 1));
             } else {
-                _this.blobData.externalJS.push(exJs);
+                this.blobData.externalJS.push(exJs);
                 mcsandyProject.externals.libraries.js.push(exJs);
             }
         },
         updateContent(loadedParts) {
             /* load content and bindUIevents call this function */
             /* only mcsandyUI.functions.loadContent sends loadedParts */
-            const _this = mcsandy;
-            const { iframe } = _this.data.targets;
-            const parts = loadedParts !== undefined ? loadedParts.blobArray : _this.helpers.wrapBlobParts();
-            const result = _this.helpers.buildBlob(parts);
+            const { iframe } = this.data.targets;
+            const parts = loadedParts !== undefined ? loadedParts.blobArray : this.helpers.wrapBlobParts();
+            const result = this.helpers.buildBlob(parts);
             iframe.src = window.URL.createObjectURL(result);
         },
         delContent(e) {
             e.preventDefault();
-            const _this = mcsandy;
-            const projectName = _this.data.ctrls.projectName.value;
+            const projectName = this.data.ctrls.projectName.value;
             store.del(0, `mp-${projectName}`);
             window.history.pushState({}, 'Create New Project', window.location.pathname);
-            _this.functions.createProjectSelect();
-            _this.data.ctrls.projectName.value = '';
+            this.functions.createProjectSelect();
+            this.data.ctrls.projectName.value = '';
         },
         clearContent(e) {
             e.preventDefault();
@@ -829,27 +827,25 @@ const mcsandy = {
         saveContent(e) {
             e.preventDefault();
             mcsandyUI.functions.flashClass(e.currentTarget);
-            const _this = mcsandy;
-            const { ctrls } = _this.data;
-            const rawParts = _this.helpers.createRawParts(ctrls.html.value, ctrls.css.value, ctrls.js.value, _this.blobData.externalJS);
-            const blobArray = _this.helpers.wrapBlobParts();
-            const projectName = _this.data.ctrls.projectName.value;
-            const externalAssets = _this.helpers.createExternalAssetsObj();
-            const project = _this.helpers.createProjectObj(projectName, rawParts, blobArray, externalAssets);
+            const { ctrls } = this.data;
+            const rawParts = this.helpers.createRawParts(ctrls.html.value, ctrls.css.value, ctrls.js.value, this.blobData.externalJS);
+            const blobArray = this.helpers.wrapBlobParts();
+            const projectName = this.data.ctrls.projectName.value;
+            const externalAssets = this.helpers.createExternalAssetsObj();
+            const project = this.helpers.createProjectObj(projectName, rawParts, blobArray, externalAssets);
             store.set(0, `mp-${projectName}`, project);
             mcsandyUI.functions.setHash(projectName);
-            _this.functions.createProjectSelect();
+            this.functions.createProjectSelect();
         },
         downloadContent(downloadObj, type) {
             // downloadObj should be an object.
             // It should have in it an array called blobArray.
             // there must be a minimum of one item in the array, which contains the stuff we want to download
             // type is presumed to be either html, css, or js
-            const _this = mcsandy;
             const downloadType = type !== undefined ? type : 'html'; // if there's no type, then it must be a dl for the entire project
-            const parts = downloadObj !== undefined ? downloadObj.blobArray : _this.helpers.wrapBlobParts();
+            const parts = downloadObj !== undefined ? downloadObj.blobArray : this.helpers.wrapBlobParts();
             const mimeType = type !== 'javascript' ? `text/${type}` : 'application/javascript';
-            const blob = _this.helpers.buildBlob(parts, mimeType);
+            const blob = this.helpers.buildBlob(parts, mimeType);
             const fileName = `${downloadObj.project}.${downloadType}`;
             saveAs(blob, fileName);
         },
