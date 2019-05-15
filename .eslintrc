@@ -10,6 +10,12 @@
         "describe": true,
         "it": true,
         "window": true,
+        "navigator" : true,
+        "mcsandy": true, 
+        "mcsandyUI" : true,
+        "mcsandyProject": true,
+        "mcsandyAppData" : true,
+        "store": true,
         "document": true
     }
 }
