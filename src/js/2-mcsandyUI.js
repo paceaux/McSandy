@@ -202,6 +202,8 @@ const mcsandyUI = {
             const decode = (s) => decodeURIComponent(s.replace(pl, ' '));
             const query = window.location.search.substring(1);
 
+            // TODO: FIND OUT WHERE THIS CAME FROM. FIND A BETTER WAY TO GET URL PARAMS
+            // eslint-disable-next-line no-cond-assign
             while (match = search.exec(query)) {
                 urlParams[decode(match[1])] = decode(match[2]);
             }
