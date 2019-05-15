@@ -5,24 +5,20 @@
         "arrow-parens": "off"
     },
     "globals": {
-        "before": true,
-        "beforeEach": true,
-        "describe": true,
-        "it": true,
-        "window": true,
+        "alert" : true,
+        "Blob" : true,
+        "BroadcastChannel" : true,
+        "document": true,
+        "FileReader": true,
+        "localStorage": true,
         "navigator" : true,
+        "window": true,
+        "saveAs" : true,
+        "store": true,
         "mcsandy": true, 
         "mcsandyUI" : true,
         "mcsandyProject": true,
         "mcsandyAppData" : true,
-        "mcsandyPrefs" : true,
-        "store": true,
-        "document": true,
-        "Blob" : true,
-        "BroadcastChannel" : true,
-        "saveAs" : true,
-        "FileReader": true,
-        "localStorage": true,
-        "alert" : true
+        "mcsandyPrefs" : true
     }
 }
