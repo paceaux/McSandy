@@ -17,6 +17,10 @@
         "mcsandyAppData" : true,
         "mcsandyPrefs" : true,
         "store": true,
-        "document": true
+        "document": true,
+        "Blob" : true,
+        "BroadcastChannel" : true,
+        "saveAs" : true,
+        "FileReader": true,
     }
 }
