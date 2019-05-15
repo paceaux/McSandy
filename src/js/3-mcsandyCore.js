@@ -162,7 +162,7 @@ const mcsandy = {
         getStoredProjects() {
             const len = localStorage.length;
             const projects = [];
-            for (i = 0; i < len; i++) {
+            for (let i = 0; i < len; i += 1) {
                 if (localStorage.key(i).indexOf('mp-') !== -1) {
                     projects.push(store.get(0, i));
                 }
