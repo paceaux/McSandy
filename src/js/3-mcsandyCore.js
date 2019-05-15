@@ -49,6 +49,7 @@ const mcsandy = {
             } else {
                 js = `${window.location.protocol}//${js}`;
             }
+            // eslint-disable-next-line no-useless-escape
             return `<script type="text\/javascript" src="${js}"><\/script>`;
         },
         prepareExternalCSS(css) {
@@ -77,6 +78,7 @@ const mcsandy = {
             return externalCSSSet;
         },
         prepareInternalJS(js) {
+            // eslint-disable-next-line no-useless-escape
             return `<script type="text\/javascript">${js}<\/script>`;
         },
         getExternalAssets(type) {
@@ -136,7 +138,7 @@ const mcsandy = {
             const inputArrayOfFields = helpers.inputArray(ui.fieldsets.js, ui.fields.unsaved);
             const externalUnsavedJS = helpers.createExternalJS(inputArrayOfFields);
 
-            return `${externalSavedJS}\n${externalUnsavedJS}\n${userJS}</body>`;
+            return `${externalSavedJS}${externalUnsavedJS}${userJS}</body>`;
         },
         wrapBlobParts() {
             const bodyOpen = this.helpers.constructBodyOpen();
