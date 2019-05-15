@@ -224,7 +224,7 @@ const mcsandy = {
             for (const lib in libs) {
                 const exJs = libs[lib];
                 const input = mcsandyUI.helpers.createInput('checkbox', lib, 'projectManager__jsLib__check input', lib, exJs);
-                label = mcsandyUI.helpers.createLabel(lib, 'projectManager__jsLib__label', lib);
+                const label = mcsandyUI.helpers.createLabel(lib, 'projectManager__jsLib__label', lib);
                 input.addEventListener('change', this.functions.handleLibToggle);
                 libWrap.appendChild(input);
                 libWrap.appendChild(label);
