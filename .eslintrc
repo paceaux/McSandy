@@ -15,6 +15,7 @@
         "mcsandyUI" : true,
         "mcsandyProject": true,
         "mcsandyAppData" : true,
+        "mcsandyPrefs" : true,
         "store": true,
         "document": true
     }
