@@ -579,6 +579,9 @@ const mcsandy = {
         // eslint-disable-next-line no-console
         console.info('McSandy is Running');
         this.data = data;
+        Object.keys(this.helpers).forEach(helper => {
+            this.helpers[helper] = this.helpers[helper].bind(this);
+        });
         this.bindUiEvents();
         this.functions.createProjectSelect();
         if (navigator.onLine) {
@@ -623,24 +626,22 @@ const mcsandy = {
         },
         createExternalJS(libList) {
             // libList is an array
-            const _this = mcsandy;
             let externalJSSet = '';
             if (mcsandyAppData.ui.onlineState === 'online') {
                 /* only add external libraries if we're online */
                 libList.forEach((el) => {
-                    externalJSSet += _this.helpers.prepareExternalJS(el);
+                    externalJSSet += this.helpers.prepareExternalJS(el);
                 });
             }
             return externalJSSet;
         },
         createExternalCSS(cssList) {
             // cssList is an array
-            const _this = mcsandy;
             let externalCSSSet = '';
             if (mcsandyAppData.ui.onlineState === 'online') {
                 /* only add external libraries if we're online */
                 cssList.forEach((el) => {
-                    externalCSSSet += _this.helpers.prepareExternalCSS(el);
+                    externalCSSSet += this.helpers.prepareExternalCSS(el);
                 });
             }
             return externalCSSSet;
@@ -675,11 +676,10 @@ const mcsandy = {
             return rawParts;
         },
         constructHead() {
-            const _this = mcsandy;
             const appData = mcsandyAppData;
-            const { helpers } = _this;
-            const reset = helpers.prepareCSS(_this.blobData.reset);
-            const { ctrls } = _this.data;
+            const { helpers } = this;
+            const reset = helpers.prepareCSS(this.blobData.reset);
+            const { ctrls } = this.data;
             const userCSS = helpers.prepareCSS(ctrls.css.value);
             const externalLibraries = helpers.createExternalJS(mcsandyProject.externals.libraries.js);
             const externalSavedCSS = helpers.createExternalCSS(mcsandyProject.externals.assets.css);
@@ -687,27 +687,24 @@ const mcsandy = {
             return `<head>${reset}${externalSavedCSS}${externalUnsavedCSS}${userCSS}${externalLibraries}</head>`;
         },
         constructBodyOpen() {
-            const _this = mcsandy;
-            const { helpers } = _this;
-            const { ctrls } = _this.data;
+            const { helpers } = this;
+            const { ctrls } = this.data;
             const userHTML = helpers.prepareHTML(ctrls.html.value);
             return `<body>${userHTML}`;
         },
         constructBodyClose() {
-            const _this = mcsandy;
             const appData = mcsandyAppData;
-            const { helpers } = _this;
-            const userJS = helpers.prepareInternalJS(_this.data.ctrls.js.value);
+            const { helpers } = this;
+            const userJS = helpers.prepareInternalJS(this.data.ctrls.js.value);
             const externalSavedJS = helpers.createExternalJS(mcsandyProject.externals.assets.js);
             const externalUnsavedJS = helpers.createExternalJS(helpers.inputArray(appData.ui.fieldsets.js, appData.ui.fields.unsaved));
 
             return `${externalSavedJS}\n${externalUnsavedJS}\n${userJS}</body>`;
         },
         wrapBlobParts() {
-            const _this = mcsandy;
-            const bodyOpen = _this.helpers.constructBodyOpen();
-            const head = _this.helpers.constructHead();
-            const bodyClose = _this.helpers.constructBodyClose();
+            const bodyOpen = this.helpers.constructBodyOpen();
+            const head = this.helpers.constructHead();
+            const bodyClose = this.helpers.constructBodyClose();
             const blobKit = [head, bodyOpen, bodyClose];
             return blobKit;
         },
