@@ -292,7 +292,7 @@ const mcsandyUI = {
                 const evtData = evt.data;
                 const targetEl = document.getElementById(evtData.id);
 
-                if (data.projectName == mcsandyProject.project) {
+                if (data.projectName === mcsandyProject.project) {
                     targetEl.value = evtData.value;
                     mcsandy.functions.updateContent();
                 }
