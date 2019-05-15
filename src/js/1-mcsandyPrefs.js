@@ -3,7 +3,8 @@
 // eslint-disable-next-line no-unused-vars
 const mcsandyPrefs = {
     init() {
-        console.log('Mcsandy Preferences Loaded');
+        // eslint-disable-next-line no-console
+        console.info('Mcsandy Preferences Loaded');
         Object.keys(this.functions).forEach((funcName) => {
             this.functions[funcName] = this.functions[funcName].bind(this);
         });
