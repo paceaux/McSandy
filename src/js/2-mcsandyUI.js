@@ -1,5 +1,6 @@
 
 /* MCSANDYUI: the main user interactions with the app */
+// eslint-disable-next-line no-unused-vars
 const mcsandyUI = {
     init(data) {
         // eslint-disable-next-line no-console
@@ -198,7 +199,7 @@ const mcsandyUI = {
             let match;
             const pl = /\+/g; // Regex for replacing addition symbol with a space
             const search = /([^&=]+)=?([^&]*)/g;
-            const decode = function (s) { return decodeURIComponent(s.replace(pl, ' ')); };
+            const decode = (s) => decodeURIComponent(s.replace(pl, ' '));
             const query = window.location.search.substring(1);
 
             while (match = search.exec(query)) {
@@ -279,7 +280,10 @@ const mcsandyUI = {
             [...data.ctrls.broadcasters].forEach((broadcaster) => {
                 broadcaster.addEventListener(broadcaster.dataset.broadcast, (evt) => {
                     fieldChannel.postMessage({
-                        id: evt.target.id, value: evt.target.value, eventType: evt.type, projectName: mcsandyProject.project,
+                        id: evt.target.id,
+                        value: evt.target.value,
+                        eventType: evt.type,
+                        projectName: mcsandyProject.project,
                     });
                 });
             });
@@ -300,7 +304,7 @@ const mcsandyUI = {
             const ctrl = document.getElementById('js-onlineStatus');
             mcsandyAppData.ui.onlineState = navigator.onLine ? 'online' : 'offline';
             if (override !== undefined && typeof override === 'string') {
-                mcsandyAppData.ui.onlineState = override; // Added this for debugging when I'm on an airplane.
+                mcsandyAppData.ui.onlineState = override; // for debugging when I'm on an airplane.
             }
             if (mcsandyAppData.ui.onlineState === 'online') {
                 ctrl.className = ctrl.className.replace(/(?:^|\s)offline(?!\S)/g, ' online');
@@ -353,12 +357,16 @@ const mcsandyUI = {
         },
         ctrlShiftKeydown(evt) {
             const modifierKey = evt.keyCode;
+            const { ctrlshiftkey } = evt.target.dataset;
             const isCtrlShift = !!evt.target.dataset.ctrlshiftkey;
             const isParentCtrlShift = !!evt.target.parentElement.dataset.ctrlshiftkey;
-            const ctrlShiftModifier = isCtrlShift ? evt.target.dataset.ctrlshiftkey : evt.target.parentElement.dataset.ctrlshiftkey;
+            const ctrlShiftModifier = isCtrlShift ? ctrlshiftkey : ctrlshiftkey;
             const id = isCtrlShift ? evt.target.id : evt.target.parentElement.id;
 
-            if (evt.ctrlKey && evt.shiftKey && (isCtrlShift || isParentCtrlShift) && modifierKey === ctrlShiftModifier.toUpperCase().charCodeAt()) {
+            if (evt.ctrlKey
+                && evt.shiftKey
+                && (isCtrlShift || isParentCtrlShift)
+                && modifierKey === ctrlShiftModifier.toUpperCase().charCodeAt()) {
                 this.functions.openIdInFullWindow(id);
             }
         },
@@ -385,7 +393,11 @@ const mcsandyUI = {
             console.info('McSandy Loaded a Project');
             console.info(projData);
             mcsandy.functions.updateContent(projData); // this is in the McSandy interface
-            this.functions.updateEditors(projData.rawParts.html, projData.rawParts.css, projData.rawParts.js);
+            this.functions.updateEditors(
+                projData.rawParts.html,
+                projData.rawParts.css,
+                projData.rawParts.js,
+            );
             this.functions.updateCtrls(projData);
         },
         handleRemoveExternalFile(e) {
@@ -494,7 +506,6 @@ const mcsandyUI = {
             const blob = new Blob([source], { type });
             const sourceURL = URL.createObjectURL(blob);
             const fileDetails = `${e.target.dataset.mimeoutput}:${projectName}.${type}:${sourceURL}`;
-            //            console.log(e.target.dataset.mimeoutput,projectName, type, sourceURL); ONly FF will log anything
             e.dataTransfer.setData('DownloadURL', fileDetails);
         },
         handleDragEnd(e) {
