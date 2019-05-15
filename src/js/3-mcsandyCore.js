@@ -221,14 +221,14 @@ const mcsandy = {
         createLibSelect() {
             const libs = this.data.externalJS;
             const libWrap = document.querySelector('[data-populate="externalLibs"]');
-            for (const lib in libs) {
+            Object.keys(libs).forEach(lib => {
                 const exJs = libs[lib];
                 const input = mcsandyUI.helpers.createInput('checkbox', lib, 'projectManager__jsLib__check input', lib, exJs);
                 const label = mcsandyUI.helpers.createLabel(lib, 'projectManager__jsLib__label', lib);
                 input.addEventListener('change', this.functions.handleLibToggle);
                 libWrap.appendChild(input);
                 libWrap.appendChild(label);
-            }
+            });
             mcsandyUI.functions.bindFieldsetCollapse();
         },
         handleLibToggle(e) {
