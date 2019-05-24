@@ -1,10 +1,10 @@
 /* MCSANDY: The preview, storage, and retrieval */
 
 const mcsandyTemplates = {
-    templateCSSInternal(css) {
+    CSSInternal(css) {
         return `<style type="text/css">${css}</style>`;
     },
-    templateJSExternal(javascript) {
+    JSExternal(javascript) {
         // make sure that the JS has a protocol that'll work
         let js = (javascript.slice(javascript.indexOf('//') + 2));
         // if McSandy isn't running as http(s), then it's probably file:// - which shouldn't use a relative protocol
@@ -16,35 +16,58 @@ const mcsandyTemplates = {
         // eslint-disable-next-line no-useless-escape
         return `<script type="text\/javascript" src="${js}"><\/script>`;
     },
-    templateCSSExternal(css) {
+    CSSExternal(css) {
         return `<link rel="stylesheet" href="${css}"/>`;
     },
-    templateJSExternalAll(libList) {
+    JSExternalAll(libList) {
         // libList is an array
         let externalJSSet = '';
         if (mcsandyAppData.ui.onlineState === 'online') {
             /* only add external libraries if we're online */
             libList.forEach((el) => {
-                externalJSSet += this.templateJSExternal(el);
+                externalJSSet += this.JSExternal(el);
             });
         }
         return externalJSSet;
     },
-    templateCSSExternalAll(cssList) {
+    CSSExternalAll(cssList) {
         // cssList is an array
         let externalCSSSet = '';
         if (mcsandyAppData.ui.onlineState === 'online') {
             /* only add external libraries if we're online */
             cssList.forEach((el) => {
-                externalCSSSet += this.templateCSSExternal(el);
+                externalCSSSet += this.CSSExternal(el);
             });
         }
         return externalCSSSet;
     },
-    templateJSInternal(js) {
+    JSInternal(js) {
         // eslint-disable-next-line no-useless-escape
         return `<script type="text\/javascript">${js}<\/script>`;
     },
+    /**
+     * templateHead
+     * @param {string} defaultReset this.blobData.reset
+     * @param {string} cssAssets  assets.css
+     * @param {array} inputArrayOfFields  inputArrayOfFields
+     * @param {string} cssFromControls  ctrls.css.value
+     * @param {array} externalJs  libraries.js
+     */
+    templateHead(defaultReset, cssAssets, inputArrayOfFields, cssFromControls, externalJs) {
+        const reset = this.CSSInternal(defaultReset);
+        const externalSavedCSS = this.CSSExternalAll(cssAssets);
+        const externalUnsavedCSS = this.CSSExternalAll(inputArrayOfFields);
+        const userCSS = this.CSSInternal(cssFromControls);
+        const externalLibraries = this.JSExternalAll(externalJs);
+
+        return `<head>
+            ${reset}
+            ${externalSavedCSS}
+            ${externalUnsavedCSS}
+            ${userCSS}
+            ${externalLibraries}
+        </head>`;
+    }
 };
 // eslint-disable-next-line no-unused-vars
 const mcsandy = {
@@ -115,16 +138,20 @@ const mcsandy = {
             const { ui } = appData;
             const { fields, fieldsets } = ui;
             const { helpers } = this;
-            const reset = mcsandyTemplates.templateCSSInternal(this.blobData.reset);
             const { ctrls } = this.data;
             const { externals } = mcsandyProject;
             const { libraries, assets } = externals;
-            const userCSS = mcsandyTemplates.templateCSSInternal(ctrls.css.value);
-            const externalLibraries = mcsandyTemplates.templateJSExternalAll(libraries.js);
-            const externalSavedCSS = mcsandyTemplates.templateCSSExternalAll(assets.css);
             const inputArrayOfFields = helpers.inputArray(fieldsets.css, fields.unsaved);
-            const externalUnsavedCSS = mcsandyTemplates.templateCSSExternalAll(inputArrayOfFields);
-            return `<head>${reset}${externalSavedCSS}${externalUnsavedCSS}${userCSS}${externalLibraries}</head>`;
+
+            const head = mcsandyTemplates.templateHead(
+                this.blobData.reset,
+                assets.css,
+                inputArrayOfFields,
+                ctrls.css.value,
+                libraries.js,
+            );
+
+            return head;
         },
         constructBodyOpen() {
             const { helpers } = this;
@@ -136,10 +163,10 @@ const mcsandy = {
             const appData = mcsandyAppData;
             const { helpers } = this;
             const { ui } = appData;
-            const userJS = mcsandyTemplates.templateJSInternal(this.data.ctrls.js.value);
-            const externalSavedJS = mcsandyTemplates.templateJSExternalAll(mcsandyProject.externals.assets.js);
+            const userJS = mcsandyTemplates.JSInternal(this.data.ctrls.js.value);
+            const externalSavedJS = mcsandyTemplates.JSExternalAll(mcsandyProject.externals.assets.js);
             const inputArrayOfFields = helpers.inputArray(ui.fieldsets.js, ui.fields.unsaved);
-            const externalUnsavedJS = mcsandyTemplates.templateJSExternalAll(inputArrayOfFields);
+            const externalUnsavedJS = mcsandyTemplates.JSExternalAll(inputArrayOfFields);
 
             return `${externalSavedJS}${externalUnsavedJS}${userJS}</body>`;
         },
