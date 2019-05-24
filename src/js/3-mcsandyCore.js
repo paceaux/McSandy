@@ -225,10 +225,11 @@ const mcsandy = {
             return bodyClose;
         },
         wrapBlobParts() {
-            const bodyOpen = this.helpers.constructBodyOpen();
             const head = this.helpers.constructHead();
+            const bodyOpen = this.helpers.constructBodyOpen();
             const bodyClose = this.helpers.constructBodyClose();
             const blobKit = [head, bodyOpen, bodyClose];
+
             return blobKit;
         },
         createProjectObj(projectName, rawParts, blobArray, assets) {
