@@ -67,6 +67,23 @@ const mcsandyTemplates = {
             ${userCSS}
             ${externalLibraries}
         </head>`;
+    },
+    BodyOpen(userHTML) {
+        return `<body>${userHTML}`;
+    },
+    /**
+     * Body Close Template
+     * @param {Array} externalSaved  mcsandyProject.externals.assets.js
+     * @param {Array} inputArrayOfFields inputArrayOfFields
+     * @param {string} jsFromControls this.data.ctrls.js.value
+     */
+    BodyClose(externalSaved,inputArrayOfFields, jsFromControls) {
+        const externalSavedJS = mcsandyTemplates.JSExternalAll(externalSaved);
+        const externalUnsavedJS = mcsandyTemplates.JSExternalAll(inputArrayOfFields);
+        const userJS = mcsandyTemplates.JSInternal(jsFromControls);
+
+        return `${externalSavedJS}${externalUnsavedJS}${userJS}</body>`;
+
     }
 };
 // eslint-disable-next-line no-unused-vars
@@ -157,18 +174,22 @@ const mcsandy = {
             const { helpers } = this;
             const { ctrls } = this.data;
             const userHTML = helpers.prepareHTML(ctrls.html.value);
-            return `<body>${userHTML}`;
+            const bodyOpen = mcsandyTemplates.BodyOpen(userHTML);
+
+            return bodyOpen;
         },
         constructBodyClose() {
             const appData = mcsandyAppData;
             const { helpers } = this;
             const { ui } = appData;
-            const userJS = mcsandyTemplates.JSInternal(this.data.ctrls.js.value);
-            const externalSavedJS = mcsandyTemplates.JSExternalAll(mcsandyProject.externals.assets.js);
             const inputArrayOfFields = helpers.inputArray(ui.fieldsets.js, ui.fields.unsaved);
-            const externalUnsavedJS = mcsandyTemplates.JSExternalAll(inputArrayOfFields);
+            const bodyClose = mcsandyTemplates.BodyClose(
+                mcsandyProject.externals.assets.js,
+                inputArrayOfFields,
+                this.data.ctrls.js.value,
+            );
 
-            return `${externalSavedJS}${externalUnsavedJS}${userJS}</body>`;
+            return bodyClose;
         },
         wrapBlobParts() {
             const bodyOpen = this.helpers.constructBodyOpen();
