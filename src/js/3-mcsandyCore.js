@@ -34,13 +34,13 @@ const mcsandy = {
             });
             return valueArray;
         },
-        prepareCSS(css) {
+        templateCSSInternal(css) {
             return `<style type="text/css">${css}</style>`;
         },
         prepareHTML(html) {
             return html;
         },
-        prepareExternalJS(javascript) {
+        templateJSExternal(javascript) {
             // make sure that the JS has a protocol that'll work
             let js = (javascript.slice(javascript.indexOf('//') + 2));
             // if McSandy isn't running as http(s), then it's probably file:// - which shouldn't use a relative protocol
@@ -52,32 +52,32 @@ const mcsandy = {
             // eslint-disable-next-line no-useless-escape
             return `<script type="text\/javascript" src="${js}"><\/script>`;
         },
-        prepareExternalCSS(css) {
+        templateCSSExternal(css) {
             return `<link rel="stylesheet" href="${css}"/>`;
         },
-        createExternalJS(libList) {
+        templateJSExternalAll(libList) {
             // libList is an array
             let externalJSSet = '';
             if (mcsandyAppData.ui.onlineState === 'online') {
                 /* only add external libraries if we're online */
                 libList.forEach((el) => {
-                    externalJSSet += this.helpers.prepareExternalJS(el);
+                    externalJSSet += this.helpers.templateJSExternal(el);
                 });
             }
             return externalJSSet;
         },
-        createExternalCSS(cssList) {
+        templateCSSExternalAll(cssList) {
             // cssList is an array
             let externalCSSSet = '';
             if (mcsandyAppData.ui.onlineState === 'online') {
                 /* only add external libraries if we're online */
                 cssList.forEach((el) => {
-                    externalCSSSet += this.helpers.prepareExternalCSS(el);
+                    externalCSSSet += this.helpers.templateCSSExternal(el);
                 });
             }
             return externalCSSSet;
         },
-        prepareInternalJS(js) {
+        templateJSInternal(js) {
             // eslint-disable-next-line no-useless-escape
             return `<script type="text\/javascript">${js}<\/script>`;
         },
@@ -112,15 +112,15 @@ const mcsandy = {
             const { ui } = appData;
             const { fields, fieldsets } = ui;
             const { helpers } = this;
-            const reset = helpers.prepareCSS(this.blobData.reset);
+            const reset = helpers.templateCSSInternal(this.blobData.reset);
             const { ctrls } = this.data;
             const { externals } = mcsandyProject;
             const { libraries, assets } = externals;
-            const userCSS = helpers.prepareCSS(ctrls.css.value);
-            const externalLibraries = helpers.createExternalJS(libraries.js);
-            const externalSavedCSS = helpers.createExternalCSS(assets.css);
+            const userCSS = helpers.templateCSSInternal(ctrls.css.value);
+            const externalLibraries = helpers.templateJSExternalAll(libraries.js);
+            const externalSavedCSS = helpers.templateCSSExternalAll(assets.css);
             const inputArrayOfFields = helpers.inputArray(fieldsets.css, fields.unsaved);
-            const externalUnsavedCSS = helpers.createExternalCSS(inputArrayOfFields);
+            const externalUnsavedCSS = helpers.templateCSSExternalAll(inputArrayOfFields);
             return `<head>${reset}${externalSavedCSS}${externalUnsavedCSS}${userCSS}${externalLibraries}</head>`;
         },
         constructBodyOpen() {
@@ -133,10 +133,10 @@ const mcsandy = {
             const appData = mcsandyAppData;
             const { helpers } = this;
             const { ui } = appData;
-            const userJS = helpers.prepareInternalJS(this.data.ctrls.js.value);
-            const externalSavedJS = helpers.createExternalJS(mcsandyProject.externals.assets.js);
+            const userJS = helpers.templateJSInternal(this.data.ctrls.js.value);
+            const externalSavedJS = helpers.templateJSExternalAll(mcsandyProject.externals.assets.js);
             const inputArrayOfFields = helpers.inputArray(ui.fieldsets.js, ui.fields.unsaved);
-            const externalUnsavedJS = helpers.createExternalJS(inputArrayOfFields);
+            const externalUnsavedJS = helpers.templateJSExternalAll(inputArrayOfFields);
 
             return `${externalSavedJS}${externalUnsavedJS}${userJS}</body>`;
         },
@@ -155,10 +155,9 @@ const mcsandy = {
                 externals: assets,
             };
         },
-        buildBlob(parts, type) {
-            const blobType = type !== undefined ? `${type};charset=utf-8` : 'text/html;charset=utf-8';
+        buildBlob(parts, type = 'text/html') {
+            const blobType = `${type};charset=utf-8`;
             const blob = new Blob(parts, { type: blobType });
-            window.mcsandyblob = blob;
             return blob;
         },
         getStoredProjects() {
@@ -298,15 +297,12 @@ const mcsandy = {
             mcsandyUI.functions.setHash(projectName);
             this.functions.createProjectSelect();
         },
-        downloadContent(downloadObj, type) {
+        downloadContent(downloadObj, type = 'html') {
             // downloadObj should be an object.
             // It should have in it an array called blobArray.
             // there must be a min of 1 item in the array,
             // array  contains the stuff we want to download
             // type is presumed to be either html, css, or js
-            const downloadType = type !== undefined
-                ? type
-                : 'html'; // if there's no type, then it must be a dl for the entire project
             const parts = downloadObj !== undefined
                 ? downloadObj.blobArray
                 : this.helpers.wrapBlobParts();
@@ -314,7 +310,7 @@ const mcsandy = {
                 ? `text/${type}`
                 : 'application/javascript';
             const blob = this.helpers.buildBlob(parts, mimeType);
-            const fileName = `${downloadObj.project}.${downloadType}`;
+            const fileName = `${downloadObj.project}.${type}`;
             saveAs(blob, fileName);
         },
     },
