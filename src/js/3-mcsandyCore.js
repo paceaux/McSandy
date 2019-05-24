@@ -46,14 +46,14 @@ const mcsandyTemplates = {
         return `<script type="text\/javascript">${js}<\/script>`;
     },
     /**
-     * templateHead
+     * Head
      * @param {string} defaultReset this.blobData.reset
      * @param {string} cssAssets  assets.css
      * @param {array} inputArrayOfFields  inputArrayOfFields
      * @param {string} cssFromControls  ctrls.css.value
      * @param {array} externalJs  libraries.js
      */
-    templateHead(defaultReset, cssAssets, inputArrayOfFields, cssFromControls, externalJs) {
+    Head(defaultReset, cssAssets, inputArrayOfFields, cssFromControls, externalJs) {
         const reset = this.CSSInternal(defaultReset);
         const externalSavedCSS = this.CSSExternalAll(cssAssets);
         const externalUnsavedCSS = this.CSSExternalAll(inputArrayOfFields);
@@ -143,7 +143,7 @@ const mcsandy = {
             const { libraries, assets } = externals;
             const inputArrayOfFields = helpers.inputArray(fieldsets.css, fields.unsaved);
 
-            const head = mcsandyTemplates.templateHead(
+            const head = mcsandyTemplates.Head(
                 this.blobData.reset,
                 assets.css,
                 inputArrayOfFields,
