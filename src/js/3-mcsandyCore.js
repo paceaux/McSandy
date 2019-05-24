@@ -1,9 +1,18 @@
 /* MCSANDY: The preview, storage, and retrieval */
 
-const mcsandyTemplates = {
+const PreviewTemplates = {
+    /**
+     * CSSInternal generates <style>
+     * @param {string} css raw CSS
+     */
     CSSInternal(css) {
         return `<style type="text/css">${css}</style>`;
     },
+
+    /**
+     * JSExternal generates <script src="">
+     * @param {string} javascript url for resource
+     */
     JSExternal(javascript) {
         // make sure that the JS has a protocol that'll work
         let js = (javascript.slice(javascript.indexOf('//') + 2));
@@ -16,9 +25,18 @@ const mcsandyTemplates = {
         // eslint-disable-next-line no-useless-escape
         return `<script type="text\/javascript" src="${js}"><\/script>`;
     },
+    /**
+     * CSSExternal generates a <link>
+     * @param {string} css url to external stylesheet
+     */
     CSSExternal(css) {
         return `<link rel="stylesheet" href="${css}"/>`;
     },
+
+    /**
+     * JSExternalAll generates all <script src>
+     * @param {Array} libList list of libraries
+     */
     JSExternalAll(libList) {
         // libList is an array
         let externalJSSet = '';
@@ -30,6 +48,11 @@ const mcsandyTemplates = {
         }
         return externalJSSet;
     },
+
+    /**
+     * CSSExternalAll generates all <link rel""">
+     * @param {Array} cssList list of all external CSS resources
+     */
     CSSExternalAll(cssList) {
         // cssList is an array
         let externalCSSSet = '';
@@ -41,12 +64,18 @@ const mcsandyTemplates = {
         }
         return externalCSSSet;
     },
+
+    /**
+     * JSInternal generates a <script> with js inside of block
+     * @param {string} js raw javascript
+     */
     JSInternal(js) {
         // eslint-disable-next-line no-useless-escape
         return `<script type="text\/javascript">${js}<\/script>`;
     },
+
     /**
-     * Head
+     * Head constructs the head for html document
      * @param {string} defaultReset this.blobData.reset
      * @param {string} cssAssets  assets.css
      * @param {array} inputArrayOfFields  inputArrayOfFields
@@ -68,23 +97,27 @@ const mcsandyTemplates = {
             ${externalLibraries}
         </head>`;
     },
+    /**
+     * BodyOpen constructs the <body> with all user HTML
+     * @param {string} userHTML markup user wrote
+     */
     BodyOpen(userHTML) {
         return `<body>${userHTML}`;
     },
+
     /**
-     * Body Close Template
+     * BodyClose creates the JS assests at the end before closing with </body>
      * @param {Array} externalSaved  mcsandyProject.externals.assets.js
      * @param {Array} inputArrayOfFields inputArrayOfFields
      * @param {string} jsFromControls this.data.ctrls.js.value
      */
     BodyClose(externalSaved,inputArrayOfFields, jsFromControls) {
-        const externalSavedJS = mcsandyTemplates.JSExternalAll(externalSaved);
-        const externalUnsavedJS = mcsandyTemplates.JSExternalAll(inputArrayOfFields);
-        const userJS = mcsandyTemplates.JSInternal(jsFromControls);
+        const externalSavedJS = this.JSExternalAll(externalSaved);
+        const externalUnsavedJS = this.JSExternalAll(inputArrayOfFields);
+        const userJS = this.JSInternal(jsFromControls);
 
         return `${externalSavedJS}${externalUnsavedJS}${userJS}</body>`;
-
-    }
+    },
 };
 // eslint-disable-next-line no-unused-vars
 const mcsandy = {
@@ -160,7 +193,7 @@ const mcsandy = {
             const { libraries, assets } = externals;
             const inputArrayOfFields = helpers.inputArray(fieldsets.css, fields.unsaved);
 
-            const head = mcsandyTemplates.Head(
+            const head = PreviewTemplates.Head(
                 this.blobData.reset,
                 assets.css,
                 inputArrayOfFields,
@@ -174,7 +207,7 @@ const mcsandy = {
             const { helpers } = this;
             const { ctrls } = this.data;
             const userHTML = helpers.prepareHTML(ctrls.html.value);
-            const bodyOpen = mcsandyTemplates.BodyOpen(userHTML);
+            const bodyOpen = PreviewTemplates.BodyOpen(userHTML);
 
             return bodyOpen;
         },
@@ -183,7 +216,7 @@ const mcsandy = {
             const { helpers } = this;
             const { ui } = appData;
             const inputArrayOfFields = helpers.inputArray(ui.fieldsets.js, ui.fields.unsaved);
-            const bodyClose = mcsandyTemplates.BodyClose(
+            const bodyClose = PreviewTemplates.BodyClose(
                 mcsandyProject.externals.assets.js,
                 inputArrayOfFields,
                 this.data.ctrls.js.value,
