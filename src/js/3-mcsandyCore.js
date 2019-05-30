@@ -1,6 +1,6 @@
 /* MCSANDY: The preview, storage, and retrieval */
 
-const PreviewTemplates = {
+const SandboxTemplates = {
     /**
      * CSSInternal generates <style>
      * @param {string} css raw CSS
@@ -120,12 +120,13 @@ const PreviewTemplates = {
     },
 };
 
-class Preview {
-    constructor(parts = [], type = 'text/html') {
+class SandBox {
+    constructor(parts = [], type = 'html', projectName = 'mcsandy') {
         // eslint-disable-next-line no-underscore-dangle
         this.__parts = parts;
         this.reset = 'html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}';
         this.type = type;
+        this.projectName = projectName;
     }
 
     get parts() {
@@ -150,8 +151,16 @@ class Preview {
         }
     }
 
+    get mimeType() {
+        const jsMimeType = 'application/javascript';
+        const textMimeType = `text/${this.type}`;
+        const isJS = this.type === 'javascript' || this.type === 'js';
+
+        return isJS ? jsMimeType : textMimeType;
+    }
+
     get blobType() {
-        return `${this.type};charset=utf-8`;
+        return `${this.mimeType};charset=utf-8`;
     }
 
     get blob() {
@@ -162,7 +171,16 @@ class Preview {
         return window.URL.createObjectURL(this.blob);
     }
 
+    get fileName() {
+        return `${this.projectName}.${this.type}`;
+    }
+
+    save() {
+        saveAs(this.blob, this.fileName);
+    }
+
 }
+
 // eslint-disable-next-line no-unused-vars
 const mcsandy = {
     init(data) {
@@ -176,7 +194,7 @@ const mcsandy = {
             this.functions[funcName] = this.functions[funcName].bind(this);
         });
 
-        this.preview = new Preview();
+        this.preview = new SandBox();
         this.bindUiEvents();
         this.functions.createProjectSelect();
         if (navigator.onLine) {
@@ -239,7 +257,7 @@ const mcsandy = {
             const { libraries, assets } = externals;
             const inputArrayOfFields = helpers.inputArray(fieldsets.css, fields.unsaved);
 
-            const head = PreviewTemplates.Head(
+            const head = SandboxTemplates.Head(
                 this.blobData.reset,
                 assets.css,
                 inputArrayOfFields,
@@ -253,7 +271,7 @@ const mcsandy = {
             const { helpers } = this;
             const { ctrls } = this.data;
             const userHTML = helpers.prepareHTML(ctrls.html.value);
-            const bodyOpen = PreviewTemplates.BodyOpen(userHTML);
+            const bodyOpen = SandboxTemplates.BodyOpen(userHTML);
 
             return bodyOpen;
         },
@@ -262,7 +280,7 @@ const mcsandy = {
             const { helpers } = this;
             const { ui } = appData;
             const inputArrayOfFields = helpers.inputArray(ui.fieldsets.js, ui.fields.unsaved);
-            const bodyClose = PreviewTemplates.BodyClose(
+            const bodyClose = SandboxTemplates.BodyClose(
                 mcsandyProject.externals.assets.js,
                 inputArrayOfFields,
                 this.data.ctrls.js.value,
@@ -390,8 +408,8 @@ const mcsandy = {
             const parts = loadedParts !== undefined
                 ? loadedParts.blobArray
                 : this.helpers.getContentFromUI();
+            
             this.preview.parts = parts;
-
             iframe.src = this.preview.url;
         },
         delContent(e) {
@@ -435,15 +453,14 @@ const mcsandy = {
             // there must be a min of 1 item in the array,
             // array  contains the stuff we want to download
             // type is presumed to be either html, css, or js
+            console.log('downloading');
             const parts = downloadObj !== undefined
                 ? downloadObj.blobArray
                 : this.helpers.getContentFromUI();
-            const mimeType = type !== 'javascript'
-                ? `text/${type}`
-                : 'application/javascript';
-            const blob = this.helpers.buildBlob(parts, mimeType);
-            const fileName = `${downloadObj.project}.${type}`;
-            saveAs(blob, fileName);
+            
+            const blob = new SandBox(parts, type, downloadObj.project);
+
+            blob.save();
         },
     },
 };
