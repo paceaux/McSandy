@@ -255,7 +255,7 @@ const mcsandy = {
             const { ctrls } = this.data;
             const { externals } = mcsandyProject;
             const { libraries, assets } = externals;
-            const inputArrayOfFields = helpers.inputArray(fieldsets.css, fields.unsaved);
+            const inputArrayOfFields = helpers.inputArray(fieldsets.css, '.fieldset__field--url');
 
             const head = SandboxTemplates.Head(
                 this.blobData.reset,
@@ -279,7 +279,7 @@ const mcsandy = {
             const appData = mcsandyAppData;
             const { helpers } = this;
             const { ui } = appData;
-            const inputArrayOfFields = helpers.inputArray(ui.fieldsets.js, ui.fields.unsaved);
+            const inputArrayOfFields = helpers.inputArray(ui.fieldsets.js, '.fieldset__field--url');
             const bodyClose = SandboxTemplates.BodyClose(
                 mcsandyProject.externals.assets.js,
                 inputArrayOfFields,
@@ -453,7 +453,6 @@ const mcsandy = {
             // there must be a min of 1 item in the array,
             // array  contains the stuff we want to download
             // type is presumed to be either html, css, or js
-            console.log('downloading');
             const parts = downloadObj !== undefined
                 ? downloadObj.blobArray
                 : this.helpers.getContentFromUI();
