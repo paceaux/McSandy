@@ -127,11 +127,6 @@ const mcsandy = {
                 externals: assets,
             };
         },
-        buildBlob(parts, type = 'text/html') {
-            const blobType = `${type};charset=utf-8`;
-            const blob = new Blob(parts, { type: blobType });
-            return blob;
-        },
         getStoredProjects() {
             const len = localStorage.length;
             const projects = [];
