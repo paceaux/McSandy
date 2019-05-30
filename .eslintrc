@@ -15,6 +15,8 @@
         "window": true,
         "saveAs" : true,
         "store": true,
+        "sandbox": true,
+        "sandboxTemplates": true,
         "mcsandy": true, 
         "mcsandyUI" : true,
         "mcsandyProject": true,
