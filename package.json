@@ -17,7 +17,9 @@
   "scripts": {
     "build": "gulp build",
     "watch": "gulp watch",
-    "lint": "eslint src/js/** gulp/** gulpfile.js"
+    "lint": "eslint src/js/** gulp/** gulpfile.js",
+    "test": "npm run lint",
+    "start": "http-server ./build/ -p 8080 -o"
   },
   "dependencies": {
     "gulp": "^3.9.1",
@@ -36,7 +38,8 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.2",
-    "nib": "~1.0.1",
+    "http-server": "^0.11.1",
+    "nib": "^1.1.2",
     "require-dir": "^0.3.2",
     "stylus": "~0.37.0"
   },
