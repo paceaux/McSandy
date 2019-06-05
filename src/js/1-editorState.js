@@ -129,4 +129,15 @@ class EditorState {
 
         this.sets.externalCss.add(value);
     }
+
+    clear() {
+        this.html = '';
+        this.css = '';
+        this.js = '';
+        this.projectName = '';
+
+        Object.values(this.sets).forEach(set => {
+            set.clear();
+        });
+    }
 }

@@ -207,6 +207,8 @@ const mcsandy = {
         },
         clearContent(e) {
             e.preventDefault();
+            this.appState.clear();
+            this.functions.updateContent();
             window.history.pushState({}, 'Create New Project', window.location.pathname);
         },
         saveContent(e) {
