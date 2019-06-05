@@ -72,21 +72,16 @@ const mcsandy = {
             return rawParts;
         },
         constructHead() {
-            const appData = mcsandyAppData;
             const { appState } = this;
-            const { ui } = appData;
-            const { fieldsets } = ui;
-            const { helpers } = this;
-            const { ctrls } = this.data;
+            const { css, externalCss } = appState;
             const { externals } = mcsandyProject;
             const { libraries, assets } = externals;
-            const inputArrayOfFields = helpers.inputArray(fieldsets.css, '.fieldset__field--url');
 
             const head = this.SandboxTemplates.Head(
                 this.blobData.reset,
                 assets.css,
-                inputArrayOfFields,
-                appState.css,
+                externalCss,
+                css,
                 libraries.js,
             );
 
@@ -94,21 +89,20 @@ const mcsandy = {
         },
         constructBodyOpen() {
             const { helpers } = this;
-            const { ctrls } = this.data;
-            const userHTML = helpers.prepareHTML(ctrls.html.value);
+            const { html } = this.appState;
+            const userHTML = helpers.prepareHTML(html);
             const bodyOpen = this.SandboxTemplates.BodyOpen(userHTML);
 
             return bodyOpen;
         },
         constructBodyClose() {
             const appData = mcsandyAppData;
-            const { helpers } = this;
-            const { ui } = appData;
-            const inputArrayOfFields = helpers.inputArray(ui.fieldsets.js, '.fieldset__field--url');
+            const { appState } = this;
+            const { js, externalJs } = appState;
             const bodyClose = this.SandboxTemplates.BodyClose(
                 mcsandyProject.externals.assets.js,
-                inputArrayOfFields,
-                this.data.ctrls.js.value,
+                externalJs,
+                js,
             );
 
             return bodyClose;

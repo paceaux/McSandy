@@ -2,6 +2,11 @@
 class EditorState {
     constructor(fields = {}) {
         this.fields = fields;
+        this.sets = { 
+            externalJs: new Set(),
+            externalCss: new Set(),
+        };
+
     }
 
     get html() {
@@ -64,25 +69,27 @@ class EditorState {
         if (!this.fields.externalJs) throw new Error('externalJs field not defined');
 
         const nodeList = this.fields.externalJs;
-        const externalJs = [];
 
         Object.values(nodeList).forEach(node => {
-            externalJs.push(node.value);
+            if (!this.sets.externalJs.has(node.value)) {
+                this.sets.externalJs.add(node.value);
+            }
         });
 
-        return externalJs;
+        return this.sets.externalJs;
     }
 
     get externalCss() {
         if (!this.fields.externalCss) throw new Error('externalJs field not defined');
 
         const nodeList = this.fields.externalCss;
-        const externalCss = [];
 
         Object.values(nodeList).forEach(node => {
-            externalCss.push(node.value);
+            if (!this.sets.externalCss.has(node.value)) {
+                this.sets.externalCss.add(node.value);
+            }
         });
 
-        return externalCss;
+        return this.sets.externalCss;
     }
 }
