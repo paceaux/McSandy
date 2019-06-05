@@ -40,6 +40,9 @@ const mcsandyAppData = {
             assets: '.fieldset__field--url',
             saved: '.fieldset__inputWrapper[data-saved="true"] .fieldset__field',
             unsaved: '.fieldset__inputWrapper[data-saved="false"] .fieldset__field',
+            html: document.getElementById('js-html'),
+            css: document.getElementById('js-css'),
+            js: document.getElementById('js-js'),
         },
         fieldsets: {
             html: document.getElementById('js-fieldset--html'),
