@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line no-unused-vars
 const mcsandy = {
-    init(data, Sandbox, SandBoxTemplates) {
+    init(data, Sandbox, SandBoxTemplates, appState) {
         // eslint-disable-next-line no-console
         console.info('McSandy is Running');
         this.data = data;
@@ -17,6 +17,7 @@ const mcsandy = {
         this.SandboxTemplates = SandBoxTemplates;
         this.SandBox = Sandbox;
         this.preview = new Sandbox();
+        this.appState = appState;
         this.bindUiEvents();
         this.functions.createProjectSelect();
 
@@ -72,6 +73,7 @@ const mcsandy = {
         },
         constructHead() {
             const appData = mcsandyAppData;
+            const { appState } = this;
             const { ui } = appData;
             const { fieldsets } = ui;
             const { helpers } = this;
@@ -84,7 +86,7 @@ const mcsandy = {
                 this.blobData.reset,
                 assets.css,
                 inputArrayOfFields,
-                ctrls.css.value,
+                appState.css,
                 libraries.js,
             );
 
@@ -145,13 +147,8 @@ const mcsandy = {
         },
     },
     bindUiEvents() {
-        const { functions } = this;
-        const { ctrls } = this.data;
 
-        // BIND EVENTS TO BUTTONS
-        ctrls.projectSave.addEventListener('click', functions.saveContent);
-        ctrls.projectDel.addEventListener('click', functions.delContent);
-        ctrls.projectNew.addEventListener('click', functions.clearContent);
+
     },
     functions: {
         createProjectSelect() {
@@ -226,15 +223,20 @@ const mcsandy = {
         saveContent(e) {
             e.preventDefault();
             mcsandyUI.functions.flashClass(e.currentTarget);
-            const { ctrls } = this.data;
+            const { appState } = this;
+            const { 
+                html,
+                css,
+                js,
+                projectName,
+            } = appState;
             const rawParts = this.helpers.createRawParts(
-                ctrls.html.value,
-                ctrls.css.value,
-                ctrls.js.value,
+                html,
+                css,
+                js,
                 this.blobData.externalJS,
             );
             const blobArray = this.helpers.getContentFromUI();
-            const projectName = this.data.ctrls.projectName.value;
             const externalAssets = this.helpers.createExternalAssetsObj();
             const project = this.helpers.createProjectObj(
                 projectName,

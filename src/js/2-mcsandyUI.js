@@ -14,10 +14,11 @@ function throttle(fn, limit) {
 }
 // eslint-disable-next-line no-unused-vars
 const mcsandyUI = {
-    init(data) {
+    init(data, appState) {
         // eslint-disable-next-line no-console
         console.info('McSandyUI is Running');
         this.data = data;
+        this.appState = appState;
         Object.keys(this.helpers).forEach(helper => {
             this.helpers[helper] = this.helpers[helper].bind(this);
         });
@@ -273,6 +274,11 @@ const mcsandyUI = {
             editor.addEventListener('drop', this.functions.handleFileUpload);
         });
 
+        // SAVE, DELETE, CLEAR
+        ctrls.projectSave.addEventListener('click', (evt) => mcsandy.functions.saveContent.call(mcsandy, evt));
+        ctrls.projectDel.addEventListener('click', (evt) => mcsandy.functions.delContent.call(mcsandy,evt));
+        ctrls.projectNew.addEventListener('click', (evt) => mcsandy.functions.clearContent.call(mcsandy, evt));
+      
         // BIND EVENTS TO TEXTAREAS
         fields.css.addEventListener('keyup', throttle(() => mcsandy.functions.updateContent(), 750));
         fields.html.addEventListener('keyup', throttle(() => mcsandy.functions.updateContent(), 750));
