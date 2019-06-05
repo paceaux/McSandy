@@ -80,6 +80,12 @@ class EditorState {
         return this.sets.externalJs;
     }
 
+    addExternalJs(value) {
+        if (!value) return;
+
+        this.sets.externalJs.add(value);
+    }
+
     get librariesJs() {
         if (!this.fields.librariesJs) throw new Error('libaries js field not defined');
 
@@ -92,6 +98,12 @@ class EditorState {
         });
 
         return this.sets.librariesJs;
+    }
+
+    addJsLibrary(value) {
+        if (!value) return;
+
+        this.sets.librariesJs.add(value);
     }
 
     get jsLibraries() {
@@ -112,4 +124,9 @@ class EditorState {
         return this.sets.externalCss;
     }
 
+    addExternalCss(value) {
+        if (!value) return;
+
+        this.sets.externalCss.add(value);
+    }
 }
