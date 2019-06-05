@@ -213,17 +213,18 @@ const mcsandy = {
             e.preventDefault();
             mcsandyUI.functions.flashClass(e.currentTarget);
             const { appState } = this;
-            const { 
+            const {
                 html,
                 css,
                 js,
                 projectName,
+                externalJs,
             } = appState;
             const rawParts = this.helpers.createRawParts(
                 html,
                 css,
                 js,
-                this.blobData.externalJS,
+                externalJs,
             );
             const blobArray = this.helpers.getContentFromUI();
             const externalAssets = this.helpers.createExternalAssetsObj();
