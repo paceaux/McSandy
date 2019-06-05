@@ -1,5 +1,17 @@
-
 /* MCSANDYUI: the main user interactions with the app */
+
+function throttle(fn, limit) {
+    let waiting = false;
+    return (...args) => {
+        if (!waiting) {
+            fn.apply(this, args);
+            waiting = true;
+            setTimeout(() => {
+                waiting = false;
+            }, limit);
+        }
+    };
+}
 // eslint-disable-next-line no-unused-vars
 const mcsandyUI = {
     init(data) {
@@ -19,73 +31,74 @@ const mcsandyUI = {
     helpers: {
         keyDown(e) {
             /* SAVE */
-            const { userPrefs } = mcsandyAppData;
+            const {
+                userPrefs
+            } = mcsandyAppData;
             if (e.ctrlKey) {
                 switch (e.keyCode) {
-                // s
-                case 83:
-                    mcsandy.functions.saveContent(e);
-                    this.functions.flashClass(mcsandy.data.ctrls.projectSave);
-                    break;
-                // r
-                case 82:
-                    mcsandy.functions.updateContent();
-                    break;
-                // l
-                case 76:
-                    this.functions.handleProjectLoad(e);
-                    this.functions.flashClass(mcsandy.data.ctrls.projectLoad);
-                    break;
-                // f
-                case 70:
-                    this.functions.handleDownloadProject(e);
-                    this.functions.flashClass(mcsandy.data.ctrls.projectDownload);
-                    break;
-                default:
-                    break;
-                }
-                if (e.shiftKey) {
-                    switch (e.keyCode) {
-                    // e
-                    case 69:
-                        document.querySelector('[for="js-editor-toggle"]').click();
+                    // s
+                    case 83:
+                        mcsandy.functions.saveContent(e);
+                        this.functions.flashClass(mcsandy.data.ctrls.projectSave);
                         break;
-                    // p
-                    case 80:
-                        document.querySelector('[for="js-footer-editor-toggle"]').click();
+                        // r
+                    case 82:
+                        mcsandy.functions.updateContent();
                         break;
-                    // =
-                    case 187:
-                        mcsandy.functions.clearContent(e);
+                        // l
+                    case 76:
+                        this.functions.handleProjectLoad(e);
+                        this.functions.flashClass(mcsandy.data.ctrls.projectLoad);
                         break;
-                    // +
-                    case 107:
-                        mcsandy.functions.clearContent(e);
-                        break;
-                    // backspace
-                    case 8:
-                        mcsandy.functions.delContent(e);
-                        break;
-                    // h
-                    case 72:
-                        this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
-                        mcsandyAppData.userPrefs.ui.hLayout = userPrefs.ui.hLayout !== true;
-                        mcsandyPrefs.functions.savePreferences();
-                        break;
-                    case 73:
-                        this.functions.toggleModal();
-                        break;
-                    case 84:
-                        this.helpers.runTest(e);
+                        // f
+                    case 70:
+                        this.functions.handleDownloadProject(e);
+                        this.functions.flashClass(mcsandy.data.ctrls.projectDownload);
                         break;
                     default:
                         break;
+                }
+                if (e.shiftKey) {
+                    switch (e.keyCode) {
+                        // e
+                        case 69:
+                            document.querySelector('[for="js-editor-toggle"]').click();
+                            break;
+                            // p
+                        case 80:
+                            document.querySelector('[for="js-footer-editor-toggle"]').click();
+                            break;
+                            // =
+                        case 187:
+                            mcsandy.functions.clearContent(e);
+                            break;
+                            // +
+                        case 107:
+                            mcsandy.functions.clearContent(e);
+                            break;
+                            // backspace
+                        case 8:
+                            mcsandy.functions.delContent(e);
+                            break;
+                            // h
+                        case 72:
+                            this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
+                            mcsandyAppData.userPrefs.ui.hLayout = userPrefs.ui.hLayout !== true;
+                            mcsandyPrefs.functions.savePreferences();
+                            break;
+                        case 73:
+                            this.functions.toggleModal();
+                            break;
+                        case 84:
+                            this.helpers.runTest(e);
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
         },
-        keyUp() {
-        },
+        keyUp() {},
         convertHash(hash) {
             return hash.replace(' ', '_');
         },
@@ -192,8 +205,7 @@ const mcsandyUI = {
             wrapper.appendChild(button);
             return wrapper;
         },
-        runTest() {
-        },
+        runTest() {},
         getUrlParams() {
             const urlParams = {};
             let match;
@@ -211,8 +223,14 @@ const mcsandyUI = {
         },
     },
     bindUiEvents() {
-        const { helpers, data } = this;
-        const { ctrls } = data;
+        const {
+            helpers,
+            data
+        } = this;
+        const {
+            ctrls,
+            fields,
+        } = data;
         const editors = document.querySelectorAll('.field--textarea');
         const editorFieldsets = data.fields.fieldsets;
         const fileUploads = data.fields.upload;
@@ -255,6 +273,12 @@ const mcsandyUI = {
             editor.addEventListener('drop', this.functions.handleFileUpload);
         });
 
+        // BIND EVENTS TO TEXTAREAS
+        fields.css.addEventListener('keyup', throttle(() => mcsandy.functions.updateContent(), 750));
+        fields.html.addEventListener('keyup', throttle(() => mcsandy.functions.updateContent(), 750));
+        fields.js.addEventListener('change', () => {
+            mcsandy.functions.updateContent();
+        });
         window.addEventListener('keydown', this.functions.ctrlShiftKeydown);
         /* GLOBAL BUTTON STUFF */
         helpers.addEvents(document.querySelectorAll('button'), 'click', this.functions.flashClass);
@@ -274,7 +298,9 @@ const mcsandyUI = {
         this.data.modal.overlay.addEventListener('click', this.functions.toggleModal);
     },
     bindBroadcastEvents() {
-        const { data } = this;
+        const {
+            data
+        } = this;
 
         if ('BroadcastChannel' in window) {
             const fieldChannel = new BroadcastChannel('field_broadcasts');
@@ -320,7 +346,9 @@ const mcsandyUI = {
             }
         },
         handleCollapsePanel(e) {
-            const { target } = e;
+            const {
+                target
+            } = e;
             const parent = target.parentElement;
             this.helpers.toggleClass(parent, 'js-collapsed');
         },
@@ -359,16 +387,18 @@ const mcsandyUI = {
         },
         ctrlShiftKeydown(evt) {
             const modifierKey = evt.keyCode;
-            const { ctrlshiftkey } = evt.target.dataset;
+            const {
+                ctrlshiftkey
+            } = evt.target.dataset;
             const isCtrlShift = !!evt.target.dataset.ctrlshiftkey;
             const isParentCtrlShift = !!evt.target.parentElement.dataset.ctrlshiftkey;
             const ctrlShiftModifier = isCtrlShift ? ctrlshiftkey : ctrlshiftkey;
             const id = isCtrlShift ? evt.target.id : evt.target.parentElement.id;
 
-            if (evt.ctrlKey
-                && evt.shiftKey
-                && (isCtrlShift || isParentCtrlShift)
-                && modifierKey === ctrlShiftModifier.toUpperCase().charCodeAt()) {
+            if (evt.ctrlKey &&
+                evt.shiftKey &&
+                (isCtrlShift || isParentCtrlShift) &&
+                modifierKey === ctrlShiftModifier.toUpperCase().charCodeAt()) {
                 this.functions.openIdInFullWindow(id);
             }
         },
@@ -408,14 +438,18 @@ const mcsandyUI = {
         },
         handleRemoveExternalFile(e) {
             e.preventDefault();
-            const { helpers } = this;
+            const {
+                helpers
+            } = this;
             helpers.removeParent(e.target);
             mcsandy.functions.updateContent();
         },
         handleFileDrop(e) {
             e.preventDefault();
             e.stopPropagation();
-            const { files } = e.dataTransfer;
+            const {
+                files
+            } = e.dataTransfer;
             let i = 0;
             for (let f; f === files[i]; i += 1) {
                 const input = this.helpers.createExternalFileSet(f);
@@ -437,8 +471,12 @@ const mcsandyUI = {
         },
         handleAddExternalFile(e) {
             e.preventDefault();
-            const { helpers } = this;
-            const { functions } = this;
+            const {
+                helpers
+            } = this;
+            const {
+                functions
+            } = this;
             const fieldPatterns = mcsandyAppData.ui.fieldRegexPatterns;
             const el = e.target;
             let clonedParent;
@@ -477,7 +515,9 @@ const mcsandyUI = {
         handleFileUpload(e) {
             e.stopPropagation();
             e.preventDefault();
-            const { files } = e.dataTransfer;
+            const {
+                files
+            } = e.dataTransfer;
             const toElement = e.toElement || e.target;
             const editField = toElement.dataset.fileext;
 
@@ -519,7 +559,9 @@ const mcsandyUI = {
             const source = e.target.parentNode.querySelector('textarea').value;
             const projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy';
             const type = e.target.dataset.fileext;
-            const blob = new Blob([source], { type });
+            const blob = new Blob([source], {
+                type
+            });
             const sourceURL = URL.createObjectURL(blob);
             const fileDetails = `${e.target.dataset.mimeoutput}:${projectName}.${type}:${sourceURL}`;
             e.dataTransfer.setData('DownloadURL', fileDetails);
@@ -530,14 +572,18 @@ const mcsandyUI = {
             e.dataTransfer.getData('DownloadURL', 0);
         },
         updateEditors(html, css, js) {
-            const { ctrls } = mcsandy.data;
+            const {
+                ctrls
+            } = mcsandy.data;
             ctrls.html.value = html;
             ctrls.css.value = css;
             ctrls.js.value = js;
         },
         updateCtrls(projData) {
             const projectField = mcsandy.data.ctrls.projectName;
-            const { ctrls } = this.data;
+            const {
+                ctrls
+            } = this.data;
             projectField.value = projData.project;
             projectField.placeholder = projData.project;
             ctrls.projectDownload.value = projData.project;
@@ -584,13 +630,17 @@ const mcsandyUI = {
             }
         },
         addModalContent(title, content) {
-            const { modal } = this.data;
+            const {
+                modal
+            } = this.data;
 
             modal.title.innerText = title;
             modal.content.innerHTML = content;
         },
         toggleModal(content) {
-            const { modal } = this.data;
+            const {
+                modal
+            } = this.data;
 
             this.helpers.toggleClass(modal.container, 'visible');
             this.helpers.toggleClass(modal.overlay, 'visible');

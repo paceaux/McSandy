@@ -148,25 +148,6 @@ const mcsandy = {
         const { functions } = this;
         const { ctrls } = this.data;
 
-        function throttle(fn, limit) {
-            let waiting = false;
-            return (...args) => {
-                if (!waiting) {
-                    fn.apply(this, args);
-                    waiting = true;
-                    setTimeout(() => {
-                        waiting = false;
-                    }, limit);
-                }
-            };
-        }
-        // BIND EVENTS TO TEXTAREAS
-        ctrls.css.addEventListener('keyup', throttle(() => functions.updateContent(), 750));
-        ctrls.html.addEventListener('keyup', throttle(() => functions.updateContent(), 750));
-        ctrls.js.addEventListener('change', () => {
-            functions.updateContent();
-        });
-
         // BIND EVENTS TO BUTTONS
         ctrls.projectSave.addEventListener('click', functions.saveContent);
         ctrls.projectDel.addEventListener('click', functions.delContent);
