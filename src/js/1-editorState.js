@@ -2,11 +2,12 @@
 class EditorState {
     constructor(fields = {}) {
         this.fields = fields;
-        this.sets = { 
+        this.sets = {
             externalJs: new Set(),
             externalCss: new Set(),
+            librariesJs: new Set(),
+            librariesCss: new Set(),
         };
-
     }
 
     get html() {
@@ -79,6 +80,24 @@ class EditorState {
         return this.sets.externalJs;
     }
 
+    get librariesJs() {
+        if (!this.fields.librariesJs) throw new Error('libaries js field not defined');
+
+        const nodeList = this.fields.librariesJs;
+
+        Object.values(nodeList).forEach(node => {
+            if (!this.sets.librariesJs.has(node.value) && node.checked) {
+                this.sets.librariesJs.add(node.value);
+            }
+        });
+
+        return this.sets.librariesJs;
+    }
+
+    get jsLibraries() {
+        return this.librariesJs;
+    }
+
     get externalCss() {
         if (!this.fields.externalCss) throw new Error('externalJs field not defined');
 
@@ -92,4 +111,5 @@ class EditorState {
 
         return this.sets.externalCss;
     }
+
 }

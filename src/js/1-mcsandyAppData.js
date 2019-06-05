@@ -50,6 +50,7 @@ const mcsandyAppData = {
             projectName: document.getElementById('js-projectName'),
             externalJs: document.querySelectorAll('.editor__js .fieldset__field--url'),
             externalCss: document.querySelectorAll('.editor__css .fieldset__field--url'),
+            librariesJs: document.querySelectorAll('.fieldset__field--jsLib'),
         },
         fieldsets: {
             html: document.getElementById('js-fieldset--html'),

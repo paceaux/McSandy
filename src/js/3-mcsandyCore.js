@@ -73,16 +73,13 @@ const mcsandy = {
         },
         constructHead() {
             const { appState } = this;
-            const { css, externalCss } = appState;
-            const { externals } = mcsandyProject;
-            const { libraries, assets } = externals;
+            const { css, externalCss, jsLibraries } = appState;
 
             const head = this.SandboxTemplates.Head(
                 this.blobData.reset,
-                assets.css,
                 externalCss,
                 css,
-                libraries.js,
+                jsLibraries,
             );
 
             return head;
@@ -96,11 +93,9 @@ const mcsandy = {
             return bodyOpen;
         },
         constructBodyClose() {
-            const appData = mcsandyAppData;
             const { appState } = this;
             const { js, externalJs } = appState;
             const bodyClose = this.SandboxTemplates.BodyClose(
-                mcsandyProject.externals.assets.js,
                 externalJs,
                 js,
             );

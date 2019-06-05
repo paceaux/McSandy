@@ -76,22 +76,19 @@ const SandboxTemplates = {
     /**
      * Head constructs the head for html document
      * @param {string} defaultReset this.blobData.reset
-     * @param {string} cssAssets  assets.css
      * @param {array} inputArrayOfFields  inputArrayOfFields
      * @param {string} cssFromControls  ctrls.css.value
      * @param {array} externalJs  libraries.js
      */
-    Head(defaultReset, cssAssets, inputArrayOfFields, cssFromControls, externalJs) {
+    Head(defaultReset, inputArrayOfFields, cssFromControls, externalJs) {
         const reset = this.CSSInternal(defaultReset);
-        const externalSavedCSS = this.CSSExternalAll(cssAssets);
-        const externalUnsavedCSS = this.CSSExternalAll(inputArrayOfFields);
+        const externalCss = this.CSSExternalAll(inputArrayOfFields);
         const userCSS = this.CSSInternal(cssFromControls);
         const externalLibraries = this.JSExternalAll(externalJs);
 
         return `<head>
             ${reset}
-            ${externalSavedCSS}
-            ${externalUnsavedCSS}
+            ${externalCss}
             ${userCSS}
             ${externalLibraries}
         </head>`;
@@ -106,16 +103,14 @@ const SandboxTemplates = {
 
     /**
      * BodyClose creates the JS assests at the end before closing with </body>
-     * @param {Array} externalSaved  mcsandyProject.externals.assets.js
-     * @param {Array} inputArrayOfFields inputArrayOfFields
+     * @param {Array} externalJs externalJs
      * @param {string} jsFromControls this.data.ctrls.js.value
      */
-    BodyClose(externalSaved, inputArrayOfFields, jsFromControls) {
-        const externalSavedJS = this.JSExternalAll(externalSaved);
-        const externalUnsavedJS = this.JSExternalAll(inputArrayOfFields);
+    BodyClose(externalJs, jsFromControls) {
+        const externalJSSet = this.JSExternalAll(externalJs);
         const userJS = this.JSInternal(jsFromControls);
 
-        return `${externalSavedJS}${externalUnsavedJS}${userJS}</body>`;
+        return `${externalJSSet}${userJS}</body>`;
     },
 };
 
