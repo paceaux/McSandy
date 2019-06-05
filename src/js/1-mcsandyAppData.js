@@ -31,6 +31,10 @@ const mcsandyAppData = {
             projectSelect: document.getElementById('js-selectProjects'),
             projectLoad: document.getElementById('js-projectLoad'),
             broadcasters: document.querySelectorAll('[data-broadcast]'),
+            projectSave: document.getElementById('js-projectSave'),
+            projectDel: document.getElementById('js-projectDel'),
+            projectNew: document.getElementById('js-projectNew'),
+            projectName: document.getElementById('js-projectName'),
         },
         fields: {
             fieldsets: document.querySelectorAll('.js-editorDragOutField'),
@@ -43,6 +47,9 @@ const mcsandyAppData = {
             html: document.getElementById('js-html'),
             css: document.getElementById('js-css'),
             js: document.getElementById('js-js'),
+            projectName: document.getElementById('js-projectName'),
+            externalJs: document.querySelectorAll('.editor__js .fieldset__field--url'),
+            externalCss: document.querySelectorAll('.editor__css .fieldset__field--url'),
         },
         fieldsets: {
             html: document.getElementById('js-fieldset--html'),
