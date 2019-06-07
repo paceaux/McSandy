@@ -36,10 +36,10 @@ const SandboxTemplates = {
      * JSExternalAll generates all <script src>
      * @param {Array} libList list of libraries
      */
-    JSExternalAll(libList) {
+    JSExternalAll(libList = []) {
         // libList is an array
         let externalJSSet = '';
-        if (mcsandyAppData.ui.onlineState === 'online') {
+        if (mcsandyAppData.ui.onlineState === 'online' && libList.length > 0) {
             /* only add external libraries if we're online */
             libList.forEach((el) => {
                 externalJSSet += this.JSExternal(el);
@@ -106,7 +106,7 @@ const SandboxTemplates = {
      * @param {Array} externalJs externalJs
      * @param {string} jsFromControls this.data.ctrls.js.value
      */
-    BodyClose(externalJs, jsFromControls) {
+    BodyClose(externalJs = [], jsFromControls) {
         const externalJSSet = this.JSExternalAll(externalJs);
         const userJS = this.JSInternal(jsFromControls);
 
