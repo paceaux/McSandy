@@ -31,22 +31,8 @@ const mcsandy = {
         externalJS: [],
     },
     helpers: {
-        inputArray(wrapper, inputs) {
-            const inputArray = wrapper.querySelectorAll(inputs);
-            const valueArray = [];
-            [].forEach.call(inputArray, (el) => {
-                if (el.value) {
-                    valueArray.push(el.value);
-                }
-            });
-            return valueArray;
-        },
-
         prepareHTML(html) {
             return html;
-        },
-        getExternalAssets(type) {
-            return mcsandyUI.helpers.getAssetsByType(type);
         },
         createExternalAssetsObj() {
             const jsLibs = mcsandyUI.helpers.getExternalJsLibs();
