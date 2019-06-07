@@ -13,6 +13,7 @@ const SandboxTemplates = {
      * @param {string} javascript url for resource
      */
     JSExternal(javascript) {
+        if (!javascript) return '';
         // make sure that the JS has a protocol that'll work
         let js = (javascript.slice(javascript.indexOf('//') + 2));
         // if McSandy isn't running as http(s), then it's probably file:// - which shouldn't use a relative protocol
