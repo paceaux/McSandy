@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line no-unused-vars
 const mcsandy = {
-    init(data, Sandbox, SandBoxTemplates, appState) {
+    init(data, Sandbox, SandBoxTemplates, editorState) {
         // eslint-disable-next-line no-console
         console.info('McSandy is Running');
         this.data = data;
@@ -17,7 +17,7 @@ const mcsandy = {
         this.SandboxTemplates = SandBoxTemplates;
         this.SandBox = Sandbox;
         this.preview = new Sandbox();
-        this.appState = appState;
+        this.editorState = editorState;
         this.bindUiEvents();
         this.functions.createProjectSelect();
 
@@ -58,8 +58,8 @@ const mcsandy = {
             return rawParts;
         },
         constructHead() {
-            const { appState } = this;
-            const { css, externalCss, jsLibraries } = appState;
+            const { editorState } = this;
+            const { css, externalCss, jsLibraries } = editorState;
 
             const head = this.SandboxTemplates.Head(
                 this.blobData.reset,
@@ -72,15 +72,15 @@ const mcsandy = {
         },
         constructBodyOpen() {
             const { helpers } = this;
-            const { html } = this.appState;
+            const { html } = this.editorState;
             const userHTML = helpers.prepareHTML(html);
             const bodyOpen = this.SandboxTemplates.BodyOpen(userHTML);
 
             return bodyOpen;
         },
         constructBodyClose() {
-            const { appState } = this;
-            const { js, externalJs } = appState;
+            const { editorState } = this;
+            const { js, externalJs } = editorState;
             const bodyClose = this.SandboxTemplates.BodyClose(
                 externalJs,
                 js,
@@ -186,28 +186,29 @@ const mcsandy = {
         delContent(e) {
             e.preventDefault();
             const projectName = this.data.ctrls.projectName.value;
+
             store.del(0, `mp-${projectName}`);
+            this.editorState.clear();
+            this.functions.updateContent();
             window.history.pushState({}, 'Create New Project', window.location.pathname);
-            this.functions.createProjectSelect();
-            this.data.ctrls.projectName.value = '';
         },
         clearContent(e) {
             e.preventDefault();
-            this.appState.clear();
+            this.editorState.clear();
             this.functions.updateContent();
             window.history.pushState({}, 'Create New Project', window.location.pathname);
         },
         saveContent(e) {
             e.preventDefault();
             mcsandyUI.functions.flashClass(e.currentTarget);
-            const { appState } = this;
+            const { editorState } = this;
             const {
                 html,
                 css,
                 js,
                 projectName,
                 externalJs,
-            } = appState;
+            } = editorState;
             const rawParts = this.helpers.createRawParts(
                 html,
                 css,
