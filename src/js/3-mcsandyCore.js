@@ -153,7 +153,7 @@ const mcsandy = {
             store.del(0, `mp-${projectName}`);
             this.editorState.clear();
             this.functions.updateContent();
-            this.functions.createProjectSelect();
+            mcsandyUI.functions.createProjectSelect();
             window.history.pushState({}, 'Create New Project', window.location.pathname);
         },
         /** clears content from state, and UI
@@ -198,7 +198,7 @@ const mcsandy = {
 
             store.set(0, `mp-${projectName}`, project);
             mcsandyUI.functions.setHash(projectName);
-            this.functions.createProjectSelect();
+            mcsandyUI.functions.createProjectSelect();
         },
         /** Generates a blob that can be downloaded
          * @param  {Object} downloadObj
