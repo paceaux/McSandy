@@ -100,7 +100,7 @@ const mcsandy = {
             return bodyClose;
         },
         /** Generates all of the sandbox views in a blobifiable format
-         * @returns {Array} [head, bodyOpen, bodyClose] 
+         * @returns {Array} [head, bodyOpen, bodyClose]
          */
         getContentFromUI() {
             const head = this.helpers.constructHead();
