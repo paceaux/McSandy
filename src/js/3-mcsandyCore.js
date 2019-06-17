@@ -18,14 +18,15 @@ const mcsandy = {
         this.SandBox = Sandbox;
         this.preview = new Sandbox();
         this.editorState = editorState;
-        this.bindUiEvents();
     },
     helpers: {
         prepareHTML(html) {
             return html;
         },
+
         createExternalAssetsObj() {
             const jsLibs = mcsandyUI.helpers.getExternalJsLibs();
+
             return {
                 libraries: {
                     js: jsLibs,
@@ -36,6 +37,7 @@ const mcsandy = {
                 },
             };
         },
+
         createRawParts(html, css, js, externalJS) {
             const rawParts = {
                 html,
@@ -45,12 +47,13 @@ const mcsandy = {
                     js: externalJS,
                 },
             };
+
             return rawParts;
         },
+
         constructHead() {
             const { editorState, data } = this;
             const { css, externalCss, jsLibraries } = editorState;
-
             const head = this.SandboxTemplates.Head(
                 data.sandboxDefaults.reset,
                 externalCss,
@@ -60,6 +63,7 @@ const mcsandy = {
 
             return head;
         },
+
         constructBodyOpen() {
             const { helpers } = this;
             const { html } = this.editorState;
@@ -68,6 +72,7 @@ const mcsandy = {
 
             return bodyOpen;
         },
+
         constructBodyClose() {
             const { editorState } = this;
             const { js, externalJs } = editorState;
@@ -78,6 +83,7 @@ const mcsandy = {
 
             return bodyClose;
         },
+
         getContentFromUI() {
             const head = this.helpers.constructHead();
             const bodyOpen = this.helpers.constructBodyOpen();
@@ -86,6 +92,7 @@ const mcsandy = {
 
             return contentParts;
         },
+
         createProjectObj(projectName, rawParts, blobArray, assets) {
             return {
                 project: projectName,
@@ -94,15 +101,8 @@ const mcsandy = {
                 externals: assets,
             };
         },
-
-    },
-    bindUiEvents() {
-
-
     },
     functions: {
-
-
         updateContent(loadedParts) {
             /* load content and bindUIevents call this function */
             /* only mcsandyUI.functions.loadContent sends loadedParts */
@@ -114,6 +114,7 @@ const mcsandy = {
             this.preview.parts = parts;
             iframe.src = this.preview.url;
         },
+
         delContent(e) {
             e.preventDefault();
             const projectName = this.data.ctrls.projectName.value;
@@ -124,12 +125,14 @@ const mcsandy = {
             this.functions.createProjectSelect();
             window.history.pushState({}, 'Create New Project', window.location.pathname);
         },
+
         clearContent(e) {
             e.preventDefault();
             this.editorState.clear();
             this.functions.updateContent();
             window.history.pushState({}, 'Create New Project', window.location.pathname);
         },
+
         saveContent(e) {
             e.preventDefault();
             mcsandyUI.functions.flashClass(e.currentTarget);
@@ -155,10 +158,12 @@ const mcsandy = {
                 blobArray,
                 externalAssets,
             );
+
             store.set(0, `mp-${projectName}`, project);
             mcsandyUI.functions.setHash(projectName);
             this.functions.createProjectSelect();
         },
+
         downloadContent(downloadObj, type = 'html') {
             // downloadObj should be an object.
             // It should have in it an array called blobArray.
@@ -168,7 +173,6 @@ const mcsandy = {
             const parts = downloadObj !== undefined
                 ? downloadObj.blobArray
                 : this.helpers.getContentFromUI();
-
             const blob = new this.SandBox(parts, type, downloadObj.project);
 
             blob.save();
