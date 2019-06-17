@@ -190,6 +190,7 @@ const mcsandy = {
             store.del(0, `mp-${projectName}`);
             this.editorState.clear();
             this.functions.updateContent();
+            this.functions.createProjectSelect();
             window.history.pushState({}, 'Create New Project', window.location.pathname);
         },
         clearContent(e) {
