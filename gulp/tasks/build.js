@@ -36,7 +36,7 @@ gulp.task('build', () => {
                 return `<script type="text/javascript">
                 ${file.contents.toString()}
                 const appState = new EditorState(mcsandyAppData.ui.fields);
-                mcsandyUI.init(mcsandyAppData.ui, appState);
+                mcsandyUI.init(mcsandyAppData.ui, UiTemplates, appState);
                 mcsandy.init(mcsandyAppData.core, SandBox, SandboxTemplates, appState);
                 mcsandyPrefs.init();
                 </script>`;

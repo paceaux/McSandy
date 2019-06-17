@@ -14,11 +14,12 @@ function throttle(fn, limit) {
 }
 // eslint-disable-next-line no-unused-vars
 const mcsandyUI = {
-    init(data, appState) {
+    init(data,UiTemplates, appState) {
         // eslint-disable-next-line no-console
         console.info('McSandyUI is Running');
         this.data = data;
         this.appState = appState;
+        this.UiTemplates = UiTemplates;
         Object.keys(this.helpers).forEach(helper => {
             this.helpers[helper] = this.helpers[helper].bind(this);
         });
