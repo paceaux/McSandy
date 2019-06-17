@@ -524,14 +524,6 @@ const mcsandyUI = {
                 functions.addError(exFileField, 'empty');
             }
         },
-        // handleLibToggle(e) {
-        //     const exJs = e.target.getAttribute('data-mcsandy');
-        //     if (!e.target.checked) {
-        //         mcsandy.blobData.externalJS.splice(mcsandy.blobData.externalJS.indexOf(exJs, 1));
-        //     } else {
-        //         mcsandy.blobData.externalJS.push(exJs);
-        //     }
-        // },
         handleDownloadProject(e) {
             e.preventDefault();
             const project = store.get(0, `mp-${this.data.ctrls.projectSelect.value}`); // don't get the value of the button, but the one from the select box.
