@@ -114,22 +114,7 @@ const mcsandyUI = {
                 .replace('_', ' ');
             return unconvertedHash;
         },
-        InputTemplate(t, id, c, v, d) {
-            const input = document.createElement('input');
-            input.type = t;
-            input.id = id;
-            input.className = c;
-            input.value = v;
-            input.setAttribute('data-mcsandy', d);
-            return input;
-        },
-        LabelTemplate(id, c, t) {
-            const label = document.createElement('label');
-            label.className = c;
-            label.setAttribute('for', id);
-            label.innerHTML = t;
-            return label;
-        },
+
         createExternalInput(type, classes, placeholder) {
             const input = document.createElement('input');
             input.type = type;
@@ -192,25 +177,8 @@ const mcsandyUI = {
             });
             return assets;
         },
-        ExternalFileWrapperTemplate() {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'fieldset__inputWrapper';
-            return wrapper;
-        },
-        ExternalFileButtonTemplate(buttonClass) {
-            const button = document.createElement('button');
-            button.className = `fieldset__button ${buttonClass}`;
-            button.innerHTML = '&mdash;';
-            return button;
-        },
-        ExternalFileSetTemplate(file, inputType, inputClass, buttonClass, buttonText) {
-            const wrapper = this.helpers.ExternalFileWrapperTemplate();
-            const input = this.helpers.InputTemplate(inputType, `js-${Math.ceil(Math.random() * 10)}`, inputClass, file, file);
-            const button = this.helpers.ExternalFileButtonTemplate(buttonClass, buttonText);
-            wrapper.appendChild(input);
-            wrapper.appendChild(button);
-            return wrapper;
-        },
+
+
         runTest() {},
         getUrlParams() {
             const urlParams = {};
@@ -226,12 +194,6 @@ const mcsandyUI = {
                 urlParams[decode(match[1])] = decode(match[2]);
             }
             return urlParams;
-        },
-        SelectOptionTemplate(el) {
-            const option = document.createElement('option');
-            option.value = el;
-            option.text = el;
-            return option;
         },
         getStoredProjects() {
             const len = localStorage.length;
@@ -479,7 +441,7 @@ const mcsandyUI = {
             } = e.dataTransfer;
             let i = 0;
             for (let f; f === files[i]; i += 1) {
-                const input = this.helpers.ExternalFileSetTemplate(f);
+                const input = this.UiTemplates.ExternalFileSetTemplate(f);
                 e.target.appendChild(input);
             }
         },
@@ -673,7 +635,7 @@ const mcsandyUI = {
             const pageHash = window.location.hash;
             select.innerHTML = '';// clear pre-exiting options
             projects.forEach((el) => {
-                const option = this.helpers.SelectOptionTemplate(el.project);
+                const option = this.UiTemplates.SelectOptionTemplate(el.project);
                 const projectHash = this.helpers.unconvertHash(el.project);
                 const pageUnconvertedHash = this.helpers.unconvertHash(pageHash);
 
@@ -691,8 +653,8 @@ const mcsandyUI = {
             const libWrap = document.querySelector('[data-populate="externalLibs"]');
             Object.keys(libs).forEach(lib => {
                 const exJs = libs[lib];
-                const input = this.helpers.InputTemplate('checkbox', lib, 'projectManager__jsLib__check input', lib, exJs);
-                const label = this.helpers.LabelTemplate(lib, 'projectManager__jsLib__label', lib);
+                const input = this.UiTemplates.InputTemplate('checkbox', lib, 'projectManager__jsLib__check input', lib, exJs);
+                const label = this.UiTemplates.LabelTemplate(lib, 'projectManager__jsLib__label', lib);
                 input.addEventListener('change', this.functions.handleLibToggle);
                 libWrap.appendChild(input);
                 libWrap.appendChild(label);
