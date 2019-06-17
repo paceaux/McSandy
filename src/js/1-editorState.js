@@ -103,7 +103,6 @@ class EditorState {
     addJsLibrary(value) {
         if (!value) return;
 
-        console.log(value);
         this.sets.librariesJs.add(value);
     }
 
