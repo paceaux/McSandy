@@ -37,68 +37,68 @@ const mcsandyUI = {
         keyDown(e) {
             /* SAVE */
             const {
-                userPrefs
+                userPrefs,
             } = mcsandyAppData;
             if (e.ctrlKey) {
                 switch (e.keyCode) {
-                    // s
-                    case 83:
-                        mcsandy.functions.saveContent(e);
-                        this.functions.flashClass(mcsandy.data.ctrls.projectSave);
-                        break;
-                        // r
-                    case 82:
-                        mcsandy.functions.updateContent();
-                        break;
-                        // l
-                    case 76:
-                        this.functions.handleProjectLoad(e);
-                        this.functions.flashClass(mcsandy.data.ctrls.projectLoad);
-                        break;
-                        // f
-                    case 70:
-                        this.functions.handleDownloadProject(e);
-                        this.functions.flashClass(mcsandy.data.ctrls.projectDownload);
-                        break;
-                    default:
-                        break;
+                // s
+                case 83:
+                    mcsandy.functions.saveContent(e);
+                    this.functions.flashClass(mcsandy.data.ctrls.projectSave);
+                    break;
+                    // r
+                case 82:
+                    mcsandy.functions.updateContent();
+                    break;
+                    // l
+                case 76:
+                    this.functions.handleProjectLoad(e);
+                    this.functions.flashClass(mcsandy.data.ctrls.projectLoad);
+                    break;
+                    // f
+                case 70:
+                    this.functions.handleDownloadProject(e);
+                    this.functions.flashClass(mcsandy.data.ctrls.projectDownload);
+                    break;
+                default:
+                    break;
                 }
                 if (e.shiftKey) {
                     switch (e.keyCode) {
-                        // e
-                        case 69:
-                            document.querySelector('[for="js-editor-toggle"]').click();
-                            break;
-                            // p
-                        case 80:
-                            document.querySelector('[for="js-footer-editor-toggle"]').click();
-                            break;
-                            // =
-                        case 187:
-                            mcsandy.functions.clearContent(e);
-                            break;
-                            // +
-                        case 107:
-                            mcsandy.functions.clearContent(e);
-                            break;
-                            // backspace
-                        case 8:
-                            mcsandy.functions.delContent(e);
-                            break;
-                            // h
-                        case 72:
-                            this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
-                            mcsandyAppData.userPrefs.ui.hLayout = userPrefs.ui.hLayout !== true;
-                            mcsandyPrefs.functions.savePreferences();
-                            break;
-                        case 73:
-                            this.functions.toggleModal();
-                            break;
-                        case 84:
-                            this.helpers.runTest(e);
-                            break;
-                        default:
-                            break;
+                    // e
+                    case 69:
+                        document.querySelector('[for="js-editor-toggle"]').click();
+                        break;
+                        // p
+                    case 80:
+                        document.querySelector('[for="js-footer-editor-toggle"]').click();
+                        break;
+                        // =
+                    case 187:
+                        mcsandy.functions.clearContent(e);
+                        break;
+                        // +
+                    case 107:
+                        mcsandy.functions.clearContent(e);
+                        break;
+                        // backspace
+                    case 8:
+                        mcsandy.functions.delContent(e);
+                        break;
+                        // h
+                    case 72:
+                        this.helpers.toggleClass(document.querySelector('body'), 'mcsandy--horizontal');
+                        mcsandyAppData.userPrefs.ui.hLayout = userPrefs.ui.hLayout !== true;
+                        mcsandyPrefs.functions.savePreferences();
+                        break;
+                    case 73:
+                        this.functions.toggleModal();
+                        break;
+                    case 84:
+                        this.helpers.runTest(e);
+                        break;
+                    default:
+                        break;
                     }
                 }
             }
@@ -246,7 +246,7 @@ const mcsandyUI = {
     bindUiEvents() {
         const {
             helpers,
-            data
+            data,
         } = this;
         const {
             ctrls,
@@ -296,9 +296,9 @@ const mcsandyUI = {
 
         // SAVE, DELETE, CLEAR
         ctrls.projectSave.addEventListener('click', (evt) => mcsandy.functions.saveContent.call(mcsandy, evt));
-        ctrls.projectDel.addEventListener('click', (evt) => mcsandy.functions.delContent.call(mcsandy,evt));
+        ctrls.projectDel.addEventListener('click', (evt) => mcsandy.functions.delContent.call(mcsandy, evt));
         ctrls.projectNew.addEventListener('click', (evt) => mcsandy.functions.clearContent.call(mcsandy, evt));
-      
+
         // BIND EVENTS TO TEXTAREAS
         fields.css.addEventListener('keyup', throttle(() => mcsandy.functions.updateContent(), 750));
         fields.html.addEventListener('keyup', throttle(() => mcsandy.functions.updateContent(), 750));
@@ -325,7 +325,7 @@ const mcsandyUI = {
     },
     bindBroadcastEvents() {
         const {
-            data
+            data,
         } = this;
 
         if ('BroadcastChannel' in window) {
@@ -373,7 +373,7 @@ const mcsandyUI = {
         },
         handleCollapsePanel(e) {
             const {
-                target
+                target,
             } = e;
             const parent = target.parentElement;
             this.helpers.toggleClass(parent, 'js-collapsed');
@@ -414,17 +414,17 @@ const mcsandyUI = {
         ctrlShiftKeydown(evt) {
             const modifierKey = evt.keyCode;
             const {
-                ctrlshiftkey
+                ctrlshiftkey,
             } = evt.target.dataset;
             const isCtrlShift = !!evt.target.dataset.ctrlshiftkey;
             const isParentCtrlShift = !!evt.target.parentElement.dataset.ctrlshiftkey;
             const ctrlShiftModifier = isCtrlShift ? ctrlshiftkey : ctrlshiftkey;
             const id = isCtrlShift ? evt.target.id : evt.target.parentElement.id;
 
-            if (evt.ctrlKey &&
-                evt.shiftKey &&
-                (isCtrlShift || isParentCtrlShift) &&
-                modifierKey === ctrlShiftModifier.toUpperCase().charCodeAt()) {
+            if (evt.ctrlKey
+                && evt.shiftKey
+                && (isCtrlShift || isParentCtrlShift)
+                && modifierKey === ctrlShiftModifier.toUpperCase().charCodeAt()) {
                 this.functions.openIdInFullWindow(id);
             }
         },
@@ -465,7 +465,7 @@ const mcsandyUI = {
         handleRemoveExternalFile(e) {
             e.preventDefault();
             const {
-                helpers
+                helpers,
             } = this;
             helpers.removeParent(e.target);
             mcsandy.functions.updateContent();
@@ -474,7 +474,7 @@ const mcsandyUI = {
             e.preventDefault();
             e.stopPropagation();
             const {
-                files
+                files,
             } = e.dataTransfer;
             let i = 0;
             for (let f; f === files[i]; i += 1) {
@@ -498,10 +498,10 @@ const mcsandyUI = {
         handleAddExternalFile(e) {
             e.preventDefault();
             const {
-                helpers
+                helpers,
             } = this;
             const {
-                functions
+                functions,
             } = this;
             const fieldPatterns = mcsandyAppData.ui.fieldRegexPatterns;
             const el = e.target;
@@ -534,7 +534,7 @@ const mcsandyUI = {
             e.stopPropagation();
             e.preventDefault();
             const {
-                files
+                files,
             } = e.dataTransfer;
             const toElement = e.toElement || e.target;
             const editField = toElement.dataset.fileext;
@@ -578,7 +578,7 @@ const mcsandyUI = {
             const projectName = mcsandy.data.ctrls.projectName.value.length > 0 ? mcsandy.data.ctrls.projectName.value : 'McSandy';
             const type = e.target.dataset.fileext;
             const blob = new Blob([source], {
-                type
+                type,
             });
             const sourceURL = URL.createObjectURL(blob);
             const fileDetails = `${e.target.dataset.mimeoutput}:${projectName}.${type}:${sourceURL}`;
@@ -591,7 +591,7 @@ const mcsandyUI = {
         },
         updateEditors(html, css, js) {
             const {
-                ctrls
+                ctrls,
             } = mcsandy.data;
             ctrls.html.value = html;
             ctrls.css.value = css;
@@ -600,7 +600,7 @@ const mcsandyUI = {
         updateCtrls(projData) {
             const projectField = mcsandy.data.ctrls.projectName;
             const {
-                ctrls
+                ctrls,
             } = this.data;
             projectField.value = projData.project;
             projectField.placeholder = projData.project;
@@ -649,7 +649,7 @@ const mcsandyUI = {
         },
         addModalContent(title, content) {
             const {
-                modal
+                modal,
             } = this.data;
 
             modal.title.innerText = title;
@@ -657,7 +657,7 @@ const mcsandyUI = {
         },
         toggleModal(content) {
             const {
-                modal
+                modal,
             } = this.data;
 
             this.helpers.toggleClass(modal.container, 'visible');
@@ -675,7 +675,7 @@ const mcsandyUI = {
                 const option = this.helpers.createSelectOption(el.project);
                 const projectHash = this.helpers.unconvertHash(el.project);
                 const pageUnconvertedHash = this.helpers.unconvertHash(pageHash);
-    
+
                 if (projectHash === pageUnconvertedHash) {
                     select.selected = true;
                 }
