@@ -28,6 +28,7 @@ const mcsandyUI = {
         this.bindUiEvents();
         this.bindBroadcastEvents();
         this.functions.handleSearch();
+        this.functions.createProjectSelect();
     },
     helpers: {
         keyDown(e) {
@@ -221,6 +222,22 @@ const mcsandyUI = {
                 urlParams[decode(match[1])] = decode(match[2]);
             }
             return urlParams;
+        },
+        createSelectOption(el) {
+            const option = document.createElement('option');
+            option.value = el;
+            option.text = el;
+            return option;
+        },
+        getStoredProjects() {
+            const len = localStorage.length;
+            const projects = [];
+            for (let i = 0; i < len; i += 1) {
+                if (localStorage.key(i).indexOf('mp-') !== -1) {
+                    projects.push(store.get(0, i));
+                }
+            }
+            return projects;
         },
     },
     bindUiEvents() {
@@ -652,6 +669,25 @@ const mcsandyUI = {
             this.helpers.toggleClass(modal.overlay, 'visible');
             if (typeof content === 'string') {
                 modal.content.innerHTML = content;
+            }
+        },
+        createProjectSelect() {
+            const projects = this.helpers.getStoredProjects();
+            const select = document.getElementById('js-selectProjects');
+            const pageHash = window.location.hash;
+            select.innerHTML = '';// clear pre-exiting options
+            projects.forEach((el) => {
+                const option = this.helpers.createSelectOption(el.project);
+                const projectHash = this.helpers.unconvertHash(el.project);
+                const pageUnconvertedHash = this.helpers.unconvertHash(pageHash);
+    
+                if (projectHash === pageUnconvertedHash) {
+                    select.selected = true;
+                }
+                select.appendChild(option);
+            });
+            if (window.location.hash) {
+                select.value = this.helpers.unconvertHash(window.location.hash);
             }
         },
     },

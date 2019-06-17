@@ -19,7 +19,6 @@ const mcsandy = {
         this.preview = new Sandbox();
         this.editorState = editorState;
         this.bindUiEvents();
-        this.functions.createProjectSelect();
 
         if (navigator.onLine) {
             this.functions.createLibSelect();
@@ -104,47 +103,14 @@ const mcsandy = {
                 externals: assets,
             };
         },
-        getStoredProjects() {
-            const len = localStorage.length;
-            const projects = [];
-            for (let i = 0; i < len; i += 1) {
-                if (localStorage.key(i).indexOf('mp-') !== -1) {
-                    projects.push(store.get(0, i));
-                }
-            }
-            return projects;
-        },
-        createSelectOption(el) {
-            const option = document.createElement('option');
-            option.value = el;
-            option.text = el;
-            return option;
-        },
+
     },
     bindUiEvents() {
 
 
     },
     functions: {
-        createProjectSelect() {
-            const projects = this.helpers.getStoredProjects();
-            const select = document.getElementById('js-selectProjects');
-            const pageHash = window.location.hash;
-            select.innerHTML = '';// clear pre-exiting options
-            projects.forEach((el) => {
-                const option = this.helpers.createSelectOption(el.project);
-                const projectHash = mcsandyUI.helpers.unconvertHash(el.project);
-                const pageUnconvertedHash = mcsandyUI.helpers.unconvertHash(pageHash);
 
-                if (projectHash === pageUnconvertedHash) {
-                    select.selected = true;
-                }
-                select.appendChild(option);
-            });
-            if (window.location.hash) {
-                select.value = mcsandyUI.helpers.unconvertHash(window.location.hash);
-            }
-        },
         createLibSelect() {
             const libs = this.data.externalJS;
             const libWrap = document.querySelector('[data-populate="externalLibs"]');
