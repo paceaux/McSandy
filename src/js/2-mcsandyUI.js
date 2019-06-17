@@ -43,7 +43,7 @@ const mcsandyUI = {
                 switch (e.keyCode) {
                 // s
                 case 83:
-                    mcsandy.functions.saveContent(e);
+                    mcsandy.functions.handleSaveContent(e);
                     this.functions.flashClass(mcsandy.data.ctrls.projectSave);
                     break;
                     // r
@@ -75,15 +75,15 @@ const mcsandyUI = {
                         break;
                         // =
                     case 187:
-                        mcsandy.functions.clearContent(e);
+                        mcsandy.functions.handleClearContent(e);
                         break;
                         // +
                     case 107:
-                        mcsandy.functions.clearContent(e);
+                        mcsandy.functions.handleClearContent(e);
                         break;
                         // backspace
                     case 8:
-                        mcsandy.functions.delContent(e);
+                        mcsandy.functions.handleDelContent(e);
                         break;
                         // h
                     case 72:
@@ -295,9 +295,9 @@ const mcsandyUI = {
         });
 
         // SAVE, DELETE, CLEAR
-        ctrls.projectSave.addEventListener('click', (evt) => mcsandy.functions.saveContent.call(mcsandy, evt));
-        ctrls.projectDel.addEventListener('click', (evt) => mcsandy.functions.delContent.call(mcsandy, evt));
-        ctrls.projectNew.addEventListener('click', (evt) => mcsandy.functions.clearContent.call(mcsandy, evt));
+        ctrls.projectSave.addEventListener('click', (evt) => mcsandy.functions.handleSaveContent.call(mcsandy, evt));
+        ctrls.projectDel.addEventListener('click', (evt) => mcsandy.functions.handleDelContent.call(mcsandy, evt));
+        ctrls.projectNew.addEventListener('click', (evt) => mcsandy.functions.handleClearContent.call(mcsandy, evt));
 
         // BIND EVENTS TO TEXTAREAS
         fields.css.addEventListener('keyup', throttle(() => mcsandy.functions.updateContent(), 750));

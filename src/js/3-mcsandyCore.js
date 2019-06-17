@@ -20,13 +20,18 @@ const mcsandy = {
         this.editorState = editorState;
     },
     helpers: {
+        /** cleans and sanitizes html
+         * @param  {string} html
+         * @returns {string} cleaned html
+         */
         prepareHTML(html) {
             return html;
         },
-
-        createExternalAssetsObj() {
-            const jsLibs = mcsandyUI.helpers.getExternalJsLibs();
-
+        /** Creates a model for all external assets
+         * @param  {Set} jsLibs A set or array of external Js Libraries
+         * @returns {object} anonymous object with libraries and assets
+         */
+        createExternalAssetsObj(jsLibs) {
             return {
                 libraries: {
                     js: jsLibs,
@@ -37,7 +42,12 @@ const mcsandy = {
                 },
             };
         },
-
+        /** Creates a model necessary for constructing a preview
+         * @param  {string} html
+         * @param  {string} css
+         * @param  {string} js
+         * @param  {Set} externalJS
+         */
         createRawParts(html, css, js, externalJS) {
             const rawParts = {
                 html,
@@ -50,7 +60,9 @@ const mcsandy = {
 
             return rawParts;
         },
-
+        /** Creates the view for the head element
+         * @returns {string} <head> with css, external libraries
+         */
         constructHead() {
             const { editorState, data } = this;
             const { css, externalCss, jsLibraries } = editorState;
@@ -63,7 +75,9 @@ const mcsandy = {
 
             return head;
         },
-
+        /** Creates the view for the opening of the body
+         *  @returns {string} <body> and subsequent HTML
+         */
         constructBodyOpen() {
             const { helpers } = this;
             const { html } = this.editorState;
@@ -72,7 +86,9 @@ const mcsandy = {
 
             return bodyOpen;
         },
-
+        /** Creates the view for the closing of the body
+         * @returns {string} <script /> and </body>
+         */
         constructBodyClose() {
             const { editorState } = this;
             const { js, externalJs } = editorState;
@@ -83,7 +99,9 @@ const mcsandy = {
 
             return bodyClose;
         },
-
+        /** Generates all of the sandbox views in a blobifiable format
+         * @returns {Array} [head, bodyOpen, bodyClose] 
+         */
         getContentFromUI() {
             const head = this.helpers.constructHead();
             const bodyOpen = this.helpers.constructBodyOpen();
@@ -92,7 +110,13 @@ const mcsandy = {
 
             return contentParts;
         },
-
+        /** Creates a model of the project
+         * @param  {string} projectName name of the project
+         * @param  {Array} rawParts raw data
+         * @param  {Array} blobArray data wrapped in views, that's previewable
+         * @param  {object} assets, external assets
+         * @returns {object}
+         */
         createProjectObj(projectName, rawParts, blobArray, assets) {
             return {
                 project: projectName,
@@ -103,6 +127,10 @@ const mcsandy = {
         },
     },
     functions: {
+        /** Updates the iframe with a new blob
+         * @param  {Array} loadedParts views with editorData
+         * @returns {void}
+         */
         updateContent(loadedParts) {
             /* load content and bindUIevents call this function */
             /* only mcsandyUI.functions.loadContent sends loadedParts */
@@ -114,9 +142,12 @@ const mcsandy = {
             this.preview.parts = parts;
             iframe.src = this.preview.url;
         },
-
-        delContent(e) {
-            e.preventDefault();
+        /** Deletes a project from state, storage, and UI
+         * Expected to be Event callback
+         * @param  {Event} evt
+         */
+        handleDelContent(evt) {
+            evt.preventDefault();
             const projectName = this.data.ctrls.projectName.value;
 
             store.del(0, `mp-${projectName}`);
@@ -125,17 +156,22 @@ const mcsandy = {
             this.functions.createProjectSelect();
             window.history.pushState({}, 'Create New Project', window.location.pathname);
         },
-
-        clearContent(e) {
-            e.preventDefault();
+        /** clears content from state, and UI
+         * Expected to be Event callback
+         * @param  {Event} evt
+         */
+        handleClearContent(evt) {
+            evt.preventDefault();
             this.editorState.clear();
             this.functions.updateContent();
             window.history.pushState({}, 'Create New Project', window.location.pathname);
         },
-
-        saveContent(e) {
-            e.preventDefault();
-            mcsandyUI.functions.flashClass(e.currentTarget);
+        /** Saves state content to storage
+         * @param  {Event} evt
+         */
+        handleSaveContent(evt) {
+            evt.preventDefault();
+            mcsandyUI.functions.flashClass(evt.currentTarget);
             const { editorState } = this;
             const {
                 html,
@@ -151,7 +187,8 @@ const mcsandy = {
                 externalJs,
             );
             const blobArray = this.helpers.getContentFromUI();
-            const externalAssets = this.helpers.createExternalAssetsObj();
+            const jsLibs = mcsandyUI.helpers.getExternalJsLibs();
+            const externalAssets = this.helpers.createExternalAssetsObj(jsLibs);
             const project = this.helpers.createProjectObj(
                 projectName,
                 rawParts,
@@ -163,7 +200,10 @@ const mcsandy = {
             mcsandyUI.functions.setHash(projectName);
             this.functions.createProjectSelect();
         },
-
+        /** Generates a blob that can be downloaded
+         * @param  {Object} downloadObj
+         * @param  {string} type='html' mimetype
+         */
         downloadContent(downloadObj, type = 'html') {
             // downloadObj should be an object.
             // It should have in it an array called blobArray.
