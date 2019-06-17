@@ -441,7 +441,7 @@ const mcsandyUI = {
             } = e.dataTransfer;
             let i = 0;
             for (let f; f === files[i]; i += 1) {
-                const input = this.UiTemplates.ExternalFileSetTemplate(f);
+                const input = this.UiTemplates.ExternalFileSet(f);
                 e.target.appendChild(input);
             }
         },
@@ -635,7 +635,7 @@ const mcsandyUI = {
             const pageHash = window.location.hash;
             select.innerHTML = '';// clear pre-exiting options
             projects.forEach((el) => {
-                const option = this.UiTemplates.SelectOptionTemplate(el.project);
+                const option = this.UiTemplates.SelectOption(el.project);
                 const projectHash = this.helpers.unconvertHash(el.project);
                 const pageUnconvertedHash = this.helpers.unconvertHash(pageHash);
 
@@ -653,8 +653,8 @@ const mcsandyUI = {
             const libWrap = document.querySelector('[data-populate="externalLibs"]');
             Object.keys(libs).forEach(lib => {
                 const exJs = libs[lib];
-                const input = this.UiTemplates.InputTemplate('checkbox', lib, 'projectManager__jsLib__check input', lib, exJs);
-                const label = this.UiTemplates.LabelTemplate(lib, 'projectManager__jsLib__label', lib);
+                const input = this.UiTemplates.Input('checkbox', lib, 'projectManager__jsLib__check input', lib, exJs);
+                const label = this.UiTemplates.Label(lib, 'projectManager__jsLib__label', lib);
                 input.addEventListener('change', this.functions.handleLibToggle);
                 libWrap.appendChild(input);
                 libWrap.appendChild(label);

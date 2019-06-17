@@ -1,25 +1,25 @@
 // eslint-disable-next-line no-unused-vars
 const UiTemplates = {
-    ExternalFileWrapperTemplate() {
+    ExternalFileWrapper() {
         const wrapper = document.createElement('div');
         wrapper.className = 'fieldset__inputWrapper';
         return wrapper;
     },
-    ExternalFileButtonTemplate(buttonClass) {
+    ExternalFileButton(buttonClass) {
         const button = document.createElement('button');
         button.className = `fieldset__button ${buttonClass}`;
         button.innerHTML = '&mdash;';
         return button;
     },
-    ExternalFileSetTemplate(file, inputType, inputClass, buttonClass, buttonText) {
-        const wrapper = this.ExternalFileWrapperTemplate();
-        const input = this.InputTemplate(inputType, `js-${Math.ceil(Math.random() * 10)}`, inputClass, file, file);
-        const button = this.ExternalFileButtonTemplate(buttonClass, buttonText);
+    ExternalFileSet(file, inputType, inputClass, buttonClass, buttonText) {
+        const wrapper = this.ExternalFileWrapper();
+        const input = this.Input(inputType, `js-${Math.ceil(Math.random() * 10)}`, inputClass, file, file);
+        const button = this.ExternalFileButton(buttonClass, buttonText);
         wrapper.appendChild(input);
         wrapper.appendChild(button);
         return wrapper;
     },
-    InputTemplate(t, id, c, v, d) {
+    Input(t, id, c, v, d) {
         const input = document.createElement('input');
         input.type = t;
         input.id = id;
@@ -28,14 +28,14 @@ const UiTemplates = {
         input.setAttribute('data-mcsandy', d);
         return input;
     },
-    LabelTemplate(id, c, t) {
+    Label(id, c, t) {
         const label = document.createElement('label');
         label.className = c;
         label.setAttribute('for', id);
         label.innerHTML = t;
         return label;
     },
-    SelectOptionTemplate(el) {
+    SelectOption(el) {
         const option = document.createElement('option');
         option.value = el;
         option.text = el;
