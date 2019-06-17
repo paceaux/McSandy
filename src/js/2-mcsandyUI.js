@@ -29,6 +29,9 @@ const mcsandyUI = {
         this.bindBroadcastEvents();
         this.functions.handleSearch();
         this.functions.createProjectSelect();
+        if (navigator.onLine) {
+            this.functions.createLibSelect();
+        }
     },
     helpers: {
         keyDown(e) {
@@ -361,7 +364,7 @@ const mcsandyUI = {
                 ctrl.className = ctrl.className.replace(/(?:^|\s)offline(?!\S)/g, ' online');
                 document.title = 'McSandy | Online';
                 document.querySelector('body').className = document.querySelector('body').className.replace(/(?:^|\s)mcsandy--offline(?!\S)/g, ' mcsandy--online');
-                mcsandy.functions.createLibSelect();
+                this.functions.createLibSelect();
             } else {
                 ctrl.className = ctrl.className.replace(/(?:^|\s)online(?!\S)/g, ' offline');
                 document.title = 'McSandy | Offline';
@@ -521,14 +524,14 @@ const mcsandyUI = {
                 functions.addError(exFileField, 'empty');
             }
         },
-        handleLibToggle(e) {
-            const exJs = e.target.getAttribute('data-mcsandy');
-            if (!e.target.checked) {
-                mcsandy.blobData.externalJS.splice(mcsandy.blobData.externalJS.indexOf(exJs, 1));
-            } else {
-                mcsandy.blobData.externalJS.push(exJs);
-            }
-        },
+        // handleLibToggle(e) {
+        //     const exJs = e.target.getAttribute('data-mcsandy');
+        //     if (!e.target.checked) {
+        //         mcsandy.blobData.externalJS.splice(mcsandy.blobData.externalJS.indexOf(exJs, 1));
+        //     } else {
+        //         mcsandy.blobData.externalJS.push(exJs);
+        //     }
+        // },
         handleDownloadProject(e) {
             e.preventDefault();
             const project = store.get(0, `mp-${this.data.ctrls.projectSelect.value}`); // don't get the value of the button, but the one from the select box.
@@ -689,6 +692,28 @@ const mcsandyUI = {
             if (window.location.hash) {
                 select.value = this.helpers.unconvertHash(window.location.hash);
             }
+        },
+        createLibSelect() {
+            const libs = this.data.externalJS;
+            const libWrap = document.querySelector('[data-populate="externalLibs"]');
+            Object.keys(libs).forEach(lib => {
+                const exJs = libs[lib];
+                const input = this.helpers.createInput('checkbox', lib, 'projectManager__jsLib__check input', lib, exJs);
+                const label = this.helpers.createLabel(lib, 'projectManager__jsLib__label', lib);
+                input.addEventListener('change', this.functions.handleLibToggle);
+                libWrap.appendChild(input);
+                libWrap.appendChild(label);
+            });
+            this.functions.bindFieldsetCollapse();
+        },
+        handleLibToggle(e) {
+            const exJs = e.target.getAttribute('data-mcsandy');
+            if (!e.target.checked) {
+                this.appState.delJsLibrary(exJs);
+            } else {
+                this.appState.addJsLibrary(exJs);
+            }
+            mcsandy.functions.updateContent();
         },
     },
 };

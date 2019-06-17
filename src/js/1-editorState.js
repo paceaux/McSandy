@@ -103,7 +103,14 @@ class EditorState {
     addJsLibrary(value) {
         if (!value) return;
 
+        console.log(value);
         this.sets.librariesJs.add(value);
+    }
+
+    delJsLibrary(value) {
+        if (!value) return;
+
+        this.sets.librariesJs.delete(value);
     }
 
     get jsLibraries() {

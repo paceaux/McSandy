@@ -19,10 +19,6 @@ const mcsandy = {
         this.preview = new Sandbox();
         this.editorState = editorState;
         this.bindUiEvents();
-
-        if (navigator.onLine) {
-            this.functions.createLibSelect();
-        }
     },
     blobData: {
         reset: 'html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}',
@@ -111,33 +107,7 @@ const mcsandy = {
     },
     functions: {
 
-        createLibSelect() {
-            const libs = this.data.externalJS;
-            const libWrap = document.querySelector('[data-populate="externalLibs"]');
-            Object.keys(libs).forEach(lib => {
-                const exJs = libs[lib];
-                const input = mcsandyUI.helpers.createInput('checkbox', lib, 'projectManager__jsLib__check input', lib, exJs);
-                const label = mcsandyUI.helpers.createLabel(lib, 'projectManager__jsLib__label', lib);
-                input.addEventListener('change', this.functions.handleLibToggle);
-                libWrap.appendChild(input);
-                libWrap.appendChild(label);
-            });
-            mcsandyUI.functions.bindFieldsetCollapse();
-        },
-        handleLibToggle(e) {
-            const exJs = e.target.getAttribute('data-mcsandy');
-            if (!e.target.checked) {
-                this.blobData.externalJS.splice(this.blobData.externalJS.indexOf(exJs, 1));
-                mcsandyProject
-                    .externals
-                    .libraries
-                    .js
-                    .splice(mcsandyProject.externals.libraries.js.indexOf(exJs, 1));
-            } else {
-                this.blobData.externalJS.push(exJs);
-                mcsandyProject.externals.libraries.js.push(exJs);
-            }
-        },
+
         updateContent(loadedParts) {
             /* load content and bindUIevents call this function */
             /* only mcsandyUI.functions.loadContent sends loadedParts */
